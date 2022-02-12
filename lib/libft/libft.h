@@ -33,7 +33,7 @@ void			ft_swap(char *a, char *b);
 /*
 ** String
 */
-
+char		    **ft_whitespaces(char const *s);
 size_t			ft_strlen(const char *s);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);

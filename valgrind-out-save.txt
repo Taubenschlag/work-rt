@@ -1,0 +1,166 @@
+==20011== Memcheck, a memory error detector
+==20011== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==20011== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==20011== Command: ./miniRT --save resources/everything.rt
+==20011== Parent PID: 6166
+==20011== 
+--20011-- 
+--20011-- Valgrind options:
+--20011--    --leak-check=full
+--20011--    --show-leak-kinds=all
+--20011--    --track-origins=yes
+--20011--    --verbose
+--20011--    --log-file=valgrind-out-save.txt
+--20011-- Contents of /proc/version:
+--20011--   Linux version 5.4.0-70-generic (buildd@lcy01-amd64-004) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #78-Ubuntu SMP Fri Mar 19 13:29:52 UTC 2021
+--20011-- 
+--20011-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx
+--20011-- Page sizes: currently 4096, max supported 4096
+--20011-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--20011-- Reading syms from /home/roman/Documents/prog/code/mini_rt/RT/miniRT
+--20011-- Reading syms from /lib/x86_64-linux-gnu/ld-2.31.so
+--20011--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--20011--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
+--20011--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--20011--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
+--20011--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--20011--   .. CRC is valid
+--20011-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--20011--    object doesn't have a symbol table
+--20011--    object doesn't have a dynamic symbol table
+--20011-- Scheduler: using generic scheduler lock implementation.
+--20011-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==20011== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-20011-by-roman-on-???
+==20011== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-20011-by-roman-on-???
+==20011== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-20011-by-roman-on-???
+==20011== 
+==20011== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==20011== don't want to do, unless you know exactly what you're doing,
+==20011== or are doing some strange experiment):
+==20011==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=20011 ...command...
+==20011== 
+==20011== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==20011==   /path/to/gdb ./miniRT
+==20011== and then give GDB the following command
+==20011==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=20011
+==20011== --pid is optional if only one valgrind process is running
+==20011== 
+--20011-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--20011-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--20011-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--20011--    object doesn't have a symbol table
+--20011-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--20011--    object doesn't have a symbol table
+==20011== WARNING: new redirection conflicts with existing -- ignoring it
+--20011--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--20011--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--20011-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--20011-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--20011-- Reading syms from /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+--20011--   Considering /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0 ..
+--20011--   .. CRC mismatch (computed 7e27e1ef wanted 4ab025b2)
+--20011--    object doesn't have a symbol table
+--20011-- Reading syms from /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+--20011--    object doesn't have a symbol table
+--20011-- Reading syms from /lib/x86_64-linux-gnu/libm-2.31.so
+--20011--   Considering /lib/x86_64-linux-gnu/libm-2.31.so ..
+--20011--   .. CRC mismatch (computed fcb42c76 wanted f6c95789)
+--20011--   Considering /lib/x86_64-linux-gnu/libm-2.31.so ..
+--20011--   .. CRC mismatch (computed fcb42c76 wanted f6c95789)
+--20011--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.31.so ..
+--20011--   .. CRC is valid
+--20011-- Reading syms from /lib/x86_64-linux-gnu/libc-2.31.so
+--20011--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--20011--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
+--20011--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--20011--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
+--20011--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--20011--   .. CRC is valid
+--20011-- Reading syms from /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+--20011--    object doesn't have a symbol table
+--20011-- Reading syms from /lib/x86_64-linux-gnu/libdl-2.31.so
+--20011--   Considering /lib/x86_64-linux-gnu/libdl-2.31.so ..
+--20011--   .. CRC mismatch (computed b5d487d3 wanted 6ef97e7c)
+--20011--   Considering /lib/x86_64-linux-gnu/libdl-2.31.so ..
+--20011--   .. CRC mismatch (computed b5d487d3 wanted 6ef97e7c)
+--20011--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libdl-2.31.so ..
+--20011--   .. CRC is valid
+--20011-- Reading syms from /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+--20011--   Considering /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0 ..
+--20011--   .. CRC mismatch (computed 7de9b6ad wanted e8a17129)
+--20011--    object doesn't have a symbol table
+--20011-- Reading syms from /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+--20011--    object doesn't have a symbol table
+--20011-- Reading syms from /usr/lib/x86_64-linux-gnu/libbsd.so.0.10.0
+--20011--    object doesn't have a symbol table
+--20011-- REDIR: 0x4ba6600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba5900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba6930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba5220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba5960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba7dd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4bc2e60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4bc29a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba6760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba6590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba5890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba52d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba66c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4bc2960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba57f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba53b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba6980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba5350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba6ad0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4bc40d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4bc29e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba59a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba5280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba57b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4baed20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba69d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba6550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4bc2ab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba5c60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba68d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba6870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba7e10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4ba6a20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--20011-- REDIR: 0x4bb7a30 (libc.so.6:__strrchr_sse2) redirected to 0x483ea70 (__strrchr_sse2)
+--20011-- REDIR: 0x4ba0260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--20011-- REDIR: 0x4ba0850 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--20011-- REDIR: 0x4bc2070 (libc.so.6:__memset_sse2_unaligned) redirected to 0x48428e0 (memset)
+==20011== 
+==20011== HEAP SUMMARY:
+==20011==     in use at exit: 2 bytes in 2 blocks
+==20011==   total heap usage: 325,356,792 allocs, 325,356,790 frees, 6,035,061,833 bytes allocated
+==20011== 
+==20011== Searching for pointers to 2 not-freed blocks
+==20011== Checked 136,104 bytes
+==20011== 
+==20011== 1 bytes in 1 blocks are still reachable in loss record 1 of 2
+==20011==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20011==    by 0x11141E: ft_strdup (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x11165B: gnl_verify_line (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x1116F3: gnl_read_file (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x111849: get_next_line (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x10A93A: check_file (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x10A430: main (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011== 
+==20011== 1 bytes in 1 blocks are still reachable in loss record 2 of 2
+==20011==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20011==    by 0x11141E: ft_strdup (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x11165B: gnl_verify_line (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x1116F3: gnl_read_file (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x111849: get_next_line (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x10AC87: parse_scene (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011==    by 0x10A442: main (in /home/roman/Documents/prog/code/mini_rt/RT/miniRT)
+==20011== 
+==20011== LEAK SUMMARY:
+==20011==    definitely lost: 0 bytes in 0 blocks
+==20011==    indirectly lost: 0 bytes in 0 blocks
+==20011==      possibly lost: 0 bytes in 0 blocks
+==20011==    still reachable: 2 bytes in 2 blocks
+==20011==         suppressed: 0 bytes in 0 blocks
+==20011== 
+==20011== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

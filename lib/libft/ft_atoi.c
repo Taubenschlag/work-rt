@@ -14,14 +14,16 @@
 
 static int	handle_num(const char *num, int negative)
 {
-	long atoi;
+	long    atoi;
+    int     i;
 
+    i = 0;
 	atoi = 0;
-	while (*num >= '0' && *num <= '9')
+	while ((num[i]) && (num[i] >= '0' && num[i] <= '9'))
 	{
 		atoi *= 10;
-		atoi += *num - '0';
-		num++;
+		atoi += num[i] - '0';
+		i++;
 		if (negative == -1 && atoi > 2147483648)
 			return (0);
 		else if (negative == 1 && atoi > 2147483647)
@@ -37,9 +39,9 @@ int			ft_atoi(const char *str)
 
 	ptr = (char *)str;
 	negative = 0;
-	while ((*ptr >= 9 && *ptr <= 13) || *ptr == ' ')
+	while (*ptr && ((*ptr >= 9 && *ptr <= 13) || *ptr == ' '))
 		ptr++;
-	if (*ptr == '-' || *ptr == '+')
+	if (*ptr && (*ptr == '-' || *ptr == '+'))
 	{
 		if (*ptr == '-')
 			negative++;

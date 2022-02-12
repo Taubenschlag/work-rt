@@ -48,7 +48,7 @@ SRC		=	mlx_init.c \
 			mlx_destroy_image.c
 
 OBJ		=	$(SRC:.c=.o)
-CFLAGS	=	-O3 -I$(INC)
+CFLAGS	=	-g -O3 -I$(INC)
 
 DESTDIR	=	/usr/local
 
