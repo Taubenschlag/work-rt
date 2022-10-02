@@ -1,58 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tuple_advanced_2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
+/*   Updated: 2022/10/01 01:52:59 by rokupin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../heads_global/minirt.h"
 
-s_tuple     *tuple_negate(s_tuple *t)
+s_tuple	*tuple_negate(s_tuple *t)
 {
-    s_tuple *res;
+	s_tuple	*res;
 
-    res =  (s_tuple*)malloc(sizeof(s_tuple));
-    res->x = t->x * -1;
-    res->y = t->y * -1;
-    res->z = t->z * -1;
-    res->type = t->type * -1;
-    tuple_free(t);
-    return (res);
+	res = (s_tuple *)malloc(sizeof(s_tuple));
+	res->x = t->x * -1;
+	res->y = t->y * -1;
+	res->z = t->z * -1;
+	res->type = t->type * -1;
+	tuple_free(t);
+	return (res);
 }
 
-double      tuple_length(s_tuple *t)
+double	tuple_length(s_tuple *t)
 {
-    return (
-            sqrt(
-                    t->x * t->x +
-                    t->y * t->y +
-                    t->z * t->z +
-                    t->type * t->type)
-            );
+	return (
+		sqrt(
+			t->x * t->x
+			+ t->y * t->y
+			+ t->z * t->z
+			+ t->type * t->type)
+	);
 }
 
-s_tuple     *tuple_normalize(s_tuple *t)
+s_tuple	*tuple_normalize(s_tuple *t)
 {
-    double  length;
-    s_tuple *n;
+	double	length;
+	s_tuple	*n;
 
-    length = tuple_length(t);
-    n = tuple_vector(
-            t->x / length,
-            t->y / length,
-            t->z / length);
-    tuple_free(t);
-    return (n);
+	length = tuple_length(t);
+	n = tuple_vector(
+			t->x / length,
+			t->y / length,
+			t->z / length);
+	tuple_free(t);
+	return (n);
 }
 
-double      tuple_dot_product(s_tuple *t1, s_tuple *t2)
+double	tuple_dot_product(s_tuple *t1, s_tuple *t2)
 {
-    return (
-            t1->x * t2->x +
-            t1->y * t2->y +
-            t1->z * t2->z
-            );
+	return (
+		t1->x * t2->x
+		+ t1->y * t2->y
+		+ t1->z * t2->z
+	);
 }
 
-s_tuple     *tuple_cross_product(s_tuple *t1, s_tuple *t2)
+s_tuple	*tuple_cross_product(s_tuple *t1, s_tuple *t2)
 {
-    return (
-            tuple_vector(
-                    t1->y * t2->z - t1->z * t2->y,
-                    t1->z * t2->x - t1->x * t2->z,
-                    t1->x * t2->y - t1->y * t2->x)
-            );
+	return (
+		tuple_vector(
+			t1->y * t2->z - t1->z * t2->y,
+			t1->z * t2->x - t1->x * t2->z,
+			t1->x * t2->y - t1->y * t2->x
+		)
+	);
 }

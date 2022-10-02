@@ -1,55 +1,74 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   general_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
+/*   Updated: 2022/09/30 21:33:09 by rokupin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../heads_global/minirt.h"
 
-int     min(int a, int b)
+int	min(int a, int b)
 {
-    return (a < b ? a : b);
+	if (a < b)
+		return (a);
+	return (b);
 }
 
-int     max(int a, int b)
+int	max(int a, int b)
 {
-    return (a > b ? a : b);
+	if (a > b)
+		return (a);
+	return (b);
 }
 
-double     max_d(double a, double b)
+double	max_d(double a, double b)
 {
-    return (a > b ? a : b);
+	if (a > b)
+		return (a);
+	return (b);
 }
 
-void    swap(double *x, double *y)
+// TODO probably redundant
+void	swap(double *x, double *y)
 {
-    double sw;
+	double	sw;
 
-    sw = *x;
-    *x = *y;
-    *y = sw;
+	sw = *x;
+	*x = *y;
+	*y = sw;
 }
 
-double     mins(double *a, int length)
+double	mins(double *a, int length)
 {
-    int i;
-    double min;
+	int		i;
+	double	min;
 
-    min = INFINITY * 1;
-    i = -1;
-    while (++i < length)
-    {
-       if( a[i] < min)
-           min = a[i];
-    }
-    return (min);
+	min = INFINITY * 1;
+	i = -1;
+	while (++i < length)
+	{
+		if (a[i] < min)
+			min = a[i];
+	}
+	return (min);
 }
 
-double     maxs(double *a, int length)
+double	maxs(double *a, int length)
 {
-    int i;
-    double max;
+	int		i;
+	double	max;
 
-    max = INFINITY * -1;
-    i = -1;
-    while (++i < length)
-    {
-        if( a[i] > max)
-            max = a[i];
-    }
-    return (max);
+	max = INFINITY * -1;
+	i = -1;
+	while (++i < length)
+	{
+		if (a[i] > max)
+			max = a[i];
+	}
+	return (max);
 }
