@@ -81,7 +81,7 @@ void	cleanup_arr(char **values)
 	free(values);
 }
 
-int	* check_file(char *filename)
+int	*check_file(char *filename)
 {
 	int		fd;
 	char	*line;
@@ -91,7 +91,7 @@ int	* check_file(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	counters = make_counters_array();
-  	correct = 1;
+	correct = 1;
 	while (correct && get_next_line(fd, &line))
 	{
 		values = ft_whitespaces(line);
