@@ -13,9 +13,9 @@
 #include "../../../heads_global/minirt.h"
 
 // todo func too big
-s_matrix	*matrix_multiply(s_matrix *m1, s_matrix *m2)
+t_matrix	*matrix_multiply(t_matrix *m1, t_matrix *m2)
 {
-	s_matrix	*res;
+	t_matrix	*res;
 	int			i;
 	int			j;
 	int			l;
@@ -43,9 +43,9 @@ s_matrix	*matrix_multiply(s_matrix *m1, s_matrix *m2)
 	return (res);
 }
 
-s_matrix	*matrix_transpose(s_matrix *m)
+t_matrix	*matrix_transpose(t_matrix *m)
 {
-	s_matrix	*res;
+	t_matrix	*res;
 	int			i;
 	int			j;
 
@@ -65,7 +65,7 @@ s_matrix	*matrix_transpose(s_matrix *m)
 	return (res);
 }
 
-double	matrix_determinant(s_matrix *m)
+double	matrix_determinant(t_matrix *m)
 {
 	int		column;
 	double	determinant;
@@ -82,9 +82,9 @@ double	matrix_determinant(s_matrix *m)
 	return (determinant);
 }
 
-s_matrix	*matrix_sub(s_matrix *m, int column, int row)
+t_matrix	*matrix_sub(t_matrix *m, int column, int row)
 {
-	s_matrix	*res;
+	t_matrix	*res;
 	int			i;
 	int			j;
 	int			i_skip;
@@ -111,9 +111,9 @@ s_matrix	*matrix_sub(s_matrix *m, int column, int row)
 	return (res);
 }
 
-s_matrix	*matrix_copy(s_matrix *m)
+t_matrix	*matrix_copy(t_matrix *m)
 {
-	s_matrix	*ret;
+	t_matrix	*ret;
 	int			i;
 	int			j;
 

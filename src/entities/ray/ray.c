@@ -12,26 +12,26 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_ray	*ray_ray(s_tuple *origin, s_tuple *direction)
+t_ray	*ray_ray(t_tuple *origin, t_tuple *direction)
 {
-	s_ray	*ray;
+	t_ray	*ray;
 
-	ray = (s_ray *)malloc(sizeof(s_ray));
+	ray = (t_ray *)malloc(sizeof(t_ray));
 	ray->origin = origin;
 	ray->dir = direction;
 	return (ray);
 }
 
-void	ray_free(s_ray *ray)
+void	ray_free(t_ray *ray)
 {
 	tuple_free((ray->origin));
 	tuple_free((ray->dir));
 	free(ray);
 }
 
-s_ray	*ray_transform(s_ray *ray, s_matrix *m)
+t_ray	*ray_transform(t_ray *ray, t_matrix *m)
 {
-	s_matrix	*m1;
+	t_matrix	*m1;
 
 	m1 = matrix_copy(m);
 	return (ray_ray(
@@ -39,7 +39,7 @@ s_ray	*ray_transform(s_ray *ray, s_matrix *m)
 			tuple_apply_trans_matrix(m, tuple_copy(ray->dir))));
 }
 
-s_tuple	*ray_position(s_ray *ray, double t)
+t_tuple	*ray_position(t_ray *ray, double t)
 {
 	return (tuple_add(
 			tuple_copy(ray->origin),

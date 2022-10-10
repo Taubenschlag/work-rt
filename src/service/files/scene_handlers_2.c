@@ -12,12 +12,12 @@
 
 #include "../../../heads_global/minirt.h"
 
-int	handle_c(char *line, s_scene *s, char *name)
+int	handle_c(char *line, t_scene *s, char *name)
 {
 	char	**input;
-	s_tuple	*from;
-	s_tuple	*dir;
-	s_tuple	*up;
+	t_tuple	*from;
+	t_tuple	*dir;
+	t_tuple	*up;
 	double	fov;
 
 	input = ft_whitespaces(line);
@@ -40,11 +40,11 @@ int	handle_c(char *line, s_scene *s, char *name)
 	return (1);
 }
 
-int	handle_l(char *line, s_scene *s)
+int	handle_l(char *line, t_scene *s)
 {
 	char	**input;
-	s_tuple	*from;
-	s_tuple	*color;
+	t_tuple	*from;
+	t_tuple	*color;
 	double	brightness;
 
 	input = ft_whitespaces(line);
@@ -62,10 +62,10 @@ int	handle_l(char *line, s_scene *s)
 	return (1);
 }
 
-int	handle_sphere(char **values, s_scene *s)
+int	handle_sphere(char **values, t_scene *s)
 {
-	s_tuple	*centre;
-	s_tuple	*color;
+	t_tuple	*centre;
+	t_tuple	*color;
 	double	diameter;
 
 	centre = get_tuple(values[1], 'p');
@@ -85,12 +85,12 @@ int	handle_sphere(char **values, s_scene *s)
 	return (1);
 }
 
-int	 handle_plane(char **values, s_scene *s)
+int	 handle_plane(char **values, t_scene *s)
 {
-	s_tuple		*coordinate;
-	s_tuple		*norm;
-	s_tuple		*color;
-	s_matrix	*trans;
+	t_tuple		*coordinate;
+	t_tuple		*norm;
+	t_tuple		*color;
+	t_matrix	*trans;
 
 	coordinate = get_tuple(values[1], 'p');
 	norm = get_tuple(values[2], 'v');

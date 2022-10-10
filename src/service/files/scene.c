@@ -12,20 +12,20 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_scene	*make_scene(int *counters)
+t_scene	*make_scene(int *counters)
 {
-	s_scene	*ret;
+	t_scene	*ret;
 
-	ret = (s_scene *)malloc(sizeof(s_scene));
+	ret = (t_scene *)malloc(sizeof(t_scene));
 	ret->resolution_x = -1;
 	ret->resolution_y = -1;
 	ret->ambi_ratio = -1;
 	ret->camera_counter = 0;
-	ret->cameras = (s_camera **)malloc(sizeof(s_camera *) * counters[2]);
+	ret->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[2]);
 	ret->light_counter = 0;
-	ret->lights = (s_light **)malloc(sizeof(s_light *) * counters[3]);
+	ret->lights = (t_light **)malloc(sizeof(t_light *) * counters[3]);
 	ret->shape_counter = 0;
-	ret->shapes = (s_shape **)malloc(sizeof(s_shape *) * counters[4]);
+	ret->shapes = (t_shape **)malloc(sizeof(t_shape *) * counters[4]);
 	return (ret);
 }
 
@@ -39,7 +39,7 @@ int	throw_err(int error)
 	return (0);
 }
 
-void parse_scene(int fd, int *counters, s_scene **s)
+void parse_scene(int fd, int *counters, t_scene **s)
 {
 	char	*line;
 	int		cnt;
@@ -67,7 +67,7 @@ void parse_scene(int fd, int *counters, s_scene **s)
 	}
 }
 
-void	free_scene(s_scene *s)
+void	free_scene(t_scene *s)
 {
 	int	i;
 
@@ -87,10 +87,10 @@ void	free_scene(s_scene *s)
 	free(s);
 }
 
-void	save_scene(s_scene *s)
+void	save_scene(t_scene *s)
 {
-	s_canvas	*c;
-	s_world		*w;
+	t_canvas	*c;
+	t_world		*w;
 	char		*filename;
 	int			fd;
 	int			camera_counter;

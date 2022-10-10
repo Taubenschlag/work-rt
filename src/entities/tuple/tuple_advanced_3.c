@@ -12,17 +12,17 @@
 
 #include "../../../heads_global/minirt.h"
 
-int	cheaty_free(s_tuple *tuple)
+int	cheaty_free(t_tuple *tuple)
 {
 	free(tuple);
 	return (1);
 }
 
-s_tuple	*tuple_multiply(s_tuple *t1, s_tuple *t2)
+t_tuple	*tuple_multiply(t_tuple *t1, t_tuple *t2)
 {
-	s_tuple	*t;
+	t_tuple	*t;
 
-	t = (s_tuple *)malloc(sizeof(s_tuple));
+	t = (t_tuple *)malloc(sizeof(t_tuple));
 	t->x = t1->x * t2->x;
 	t->y = t1->y * t2->y;
 	t->z = t1->z * t2->z;
@@ -30,10 +30,10 @@ s_tuple	*tuple_multiply(s_tuple *t1, s_tuple *t2)
 	return (t);
 }
 
-s_tuple	*tuple_reflect(s_tuple *v_in, s_tuple *v_normal)
+t_tuple	*tuple_reflect(t_tuple *v_in, t_tuple *v_normal)
 {
-	s_tuple	*v_out;
-	s_tuple	*tmp;
+	t_tuple	*v_out;
+	t_tuple	*tmp;
 
 	tmp = tuple_scalar_multiply(
 			tuple_copy(v_normal), tuple_dot_product(v_in, v_normal) * 2);
@@ -41,11 +41,11 @@ s_tuple	*tuple_reflect(s_tuple *v_in, s_tuple *v_normal)
 	return (v_out);
 }
 
-s_tuple	*tuple_color(double r, double g, double b)
+t_tuple	*tuple_color(double r, double g, double b)
 {
-	s_tuple	*t;
+	t_tuple	*t;
 
-	t = (s_tuple *)malloc(sizeof(s_tuple));
+	t = (t_tuple *)malloc(sizeof(t_tuple));
 	t->x = r;
 	t->y = g;
 	t->z = b;
@@ -53,9 +53,9 @@ s_tuple	*tuple_color(double r, double g, double b)
 	return (t);
 }
 
-s_tuple	*tuple_copy(s_tuple *t)
+t_tuple	*tuple_copy(t_tuple *t)
 {
-	s_tuple	*res;
+	t_tuple	*res;
 
 	res = tuple_point(t->x, t->y, t->z);
 	res->type = t->type;

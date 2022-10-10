@@ -14,20 +14,20 @@
 # define SHAPE_H
 # include "../../../heads_global/minirt.h"
 
-typedef struct t_shape
+typedef struct shape
 {
 	char		type;
-	s_matrl		*matrl;
-	s_matrix	*trans;
+	t_matrl		*matrl;
+	t_matrix	*trans;
 	void		*shape;
-}	s_shape;
+}	t_shape;
 
 // static unsigned int g_id;
 
-s_shape	*make_shape(char type, void *shape_itself);
-s_shape	*test_shape(void);
-void	*set_transform(s_shape *sh, s_matrix *trans);//todo deprecated
-s_tuple	*shape_normal_at(s_shape *sh, s_tuple *p);
-void	free_shape(s_shape *s);
+t_shape	*make_shape(char type, void *shape_itself);
+t_shape	*test_shape(void);
+void	*set_transform(t_shape *sh, t_matrix *trans);//todo deprecated
+t_tuple	*shape_normal_at(t_shape *sh, t_tuple *p);
+void	free_shape(t_shape *s);
 
 #endif

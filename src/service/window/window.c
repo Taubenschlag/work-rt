@@ -12,7 +12,7 @@
 
 #include "../../../heads_global/minirt.h"
 
-void	went_out(s_mlx_wrap *data)
+void	went_out(t_mlx_wrap *data)
 {
 	int	i;
 
@@ -33,11 +33,11 @@ void	went_out(s_mlx_wrap *data)
 	exit(EXIT_SUCCESS);
 }
 
-s_canvas	*argb_render(s_camera *c, s_world *w)
+t_canvas	*argb_render(t_camera *c, t_world *w)
 {
-	s_canvas	*img;
-	s_ray		*r;
-	s_tuple		*color;
+	t_canvas	*img;
+	t_ray		*r;
+	t_tuple		*color;
 	int			y;
 	int			x;
 
@@ -58,8 +58,8 @@ s_canvas	*argb_render(s_camera *c, s_world *w)
 }
 
 //TODO too much args
-void	my_mlx_pixel_put(s_mlx_wrap *data,
-		unsigned int x, unsigned int y, int color, int count)
+void	my_mlx_pixel_put(t_mlx_wrap *data,
+						 unsigned int x, unsigned int y, int color, int count)
 {
 	char	*dst;
 
@@ -68,7 +68,7 @@ void	my_mlx_pixel_put(s_mlx_wrap *data,
 	*(unsigned int *)dst = color;
 }
 
-void	fill_image(s_canvas *c, s_mlx_wrap *data, int count)
+void	fill_image(t_canvas *c, t_mlx_wrap *data, int count)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -84,14 +84,14 @@ void	fill_image(s_canvas *c, s_mlx_wrap *data, int count)
 	}
 }
 
-int	w_close(s_mlx_wrap *data)
+int	w_close(t_mlx_wrap *data)
 {
 	went_out(data);
 	return (1);
 }
 
 //TODO too much func
-int	k_press(int keycode, s_mlx_wrap *data)
+int	k_press(int keycode, t_mlx_wrap *data)
 {
 	int	next;
 	int	prev;
@@ -117,7 +117,7 @@ int	k_press(int keycode, s_mlx_wrap *data)
 	return (1);
 }
 
-void	loop_gui(s_mlx_wrap *data)
+void	loop_gui(t_mlx_wrap *data)
 {
 	data->img_ptr = 1;
 	mlx_put_image_to_window(
@@ -127,13 +127,13 @@ void	loop_gui(s_mlx_wrap *data)
 	mlx_loop(data->mlx);
 }
 
-s_mlx_wrap	*init_mlx_wrapper(s_scene *s)
+t_mlx_wrap	*init_mlx_wrapper(t_scene *s)
 {
-	s_mlx_wrap	*data;
+	t_mlx_wrap	*data;
 	// TODO wtf?
 	// int screen_x;
 	// int screen_y;
-	data = malloc(sizeof(s_mlx_wrap));
+	data = malloc(sizeof(t_mlx_wrap));
 	data->mlx = mlx_init();
 	// mlx_get_screen_size(data->mlx, &screen_x, &screen_y);
 	// if (s->resolution_x > screen_x)
@@ -150,11 +150,11 @@ s_mlx_wrap	*init_mlx_wrapper(s_scene *s)
 	return (data);
 }
 
-void	display_scene(s_scene *s)
+void	display_scene(t_scene *s)
 {
-	s_mlx_wrap	*data;
-	s_canvas	*c;
-	s_world		*w;
+	t_mlx_wrap	*data;
+	t_canvas	*c;
+	t_world		*w;
 	int			camera_counter;
 
 	camera_counter = 0;

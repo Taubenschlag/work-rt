@@ -12,12 +12,12 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_world	*make_world(s_shape **shapes,
-		s_light **lights, int shape_counter, int light_counter)
+t_world	*make_world(t_shape **shapes,
+					   t_light **lights, int shape_counter, int light_counter)
 {
-	s_world	*w;
+	t_world	*w;
 
-	w = (s_world *)malloc(sizeof(s_world));
+	w = (t_world *)malloc(sizeof(t_world));
 	w->shapes = shapes;
 	w->lights = lights;
 	w->lights_counter = light_counter;
@@ -26,14 +26,14 @@ s_world	*make_world(s_shape **shapes,
 	return (w);
 }
 
-s_world	*make_default_world(void)
+t_world	*make_default_world(void)
 {
-	s_shape		**shapes;
-	s_nsphere	*s1;
-	s_nsphere	*s2;
-	s_light		**lights;
+	t_shape		**shapes;
+	t_sphere	*s1;
+	t_sphere	*s2;
+	t_light		**lights;
 
-	shapes = (s_shape **)malloc(sizeof(s_shape *) * 2);
+	shapes = (t_shape **)malloc(sizeof(t_shape *) * 2);
 	s1 = nsphere_unit(tuple_point(0, 0, 0));
 	s2 = nsphere_unit(tuple_point(0, 0, 0));
 	shapes[0] = make_shape('s', s1);
@@ -44,13 +44,13 @@ s_world	*make_default_world(void)
 	shapes[0]->matrl->diffuse = 0.7;
 	shapes[0]->matrl->color = tuple_color(0.8, 1.0, 0.6);
 	set_transform(shapes[1], matrix_scale(0.5, 0.5, 0.5));
-	lights = (s_light **)malloc(sizeof(s_light *));
+	lights = (t_light **)malloc(sizeof(t_light *));
 	*lights = light_make(tuple_point(-10, 10, -10),
 			tuple_color(1, 1, 1));
 	return (make_world(shapes, lights, 2, 1));
 }
 
-void	free_world_deep(s_world *w)
+void	free_world_deep(t_world *w)
 {
 	while (--(w->shape_counter) >= 0)
 		free_shape(w->shapes[w->shape_counter]);
@@ -63,7 +63,7 @@ void	free_world_deep(s_world *w)
 	free(w);
 }
 
-void	world_set_ambience(s_world *w, s_tuple *from, s_tuple *color)
+void	world_set_ambience(t_world *w, t_tuple *from, t_tuple *color)
 {
 	if (w->ambienace)
 		light_free(w->ambienace);

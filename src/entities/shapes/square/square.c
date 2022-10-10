@@ -12,11 +12,11 @@
 
 #include "../../../../heads_global/minirt.h"
 
-s_square	*square(void)
+t_square	*square(void)
 {
-	s_square	*ret;
+	t_square	*ret;
 
-	ret = (s_square *)malloc(sizeof(s_square));
+	ret = (t_square *)malloc(sizeof(t_square));
 	ret->t1 = triangle_coordinates(
 			tuple_point(-1, 1, 0),
 			tuple_point(-1, -1, 0),
@@ -28,12 +28,12 @@ s_square	*square(void)
 	return (ret);
 }
 
-s_tuple	*square_normale_at(void)
+t_tuple	*square_normale_at(void)
 {
 	return (tuple_vector(0, 0, 1));
 }
 
-void	free_square(s_square *t)
+void	free_square(t_square *t)
 {
 	free_triangle(t->t1);
 	free_triangle(t->t2);

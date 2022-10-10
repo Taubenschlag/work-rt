@@ -16,37 +16,36 @@
 # include "../../../heads_global/minirt.h"
 # define COLOR_CF 0.003921569 //WHY?
 
-//TODO structname
-typedef struct t_scene
+typedef struct scene
 {
 	int			resolution_x;
 	int			resolution_y;
 	double		ambi_ratio;
-	s_tuple		*ambi_color;
+	t_tuple		*ambi_color;
 	int			camera_counter;
-	s_camera	**cameras;
+	t_camera	**cameras;
 	int			light_counter;
-	s_light		**lights;
+	t_light		**lights;
 	int			shape_counter;
-	s_shape		**shapes;
-}	s_scene;
+	t_shape		**shapes;
+}	t_scene;
 
-s_tuple		*get_tuple(char *value, char type);
-void		free_scene(s_scene *s);
-int			handle_r(char *line, s_scene *s);
-int			handle_a(char *line, s_scene *s);
-int			handle_c(char *line, s_scene *s, char *name);
-int			handle_l(char *line, s_scene *s);
-int			handle_shape(char *line, s_scene *s);
-int			handle_plane(char **values, s_scene *s);
-int			handle_sphere(char **values, s_scene *s);
-int			handle_square(char **values, s_scene *s);
-int			handle_cylinder(char **values, s_scene *s);
-int			handle_triangle(char **values, s_scene *s);
-int			handle_cone(char **values, s_scene *s);
-int			handle_cube(char **values, s_scene *s);
-void		save_scene(s_scene *s);
-void 		parse_scene(int fd, int *counters, s_scene **s);
+t_tuple		*get_tuple(char *value, char type);
+void		free_scene(t_scene *s);
+int			handle_r(char *line, t_scene *s);
+int			handle_a(char *line, t_scene *s);
+int			handle_c(char *line, t_scene *s, char *name);
+int			handle_l(char *line, t_scene *s);
+int			handle_shape(char *line, t_scene *s);
+int			handle_plane(char **values, t_scene *s);
+int			handle_sphere(char **values, t_scene *s);
+int			handle_square(char **values, t_scene *s);
+int			handle_cylinder(char **values, t_scene *s);
+int			handle_triangle(char **values, t_scene *s);
+int			handle_cone(char **values, t_scene *s);
+int			handle_cube(char **values, t_scene *s);
+void		save_scene(t_scene *s);
+void		parse_scene(int fd, int *counters, t_scene **s);
 void		cleanup(char **values);
 
 #endif

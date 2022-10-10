@@ -12,7 +12,7 @@
 
 #include "../../../heads_global/minirt.h"
 
-int	tuple_equals(s_tuple *t1, s_tuple *t2)
+int	tuple_equals(t_tuple *t1, t_tuple *t2)
 {
 	int	res;
 
@@ -26,11 +26,11 @@ int	tuple_equals(s_tuple *t1, s_tuple *t2)
 	return (res);
 }
 
-s_tuple	*tuple_add(s_tuple *t1, s_tuple *t2)
+t_tuple	*tuple_add(t_tuple *t1, t_tuple *t2)
 {
-	s_tuple	*t;
+	t_tuple	*t;
 
-	t = (s_tuple *)malloc(sizeof(s_tuple));
+	t = (t_tuple *)malloc(sizeof(t_tuple));
 	t->x = t1->x + t2->x;
 	t->y = t1->y + t2->y;
 	t->z = t1->z + t2->z;
@@ -40,11 +40,11 @@ s_tuple	*tuple_add(s_tuple *t1, s_tuple *t2)
 	return (t);
 }
 
-s_tuple	*tuple_substract(s_tuple *t1, s_tuple *t2)
+t_tuple	*tuple_substract(t_tuple *t1, t_tuple *t2)
 {
-	s_tuple	*t;
+	t_tuple	*t;
 
-	t = (s_tuple *)malloc(sizeof(s_tuple));
+	t = (t_tuple *)malloc(sizeof(t_tuple));
 	t->x = t1->x - t2->x;
 	t->y = t1->y - t2->y;
 	t->z = t1->z - t2->z;
@@ -54,11 +54,11 @@ s_tuple	*tuple_substract(s_tuple *t1, s_tuple *t2)
 	return (t);
 }
 
-s_tuple	*tuple_scalar_multiply(s_tuple *t, double scale)
+t_tuple	*tuple_scalar_multiply(t_tuple *t, double scale)
 {
-	s_tuple	*res;
+	t_tuple	*res;
 
-	res = (s_tuple *)malloc(sizeof(s_tuple));
+	res = (t_tuple *)malloc(sizeof(t_tuple));
 	res->x = t->x * scale;
 	res->y = t->y * scale;
 	res->z = t->z * scale;

@@ -14,14 +14,14 @@
 # define SQUARE_H
 # include "../../../../heads_global/minirt.h"
 
-typedef struct t_square
+typedef struct square
 {
-	s_triangle	*t1;
-	s_triangle	*t2;
-}	s_square;
+	t_triangle	*t1;
+	t_triangle	*t2;
+}	t_square;
 
-s_square	*square(void);
-s_tuple		*square_normale_at(void);
-void		free_square(s_square *t);
+t_square	*square(void);
+t_tuple		*square_normale_at(void);
+void		free_square(t_square *t);
 
 #endif //RT_CHALLENGE_SQUARE_H

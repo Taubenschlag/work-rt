@@ -14,47 +14,47 @@
 # define MATERIAL_H
 # include "../../../heads_global/minirt.h"
 
-typedef struct t_matrl
+typedef struct matrl
 {
-	s_tuple	*color;
+	t_tuple	*color;
 	double	diffuse;
 	double	ambient;
 	double	specular;
 	double	shininess;
-}	s_matrl;
+}	t_matrl;
 
-typedef struct t_lightning_pack
+typedef struct lightning_pack
 {
-	s_matrl	*m;
-	s_light	*l;
-	s_tuple	*posit;
-	s_tuple	*eye_v;
-	s_tuple	*norm_v;
-	s_tuple	*ef_color;
-	s_tuple	*lightv;
-	s_tuple	*diffuse;
-	s_tuple	*specular;
+	t_matrl	*m;
+	t_light	*l;
+	t_tuple	*posit;
+	t_tuple	*eye_v;
+	t_tuple	*norm_v;
+	t_tuple	*ef_color;
+	t_tuple	*lightv;
+	t_tuple	*diffuse;
+	t_tuple	*specular;
 	double	light_dot_norm;
-}	s_lightning_pack;
+}	t_lightning_pack;
 
 // TODO mre than 4 args
-s_matrl				*material_make(
-						s_tuple *color,
-						double diffuse,
-						double ambient,
-						double specular,
-						double shininess);
-s_matrl				*material_make_default(void);
-void				material_free(s_matrl *m);
+t_matrl				*material_make(
+		t_tuple *color,
+		double diffuse,
+		double ambient,
+		double specular,
+		double shininess);
+t_matrl				*material_make_default(void);
+void				material_free(t_matrl *m);
 
 // TODO mre than 4 args
-s_lightning_pack	*make_l_p(s_matrl *m,
-						s_light *l,
-						s_tuple *posit,
-						s_tuple *eye_v,
-						s_tuple *norm_v);
-s_tuple				*lightning(s_lightning_pack *p, int in_shadow);
-void				cleanup_light_pack(s_lightning_pack *l);
-s_matrl				*mat_with_col(s_tuple *color);
+t_lightning_pack	*make_l_p(t_matrl *m,
+							  t_light *l,
+							  t_tuple *posit,
+							  t_tuple *eye_v,
+							  t_tuple *norm_v);
+t_tuple				*lightning(t_lightning_pack *p, int in_shadow);
+void				cleanup_light_pack(t_lightning_pack *l);
+t_matrl				*mat_with_col(t_tuple *color);
 
 #endif //RT_CHALLENGE_MATERIAL_H

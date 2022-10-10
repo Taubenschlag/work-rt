@@ -13,15 +13,15 @@
 #include "../../../heads_global/minirt.h"
 
 // TODO mre than 4 args
-s_lightning_pack	*make_l_p(s_matrl *m,
-						s_light *l,
-						s_tuple *posit,
-						s_tuple *eye_v,
-						s_tuple *norm_v)
+t_lightning_pack	*make_l_p(t_matrl *m,
+							  t_light *l,
+							  t_tuple *posit,
+							  t_tuple *eye_v,
+							  t_tuple *norm_v)
 {
-	s_lightning_pack	*pack;
+	t_lightning_pack	*pack;
 
-	pack = (s_lightning_pack *)malloc(sizeof(s_lightning_pack));
+	pack = (t_lightning_pack *)malloc(sizeof(t_lightning_pack));
 	pack->eye_v = eye_v;
 	pack->l = l;
 	pack->m = m;
@@ -43,7 +43,7 @@ s_lightning_pack	*make_l_p(s_matrl *m,
 }
 
 //todo shallow leak ?
-void	cleanup_light_pack(s_lightning_pack *l)
+void	cleanup_light_pack(t_lightning_pack *l)
 {
 	free(l->posit);
 	free(l->eye_v);
@@ -55,10 +55,10 @@ void	cleanup_light_pack(s_lightning_pack *l)
 }
 
 // TODO mre than 4 args
-s_tuple	*lightning(s_lightning_pack *p, int in_shadow)
+t_tuple	*lightning(t_lightning_pack *p, int in_shadow)
 {
-	s_tuple	*amb_color;
-	s_tuple	*reflv;
+	t_tuple	*amb_color;
+	t_tuple	*reflv;
 	double	rf_dot_eye;
 
 	amb_color = tuple_scalar_multiply(tuple_copy(p->ef_color), p->m->ambient);

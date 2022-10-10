@@ -12,11 +12,11 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_matrix	*invert(double determinant, s_matrix *m, s_matrix *inverted)
+t_matrix	*invert(double determinant, t_matrix *m, t_matrix *inverted)
 {
 	int			i;
 	int			j;
-	s_matrix	*cofactors;
+	t_matrix	*cofactors;
 	double		diag;
 
 	i = -1;
@@ -41,10 +41,10 @@ s_matrix	*invert(double determinant, s_matrix *m, s_matrix *inverted)
 	return (inverted);
 }
 
-s_matrix	*matrix_invert(s_matrix *m)
+t_matrix	*matrix_invert(t_matrix *m)
 {
 	double		determinant;
-	s_matrix	*inverted;
+	t_matrix	*inverted;
 
 	inverted = NULL;
 	determinant = matrix_determinant(m);
@@ -56,11 +56,11 @@ s_matrix	*matrix_invert(s_matrix *m)
 }
 
 // TODO ternary
-s_tuple	*tuple_apply_trans_matrix(s_matrix *trans_matrix, s_tuple *tup)
+t_tuple	*tuple_apply_trans_matrix(t_matrix *trans_matrix, t_tuple *tup)
 {
-	s_matrix	*source_tuple_converted;
-	s_matrix	*product;
-	s_tuple		*res;
+	t_matrix	*source_tuple_converted;
+	t_matrix	*product;
+	t_tuple		*res;
 	int			need_free;
 
 	source_tuple_converted = tuple_to_matrix(tup);
@@ -85,9 +85,9 @@ s_tuple	*tuple_apply_trans_matrix(s_matrix *trans_matrix, s_tuple *tup)
 	return (res);
 }
 
-s_matrix	*vt_combine_matrix(s_tuple *left, s_tuple *true_up, s_tuple *forward)
+t_matrix	*vt_combine_matrix(t_tuple *left, t_tuple *true_up, t_tuple *forward)
 {
-	s_matrix	*res;
+	t_matrix	*res;
 
 	res = matrix_identity(4);
 	res->matrix[0][0] = left->x;
@@ -105,13 +105,13 @@ s_matrix	*vt_combine_matrix(s_tuple *left, s_tuple *true_up, s_tuple *forward)
 	return (res);
 }
 
-s_matrix	*view_transform(s_tuple *from, s_tuple *to, s_tuple *up)
+t_matrix	*view_transform(t_tuple *from, t_tuple *to, t_tuple *up)
 {
-	s_tuple		*forward;
-	s_tuple		*left;
-	s_tuple		*tmp;
-	s_matrix	*res;
-	s_matrix	*view_matrix;
+	t_tuple		*forward;
+	t_tuple		*left;
+	t_tuple		*tmp;
+	t_matrix	*res;
+	t_matrix	*view_matrix;
 
 	tmp = tuple_substract(to, tuple_copy(from));
 	forward = tuple_normalize(tmp);

@@ -13,12 +13,12 @@
 #include "../../../heads_global/minirt.h"
 
 //TODO func more than 25
-int	handle_square(char **values, s_scene *s)
+int	handle_square(char **values, t_scene *s)
 {
-	s_tuple		*center;
-	s_tuple		*norm;
-	s_tuple		*color;
-	s_matrix	*trans;
+	t_tuple		*center;
+	t_tuple		*norm;
+	t_tuple		*color;
+	t_matrix	*trans;
 	double		side;
 
 	center = get_tuple(values[1], 'p');
@@ -45,12 +45,12 @@ int	handle_square(char **values, s_scene *s)
 
 //TODO too much variables
 //TODO func more than 25
-int	handle_cylinder(char **values, s_scene *s)
+int	handle_cylinder(char **values, t_scene *s)
 {
-	s_tuple		*center;
-	s_tuple		*norm;
-	s_tuple		*color;
-	s_matrix	*trans;
+	t_tuple		*center;
+	t_tuple		*norm;
+	t_tuple		*color;
+	t_matrix	*trans;
 	double		d;
 	double		h;
 
@@ -77,12 +77,12 @@ int	handle_cylinder(char **values, s_scene *s)
 	return (1);
 }
 
-int	handle_triangle(char **values, s_scene *s)
+int	handle_triangle(char **values, t_scene *s)
 {
-	s_tuple	*a;
-	s_tuple	*b;
-	s_tuple	*c;
-	s_tuple	*color;
+	t_tuple	*a;
+	t_tuple	*b;
+	t_tuple	*c;
+	t_tuple	*color;
 
 	a = get_tuple(values[1], 'p');
 	b = get_tuple(values[2], 'p');
@@ -97,12 +97,12 @@ int	handle_triangle(char **values, s_scene *s)
 }
 
 //TODO func more than 25
-int	handle_cone(char **values, s_scene *s)
+int	handle_cone(char **values, t_scene *s)
 {
-	s_tuple		*center;
-	s_tuple		*norm;
-	s_tuple		*color;
-	s_matrix	*trans;
+	t_tuple		*center;
+	t_tuple		*norm;
+	t_tuple		*color;
+	t_matrix	*trans;
 	double		p[2];
 
 	center = get_tuple(values[1], 'p');
@@ -128,13 +128,13 @@ int	handle_cone(char **values, s_scene *s)
 }
 
 //TODO func more than 25
-int	handle_cube(char **values, s_scene *s)
+int	handle_cube(char **values, t_scene *s)
 {
-	s_tuple		*center;
+	t_tuple		*center;
 	double		side;
-	s_tuple		*color;
-	s_tuple		*norm;
-	s_matrix	*trans;
+	t_tuple		*color;
+	t_tuple		*norm;
+	t_matrix	*trans;
 
 	center = get_tuple(values[1], 'p');
 	norm = tuple_normalize(get_tuple(values[2], 'v'));

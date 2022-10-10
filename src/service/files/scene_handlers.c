@@ -12,11 +12,11 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_tuple	*get_tuple(char *value, char type)
+t_tuple	*get_tuple(char *value, char type)
 {
 	char	**next_part;
 	int		i;
-	s_tuple	*ret;
+	t_tuple	*ret;
 
 	ret = NULL;
 	next_part = ft_split(value, ',');
@@ -49,7 +49,7 @@ void	cleanup(char **values)
 	free(values);
 }
 
-int	handle_r(char *line, s_scene *s)
+int	handle_r(char *line, t_scene *s)
 {
 	int		i;
 	char	**input;
@@ -76,10 +76,10 @@ int	handle_r(char *line, s_scene *s)
 	return (s->resolution_x > 0 && s->resolution_y > 0);
 }
 
-int	handle_a(char *line, s_scene *s)
+int	handle_a(char *line, t_scene *s)
 {
 	char	**input;
-	s_tuple	*color;
+	t_tuple	*color;
 
 	input = ft_whitespaces(line);
 	free(line);
@@ -96,7 +96,7 @@ int	handle_a(char *line, s_scene *s)
 	return (s->ambi_ratio >= 0 && s->ambi_ratio <= 1);
 }
 
-int	handle_shape(char *line, s_scene *s)
+int	handle_shape(char *line, t_scene *s)
 {
 	char	**input;
 

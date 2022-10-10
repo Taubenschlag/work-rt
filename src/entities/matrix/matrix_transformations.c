@@ -12,9 +12,9 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_matrix	*matrix_translate(double x, double y, double z)
+t_matrix	*matrix_translate(double x, double y, double z)
 {
-	s_matrix	*trans;
+	t_matrix	*trans;
 
 	trans = matrix_identity(4);
 	trans->matrix[0][3] = x;
@@ -23,9 +23,9 @@ s_matrix	*matrix_translate(double x, double y, double z)
 	return (trans);
 }
 
-s_matrix	*matrix_scale(double x, double y, double z)
+t_matrix	*matrix_scale(double x, double y, double z)
 {
-	s_matrix	*scl;
+	t_matrix	*scl;
 
 	scl = matrix_identity(4);
 	scl->matrix[0][0] = x;
@@ -34,9 +34,9 @@ s_matrix	*matrix_scale(double x, double y, double z)
 	return (scl);
 }
 
-s_matrix	*matrix_x_rotate(double r)
+t_matrix	*matrix_x_rotate(double r)
 {
-	s_matrix	*scl;
+	t_matrix	*scl;
 
 	scl = matrix_identity(4);
 	if (r != 0)
@@ -49,9 +49,9 @@ s_matrix	*matrix_x_rotate(double r)
 	return (scl);
 }
 
-s_matrix	*matrix_y_rotate(double r)
+t_matrix	*matrix_y_rotate(double r)
 {
-	s_matrix	*scl;
+	t_matrix	*scl;
 
 	scl = matrix_identity(4);
 	if (r != 0)
@@ -64,9 +64,9 @@ s_matrix	*matrix_y_rotate(double r)
 	return (scl);
 }
 
-s_matrix	*matrix_z_rotate(double r)
+t_matrix	*matrix_z_rotate(double r)
 {
-	s_matrix	*scl;
+	t_matrix	*scl;
 
 	scl = matrix_identity(4);
 	if (r != 0)

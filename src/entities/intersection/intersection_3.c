@@ -12,13 +12,13 @@
 
 #include "../../../heads_global/minirt.h"
 
-int	in_shadow(s_world *w, s_tuple *p, s_light *current_light)
+int	in_shadow(t_world *w, t_tuple *p, t_light *current_light)
 {
-	s_tuple			*v;
+	t_tuple			*v;
 	double			dist;
-	s_tuple			*direction;
-	s_ray			*ray;
-	s_intersection	*h;
+	t_tuple			*direction;
+	t_ray			*ray;
+	t_intersection	*h;
 
 	v = tuple_substract(tuple_copy(current_light->position), tuple_copy(p));
 	dist = tuple_length(v);
@@ -36,9 +36,9 @@ int	in_shadow(s_world *w, s_tuple *p, s_light *current_light)
 	return (0);
 }
 
-s_intersection_list	*intersection_ray_plane(s_shape *s, s_ray *ray)
+t_intersection_list	*intersection_ray_plane(t_shape *s, t_ray *ray)
 {
-	s_intersection_list	*ret;
+	t_intersection_list	*ret;
 
 	if (fabs(ray->dir->y) < 0.000001)
 		return (intersection_list_make(0));
@@ -51,16 +51,16 @@ s_intersection_list	*intersection_ray_plane(s_shape *s, s_ray *ray)
 	}
 }
 
-s_intersection_list	*intersection_ray_nsphere(s_shape *s, s_ray *ray)
+t_intersection_list	*intersection_ray_nsphere(t_shape *s, t_ray *ray)
 {
-	s_tuple				*sphere_ray;
+	t_tuple				*sphere_ray;
 	double				a;
 	double				b;
 	double				dis;
-	s_intersection_list	*ret;
+	t_intersection_list	*ret;
 
 	sphere_ray = tuple_substract(tuple_copy(ray->origin),
-			tuple_copy(((s_nsphere*)s->shape)->centre));
+			tuple_copy(((t_sphere*)s->shape)->centre));
 	a = tuple_dot_product(ray->dir, ray->dir);
 	b = 2 * tuple_dot_product(ray->dir, sphere_ray);
 	dis = b * b - 4 * a * (tuple_dot_product(sphere_ray, sphere_ray) - 1);

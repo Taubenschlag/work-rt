@@ -12,11 +12,11 @@
 
 #include "../../../../heads_global/minirt.h"
 
-s_triangle	*triangle_coordinates(s_tuple *a, s_tuple *b, s_tuple *c)
+t_triangle	*triangle_coordinates(t_tuple *a, t_tuple *b, t_tuple *c)
 {
-	s_triangle	*tr;
+	t_triangle	*tr;
 
-	tr = (s_triangle *)malloc(sizeof(s_triangle));
+	tr = (t_triangle *)malloc(sizeof(t_triangle));
 	tr->a = a;
 	tr->b = b;
 	tr->c = c;
@@ -26,7 +26,7 @@ s_triangle	*triangle_coordinates(s_tuple *a, s_tuple *b, s_tuple *c)
 	return (tr);
 }
 
-void	free_triangle(s_triangle *t)
+void	free_triangle(t_triangle *t)
 {
 	tuple_free(t->a);
 	tuple_free(t->b);
@@ -37,7 +37,7 @@ void	free_triangle(s_triangle *t)
 	free(t);
 }
 
-s_tuple	*triangle_normale_at(s_triangle *t)
+t_tuple	*triangle_normale_at(t_triangle *t)
 {
 	return (tuple_copy(t->n));
 }

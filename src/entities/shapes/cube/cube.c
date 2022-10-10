@@ -12,20 +12,20 @@
 
 #include "../../../../heads_global/minirt.h"
 
-s_cube	*cube_cube(void)
+t_cube	*cube_cube(void)
 {
-	s_cube	*c;
+	t_cube	*c;
 
-	c = (s_cube *)malloc(sizeof(s_cube));
+	c = (t_cube *)malloc(sizeof(t_cube));
 	return (c);
 }
 
-void	cube_free(s_cube *c)
+void	cube_free(t_cube *c)
 {
 	free(c);
 }
 
-s_tuple	*cube_normal_at(s_tuple *p)
+t_tuple	*cube_normal_at(t_tuple *p)
 {
 	double	max_one;
 

@@ -12,11 +12,11 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_camera	*make_camera(int h_s, int v_s, double fov, char *name, s_tuple *from)
+t_camera	*make_camera(int h_s, int v_s, double fov, char *name, t_tuple *from)
 {
-	s_camera	*cam;
+	t_camera	*cam;
 
-	cam = (s_camera *)malloc(sizeof(s_camera));
+	cam = (t_camera *)malloc(sizeof(t_camera));
 	cam->from = from;
 	cam->name = name;
 	cam->fov = fov;
@@ -39,20 +39,20 @@ s_camera	*make_camera(int h_s, int v_s, double fov, char *name, s_tuple *from)
 	return (cam);
 }
 
-void	free_camera(s_camera *c)
+void	free_camera(t_camera *c)
 {
 	matrix_free(c->transform);
 	tuple_free(c->from);
 	free(c);
 }
 
-s_ray	*ray_for_pix(s_camera *c, int y, int x)
+t_ray	*ray_for_pix(t_camera *c, int y, int x)
 {
 	double	xwrld;
 	double	ywrld;
-	s_tuple	*pixel;
-	s_tuple	*origin;
-	s_tuple	*direction;
+	t_tuple	*pixel;
+	t_tuple	*origin;
+	t_tuple	*direction;
 
 	xwrld = c->half_w - ((double)y + 0.5) * c->pix_size;
 	ywrld = c->half_h - ((double)x + 0.5) * c->pix_size;
@@ -64,11 +64,11 @@ s_ray	*ray_for_pix(s_camera *c, int y, int x)
 	return (ray_ray(origin, direction));
 }
 
-s_canvas	*render(s_camera *c, s_world *w)
+t_canvas	*render(t_camera *c, t_world *w)
 {
-	s_canvas	*img;
-	s_ray		*r;
-	s_tuple		*color;
+	t_canvas	*img;
+	t_ray		*r;
+	t_tuple		*color;
 	int			y;
 	int			x;
 

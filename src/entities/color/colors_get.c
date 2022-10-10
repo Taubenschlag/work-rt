@@ -31,7 +31,7 @@ unsigned char	get_blue(unsigned int rgb)
 }
 
 //todo color limitations
-unsigned int	tuple_to_rgb(s_tuple *rgb_tuple)
+unsigned int	tuple_to_rgb(t_tuple *rgb_tuple)
 {
 	unsigned int	r;
 	unsigned int	g;
@@ -53,7 +53,7 @@ unsigned int	tuple_to_rgb(s_tuple *rgb_tuple)
 			(unsigned char)b));
 }
 
-unsigned int	tuple_to_argb(s_tuple *rgb_tuple)
+unsigned int	tuple_to_argb(t_tuple *rgb_tuple)
 {
 	unsigned int	r;
 	unsigned int	g;

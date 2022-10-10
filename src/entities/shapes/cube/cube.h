@@ -14,12 +14,12 @@
 # define CUBE_H
 # include "../../../../heads_global/minirt.h"
 
-typedef struct t_cube
+typedef struct cube
 {
-}	s_cube;
+}	t_cube;
 
-s_cube	*cube_cube(void);
-void	cube_free(s_cube *c);
-s_tuple	*cube_normal_at(s_tuple *p);
+t_cube	*cube_cube(void);
+void	cube_free(t_cube *c);
+t_tuple	*cube_normal_at(t_tuple *p);
 
 #endif //RT_CHALLENGE_CUBE_H

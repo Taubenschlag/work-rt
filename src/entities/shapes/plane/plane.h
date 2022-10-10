@@ -14,13 +14,13 @@
 # define PLANE_H
 # include "../../../../heads_global/minirt.h"
 
-typedef struct t_plane
+typedef struct plane
 {
-}	s_plane;
+}	plane;
 
-s_plane	*plane_plane(void);
-s_plane	*plane_defautl(void);
-s_tuple	*plane_normal_at(void);
-void	plane_free(s_plane *pl);
+plane	*plane_plane(void);
+plane	*plane_defautl(void);
+t_tuple	*plane_normal_at(void);
+void	plane_free(plane *pl);
 
 #endif //RT_CHALLENGE_PLANE_H

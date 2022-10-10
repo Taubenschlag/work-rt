@@ -14,8 +14,7 @@
 # define WINDOW_H
 # include "../../../heads_global/minirt.h"
 
-// TODO rename t_ to s_
-typedef struct t_mlx_wrap {
+typedef struct mlx_wrap {
 	void		*mlx;
 	void		*win;
 	void		**imgs;
@@ -25,12 +24,12 @@ typedef struct t_mlx_wrap {
 	int			endian;
 	int			img_ptr;
 	int			img_counter;
-}	s_mlx_wrap;
+}	t_mlx_wrap;
 
-s_canvas	*argb_render(s_camera *c, s_world *w);
-void		my_mlx_pixel_put(s_mlx_wrap *data,  unsigned int x,  unsigned int y, int color, int count);
-void		fill_image(s_canvas *c, s_mlx_wrap *data, int count);
-void		display_scene(s_scene *s);
+t_canvas	*argb_render(t_camera *c, t_world *w);
+void		my_mlx_pixel_put(t_mlx_wrap *data, unsigned int x, unsigned int y, int color, int count);
+void		fill_image(t_canvas *c, t_mlx_wrap *data, int count);
+void		display_scene(t_scene *s);
 //int             wclose(int keycode, s_mlx_win *vars);
 
 #endif

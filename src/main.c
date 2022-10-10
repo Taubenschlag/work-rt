@@ -25,7 +25,7 @@
 int	main(int ac, char **av)
 {
 	int		fd;
-	s_scene	*s;
+	t_scene	*s;
 	int		*counters;
 
 	s = NULL;

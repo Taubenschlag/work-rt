@@ -14,16 +14,16 @@
 # define BMP_H
 # include "../../../heads_global/minirt.h"
 
-typedef struct t_canvas
+typedef struct canvas
 {
 	unsigned int	w;
 	unsigned int	h;
 	unsigned int	**canvas;
-}	s_canvas;
+}	t_canvas;
 
-s_canvas	*canvas_canvas(unsigned int w, unsigned int h);
-void		canvas_free(s_canvas *c);
+t_canvas	*canvas_canvas(unsigned int w, unsigned int h);
+void		canvas_free(t_canvas *c);
 int			init_bmp(int h, int w, int fd);
-void		fill_bmp(int fd, s_canvas *c);
+void		fill_bmp(int fd, t_canvas *c);
 
 #endif //RT_CHALLENGE_BMP_H

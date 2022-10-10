@@ -16,34 +16,34 @@
 # define IS_POINT    1
 # define IS_VECTOR   0
 
-typedef struct t_tuple
+typedef struct tuple
 {
 	double	x;
 	double	y;
 	double	z;
 	int		type;
-}	s_tuple;
+}	t_tuple;
 
-s_tuple	*tuple_vector(double x, double y, double z);
-s_tuple	*tuple_point(double x, double y, double z);
-s_tuple	*tuple_color(double r, double g, double b);
+t_tuple	*tuple_vector(double x, double y, double z);
+t_tuple	*tuple_point(double x, double y, double z);
+t_tuple	*tuple_color(double r, double g, double b);
 
-void	tuple_free(s_tuple *tuple);
-int		cheaty_free(s_tuple *tuple);
+void	tuple_free(t_tuple *tuple);
+int		cheaty_free(t_tuple *tuple);
 
-int		tuple_is_vector(s_tuple *tuple);
+int		tuple_is_vector(t_tuple *tuple);
 
-int		tuple_equals(s_tuple *t1, s_tuple *t2);
-s_tuple	*tuple_add(s_tuple *t1, s_tuple *t2);
-s_tuple	*tuple_substract(s_tuple *t1, s_tuple *t2);
-s_tuple	*tuple_scalar_multiply(s_tuple *t, double scale);
-s_tuple	*tuple_negate(s_tuple *t);
-double	tuple_length(s_tuple *t);
-s_tuple	*tuple_normalize(s_tuple *t);
-double	tuple_dot_product(s_tuple *t1, s_tuple *t2);
-s_tuple	*tuple_cross_product(s_tuple *t1, s_tuple *t2);
-s_tuple	*tuple_multiply(s_tuple *t1, s_tuple *t2);
-s_tuple	*tuple_reflect(s_tuple *v_in, s_tuple *v_normal);
-s_tuple	*tuple_copy(s_tuple *t);
+int		tuple_equals(t_tuple *t1, t_tuple *t2);
+t_tuple	*tuple_add(t_tuple *t1, t_tuple *t2);
+t_tuple	*tuple_substract(t_tuple *t1, t_tuple *t2);
+t_tuple	*tuple_scalar_multiply(t_tuple *t, double scale);
+t_tuple	*tuple_negate(t_tuple *t);
+double	tuple_length(t_tuple *t);
+t_tuple	*tuple_normalize(t_tuple *t);
+double	tuple_dot_product(t_tuple *t1, t_tuple *t2);
+t_tuple	*tuple_cross_product(t_tuple *t1, t_tuple *t2);
+t_tuple	*tuple_multiply(t_tuple *t1, t_tuple *t2);
+t_tuple	*tuple_reflect(t_tuple *v_in, t_tuple *v_normal);
+t_tuple	*tuple_copy(t_tuple *t);
 
 #endif 

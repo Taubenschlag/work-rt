@@ -12,18 +12,18 @@
 
 #include "../../../../heads_global/minirt.h"
 
-s_cone	*cone_cone(void)
+t_cone	*cone_cone(void)
 {
-	s_cone	*cone;
+	t_cone	*cone;
 
-	cone = (s_cone *)malloc(sizeof(s_cone));
+	cone = (t_cone *)malloc(sizeof(t_cone));
 	cone->closed = 0;
 	cone->min = INFINITY * -1;
 	cone->max = INFINITY * 1;
 	return (cone);
 }
 
-s_tuple	*cone_normale_at(s_tuple *t, s_cone *c)
+t_tuple	*cone_normale_at(t_tuple *t, t_cone *c)
 {
 	double	dist;
 	double	y;
@@ -39,7 +39,7 @@ s_tuple	*cone_normale_at(s_tuple *t, s_cone *c)
 	return (tuple_vector(t->x, y, t->z));
 }
 
-int	check_cap_cone_max(s_ray *r, double t, double max)
+int	check_cap_cone_max(t_ray *r, double t, double max)
 {
 	double	x;
 	double	y;
@@ -51,7 +51,7 @@ int	check_cap_cone_max(s_ray *r, double t, double max)
 	return (temp <= max);
 }
 
-int	check_cap_cone_min(s_ray *r, double t, double min)
+int	check_cap_cone_min(t_ray *r, double t, double min)
 {
 	double	x;
 	double	y;
@@ -63,9 +63,9 @@ int	check_cap_cone_min(s_ray *r, double t, double min)
 	return (temp <= min);
 }
 
-s_cone	*cone_param(double h)
+t_cone	*cone_param(double h)
 {
-	s_cone	*c;
+	t_cone	*c;
 
 	c = cone_cone();
 	c->min = h * -1;

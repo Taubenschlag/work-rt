@@ -12,36 +12,36 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_intersection	*intersect_make_shape(s_shape *s, double t)
+t_intersection	*intersect_make_shape(t_shape *s, double t)
 {
-	s_intersection	*i;
+	t_intersection	*i;
 
-	i = (s_intersection *)malloc(sizeof(s_intersection));
+	i = (t_intersection *)malloc(sizeof(t_intersection));
 	i->shape = s;
 	i->t = t;
 	return (i);
 }
 
-s_intersection_list	*intersection_list_make(int elem)
+t_intersection_list	*intersection_list_make(int elem)
 {
-	s_intersection_list	*l;
+	t_intersection_list	*l;
 	int					i;
 
 	i = -1;
-	l = (s_intersection_list *)malloc(sizeof(s_intersection_list));
+	l = (t_intersection_list *)malloc(sizeof(t_intersection_list));
 	l->list = NULL;
 	if (elem > 0)
-		l->list = (s_intersection **)malloc(sizeof(s_intersection *) * elem);
+		l->list = (t_intersection **)malloc(sizeof(t_intersection *) * elem);
 	while (++i < elem)
 		l->list[i] = NULL;
 	l->size = elem;
 	return (l);
 }
 
-s_intersection_list	*intersect_shape(s_shape *s, s_ray *r)
+t_intersection_list	*intersect_shape(t_shape *s, t_ray *r)
 {
-	s_ray				*ray;
-	s_intersection_list	*list;
+	t_ray				*ray;
+	t_intersection_list	*list;
 
 	list = NULL;
 	ray = ray_transform(r, matrix_invert(s->trans));
@@ -63,7 +63,7 @@ s_intersection_list	*intersect_shape(s_shape *s, s_ray *r)
 	return (list);
 }
 
-void	intersection_list_free(s_intersection_list *l)
+void	intersection_list_free(t_intersection_list *l)
 {
 	int	i;
 
@@ -74,12 +74,12 @@ void	intersection_list_free(s_intersection_list *l)
 }
 
 // todo too big func
-s_intersection	*hit(s_intersection_list *l)
+t_intersection	*hit(t_intersection_list *l)
 {
 	int				i;
 	double			min;
 	int				index;
-	s_intersection	*ret;
+	t_intersection	*ret;
 
 	i = -1;
 	index = -1;

@@ -36,9 +36,9 @@ void	axis(double orig, double direct, double *min, double *max)
 	*min = t_max < t_min ? t_max : t_min;
 }
 
-s_intersection_list	*intersection_ray_cube(s_shape *s, s_ray *ray)
+t_intersection_list	*intersection_ray_cube(t_shape *s, t_ray *ray)
 {
-	s_intersection_list	*ret;
+	t_intersection_list	*ret;
 	double				*mints;
 	double				*maxts;
 	double				min;
@@ -66,60 +66,60 @@ s_intersection_list	*intersection_ray_cube(s_shape *s, s_ray *ray)
 }
 
 // todo too much args
-double	init(s_shape *s, s_ray *ray, s_intersection_list **ret,
-			s_tuple **dir_cros, double *dot)
+double	init(t_shape *s, t_ray *ray, t_intersection_list **ret,
+			   t_tuple **dir_cros, double *dot)
 {
 	*ret = intersection_list_make(0);
-	*dir_cros = tuple_cross_product(ray->dir, ((s_triangle *)s->shape)->e2);
-	*dot = tuple_dot_product(((s_triangle *)s->shape)->e1, *dir_cros);
+	*dir_cros = tuple_cross_product(ray->dir, ((t_triangle *)s->shape)->e2);
+	*dot = tuple_dot_product(((t_triangle *)s->shape)->e1, *dir_cros);
 	return (1.0 / *dot);
 }
 
 //? TODO more than 25
-s_intersection_list	*intersection_ray_triangle(s_shape *s, s_ray *ray)
+t_intersection_list	*intersection_ray_triangle(t_shape *s, t_ray *ray)
 {
-	s_tuple				*dir_cros;
-	s_tuple				*or_crs;
-	s_tuple				*a_to_origin;
+	t_tuple				*dir_cros;
+	t_tuple				*or_crs;
+	t_tuple				*a_to_origin;
 	double				dots[5];
-	s_intersection_list	*ret;
+	t_intersection_list	*ret;
 
 	dots[0] = init(s, ray, &ret, &dir_cros, &(dots[4]));
 	if (fabs(dots[4]) < 0.0001 && cheaty_free(dir_cros))
 		return (ret);
 	a_to_origin = tuple_substract(tuple_copy(ray->origin),
-			tuple_copy(((s_triangle *)s->shape)->a));
+			tuple_copy(((t_triangle *)s->shape)->a));
 	dots[1] = dots[0] * tuple_dot_product(a_to_origin, dir_cros);
 	free(dir_cros);
 	if ((dots[1] < 0 - 0.0001
 			|| dots[1] > 1 + 0.00001) && cheaty_free(a_to_origin))
 		return (ret);
-	or_crs = tuple_cross_product(a_to_origin, ((s_triangle *)s->shape)->e1);
+	or_crs = tuple_cross_product(a_to_origin, ((t_triangle *)s->shape)->e1);
 	dots[2] = dots[0] * tuple_dot_product(ray->dir, or_crs);
 	free(a_to_origin);
 	if ((dots[2] < 0 - 0.0001
 			|| (dots[2] + dots[1]) > 1 + 0.00001) && cheaty_free(or_crs))
 		return (ret);
-	dots[3] = dots[0] * tuple_dot_product(((s_triangle*)s->shape)->e2, or_crs);
+	dots[3] = dots[0] * tuple_dot_product(((t_triangle*)s->shape)->e2, or_crs);
 	add_intersection(intersect_make_shape(s, dots[3]), &ret);
 	free(or_crs);
 	return (ret);
 }
 
 //todo too long
-s_intersection_list	*intersection_ray_square(s_shape *s, s_ray *ray)
+t_intersection_list	*intersection_ray_square(t_shape *s, t_ray *ray)
 {
-	s_intersection_list	*ret;
-	s_intersection_list	*temp;
-	s_shape				*tr;
-	s_square			*q;
+	t_intersection_list	*ret;
+	t_intersection_list	*temp;
+	t_shape				*tr;
+	t_square			*q;
 
-	q = (s_square *)s->shape;
-	tr = make_shape('i', (s_triangle *)q->t1);
+	q = (t_square *)s->shape;
+	tr = make_shape('i', (t_triangle *)q->t1);
 	temp = intersection_ray_triangle(tr, ray);
 	matrix_free(tr->trans);
 	free(tr);
-	tr = make_shape('i', (s_triangle *)q->t2);
+	tr = make_shape('i', (t_triangle *)q->t2);
 	ret = intersection_ray_triangle(tr, ray);
 	matrix_free(tr->trans);
 	free(tr);

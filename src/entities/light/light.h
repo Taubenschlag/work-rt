@@ -14,13 +14,13 @@
 # define LIGHT_H
 # include "../../../heads_global/minirt.h"
 
-typedef struct t_light
+typedef struct light
 {
-	s_tuple	*position;
-	s_tuple	*color;
-}	s_light;
+	t_tuple	*position;
+	t_tuple	*color;
+}	t_light;
 
-s_light	*light_make(s_tuple *position, s_tuple *color);
-void	light_free(s_light *l);
+t_light	*light_make(t_tuple *position, t_tuple *color);
+void	light_free(t_light *l);
 
 #endif

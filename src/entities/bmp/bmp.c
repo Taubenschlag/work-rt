@@ -21,14 +21,14 @@ void	vw(int fd, void *ptr, size_t len)
 	(void)silencer;
 }
 
-s_canvas	*canvas_canvas(unsigned int w, unsigned int h)
+t_canvas	*canvas_canvas(unsigned int w, unsigned int h)
 {
-	s_canvas		*c;
+	t_canvas		*c;
 	unsigned int	i;
 	unsigned int	j;
 
 	i = 0;
-	c = (s_canvas *)malloc(sizeof(s_canvas));
+	c = (t_canvas *)malloc(sizeof(t_canvas));
 	c->h = h;
 	c->w = w;
 	c->canvas = (unsigned int **)malloc(sizeof(int *) * h);
@@ -46,7 +46,7 @@ s_canvas	*canvas_canvas(unsigned int w, unsigned int h)
 	return (c);
 }
 
-void	canvas_free(s_canvas *c)
+void	canvas_free(t_canvas *c)
 {
 	unsigned int	i;
 
@@ -87,7 +87,7 @@ int	init_bmp(int h, int w, int fd)
 }
 
 // todo declaration and assignation
-void	fill_bmp(int fd, s_canvas *c)
+void	fill_bmp(int fd, t_canvas *c)
 {
 	unsigned char	bmp_pad[40] = {0, 0, 0};
 	unsigned int	i;

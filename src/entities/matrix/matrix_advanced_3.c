@@ -12,12 +12,12 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_matrix	*rotate_axis_angle(s_tuple *u, double angle)
+t_matrix	*rotate_axis_angle(t_tuple *u, double angle)
 {
 	double		sin_a;
 	double		cos_a;
 	double		one_min_cos_a;
-	s_matrix	*ret;
+	t_matrix	*ret;
 
 	sin_a = sin(angle);
 	cos_a = cos(angle);
@@ -35,12 +35,12 @@ s_matrix	*rotate_axis_angle(s_tuple *u, double angle)
 	return (ret);
 }
 
-s_matrix	* rotate_align(s_tuple *v1, s_tuple *v2)
+t_matrix	* rotate_align(t_tuple *v1, t_tuple *v2)
 {
-	s_tuple		*axis;
+	t_tuple		*axis;
 	double		dot;
 	double		angle;
-	s_matrix	*res;
+	t_matrix	*res;
 
 	axis = tuple_normalize(tuple_cross_product(v1, v2));
 	dot = tuple_dot_product(v1, v2);
@@ -51,9 +51,9 @@ s_matrix	* rotate_align(s_tuple *v1, s_tuple *v2)
 	return (res);
 }
 
-double	matrix_minor(s_matrix *m, int from, int to)//todo assert 3x3
+double	matrix_minor(t_matrix *m, int from, int to)//todo assert 3x3
 {
-	s_matrix	*sub;
+	t_matrix	*sub;
 	double		res;
 
 	sub = matrix_sub(m, from, to);
@@ -63,7 +63,7 @@ double	matrix_minor(s_matrix *m, int from, int to)//todo assert 3x3
 }
 
 // changed
-double	matrix_cofactor(s_matrix *m, int from, int to)
+double	matrix_cofactor(t_matrix *m, int from, int to)
 {
 	double	minor;
 

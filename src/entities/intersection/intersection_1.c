@@ -12,10 +12,10 @@
 
 #include "../../../heads_global/minirt.h"
 
-void	add_intersection(s_intersection *new_elem,
-		s_intersection_list **list)
+void	add_intersection(t_intersection *new_elem,
+						 t_intersection_list **list)
 {
-	s_intersection_list	*nl;
+	t_intersection_list	*nl;
 	int					i;
 
 	i = -1;
@@ -30,10 +30,10 @@ void	add_intersection(s_intersection *new_elem,
 }
 
 // todo fix array size
-s_intersection_list	*intersect_world(s_ray *r, s_world *w)
+t_intersection_list	*intersect_world(t_ray *r, t_world *w)
 {
-	s_intersection_list	*merged;
-	s_intersection_list	*unsorted[w->shape_counter];
+	t_intersection_list	*merged;
+	t_intersection_list	*unsorted[w->shape_counter];
 	int					i;
 	int					j;
 	int					size;
@@ -59,12 +59,12 @@ s_intersection_list	*intersect_world(s_ray *r, s_world *w)
 	return (merged);
 }
 
-s_computations	*precomp(s_intersection *i, s_ray *r)
+t_computations	*precomp(t_intersection *i, t_ray *r)
 {
-	s_computations	*comps;
-	s_tuple			*tmp;
+	t_computations	*comps;
+	t_tuple			*tmp;
 
-	comps = (s_computations *)malloc(sizeof(s_computations));
+	comps = (t_computations *)malloc(sizeof(t_computations));
 	comps->t = i->t;
 	comps->shape = i->shape;
 	comps->point = ray_position(r, i->t);
@@ -84,19 +84,19 @@ s_computations	*precomp(s_intersection *i, s_ray *r)
 	return (comps);
 }
 
-s_tuple	*shade_hit(s_world *w, s_computations *cs, s_light *current)
+t_tuple	*shade_hit(t_world *w, t_computations *cs, t_light *current)
 {
 	return (lightning(
 			make_l_p(cs->shape->matrl, current, cs->point, cs->eyev, cs->normv),
 			in_shadow(w, cs->overpoint, current)));
 }
 
-s_tuple	*color_at(s_world *w, s_ray *r)
+t_tuple	*color_at(t_world *w, t_ray *r)
 {
-	s_intersection_list	*l;
-	s_intersection		*i;
-	s_computations		*c;
-	s_tuple				*color;
+	t_intersection_list	*l;
+	t_intersection		*i;
+	t_computations		*c;
+	t_tuple				*color;
 	int					j;
 
 	j = -1;

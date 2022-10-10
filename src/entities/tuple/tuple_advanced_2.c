@@ -12,11 +12,11 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_tuple	*tuple_negate(s_tuple *t)
+t_tuple	*tuple_negate(t_tuple *t)
 {
-	s_tuple	*res;
+	t_tuple	*res;
 
-	res = (s_tuple *)malloc(sizeof(s_tuple));
+	res = (t_tuple *)malloc(sizeof(t_tuple));
 	res->x = t->x * -1;
 	res->y = t->y * -1;
 	res->z = t->z * -1;
@@ -25,7 +25,7 @@ s_tuple	*tuple_negate(s_tuple *t)
 	return (res);
 }
 
-double	tuple_length(s_tuple *t)
+double	tuple_length(t_tuple *t)
 {
 	return (
 		sqrt(
@@ -36,10 +36,10 @@ double	tuple_length(s_tuple *t)
 	);
 }
 
-s_tuple	*tuple_normalize(s_tuple *t)
+t_tuple	*tuple_normalize(t_tuple *t)
 {
 	double	length;
-	s_tuple	*n;
+	t_tuple	*n;
 
 	length = tuple_length(t);
 	n = tuple_vector(
@@ -50,7 +50,7 @@ s_tuple	*tuple_normalize(s_tuple *t)
 	return (n);
 }
 
-double	tuple_dot_product(s_tuple *t1, s_tuple *t2)
+double	tuple_dot_product(t_tuple *t1, t_tuple *t2)
 {
 	return (
 		t1->x * t2->x
@@ -59,7 +59,7 @@ double	tuple_dot_product(s_tuple *t1, s_tuple *t2)
 	);
 }
 
-s_tuple	*tuple_cross_product(s_tuple *t1, s_tuple *t2)
+t_tuple	*tuple_cross_product(t_tuple *t1, t_tuple *t2)
 {
 	return (
 		tuple_vector(

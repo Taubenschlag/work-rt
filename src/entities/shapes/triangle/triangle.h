@@ -14,19 +14,19 @@
 # define TRIANGLE_H
 # include "../../../../heads_global/minirt.h"
 
-typedef struct t_triangle
+typedef struct triangle
 {
-	s_tuple	*a;
-	s_tuple	*b;
-	s_tuple	*c;
-	s_tuple	*e1;
-	s_tuple	*e2;
-	s_tuple	*n;
+	t_tuple	*a;
+	t_tuple	*b;
+	t_tuple	*c;
+	t_tuple	*e1;
+	t_tuple	*e2;
+	t_tuple	*n;
 
-}	s_triangle;
+}	t_triangle;
 
-s_triangle	*triangle_coordinates(s_tuple *a, s_tuple *b, s_tuple *c);
-s_tuple		*triangle_normale_at(s_triangle *t);
-void		free_triangle(s_triangle *t);
+t_triangle	*triangle_coordinates(t_tuple *a, t_tuple *b, t_tuple *c);
+t_tuple		*triangle_normale_at(t_triangle *t);
+void		free_triangle(t_triangle *t);
 
 #endif //RT_CHALLENGE_TRIANGLE_H

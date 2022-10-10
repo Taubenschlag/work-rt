@@ -12,14 +12,14 @@
 
 #include "../../../heads_global/minirt.h"
 
-s_matrix	*matrix_matrix(int h, int w)
+t_matrix	*matrix_matrix(int h, int w)
 {
-	s_matrix	*m;
+	t_matrix	*m;
 	int			i;
 	int			j;
 
 	i = 0;
-	m = (s_matrix *)malloc(sizeof(s_matrix));
+	m = (t_matrix *)malloc(sizeof(t_matrix));
 	m->w = w;
 	m->h = h;
 	m->matrix = (double **)malloc(sizeof(double *) * h);
@@ -37,9 +37,9 @@ s_matrix	*matrix_matrix(int h, int w)
 	return (m);
 }
 
-s_matrix	*matrix_identity(int range)
+t_matrix	*matrix_identity(int range)
 {
-	s_matrix	*m;
+	t_matrix	*m;
 	int			i;
 
 	i = 0;
@@ -52,7 +52,7 @@ s_matrix	*matrix_identity(int range)
 	return (m);
 }
 
-int	matrix_equals(s_matrix *m1, s_matrix *m2)
+int	matrix_equals(t_matrix *m1, t_matrix *m2)
 {
 	int	i;
 	int	j;
@@ -77,7 +77,7 @@ int	matrix_equals(s_matrix *m1, s_matrix *m2)
 	return (1);
 }
 
-void	matrix_free(s_matrix *m)
+void	matrix_free(t_matrix *m)
 {
 	int	i;
 
@@ -94,9 +94,9 @@ void	matrix_free(s_matrix *m)
 	}
 }
 
-s_matrix	*tuple_to_matrix(s_tuple *t)
+t_matrix	*tuple_to_matrix(t_tuple *t)
 {
-	s_matrix	*m;
+	t_matrix	*m;
 
 	m = matrix_matrix(4, 1);
 	m->matrix[0][0] = t->x;

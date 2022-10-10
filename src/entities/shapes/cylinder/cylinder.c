@@ -12,20 +12,20 @@
 
 #include "../../../../heads_global/minirt.h"
 
-s_cylinder	*cylinder_cylinder(void)
+t_cylinder	*cylinder_cylinder(void)
 {
-	s_cylinder	*c;
+	t_cylinder	*c;
 
-	c = (s_cylinder *)malloc(sizeof(s_cylinder));
+	c = (t_cylinder *)malloc(sizeof(t_cylinder));
 	c->closed = 0;
 	c->min = INFINITY * -1;
 	c->max = INFINITY * 1;
 	return (c);
 }
 
-s_cylinder	*cylinder_params(double h)
+t_cylinder	*cylinder_params(double h)
 {
-	s_cylinder	*c;
+	t_cylinder	*c;
 
 	c = cylinder_cylinder();
 	c->min = 0;
@@ -34,7 +34,7 @@ s_cylinder	*cylinder_params(double h)
 	return (c);
 }
 
-s_tuple	*cylinder_normale_at(s_tuple *t, s_cylinder *c)
+t_tuple	*cylinder_normale_at(t_tuple *t, t_cylinder *c)
 {
 	double	dist;
 
@@ -46,7 +46,7 @@ s_tuple	*cylinder_normale_at(s_tuple *t, s_cylinder *c)
 	return (tuple_vector(t->x, 0, t->z));
 }
 
-int	check_cap(s_ray *r, double t)
+int	check_cap(t_ray *r, double t)
 {
 	double	x;
 	double	z;
@@ -58,7 +58,7 @@ int	check_cap(s_ray *r, double t)
 	return (temp <= 1);
 }
 
-void	cylinder_free(s_cylinder *c)
+void	cylinder_free(t_cylinder *c)
 {
 	free(c);
 }
