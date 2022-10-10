@@ -52,7 +52,7 @@ s_tuple	*shape_normal_at(s_shape *s, s_tuple *p)
 	if (s->type == 's' )
 		return (nsphere_normal_at(loc_pnt, s->trans));
 	else if (s->type == 'p')
-		loc_normal = plane_normal_at(s->trans, loc_pnt);
+		loc_normal = plane_normal_at();
 	else if (s->type == 'u')
 		loc_normal = cube_normal_at(loc_pnt);
 	else if (s->type == 'y')
@@ -62,7 +62,7 @@ s_tuple	*shape_normal_at(s_shape *s, s_tuple *p)
 	else if (s->type == 'i')
 		loc_normal = triangle_normale_at((s_triangle *) s->shape);
 	else if (s->type == 'q')
-		loc_normal = square_normale_at(loc_pnt, (s_square *) s->shape);
+		loc_normal = square_normale_at();
 	else
 		return (NULL);
 	wrld_normal = tuple_apply_trans_matrix(

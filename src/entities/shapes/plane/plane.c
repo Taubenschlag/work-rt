@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 03:08:39 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/02 17:46:48 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ s_plane	*plane_plane(void)
 
 s_plane	*plane_defautl(void)
 {
-	return (plane_plane(void));
+	return (plane_plane());
 }
 
 s_tuple	*plane_normal_at(void)

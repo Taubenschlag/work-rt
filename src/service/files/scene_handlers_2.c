@@ -17,6 +17,7 @@ int	handle_c(char *line, s_scene *s, char *name)
 	char	**input;
 	s_tuple	*from;
 	s_tuple	*dir;
+	s_tuple	*up;
 	double	fov;
 
 	input = ft_whitespaces(line);
@@ -25,13 +26,14 @@ int	handle_c(char *line, s_scene *s, char *name)
 	{
 		from = get_tuple(input[1], 'p');
 		dir = get_tuple(input[2], 'v');
-		fov = ft_atoi(input[3]) * (M_PI / 180);
+		up = get_tuple(input[3], 'v');
+		fov = ft_atoi(input[4]) * (M_PI / 180);
 		s->cameras[s->camera_counter] = make_camera(
 				s->resolution_y, s->resolution_x, fov, name, from);
 		s->cameras[s->camera_counter]->transform = view_transform(
 				tuple_copy(from),
 				tuple_add(tuple_copy(from), dir),
-				tuple_vector(0, 1, 0));
+				up);
 		s->camera_counter++;
 	}
 	cleanup(input);
@@ -83,7 +85,7 @@ int	handle_sphere(char **values, s_scene *s)
 	return (1);
 }
 
-int	handle_plane(char **values, s_scene *s)
+int	 handle_plane(char **values, s_scene *s)
 {
 	s_tuple		*coordinate;
 	s_tuple		*norm;

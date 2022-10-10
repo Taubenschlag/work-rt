@@ -62,7 +62,7 @@ int	handle_cylinder(char **values, s_scene *s)
 			COLOR_CF);
 	s->shapes[s->shape_counter] = make_shape('y', cylinder_params(h));
 	s->shapes[s->shape_counter]->matrl = mat_with_col(color);
-	if (norm->x == 0 && fabs(norm->y) == 1 && norm->z == 0)
+	if (fabs(norm->x) < 0000.1 && fabs(norm->y - 1.0) < 0000.1 && fabs(norm->z) < 0000.1)
 		trans = matrix_identity(4);
 	else
 		trans = rotate_align(tuple_vector(0, 1, 0), norm);

@@ -39,35 +39,32 @@ int	throw_err(int error)
 	return (0);
 }
 
-// TODO more than 25 lines
-s_scene	*parse_scene(int fd, int *counters)
+void parse_scene(int fd, int *counters, s_scene **s)
 {
 	char	*line;
 	int		cnt;
 	int		error;
-	s_scene	*sc;
 
-	sc = make_scene(counters);
+	*s = make_scene(counters);
 	error = 0;
-	if (get_next_line(fd, &line) && handle_r(line, sc)
-		&& get_next_line(fd, &line) && handle_a(line, sc))
+	if (get_next_line(fd, &line) && handle_r(line, *s)
+		&& get_next_line(fd, &line) && handle_a(line, *s))
 	{
 		cnt = -1;
 		while (!error && ++cnt < counters[2])
-			if (!get_next_line(fd, &line) || !handle_c(line, sc, ft_itoa(cnt)))
+			if (!get_next_line(fd, &line) || !handle_c(line, *s, ft_itoa(cnt)))
 				error = 1;
 		cnt = -1;
 		while (!error && ++cnt < counters[3])
-			if (!get_next_line(fd, &line) || !handle_l(line, sc))
+			if (!get_next_line(fd, &line) || !handle_l(line, *s))
 				error = 1;
 		cnt = -1;
 		while (!error && ++cnt < counters[4])
-			if (!get_next_line(fd, &line) || !handle_shape(line, sc))
+			if (!get_next_line(fd, &line) || !handle_shape(line, *s))
 				error = 1;
 		if (throw_err(error))
-			return (NULL);
+			*s = NULL;
 	}
-	return (sc);
 }
 
 void	free_scene(s_scene *s)

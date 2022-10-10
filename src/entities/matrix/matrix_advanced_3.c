@@ -35,7 +35,7 @@ s_matrix	*rotate_axis_angle(s_tuple *u, double angle)
 	return (ret);
 }
 
-s_matrix	*rotate_align(s_tuple *v1, s_tuple *v2)
+s_matrix	* rotate_align(s_tuple *v1, s_tuple *v2)
 {
 	s_tuple		*axis;
 	double		dot;

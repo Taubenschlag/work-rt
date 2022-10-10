@@ -37,7 +37,7 @@ s_intersection_list	*intersection_ray_cylinder(s_shape *s, s_ray *ray)
 
 	a = ray->dir->x * ray->dir->x + ray->dir->z * ray->dir->z;
 	ret = intersection_list_make(0);
-	if (a < 0.00001)
+	if (fabs(a) < 0.000001)
 		return (cyl_int_cap(s, ray, ret));
 	b = 2 * ray->dir->x * ray->origin->x + 2 * ray->dir->z * ray->origin->z;
 	disc = b * b - 4 * a * (ray->origin->x * ray->origin->x

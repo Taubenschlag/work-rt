@@ -112,7 +112,7 @@ s_intersection_list	*intersection_ray_square(s_shape *s, s_ray *ray)
 	s_intersection_list	*ret;
 	s_intersection_list	*temp;
 	s_shape				*tr;
-	s_square			q;
+	s_square			*q;
 
 	q = (s_square *)s->shape;
 	tr = make_shape('i', (s_triangle *)q->t1);

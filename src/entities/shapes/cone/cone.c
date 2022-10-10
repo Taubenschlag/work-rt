@@ -48,7 +48,7 @@ int	check_cap_cone_max(s_ray *r, double t, double max)
 	x = r->origin->x + t * r->dir->x;
 	y = r->origin->z + t * r->dir->z;
 	temp = fabs(x * x) + fabs(y * y);
-	return (sqrt(temp) <= fabs(max));
+	return (temp <= max);
 }
 
 int	check_cap_cone_min(s_ray *r, double t, double min)
@@ -60,7 +60,7 @@ int	check_cap_cone_min(s_ray *r, double t, double min)
 	x = r->origin->x + t * r->dir->x;
 	y = r->origin->z + t * r->dir->z;
 	temp = fabs(x * x) + fabs(y * y);
-	return (sqrt(temp) <= fabs(min));
+	return (temp <= min);
 }
 
 s_cone	*cone_param(double h)

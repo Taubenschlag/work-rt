@@ -17,6 +17,7 @@
 typedef struct t_camera
 {
 	s_tuple		*from;
+	s_tuple		*up;
 	char		*name;
 	int			h_size;
 	int			v_size;

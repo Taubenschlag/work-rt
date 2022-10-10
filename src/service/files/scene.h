@@ -46,7 +46,7 @@ int			handle_triangle(char **values, s_scene *s);
 int			handle_cone(char **values, s_scene *s);
 int			handle_cube(char **values, s_scene *s);
 void		save_scene(s_scene *s);
-s_scene		*parse_scene(int fd, int *counters);
+void 		parse_scene(int fd, int *counters, s_scene **s);
 void		cleanup(char **values);
 
 #endif

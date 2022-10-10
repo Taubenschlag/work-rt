@@ -49,11 +49,13 @@ s_tuple	*cylinder_normale_at(s_tuple *t, s_cylinder *c)
 int	check_cap(s_ray *r, double t)
 {
 	double	x;
-	double	y;
+	double	z;
+	double	temp;
 
 	x = r->origin->x + t * r->dir->x;
-	y = r->origin->z + t * r->dir->z;
-	return ((x * x + y * y) <= 1);
+	z = r->origin->z + t * r->dir->z;
+	temp = fabs(x * x) + fabs(z * z);
+	return (temp <= 1);
 }
 
 void	cylinder_free(s_cylinder *c)
