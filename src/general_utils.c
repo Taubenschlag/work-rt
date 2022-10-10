@@ -33,16 +33,6 @@ double	max_d(double a, double b)
 	return (b);
 }
 
-// TODO probably redundant
-void	swap(double *x, double *y)
-{
-	double	sw;
-
-	sw = *x;
-	*x = *y;
-	*y = sw;
-}
-
 double	mins(double *a, int length)
 {
 	int		i;
