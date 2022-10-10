@@ -27,12 +27,15 @@ int	main(int ac, char **av)
 	int		fd;
 	s_scene	*s;
 	int		*counters;
-// TODO fd inside if
+
 	s = NULL;
-	if((fd = check_arguments(ac, av)) < 1 || !(counters = check_file(ac == 2? av[1]:av[2])))
+	fd = check_arguments(ac, av);
+	if(fd < 1)
 		exit(EXIT_FAILURE);
-	else
-		parse_scene(fd, counters, &s);
+	counters = check_file(ac == 2? av[1]:av[2]);
+	if (!counters)
+		exit(EXIT_FAILURE);
+	parse_scene(fd, counters, &s);
 	free(counters);
 	close(fd);
 	if (ac == 3)
