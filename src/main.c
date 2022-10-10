@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 21:22:51 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/10 23:04:09 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  *   [2] - Camera (N)
  *   [3] - lights
  *   [4] - Shapes
-*/
+ */
 
 int	main(int ac, char **av)
 {
@@ -30,9 +30,12 @@ int	main(int ac, char **av)
 
 	s = NULL;
 	fd = check_arguments(ac, av);
-	if(fd < 1)
+	if (fd < 1)
 		exit(EXIT_FAILURE);
-	counters = check_file(ac == 2? av[1]:av[2]);
+	if (ac == 2 || ac == 3)
+		counters = check_file(av[ac - 1]);
+	else
+		exit(EXIT_FAILURE);
 	if (!counters)
 		exit(EXIT_FAILURE);
 	parse_scene(fd, counters, &s);

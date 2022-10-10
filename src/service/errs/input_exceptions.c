@@ -12,17 +12,16 @@
 
 #include "../../../heads_global/minirt.h"
 
-//TODO fd in if
 int	check_arguments(int ac, char **av)
 {
 	int	fd;
 
 	fd = 0;
-	if (ac == 1 || ac > 3
-		|| (ac == 3
-			&& !((ft_strequals(av[1], "--save"))
-				&& (fd = open(av[2], O_RDONLY))))
-		|| (ac == 2 && !(fd = open(av[1], O_RDONLY))))
+	if (ac == 3 || ac == 2)
+		fd = open(av[ac - 1], O_RDONLY);
+	if (ac < 2 || ac > 3
+		|| (ac == 3 && !((ft_strequals(av[1], "--save"))))
+		|| !fd)
 	{
 		perror("wrong argument");
 		return (-1);
