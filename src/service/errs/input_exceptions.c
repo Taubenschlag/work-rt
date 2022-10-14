@@ -98,7 +98,6 @@ int	*check_file(char *filename)
 		figure_switch(values, &entry, &correct);
 		cleanup_arr(values);
 	}
-	free(line);
 	close(fd);
 	if (!correct || entry[RES] != 1 || entry[AMB] > 1 || entry[CAM] < 1)
 	{
@@ -106,5 +105,6 @@ int	*check_file(char *filename)
 		perror("invalid file");
 		return (NULL);
 	}
+	free(line);
 	return (entry);
 }
