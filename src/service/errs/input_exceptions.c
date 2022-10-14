@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 01:37:13 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/14 22:02:55 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,26 @@ int	check_arguments(int ac, char **av)
 	return (fd);
 }
 
-void	figure_switch(char *str, int **counters_ptr, int *correct)
+void	figure_switch(char **str, int **counters_ptr, int *correct)
 {
-	int	*counters;
-
-	counters = *counters_ptr;
-	if (ft_strequals(str, "R"))
-		counters[0]++;
-	else if (ft_strequals(str, "A"))
-		counters[1]++;
-	else if (ft_strequals(str, "c"))
-		counters[2]++;
-	else if (ft_strequals(str, "l"))
-		counters[3]++;
-	else if (ft_strequals(str, "sp")
-		|| ft_strequals(str, "pl")
-		|| ft_strequals(str, "sq")
-		|| ft_strequals(str, "cy")
-		|| ft_strequals(str, "tr")
-		|| ft_strequals(str, "co")
-		|| ft_strequals(str, "cu"))
-		counters[4]++;
+	if (ft_strequals(str[0], "R"))
+		check_resolution(counters_ptr, correct, str);
+	else if (ft_strequals(str[0], "A"))
+		check_ambiance(counters_ptr, correct, str);
+	else if (ft_strequals(str[0], "c"))
+		check_cameras(counters_ptr, correct, str);
+	else if (ft_strequals(str[0], "l"))
+		check_lights(counters_ptr, correct, str);
+	else if (ft_strequals(str[0], "sp"))
+		check_sphere(counters_ptr, correct, str);
+	else if (ft_strequals(str[0], "pl"))
+		check_plane(counters_ptr, correct, str);
+	else if (ft_strequals(str[0], "sq") || ft_strequals(str[0], "cu"))
+		check_square_cube(counters_ptr, correct, str);
+	else if (ft_strequals(str[0], "tr"))
+		check_triangle(counters_ptr, correct, str);
+	else if (ft_strequals(str[0], "co") || ft_strequals(str[0], "cy"))
+		check_cone_cylinder(counters_ptr, correct, str);
 	else
 		*correct = 0;
 }
@@ -65,8 +64,8 @@ int	*make_counters_array(void)
 	int	i;
 
 	i = -1;
-	counters = malloc(sizeof(int) * 5);
-	while (++i < 5)
+	counters = malloc(sizeof(int) * 11);
+	while (++i < 11)
 		counters[i] = 0;
 	return (counters);
 }
@@ -86,26 +85,26 @@ int	*check_file(char *filename)
 	int		fd;
 	char	*line;
 	char	**values;
-	int		*counters;
+	int		*entry;
 	int		correct;
 
 	fd = open(filename, O_RDONLY);
-	counters = make_counters_array();
-	correct = 1;
+	entry = make_counters_array();
+	correct = TRUE;
 	while (correct && get_next_line(fd, &line))
 	{
 		values = ft_whitespaces(line);
 		free(line);
-		figure_switch(values[0], &counters, &correct);
+		figure_switch(values, &entry, &correct);
 		cleanup_arr(values);
 	}
 	free(line);
 	close(fd);
-	if (!correct || counters[0] != 1 || counters[1] > 1 || counters[2] < 1)
+	if (!correct || entry[RES] != 1 || entry[AMB] > 1 || entry[CAM] < 1)
 	{
-		free(counters);
+		free(entry);
 		perror("invalid file");
 		return (NULL);
 	}
-	return (counters);
+	return (entry);
 }

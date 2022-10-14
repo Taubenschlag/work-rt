@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/09/30 22:43:48 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/14 21:54:20 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@ t_scene	*make_scene(int *counters)
 	ret->resolution_y = -1;
 	ret->ambi_ratio = -1;
 	ret->camera_counter = 0;
-	ret->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[2]);
+	ret->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[CAM]);
 	ret->light_counter = 0;
-	ret->lights = (t_light **)malloc(sizeof(t_light *) * counters[3]);
+	ret->lights = (t_light **)malloc(sizeof(t_light *) * counters[LHT]);
 	ret->shape_counter = 0;
-	ret->shapes = (t_shape **)malloc(sizeof(t_shape *) * counters[4]);
+	ret->shapes = (t_shape **)malloc(sizeof(t_shape *)
+			* (counters[SPH]
+				+ counters[PLA]
+				+ counters[SQU]
+				+ counters[CUB]
+				+ counters[TRI]
+				+ counters[CYL]
+				+ counters[CON]));
 	return (ret);
 }
 
@@ -39,27 +46,28 @@ int	throw_err(int error)
 	return (0);
 }
 
-void parse_scene(int fd, int *counters, t_scene **s)
+void	parse_scene(int fd, int *countrs, t_scene **s)
 {
 	char	*line;
 	int		cnt;
 	int		error;
 
-	*s = make_scene(counters);
+	*s = make_scene(countrs);
 	error = 0;
 	if (get_next_line(fd, &line) && handle_r(line, *s)
 		&& get_next_line(fd, &line) && handle_a(line, *s))
 	{
 		cnt = -1;
-		while (!error && ++cnt < counters[2])
+		while (!error && ++cnt < countrs[CAM])
 			if (!get_next_line(fd, &line) || !handle_c(line, *s, ft_itoa(cnt)))
 				error = 1;
 		cnt = -1;
-		while (!error && ++cnt < counters[3])
+		while (!error && ++cnt < countrs[LHT])
 			if (!get_next_line(fd, &line) || !handle_l(line, *s))
 				error = 1;
 		cnt = -1;
-		while (!error && ++cnt < counters[4])
+		while (!error && ++cnt < (countrs[SPH] + countrs[PLA] + countrs[SQU]
+				+ countrs[CUB] + countrs[TRI] + countrs[CYL] + countrs[CON]))
 			if (!get_next_line(fd, &line) || !handle_shape(line, *s))
 				error = 1;
 		if (throw_err(error))

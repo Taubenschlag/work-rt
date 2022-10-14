@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 02:30:55 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/14 22:03:37 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct tuple
 	double	z;
 	int		type;
 }	t_tuple;
+
+int		is_tuple(char *value, int exclude_neg);
 
 t_tuple	*tuple_vector(double x, double y, double z);
 t_tuple	*tuple_point(double x, double y, double z);

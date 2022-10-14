@@ -14,10 +14,10 @@
 
 plane	*plane_plane(void)
 {
-	plane	*plane;
+	plane	*new_plane;
 
-	plane = (plane *)malloc(sizeof(plane));
-	return (plane);
+	new_plane = (plane *)malloc(sizeof(new_plane));
+	return (new_plane);
 }
 
 plane	*plane_defautl(void)

@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 16:53:04 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/14 22:04:35 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct camera
 
 // todo more than 4 args
 t_camera	*make_camera(int h_size, int v_size, double fov,
-						 char *name, t_tuple *from);
+				char *name, t_tuple *from);
 t_ray		*ray_for_pix(t_camera *c, int y, int x);
 t_canvas	*render(t_camera *c, t_world *w);
 void		free_camera(t_camera *c);

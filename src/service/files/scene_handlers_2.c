@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/09/30 23:08:49 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/14 22:01:32 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	handle_sphere(char **values, t_scene *s)
 	return (1);
 }
 
-int	 handle_plane(char **values, t_scene *s)
+int	handle_plane(char **values, t_scene *s)
 {
 	t_tuple		*coordinate;
 	t_tuple		*norm;

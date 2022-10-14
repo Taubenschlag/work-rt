@@ -12,6 +12,11 @@
 
 #include "../../../heads_global/minirt.h"
 
+int	tuple_is_vector(t_tuple *tuple)
+{
+	return (tuple->type == IS_VECTOR);
+}
+
 int	tuple_equals(t_tuple *t1, t_tuple *t2)
 {
 	int	res;

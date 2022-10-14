@@ -1,6 +1,20 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 # define DOUBLE_PREC 0.0001
+# define RES 0
+# define AMB 1
+# define CAM 2
+# define LHT 3
+# define SPH 4
+# define PLA 5
+# define SQU 6
+# define CUB 7
+# define TRI 8
+# define CON 9
+# define CYL 10
+
+# define TRUE 1
+# define FALSE 0
 
 # include <math.h>
 # include <pthread.h>
