@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/14 16:28:33 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/14 23:41:45 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	tuple_free(t_tuple *tuple)
 	free(tuple);
 }
 
-int	check_parsed_tuple(char **value)
+int	check_parsed_tuple(char **val)
 {
 	int	i;
 	int	j;
@@ -49,14 +49,15 @@ int	check_parsed_tuple(char **value)
 
 	ret = 1;
 	i = -1;
-	while (value[++i])
+	while (val[++i])
 	{
 		j = 0;
-		if (value[i][j] == '-')
+		if (val[i][j] == '-')
 			j++;
-		while (value[i][j])
+		while (val[i][j])
 		{
-			if (value[i][j] != '.' && (value[i][j] < '0' || value[i][j] > '9'))
+			if (((val[i][j] < '0' || val[i][j] > '9') && val[i][j] != '.')
+				|| ((val[i][j] == '.' && (j == 0 || !(val[i][j + 1])))))
 			{
 				ret = 0;
 				break ;
