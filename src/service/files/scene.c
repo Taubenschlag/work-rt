@@ -6,73 +6,63 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/14 21:54:20 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/15 23:21:47 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-t_scene	*make_scene(int *counters)
+int	count_shapes(int *counters)
 {
-	t_scene	*ret;
-
-	ret = (t_scene *)malloc(sizeof(t_scene));
-	ret->resolution_x = -1;
-	ret->resolution_y = -1;
-	ret->ambi_ratio = -1;
-	ret->camera_counter = 0;
-	ret->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[CAM]);
-	ret->light_counter = 0;
-	ret->lights = (t_light **)malloc(sizeof(t_light *) * counters[LHT]);
-	ret->shape_counter = 0;
-	ret->shapes = (t_shape **)malloc(sizeof(t_shape *)
-			* (counters[SPH]
-				+ counters[PLA]
-				+ counters[SQU]
-				+ counters[CUB]
-				+ counters[TRI]
-				+ counters[CYL]
-				+ counters[CON]));
-	return (ret);
+	return (counters[SPH]
+		+ counters[PLA]
+		+ counters[SQU]
+		+ counters[CUB]
+		+ counters[TRI]
+		+ counters[CYL]
+		+ counters[CON]);
 }
 
-int	throw_err(int error)
+void *init_scene(int *counters, t_scene *scene)
 {
-	if (error)
-	{
-		perror("invalid file");
-		return (1);
-	}
-	return (0);
+	scene->resolution_x = -1;
+	scene->resolution_y = -1;
+	scene->ambi_ratio = -1;
+	scene->camera_counter = 0;
+	scene->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[CAM]);
+	scene->light_counter = 0;
+	scene->lights = (t_light **)malloc(sizeof(t_light *) * counters[LHT]);
+	scene->shape_counter = 0;
+	scene->shapes = (t_shape **)malloc(sizeof(t_shape *) * count_shapes(counters));
 }
 
-void	parse_scene(int fd, int *countrs, t_scene **s)
+int	parse_scene(int fd, int *counters, t_scene *s)
 {
 	char	*line;
 	int		cnt;
-	int		error;
+	int		success;
 
-	*s = make_scene(countrs);
-	error = 0;
-	if (get_next_line(fd, &line) && handle_r(line, *s)
-		&& get_next_line(fd, &line) && handle_a(line, *s))
+	success = 0;
+	if (get_next_line(fd, &line) && handle_r(line, s)
+		&& get_next_line(fd, &line) && handle_a(line, s))
 	{
+		success = 1;
 		cnt = -1;
-		while (!error && ++cnt < countrs[CAM])
-			if (!get_next_line(fd, &line) || !handle_c(line, *s, ft_itoa(cnt)))
-				error = 1;
+		while (success && ++cnt < counters[CAM])
+			if (!get_next_line(fd, &line) || !handle_c(line, s, ft_itoa(cnt)))
+				success = 0;
 		cnt = -1;
-		while (!error && ++cnt < countrs[LHT])
-			if (!get_next_line(fd, &line) || !handle_l(line, *s))
-				error = 1;
+		while (success && ++cnt < counters[LHT])
+			if (!get_next_line(fd, &line) || !handle_l(line, s))
+				success = 0;
 		cnt = -1;
-		while (!error && ++cnt < (countrs[SPH] + countrs[PLA] + countrs[SQU]
-				+ countrs[CUB] + countrs[TRI] + countrs[CYL] + countrs[CON]))
-			if (!get_next_line(fd, &line) || !handle_shape(line, *s))
-				error = 1;
-		if (throw_err(error))
-			*s = NULL;
+		while (success && ++cnt < count_shapes(counters))
+			if (!get_next_line(fd, &line) || !handle_shape(line, s))
+				success = 0;
 	}
+	free(counters);
+	close(fd);
+	return (success);
 }
 
 void	free_scene(t_scene *s)
@@ -92,7 +82,6 @@ void	free_scene(t_scene *s)
 		light_free(s->lights[i]);
 	free(s->lights);
 	free(s->ambi_color);
-	free(s);
 }
 
 void	save_scene(t_scene *s)

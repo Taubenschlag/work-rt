@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/09/30 22:38:37 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/15 22:59:54 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct scene
 	t_shape		**shapes;
 }	t_scene;
 
+void		*init_scene(int *counters, t_scene *scene);
 t_tuple		*get_tuple(char *value, char type);
 void		free_scene(t_scene *s);
 int			handle_r(char *line, t_scene *s);
@@ -45,7 +46,7 @@ int			handle_triangle(char **values, t_scene *s);
 int			handle_cone(char **values, t_scene *s);
 int			handle_cube(char **values, t_scene *s);
 void		save_scene(t_scene *s);
-void		parse_scene(int fd, int *countrs, t_scene **s);
+int			parse_scene(int fd, int *counters, t_scene *s);
 void		cleanup(char **values);
 
 #endif
