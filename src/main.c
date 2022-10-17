@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/10 23:04:09 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/16 23:38:48 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@ int	main(int ac, char **av)
 	int		*counters;
 
 	fd = check_arguments(ac, av);
-	if (fd < 1)
+	if (fd < 1 || (ac != 2 && ac != 3))
 		exit(EXIT_FAILURE);
-	if (ac == 2 || ac == 3)
-		counters = check_file(av[ac - 1]);
-	else
-		exit(EXIT_FAILURE);
+	counters = check_file(av[ac - 1]);
 	if (!counters)
 		exit(EXIT_FAILURE);
-	init_scene(counters, s);
+	init_scene(counters, &s);
 	if (!parse_scene(fd, counters, &s))
 	{
 		free_scene(&s);
@@ -38,5 +35,6 @@ int	main(int ac, char **av)
 		save_scene(&s);
 	else
 		display_scene(&s);
+	free_scene(&s);
 	return (0);
 }

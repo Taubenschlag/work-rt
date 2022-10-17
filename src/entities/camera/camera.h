@@ -35,7 +35,7 @@ typedef struct camera
 t_camera	*make_camera(int h_size, int v_size, double fov,
 				char *name, t_tuple *from);
 t_ray		*ray_for_pix(t_camera *c, int y, int x);
-t_canvas	*render(t_camera *c, t_world *w);
+void *render(t_camera *c, t_world *w, t_canvas *img);
 void		free_camera(t_camera *c);
 
 #endif

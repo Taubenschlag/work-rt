@@ -21,14 +21,12 @@ void	vw(int fd, void *ptr, size_t len)
 	(void)silencer;
 }
 
-t_canvas	*canvas_canvas(unsigned int w, unsigned int h)
+void init_canvas(unsigned int w, unsigned int h, t_canvas *c)
 {
-	t_canvas		*c;
 	unsigned int	i;
 	unsigned int	j;
 
 	i = 0;
-	c = (t_canvas *)malloc(sizeof(t_canvas));
 	c->h = h;
 	c->w = w;
 	c->canvas = (unsigned int **)malloc(sizeof(int *) * h);
@@ -43,7 +41,6 @@ t_canvas	*canvas_canvas(unsigned int w, unsigned int h)
 		}
 		i++;
 	}
-	return (c);
 }
 
 void	canvas_free(t_canvas *c)
@@ -57,7 +54,6 @@ void	canvas_free(t_canvas *c)
 		i++;
 	}
 	free(c->canvas);
-	free(c);
 }
 
 int	init_bmp(int h, int w, int fd)

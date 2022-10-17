@@ -33,15 +33,14 @@ void	went_out(t_mlx_wrap *data)
 	exit(EXIT_SUCCESS);
 }
 
-t_canvas	*argb_render(t_camera *c, t_world *w)
+void *argb_render(t_camera *c, t_world *w, t_canvas *img)
 {
-	t_canvas	*img;
 	t_ray		*r;
 	t_tuple		*color;
 	int			y;
 	int			x;
 
-	img = canvas_canvas(c->v_size, c->h_size);
+	init_canvas(c->v_size, c->h_size, img);
 	y = -1;
 	while (++y < c->h_size)
 	{
@@ -54,7 +53,6 @@ t_canvas	*argb_render(t_camera *c, t_world *w)
 			img->canvas[y][x] = tuple_to_argb(color);
 		}
 	}
-	return (img);
 }
 
 //TODO too much args
@@ -125,6 +123,9 @@ void	loop_gui(t_mlx_wrap *data)
 	mlx_hook(data->win, 17, 131072, w_close, data);
 	mlx_hook(data->win, 2, 1, k_press, data);
 	mlx_loop(data->mlx);
+	free(data->imgs);
+	free(data->addr);
+	free(data);
 }
 
 t_mlx_wrap	*init_mlx_wrapper(t_scene *s)
@@ -153,28 +154,28 @@ t_mlx_wrap	*init_mlx_wrapper(t_scene *s)
 void	display_scene(t_scene *s)
 {
 	t_mlx_wrap	*data;
-	t_canvas	*c;
-	t_world		*w;
-	int			camera_counter;
+	t_canvas	c;
+	t_world		w;
+	int			cam_count;
 
-	camera_counter = 0;
-	w = make_world(s->shapes, s->lights, s->shape_counter, s->light_counter);
+	cam_count = 0;
+	w.shape_counter = s->shape_counter;
+	init_world(&w, s->shapes, s->lights, s->light_counter);
 	data = init_mlx_wrapper(s);
-	while (++camera_counter <= s->camera_counter)
+	while (++cam_count <= s->camera_counter)
 	{
-		world_set_ambience(w, s->cameras[camera_counter - 1]->from, s->ambi_color);
-		c = argb_render(s->cameras[camera_counter -1], w);
-		free(s->cameras[camera_counter -1]->name);
-		data->imgs[camera_counter] = mlx_new_image(data->mlx, s->resolution_x, s->resolution_y);
-		data->addr[camera_counter] = mlx_get_data_addr(
-				data->imgs[camera_counter], &(data->bits_per_pixel),
+		world_set_ambience(&w, s->cameras[cam_count - 1]->from, s->ambi_color);
+		argb_render(s->cameras[cam_count - 1], &w, &c);
+		free(s->cameras[cam_count - 1]->name);
+		data->imgs[cam_count] = mlx_new_image(
+				data->mlx, s->resolution_x, s->resolution_y);
+		data->addr[cam_count] = mlx_get_data_addr(
+				data->imgs[cam_count], &(data->bits_per_pixel),
 				&(data->line_length), &(data->endian));
-		fill_image(c, data, camera_counter);
-		canvas_free(c);
+		fill_image(&c, data, cam_count);
+		canvas_free(&c);
 	}
-	if (w->ambienace)
-		light_free(w->ambienace);
-	free_scene(s);
-	free(w);
+	if (w.ambienace)
+		light_free(w.ambienace);
 	loop_gui(data);
 }

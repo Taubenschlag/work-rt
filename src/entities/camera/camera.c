@@ -64,15 +64,14 @@ t_ray	*ray_for_pix(t_camera *c, int y, int x)
 	return (ray_ray(origin, direction));
 }
 
-t_canvas	*render(t_camera *c, t_world *w)
+void *render(t_camera *c, t_world *w, t_canvas *img)
 {
-	t_canvas	*img;
 	t_ray		*r;
 	t_tuple		*color;
 	int			y;
 	int			x;
 
-	img = canvas_canvas(c->v_size, c->h_size);
+	init_canvas(c->v_size, c->h_size, img);
 	y = -1;
 	while (++y < c->h_size)
 	{
@@ -85,5 +84,4 @@ t_canvas	*render(t_camera *c, t_world *w)
 			img->canvas[y][x] = tuple_to_rgb(color);
 		}
 	}
-	return (img);
 }

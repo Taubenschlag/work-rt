@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/15 23:21:47 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/17 00:28:20 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	count_shapes(int *counters)
 		+ counters[CON]);
 }
 
-void *init_scene(int *counters, t_scene *scene)
+void	*init_scene(int *counters, t_scene *scene)
 {
 	scene->resolution_x = -1;
 	scene->resolution_y = -1;
@@ -33,7 +33,8 @@ void *init_scene(int *counters, t_scene *scene)
 	scene->light_counter = 0;
 	scene->lights = (t_light **)malloc(sizeof(t_light *) * counters[LHT]);
 	scene->shape_counter = 0;
-	scene->shapes = (t_shape **)malloc(sizeof(t_shape *) * count_shapes(counters));
+	scene->shapes = (t_shape **)malloc(
+			sizeof(t_shape *) * count_shapes(counters));
 }
 
 int	parse_scene(int fd, int *counters, t_scene *s)
@@ -86,28 +87,27 @@ void	free_scene(t_scene *s)
 
 void	save_scene(t_scene *s)
 {
-	t_canvas	*c;
-	t_world		*w;
+	t_canvas	c;
+	t_world		w;
 	char		*filename;
 	int			fd;
 	int			camera_counter;
 
 	camera_counter = -1;
-	w = make_world(s->shapes, s->lights, s->shape_counter, s->light_counter);
+	w.shape_counter = s->shape_counter;
+	init_world(&w, s->shapes, s->lights, s->light_counter);
 	while (++camera_counter < s->camera_counter)
 	{
-		world_set_ambience(w, s->cameras[camera_counter]->from, s->ambi_color);
+		world_set_ambience(&w, s->cameras[camera_counter]->from, s->ambi_color);
 		filename = ft_strcat(
 				ft_strdup(".bmp"), s->cameras[camera_counter]->name);
 		fd = open(filename, O_CREAT | O_WRONLY, 0);
 		free(filename);
-		c = render(s->cameras[camera_counter], w);
-		fill_bmp(init_bmp(s->resolution_y, s->resolution_x, fd), c);
+		render(s->cameras[camera_counter], &w, &c);
+		fill_bmp(init_bmp(s->resolution_y, s->resolution_x, fd), &c);
 		close(fd);
-		canvas_free(c);
+		canvas_free(&c);
 	}
-	if (w->ambienace)
-		light_free(w->ambienace);
-	free_scene(s);
-	free(w);
+	if (w.ambienace)
+		light_free(w.ambienace);
 }
