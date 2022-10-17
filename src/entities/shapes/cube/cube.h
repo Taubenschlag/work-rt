@@ -16,6 +16,11 @@
 
 typedef struct cube
 {
+	t_tuple		*center;
+	double		side;
+	t_tuple		*color;
+	t_tuple		*norm;
+	t_matrix	*trans;
 }	t_cube;
 
 t_cube	*cube_cube(void);

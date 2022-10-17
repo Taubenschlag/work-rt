@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	int		*counters;
 
 	fd = check_arguments(ac, av);
-	if (fd < 1 || (ac != 2 && ac != 3))
+	if (fd < 1 || ac < 2 || ac > 3)
 		exit(EXIT_FAILURE);
 	counters = check_file(av[ac - 1]);
 	if (!counters)

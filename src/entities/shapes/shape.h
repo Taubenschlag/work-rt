@@ -22,10 +22,7 @@ typedef struct shape
 	void		*shape;
 }	t_shape;
 
-// static unsigned int g_id;
-
 t_shape	*make_shape(char type, void *shape_itself);
-t_shape	*test_shape(void);
 void	*set_transform(t_shape *sh, t_matrix *trans);//todo deprecated
 t_tuple	*shape_normal_at(t_shape *sh, t_tuple *p);
 void	free_shape(t_shape *s);

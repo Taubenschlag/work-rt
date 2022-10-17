@@ -19,6 +19,12 @@ typedef struct cone
 	double	min;
 	double	max;
 	int		closed;
+
+	t_tuple		*center;
+	t_tuple		*norm;
+	t_tuple		*color;
+	t_matrix	*trans;
+	double		d;
 }	t_cone;
 
 t_cone		*cone_cone(void);

@@ -18,6 +18,12 @@ typedef struct square
 {
 	t_triangle	*t1;
 	t_triangle	*t2;
+
+	t_tuple		*center;
+	t_tuple		*norm;
+	t_tuple		*color;
+	t_matrix	*trans;
+	double		side;
 }	t_square;
 
 t_square	*square(void);
