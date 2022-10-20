@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 03:34:07 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/19 23:49:30 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,17 @@ t_intersection_list	*intersect_shape(t_shape *s, t_ray *r)
 	return (list);
 }
 
-void	intersection_list_free(t_intersection_list *l)
+void	intersection_list_free(t_intersection_list **l)
 {
 	int	i;
 
 	i = -1;
-	while (++i < l->size)
-		free(l->list[i]);
-	free(l->list);
+	while (++i < (*l)->size)
+		free((*l)->list[i]);
+	free((*l)->list);
+	free(*l);
 }
 
-// todo too big func
 t_intersection	*hit(t_intersection_list *l)
 {
 	int				i;
@@ -99,7 +99,6 @@ t_intersection	*hit(t_intersection_list *l)
 			ret = intersect_make_shape(l->list[index]->shape,
 					l->list[index]->t);
 	}
-	intersection_list_free(l);
-	free(l);
+	intersection_list_free(&l);
 	return (ret);
 }

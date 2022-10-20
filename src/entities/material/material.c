@@ -11,37 +11,18 @@
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
-// TODO mre than 4 args
-t_matrl	*material_make(
-		t_tuple *color,
-		double diffuse,
-		double ambient,
-		double specular,
-		double shininess)
+
+t_matrl	*mat_with_col(t_tuple *color)
 {
 	t_matrl	*res;
 
 	res = (t_matrl *)malloc(sizeof(t_matrl));
 	res->color = color;
-	res->ambient = ambient;
-	res->diffuse = diffuse;
-	res->shininess = shininess;
-	res->specular = specular;
+	res->ambient = 0.1;
+	res->diffuse = 0.9;
+	res->shininess = 200;
+	res->specular = 0.9;
 	return (res);
-}
-
-t_matrl	*material_make_default(void)
-{
-	return (material_make(
-			NULL,
-			0.9, 0.1, 0.9, 200));
-}
-
-t_matrl	*mat_with_col(t_tuple *color)
-{
-	return (material_make(
-			color,
-			0.9, 0.1, 0.9, 200));
 }
 
 void	material_free(t_matrl *m)

@@ -12,15 +12,6 @@
 
 #include "../../../heads_global/minirt.h"
 
-t_shape	*test_shape(void)
-{
-	t_shape	*sh;
-
-	sh = make_shape('s', NULL);
-	sh->matrl = material_make_default();
-	return (sh);
-}
-
 t_shape	*make_shape(char type, void *shape_itself)
 {
 	t_shape	*sh;
@@ -40,13 +31,22 @@ void	*set_transform(t_shape *sh, t_matrix *trans)
 	return (sh);
 }
 
-//TODO toolong
+t_tuple	*world_normal_apply(t_shape *s, t_tuple *loc_pnt, t_tuple *loc_normal)
+{
+	t_tuple	*wrld_normal;
+
+	wrld_normal = tuple_apply_trans_matrix(
+			matrix_transpose(matrix_copy(s->trans)), loc_normal);
+	tuple_free(loc_pnt);
+	wrld_normal->type = 0;
+	return (wrld_normal);
+}
+
 //todo mem
 t_tuple	*shape_normal_at(t_shape *s, t_tuple *p)
 {
 	t_tuple	*loc_pnt;
 	t_tuple	*loc_normal;
-	t_tuple	*wrld_normal;
 
 	loc_pnt = tuple_apply_trans_matrix(matrix_invert(s->trans), tuple_copy(p));
 	if (s->type == 's' )
@@ -65,11 +65,7 @@ t_tuple	*shape_normal_at(t_shape *s, t_tuple *p)
 		loc_normal = square_normale_at();
 	else
 		return (NULL);
-	wrld_normal = tuple_apply_trans_matrix(
-			matrix_transpose(matrix_copy(s->trans)), loc_normal);
-	tuple_free(loc_pnt);
-	wrld_normal->type = 0;
-	return (tuple_normalize(wrld_normal));
+	return (tuple_normalize(world_normal_apply(s, loc_pnt, loc_normal)));
 }
 
 void	free_shape(t_shape *s)
@@ -77,7 +73,7 @@ void	free_shape(t_shape *s)
 	if (s->type == 's' )
 		nsphere_free((t_sphere *)s->shape);
 	else if (s->type == 'p')
-		plane_free((plane *)s->shape);
+		plane_free((t_plane *)s->shape);
 	else if (s->type == 'u')
 		cube_free((t_cube *)s->shape);
 	else if (s->type == 'y')

@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 03:28:28 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/19 23:48:37 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ typedef struct computations
 	t_tuple		*overpoint;
 }	t_computations;
 
+t_lightning_pack		*make_l_p(t_light *l, t_computations *c);
 t_computations			*precomp(t_intersection *i, t_ray *r);
 t_intersection_list		*intersect_shape(t_shape *s, t_ray *r);
 t_intersection			*intersect_make_shape(t_shape *s, double t);
 void					add_intersection(t_intersection *new_elem,
-										 t_intersection_list **list);
+							t_intersection_list **list);
 t_intersection_list		*intersection_ray_nsphere(t_shape *s, t_ray *ray);
 t_intersection_list		*intersection_ray_plane(t_shape *s, t_ray *ray);
 t_intersection_list		*intersection_ray_cube(t_shape *s, t_ray *ray);
@@ -52,11 +53,11 @@ t_intersection_list		*intersection_ray_square(t_shape *s, t_ray *ray);
 t_intersection_list		*intersection_list_make(int elem);
 t_intersection			*hit(t_intersection_list *l);
 t_tuple					*shade_hit(t_world *w, t_computations *cs,
-									  t_light *current);
+							t_light *current);
 t_intersection_list		*intersect_world(t_ray *r, t_world *w);
 t_tuple					*color_at(t_world *w, t_ray *r);
 int						in_shadow(t_world *w, t_tuple *p,
-									 t_light *current_light);
-void					intersection_list_free(t_intersection_list *l);
+							t_light *current_light);
+void					intersection_list_free(t_intersection_list **l);
 
 #endif

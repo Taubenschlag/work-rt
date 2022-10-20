@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 23:47:05 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/18 00:19:17 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_matrix	*rotate_axis_angle(t_tuple *u, double angle)
 	return (ret);
 }
 
-t_matrix	* rotate_align(t_tuple *v1, t_tuple *v2)
+t_matrix	*rotate_align(t_tuple *v1, t_tuple *v2)
 {
 	t_tuple		*axis;
 	double		dot;
@@ -51,7 +51,8 @@ t_matrix	* rotate_align(t_tuple *v1, t_tuple *v2)
 	return (res);
 }
 
-double	matrix_minor(t_matrix *m, int from, int to)//todo assert 3x3
+//todo assert 3x3
+double	matrix_minor(t_matrix *m, int from, int to)
 {
 	t_matrix	*sub;
 	double		res;

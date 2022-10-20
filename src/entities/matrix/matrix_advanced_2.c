@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 00:00:28 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/18 03:07:22 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_matrix	*matrix_invert(t_matrix *m)
 	return (inverted);
 }
 
-// TODO ternary
+// TODO probably creates burrr
 t_tuple	*tuple_apply_trans_matrix(t_matrix *trans_matrix, t_tuple *tup)
 {
 	t_matrix	*source_tuple_converted;
@@ -64,28 +64,27 @@ t_tuple	*tuple_apply_trans_matrix(t_matrix *trans_matrix, t_tuple *tup)
 	int			need_free;
 
 	source_tuple_converted = tuple_to_matrix(tup);
+	need_free = 1;
 	if (trans_matrix)
+	{
 		product = matrix_multiply(trans_matrix, source_tuple_converted);
+		need_free = 0;
+	}
 	else
 		product = source_tuple_converted;
-	need_free = trans_matrix ? 0 : 1;
-	res = tuple_point(
-			product->matrix[0][0], product->matrix[1][0],
-			product->matrix[2][0]);
+	res = tuple_point(product->matrix[0][0],
+			product->matrix[1][0], product->matrix[2][0]);
 	if (tuple_is_vector(tup))
 		res->type = IS_VECTOR;
-	if (trans_matrix)
-		matrix_free(product);
 	if (need_free)
-	{
 		matrix_free(trans_matrix);
-		matrix_free(source_tuple_converted);
-	}
+	matrix_free(product);
 	free(tup);
 	return (res);
 }
 
-t_matrix	*vt_combine_matrix(t_tuple *left, t_tuple *true_up, t_tuple *forward)
+t_matrix	*vt_combine_matrix(t_tuple *left,
+	t_tuple *true_up, t_tuple *forward)
 {
 	t_matrix	*res;
 

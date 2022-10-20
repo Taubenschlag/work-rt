@@ -39,7 +39,7 @@ void	check_sphere(int **counters_ptr, int *is_correct, char **str)
 }
 
 /*
- * 1 - point on a plane
+ * 1 - point on a t_plane
  * 2 - normale
  * 3 - color
  */

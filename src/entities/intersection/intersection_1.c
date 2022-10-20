@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 16:40:56 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/19 21:50:24 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_computations	*precomp(t_intersection *i, t_ray *r)
 t_tuple	*shade_hit(t_world *w, t_computations *cs, t_light *current)
 {
 	return (lightning(
-			make_l_p(cs->shape->matrl, current, cs->point, cs->eyev, cs->normv),
+			make_l_p(current, cs),
 			in_shadow(w, cs->overpoint, current)));
 }
 

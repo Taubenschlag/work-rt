@@ -16,11 +16,10 @@
 
 typedef struct plane
 {
-}	plane;
+}	t_plane;
 
-plane	*plane_plane(void);
-plane	*plane_defautl(void);
+t_plane	*plane_plane(void);
 t_tuple	*plane_normal_at(void);
-void	plane_free(plane *pl);
+void	plane_free(t_plane *pl);
 
 #endif //RT_CHALLENGE_PLANE_H

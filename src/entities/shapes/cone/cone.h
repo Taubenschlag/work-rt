@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 21:58:58 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/18 00:14:02 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 typedef struct cone
 {
-	double	min;
-	double	max;
-	int		closed;
+	double		min;
+	double		max;
+	int			closed;
 
 	t_tuple		*center;
 	t_tuple		*norm;

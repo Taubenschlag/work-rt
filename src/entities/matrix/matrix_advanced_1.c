@@ -12,30 +12,27 @@
 
 #include "../../../heads_global/minirt.h"
 
-// todo func too big
 t_matrix	*matrix_multiply(t_matrix *m1, t_matrix *m2)
 {
 	t_matrix	*res;
-	int			i;
-	int			j;
-	int			l;
+	int			it[3];
 	double		tmp;
 
 	res = matrix_matrix(min(m1->h, m2->h), min(m1->w, m2->w));
-	i = -1;
-	while (++i < res->h)
+	it[0] = -1;
+	while (++it[0] < res->h)
 	{
-		j = -1;
-		while (++j < res->w)
+		it[1] = -1;
+		while (++it[1] < res->w)
 		{
-			l = 0;
+			it[2] = 0;
 			tmp = 0;
-			while (l < m1->w && l < m2->h)
+			while (it[2] < m1->w && it[2] < m2->h)
 			{
-				tmp += m1->matrix[i][l] * m2->matrix[l][j];
-				l++;
+				tmp += m1->matrix[it[0]][it[2]] * m2->matrix[it[2]][it[1]];
+				it[2]++;
 			}
-			res->matrix[i][j] = tmp;
+			res->matrix[it[0]][it[1]] = tmp;
 		}
 	}
 	matrix_free(m1);
