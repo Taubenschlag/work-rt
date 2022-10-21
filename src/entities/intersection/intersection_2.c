@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/21 20:44:17 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/21 22:58:41 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,24 @@
 
 void	co_intrs_cap(t_shape *s, t_ray *r, t_intersection_list **ret)
 {
-	double	t;
+	double	t1;
+	double	t2;
 	t_cone	*co;
 
 	co = (t_cone *)s->shape;
 	if (!(co->closed) || fabs(r->dir->y) < 0.0000001)
 		return ;
-	t = (co->min - r->origin->y) / r->dir->y;
-	if (check_cap_cone_min(r, t, co->min))
-		add_intersection(intersect_make_shape(s, t),
+	t1 = (co->min - r->origin->y) / r->dir->y;
+	if (check_cap_cone_min(r, t1, co->min))
+		add_intersection(intersect_make_shape(s, t1),
 			ret);
-	t = (co->max - r->origin->y) / r->dir->y;
-	if (check_cap_cone_max(r, t, co->max))
-		add_intersection(intersect_make_shape(s, t),
+	t2 = (co->max - r->origin->y) / r->dir->y;
+	if (check_cap_cone_max(r, t2, co->max))
+		add_intersection(intersect_make_shape(s, t2),
 			ret);
 }
 
-void				cone_discriminant(t_cone *co, t_ray *ray)
+void	cone_discriminant(t_cone *co, t_ray *ray)
 {
 	co->a = ray->dir->x * ray->dir->x
 		- ray->dir->y * ray->dir->y
@@ -44,7 +45,7 @@ void				cone_discriminant(t_cone *co, t_ray *ray)
 	co->disc = co->b * co->b - 4 * co->a * co->c;
 }
 
-void				cone_hit_truncate(t_shape *s, t_ray *ray, t_intersection_list **ret)
+void	cone_hit_truncate(t_shape *s, t_ray *ray, t_intersection_list **ret)
 {
 	t_cone	*co;
 	double	t1;

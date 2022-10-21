@@ -25,6 +25,11 @@ typedef struct cylinder
 	t_tuple		*color;
 	t_matrix	*trans;
 	double		d;
+
+	double		a;
+	double		b;
+	double		c;
+	double		disc;
 }	t_cylinder;
 
 t_cylinder	*cylinder_cylinder(void);

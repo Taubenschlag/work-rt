@@ -6,51 +6,82 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 22:56:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/21 22:56:24 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/21 23:22:37 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-t_intersection_list	*cyl_int_cap(t_shape *c, t_ray *r, t_intersection_list *l)
+void	cyl_int_cap(t_shape *s, t_ray *r, t_intersection_list **ret)
 {
-	double	t;
+	double		t1;
+	double		t2;
+	t_cylinder	*cy;
 
-	if (!(((t_cylinder *)c->shape)->closed) || fabs(r->dir->y) < 0.00001)
-		return (l);
-	t = (((t_cylinder *)c->shape)->min - r->origin->y) / r->dir->y;
-	if (check_cap(r, t))
-		add_intersection(intersect_make_shape(c, t), &l);
-	t = (((t_cylinder *)c->shape)->max - r->origin->y) / r->dir->y;
-	if (check_cap(r, t))
-		add_intersection(intersect_make_shape(c, t), &l);
-	return (l);
+	cy = (t_cylinder *)s->shape;
+	if (!(cy->closed) || fabs(r->dir->y) < 0.0000001)
+		return ;
+	t1 = (cy->min - r->origin->y) / r->dir->y;
+	if (check_cap(r, t1))
+		add_intersection(intersect_make_shape(s, t1),
+			ret);
+	t2 = (cy->max - r->origin->y) / r->dir->y;
+	if (check_cap(r, t2))
+		add_intersection(intersect_make_shape(s, t2),
+			ret);
+}
+
+void	cylinder_discriminant(t_cylinder *cy, t_ray *ray)
+{
+	cy->a = ray->dir->x * ray->dir->x
+		+ ray->dir->z * ray->dir->z;
+	cy->b = 2 * ray->dir->x * ray->origin->x
+		+ 2 * ray->dir->z * ray->origin->z;
+	cy->c = ray->origin->x * ray->origin->x
+		+ ray->origin->z * ray->origin->z
+		- 1;
+	cy->disc = cy->b * cy->b - 4 * cy->a * cy->c;
+}
+
+void	cylinder_hit_truncate(t_shape *s, t_ray *ray, t_intersection_list **ret)
+{
+	t_cylinder	*cy;
+	double		t1;
+	double		t2;
+	double		y1;
+	double		y2;
+
+	cy = (t_cylinder *)s->shape;
+	t1 = (-1 * cy->b - sqrt(cy->disc)) / (2 * cy->a);
+	t2 = (-1 * cy->b + sqrt(cy->disc)) / (2 * cy->a);
+	y1 = ray->origin->y + dmin(t1, t2) * ray->dir->y;
+	if ((cy)->min < y1 && y1 < (cy)->max)
+		add_intersection(
+			intersect_make_shape(s, dmin(t1, t2)),
+			ret);
+	y2 = ray->origin->y + dmax(t1, t2) * ray->dir->y;
+	if ((cy)->min < y2 && y2 < (cy)->max)
+		add_intersection(
+			intersect_make_shape(s, dmax(t1, t2)),
+			ret);
 }
 
 t_intersection_list	*intersection_ray_cylinder(t_shape *s, t_ray *ray)
 {
-	double				a;
-	double				b;
-	double				disc;
-	double				t[2];
 	t_intersection_list	*ret;
+	t_cylinder			*cy;
 
-	a = ray->dir->x * ray->dir->x + ray->dir->z * ray->dir->z;
+	cy = (t_cylinder *)s->shape;
 	ret = intersection_list_make(0);
-	if (fabs(a) < 0.000001)
-		return (cyl_int_cap(s, ray, ret));
-	b = 2 * ray->dir->x * ray->origin->x + 2 * ray->dir->z * ray->origin->z;
-	disc = b * b - 4 * a * (ray->origin->x * ray->origin->x
-							+ ray->origin->z * ray->origin->z - 1);
-	if (disc < 0)
+	cylinder_discriminant(cy, ray);
+	if (fabs(cy->a) < 0.000001)
+	{
+		cyl_int_cap(s, ray, &ret);
 		return (ret);
-	t[0] = (-1 * b - sqrt(disc)) / (2 * a);
-	t[1] = (-1 * b + sqrt(disc)) / (2 * a);
-	a = ray->origin->y + mins(t, 2) * ray->dir->y;
-	if (((t_cylinder *)s->shape)->min < a && a < ((t_cylinder *)s->shape)->max)
-		add_intersection(intersect_make_shape(s, mins(t, 2)), &ret);
-	a = ray->origin->y + maxs(t, 2) * ray->dir->y;
-	if (((t_cylinder *)s->shape)->min < a && a < ((t_cylinder *)s->shape)->max)
-		add_intersection(intersect_make_shape(s, maxs(t, 2)), &ret);
-	return (cyl_int_cap(s, ray, ret));
+	}
+	if (cy->disc < 0)
+		return (ret);
+	cylinder_hit_truncate(s, ray, &ret);
+	cyl_int_cap(s, ray, &ret);
+	return (ret);
 }
