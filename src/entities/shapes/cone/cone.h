@@ -25,6 +25,11 @@ typedef struct cone
 	t_tuple		*color;
 	t_matrix	*trans;
 	double		d;
+
+	double				a;
+	double				b;
+	double				c;
+	double				disc;
 }	t_cone;
 
 t_cone		*cone_cone(void);

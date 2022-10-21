@@ -19,14 +19,14 @@ int	min(int a, int b)
 	return (b);
 }
 
-int	max(int a, int b)
+double	dmin(double a, double b)
 {
-	if (a > b)
+	if (a < b)
 		return (a);
 	return (b);
 }
 
-double	max_d(double a, double b)
+double	dmax(double a, double b)
 {
 	if (a > b)
 		return (a);

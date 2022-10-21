@@ -53,7 +53,8 @@
 
 int     min(int a, int b);
 int     max(int a, int b);
-double  max_d(double a, double b);
+double  dmax(double a, double b);
+double	dmin(double a, double b);
 double  mins(double *a, int length);
 double  maxs(double *a, int length);
 void    swap(double *x, double *y);

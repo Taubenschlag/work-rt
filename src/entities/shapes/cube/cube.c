@@ -29,7 +29,7 @@ t_tuple	*cube_normal_at(t_tuple *p)
 {
 	double	max_one;
 
-	max_one = max_d(max_d(fabs(p->x), fabs(p->y)), fabs(p->z));
+	max_one = dmax(dmax(fabs(p->x), fabs(p->y)), fabs(p->z));
 	if (max_one == fabs(p->x))
 		return (tuple_vector(p->x, 0, 0));
 	if (max_one == fabs(p->y))

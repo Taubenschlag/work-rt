@@ -72,3 +72,62 @@ t_intersection_list	*intersection_ray_nsphere(t_shape *s, t_ray *ray)
 	ret->list[1] = intersect_make_shape(s, (-1 * b + sqrt(dis)) / (2 * a));
 	return (ret);
 }
+
+// todo ternary
+void	axis(double orig, double direct, double *min, double *max)
+{
+	double	t_min_temp;
+	double	t_max_temp;
+	double	t_min;
+	double	t_max;
+
+	t_min_temp = -1 - orig;
+	t_max_temp = 1 - orig;
+	if (fabs(direct) >= 0.00001)
+	{
+		t_min = t_min_temp / direct;
+		t_max = t_max_temp / direct;
+	}
+	else
+	{
+		t_min = t_min_temp * INFINITY;
+		t_max = t_max_temp * INFINITY;
+	}
+	if (t_max >= t_min)
+		*max = t_max;
+	else
+		*max = t_min;
+	if (t_min <= t_max)
+		*min = t_min;
+	else
+		*min = t_max;
+}
+
+t_intersection_list	*intersection_ray_cube(t_shape *s, t_ray *ray)
+{
+	t_intersection_list	*ret;
+	double				*mints;
+	double				*maxts;
+	double				min;
+	double				max;
+
+	mints = (double *)malloc(sizeof(double) * 3);
+	maxts = (double *)malloc(sizeof(double) * 3);
+	axis(ray->origin->x, ray->dir->x, &(mints[0]), &(maxts[0]));
+	axis(ray->origin->y, ray->dir->y, &(mints[1]), &(maxts[1]));
+	axis(ray->origin->z, ray->dir->z, &(mints[2]), &(maxts[2]));
+	min = maxs(mints, 3);
+	max = mins(maxts, 3);
+	if (min > max)
+	{
+		free(mints);
+		free(maxts);
+		return (intersection_list_make(0));
+	}
+	ret = intersection_list_make(2);
+	ret->list[0] = intersect_make_shape(s, min);
+	ret->list[1] = intersect_make_shape(s, max);
+	free(mints);
+	free(maxts);
+	return (ret);
+}

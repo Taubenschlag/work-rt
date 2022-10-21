@@ -23,6 +23,14 @@ typedef struct triangle
 	t_tuple	*e2;
 	t_tuple	*n;
 
+	t_tuple	*dir_cros;
+	t_tuple	*or_crs;
+	t_tuple	*a_to_org;
+	double	det;
+	double	f;
+	double	u;
+	double	v;
+	double	t;
 }	t_triangle;
 
 t_triangle	*triangle_coordinates(t_tuple *a, t_tuple *b, t_tuple *c);
