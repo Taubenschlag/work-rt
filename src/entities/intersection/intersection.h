@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/19 23:48:37 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 17:32:12 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ typedef struct computations
 
 typedef struct world
 {
-	int		shape_counter;
-	int		lights_counter;
-	t_shape	**shapes;
-	t_light	**lights;
-	t_light	*ambienace;
+	int					shape_counter;
+	int					lights_counter;
+	t_shape				**shapes;
+	t_light				**lights;
+	t_light				*ambienace;
 	t_intersection_list	*merged;
 	t_intersection_list	**unsorted;
 }	t_world;
@@ -66,14 +66,14 @@ t_intersection			*hit(t_intersection_list *l);
 void					intersection_list_free(t_intersection_list **l);
 
 t_tuple					*shade_hit(t_world *w, t_computations *cs,
-									  t_light *current);
+							t_light *current);
 t_intersection_list		*intersect_world(t_ray *r, t_world *w);
 t_tuple					*color_at(t_world *w, t_ray *r);
 int						in_shadow(t_world *w, t_tuple *p,
-									 t_light *current_light);
-void					*init_world(t_world *w, t_shape **shapes, t_light **lights,
-					int lights_counter);
-void					world_set_ambience(t_world *w, t_tuple *from, t_tuple *color);
-
+							t_light *current_light);
+void					*init_world(t_world *w, t_shape **shapes,
+							t_light **lights, int lights_counter);
+void					world_set_ambience(t_world *w, t_tuple *from,
+							t_tuple *color);
 
 #endif

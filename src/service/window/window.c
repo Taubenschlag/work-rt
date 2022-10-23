@@ -61,9 +61,6 @@ void	loop_gui(t_mlx_wrap *data)
 	mlx_hook(data->win, 17, 131072, w_close, data);
 	mlx_hook(data->win, 2, 1, k_press, data);
 	mlx_loop(data->mlx);
-	free(data->imgs);
-	free(data->addr);
-	free(data);
 }
 
 t_mlx_wrap	*init_mlx_wrapper(t_scene *s)

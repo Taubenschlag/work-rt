@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/18 00:14:02 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 17:29:34 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ typedef struct cone
 	t_matrix	*trans;
 	double		d;
 
-	double				a;
-	double				b;
-	double				c;
-	double				disc;
+	double		a;
+	double		b;
+	double		c;
+	double		disc;
 }	t_cone;
 
 t_cone		*cone_cone(void);
