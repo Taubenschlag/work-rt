@@ -41,15 +41,17 @@ void	fill_image(t_canvas *c, t_mlx_wrap *data, int count)
 	char			*dst;
 
 	i = c->h;
-	while (--i > 0)
+	while (i > 0)
 	{
 		j = c->w;
-		while (--j > 0)
+		while (j > 0)
 		{
-			dst = data->addr[count]
-				+ (i * data->line_length + j * (data->bits_per_pixel / 8));
-			*(unsigned int *)dst = c->canvas[i][j];
+			dst = data->addr[count] + ((i - 1) * data->line_length
+					+ (j - 1) * (data->bits_per_pixel / 8));
+			*(unsigned int *)dst = c->canvas[i - 1][j - 1];
+			j--;
 		}
+		i--;
 	}
 }
 
