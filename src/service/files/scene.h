@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/15 22:59:54 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:18:50 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct scene
 	t_shape		**shapes;
 }	t_scene;
 
-void		*init_scene(int *counters, t_scene *scene);
+void		init_scene(int *counters, t_scene *scene);
 t_tuple		*get_tuple(char *value, char type);
 void		free_scene(t_scene *s);
 int			handle_r(char *line, t_scene *s);

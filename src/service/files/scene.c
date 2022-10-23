@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/17 00:28:20 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:18:43 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	count_shapes(int *counters)
 		+ counters[CON]);
 }
 
-void	*init_scene(int *counters, t_scene *scene)
+void	init_scene(int *counters, t_scene *scene)
 {
 	scene->resolution_x = -1;
 	scene->resolution_y = -1;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/23 18:11:07 by rokupin           #+#    #+#             */
+/*   Updated: 2022/10/23 18:11:27 by rokupin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 # define DOUBLE_PREC 0.0001
@@ -50,12 +62,12 @@
 # include "../src/service/window/window.h"
 # include "../src/service/errs/err.h"
 
-int     min(int a, int b);
-int     max(int a, int b);
-double  dmax(double a, double b);
+int		min(int a, int b);
+int		max(int a, int b);
+double	dmax(double a, double b);
 double	dmin(double a, double b);
-double  mins(double *a, int length);
-double  maxs(double *a, int length);
-void    swap(double *x, double *y);
+double	mins(double *a, int length);
+double	maxs(double *a, int length);
+void	swap(double *x, double *y);
 
 #endif

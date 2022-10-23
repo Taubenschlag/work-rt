@@ -6,13 +6,13 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/17 17:39:38 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:19:19 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-void	*argb_render(t_camera *c, t_world *w, t_canvas *img)
+void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 {
 	t_ray		*r;
 	t_tuple		*color;

@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 16:55:28 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:17:54 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_ray	*ray_for_pix(t_camera *c, int y, int x)
 	return (ray_ray(origin, direction));
 }
 
-void	*render(t_camera *c, t_world *w, t_canvas *img)
+void	render(t_camera *c, t_world *w, t_canvas *img)
 {
 	t_ray		*r;
 	t_tuple		*color;

@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/17 17:39:46 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:19:13 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct mlx_wrap {
 	int			img_counter;
 }	t_mlx_wrap;
 
-void		*argb_render(t_camera *c, t_world *w, t_canvas *img);
+void		argb_render(t_camera *c, t_world *w, t_canvas *img);
 void		fill_image(t_canvas *c, t_mlx_wrap *data, int count);
 void		display_scene(t_scene *s);
 int			w_close(t_mlx_wrap *data);

@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/23 17:32:12 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:17:06 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_intersection_list		*intersect_world(t_ray *r, t_world *w);
 t_tuple					*color_at(t_world *w, t_ray *r);
 int						in_shadow(t_world *w, t_tuple *p,
 							t_light *current_light);
-void					*init_world(t_world *w, t_shape **shapes,
+void					init_world(t_world *w, t_shape **shapes,
 							t_light **lights, int lights_counter);
 void					world_set_ambience(t_world *w, t_tuple *from,
 							t_tuple *color);

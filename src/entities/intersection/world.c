@@ -6,13 +6,13 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/16 23:41:33 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 18:16:57 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-void	*init_world(t_world *w, t_shape **shapes, t_light **lights,
+void	init_world(t_world *w, t_shape **shapes, t_light **lights,
 			int lights_counter)
 {
 	w->shapes = shapes;
