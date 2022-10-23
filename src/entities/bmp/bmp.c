@@ -82,7 +82,6 @@ int	init_bmp(int h, int w, int fd)
 	return (fd);
 }
 
-// todo declaration and assignation
 void	fill_bmp(int fd, t_canvas *c)
 {
 	unsigned char	bmp_pad[40];
@@ -96,14 +95,15 @@ void	fill_bmp(int fd, t_canvas *c)
 		i++;
 	}
 	i = c->h;
-	while (--i > 0)
+	while (i > 0)
 	{
 		j = 0;
 		while (j < c->w)
 		{
-			vw(fd, &(c->canvas[i][j]), 4);
+			vw(fd, &(c->canvas[i - 1][j]), 4);
 			j++;
 		}
+		i--;
 	}
 	vw(fd, bmp_pad, (4 - (c->w * 3) % 4));
 	close(fd);

@@ -74,7 +74,6 @@ char	*ft_dtoa(double d, int prec)
 	int					negative;
 	unsigned long long	i_part;
 	double				f_part;
-	int					range;
 
 	negative = (d < 0) ? 1 : 0;
 	i_part = (unsigned long long)((negative) ? d * -1 : d);

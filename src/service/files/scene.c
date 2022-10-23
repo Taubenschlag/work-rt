@@ -91,19 +91,19 @@ void	save_scene(t_scene *s)
 	t_world		w;
 	char		*filename;
 	int			fd;
-	int			camera_counter;
+	int			cam_count;
 
-	camera_counter = -1;
+	cam_count = -1;
 	w.shape_counter = s->shape_counter;
 	init_world(&w, s->shapes, s->lights, s->light_counter);
-	while (++camera_counter < s->camera_counter)
+	while (++cam_count < s->camera_counter)
 	{
-		world_set_ambience(&w, s->cameras[camera_counter]->from, s->ambi_color);
+		world_set_ambience(&w, s->cameras[cam_count]->from, s->ambi_color);
 		filename = ft_strcat(
-				ft_strdup(".bmp"), s->cameras[camera_counter]->name);
+				ft_strdup(".bmp"), s->cameras[cam_count]->name);
 		fd = open(filename, O_CREAT | O_WRONLY, 0);
 		free(filename);
-		render(s->cameras[camera_counter], &w, &c);
+		render(s->cameras[cam_count], &w, &c);
 		fill_bmp(init_bmp(s->resolution_y, s->resolution_x, fd), &c);
 		close(fd);
 		canvas_free(&c);
