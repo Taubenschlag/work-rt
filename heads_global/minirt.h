@@ -42,7 +42,6 @@
 # include "../src/entities/shapes/sphere/sphere.h"
 # include "../src/entities/shapes/triangle/triangle.h"
 # include "../src/entities/shapes/square/square.h"
-# include "../src/entities/world/world.h"
 # include "../src/entities/intersection/intersection.h"
 # include "../src/entities/bmp/bmp.h"
 # include "../src/entities/camera/camera.h"

@@ -6,14 +6,14 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/19 21:50:24 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/22 23:06:51 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
 void	add_intersection(t_intersection *new_elem,
-						 t_intersection_list **list)
+						t_intersection_list **list)
 {
 	t_intersection_list	*nl;
 	int					i;
@@ -29,34 +29,33 @@ void	add_intersection(t_intersection *new_elem,
 	*list = nl;
 }
 
-// todo fix array size
 t_intersection_list	*intersect_world(t_ray *r, t_world *w)
 {
-	t_intersection_list	*merged;
-	t_intersection_list	*unsorted[w->shape_counter];
 	int					i;
 	int					j;
 	int					size;
 
+	w->unsorted = malloc(sizeof(t_intersection_list *) * w->shape_counter);
 	i = w->shape_counter;
 	size = 0;
 	while (--i >= 0)
 	{
-		unsorted[i] = intersect_shape(w->shapes[i], r);
-		size += unsorted[i]->size;
+		w->unsorted[i] = intersect_shape(w->shapes[i], r);
+		size += w->unsorted[i]->size;
 	}
-	merged = intersection_list_make(size);
+	w->merged = intersection_list_make(size);
 	size = -1;
 	i = -1;
 	while (++i < w->shape_counter)
 	{
 		j = -1;
-		while (++j < unsorted[i]->size)
-			merged->list[++size] = unsorted[i]->list[j];
-		free(unsorted[i]->list);
-		free(unsorted[i]);
+		while (++j < w->unsorted[i]->size)
+			w->merged->list[++size] = w->unsorted[i]->list[j];
+		free(w->unsorted[i]->list);
+		free(w->unsorted[i]);
 	}
-	return (merged);
+	free(w->unsorted);
+	return (w->merged);
 }
 
 t_computations	*precomp(t_intersection *i, t_ray *r)

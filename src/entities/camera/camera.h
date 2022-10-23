@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/15 23:22:09 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/23 12:20:32 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 typedef struct camera
 {
 	t_tuple		*from;
-	t_tuple		*up;
 	char		*name;
 	int			h_size;
 	int			v_size;
-	double		fov;
 	double		pix_size;
 	t_matrix	*transform;
 	double		half;
@@ -31,11 +29,9 @@ typedef struct camera
 
 }	t_camera;
 
-// todo more than 4 args
-t_camera	*make_camera(int h_size, int v_size, double fov,
-				char *name, t_tuple *from);
+t_camera	*make_camera(int h_s, int v_s, double fov, char *name);
 t_ray		*ray_for_pix(t_camera *c, int y, int x);
-void *render(t_camera *c, t_world *w, t_canvas *img);
+void		*render(t_camera *c, t_world *w, t_canvas *img);
 void		free_camera(t_camera *c);
 
 #endif

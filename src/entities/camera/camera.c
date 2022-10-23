@@ -12,14 +12,12 @@
 
 #include "../../../heads_global/minirt.h"
 
-t_camera	*make_camera(int h_s, int v_s, double fov, char *name, t_tuple *from)
+t_camera	*make_camera(int h_s, int v_s, double fov, char *name)
 {
 	t_camera	*cam;
 
 	cam = (t_camera *)malloc(sizeof(t_camera));
-	cam->from = from;
 	cam->name = name;
-	cam->fov = fov;
 	cam->h_size = h_s;
 	cam->v_size = v_s;
 	cam->transform = NULL;
@@ -64,7 +62,7 @@ t_ray	*ray_for_pix(t_camera *c, int y, int x)
 	return (ray_ray(origin, direction));
 }
 
-void *render(t_camera *c, t_world *w, t_canvas *img)
+void	*render(t_camera *c, t_world *w, t_canvas *img)
 {
 	t_ray		*r;
 	t_tuple		*color;

@@ -21,7 +21,7 @@ void	vw(int fd, void *ptr, size_t len)
 	(void)silencer;
 }
 
-void init_canvas(unsigned int w, unsigned int h, t_canvas *c)
+void	init_canvas(unsigned int w, unsigned int h, t_canvas *c)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -85,10 +85,16 @@ int	init_bmp(int h, int w, int fd)
 // todo declaration and assignation
 void	fill_bmp(int fd, t_canvas *c)
 {
-	unsigned char	bmp_pad[40] = {0, 0, 0};
+	unsigned char	bmp_pad[40];
 	unsigned int	i;
 	unsigned int	j;
 
+	i = 0;
+	while (i < 40)
+	{
+		bmp_pad[i] = 0;
+		i++;
+	}
 	i = c->h;
 	while (--i > 0)
 	{

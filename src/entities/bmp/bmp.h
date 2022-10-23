@@ -21,7 +21,7 @@ typedef struct canvas
 	unsigned int	**canvas;
 }	t_canvas;
 
-void init_canvas(unsigned int w, unsigned int h, t_canvas *c);
+void		init_canvas(unsigned int w, unsigned int h, t_canvas *c);
 void		canvas_free(t_canvas *c);
 int			init_bmp(int h, int w, int fd);
 void		fill_bmp(int fd, t_canvas *c);

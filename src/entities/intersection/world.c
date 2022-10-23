@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world.h                                            :+:      :+:    :+:   */
+/*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/16 23:41:02 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/16 23:41:33 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORLD_H
-# define WORLD_H
-# include "../../../heads_global/minirt.h"
-
-typedef struct world
-{
-	int		shape_counter;
-	int		lights_counter;
-	t_shape	**shapes;
-	t_light	**lights;
-	t_light	*ambienace;
-}	t_world;
+#include "../../../heads_global/minirt.h"
 
 void	*init_world(t_world *w, t_shape **shapes, t_light **lights,
-			int lights_counter);
-void	world_set_ambience(t_world *w, t_tuple *from, t_tuple *color);
-t_world	*make_default_world(void);
-void	free_world_deep(t_world *w);
+			int lights_counter)
+{
+	w->shapes = shapes;
+	w->lights = lights;
+	w->lights_counter = lights_counter;
+	w->ambienace = NULL;
+}
 
-#endif
+void	world_set_ambience(t_world *w, t_tuple *from, t_tuple *color)
+{
+	if (w->ambienace)
+		light_free(w->ambienace);
+	w->ambienace = light_make(tuple_point(from->x, from->y, from->z),
+			tuple_color(color->x, color->y, color->z));
+}

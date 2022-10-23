@@ -14,26 +14,27 @@
 
 int	handle_c(char *line, t_scene *s, char *name)
 {
-	char	**input;
-	t_tuple	*from;
-	t_tuple	*dir;
-	t_tuple	*up;
-	double	fov;
+	char		**input;
+	t_tuple		*dir;
+	t_tuple		*up;
+	t_camera	*cam;
 
 	input = ft_whitespaces(line);
 	free(line);
 	if (input && ft_strequals(input[0], "c"))
 	{
-		from = get_tuple(input[1], 'p');
+		cam = make_camera(
+				s->resolution_y,
+				s->resolution_x,
+				ft_atoi(input[4]) * (M_PI / 180), name);
+		cam->from = get_tuple(input[1], 'p');
 		dir = get_tuple(input[2], 'v');
 		up = get_tuple(input[3], 'v');
-		fov = ft_atoi(input[4]) * (M_PI / 180);
-		s->cameras[s->camera_counter] = make_camera(
-				s->resolution_y, s->resolution_x, fov, name, from);
-		s->cameras[s->camera_counter]->transform = view_transform(
-				tuple_copy(from),
-				tuple_add(tuple_copy(from), dir),
+		cam->transform = view_transform(
+				tuple_copy(cam->from),
+				tuple_add(tuple_copy(cam->from), dir),
 				up);
+		s->cameras[s->camera_counter] = cam;
 		s->camera_counter++;
 	}
 	cleanup(input);
