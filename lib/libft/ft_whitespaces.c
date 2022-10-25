@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 23:16:10 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/25 23:18:49 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/26 00:29:05 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static char	*allocate(char *s, char *set)
 	chars = 0;
 	while (s[chars] && !present(s[chars], set))
 		chars++;
-	if (!(word = malloc(sizeof(char) * (chars + 1))))
+	word = malloc(sizeof(char) * (chars + 1));
+	if (!word)
 		return (NULL);
 	word[chars--] = '\0';
 	while (chars >= 0)
@@ -64,19 +65,18 @@ static char	*allocate(char *s, char *set)
 	return (word);
 }
 
-static char	**split(char const *s)
+static char	**split(char const *s, char *set)
 {
 	char	**table;
-	char	*set;
 	char	*st;
 	int		wc;
 	int		i;
 
-	set = " \t";
 	st = (char *)s;
 	i = 0;
 	wc = wcount(st, set);
-	if ((table = malloc(sizeof(char *) * (wc + 1))))
+	table = malloc(sizeof(char *) * (wc + 1));
+	if (table)
 	{
 		while (*st && i < wc)
 		{
@@ -97,6 +97,6 @@ static char	**split(char const *s)
 char	**ft_whitespaces(char const *s)
 {
 	if (s)
-		return (split(s));
+		return (split(s, " \t"));
 	return (NULL);
 }

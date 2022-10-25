@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 23:21:13 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/25 23:21:50 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/26 00:24:09 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ double	ft_atod(char *str)
 	int		negative;
 
 	f = ft_atoi(str);
-	f = f < 0 ? f * -1 : f;
+	if (f < 0)
+		f = f * -1;
 	negative = str[0] == '-';
 	div = get_range((long)f, negative);
 	str += sizeof(char) * (div);
