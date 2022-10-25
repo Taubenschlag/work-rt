@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 17:13:08 by rokupin           #+#    #+#             */
-/*   Updated: 2019/10/12 17:50:41 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 01:06:11 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	long l1;
-	long l2;
-	char *res;
+	long	l1;
+	long	l2;
+	char	*res;
 
 	l1 = 0;
 	l2 = 0;

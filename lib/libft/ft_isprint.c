@@ -6,11 +6,11 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:05:35 by rokupin           #+#    #+#             */
-/*   Updated: 2019/10/11 18:47:14 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 00:52:25 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (c >= ' ' && c <= '~')
 		return (1);

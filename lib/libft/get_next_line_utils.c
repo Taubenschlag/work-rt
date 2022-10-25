@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/28 12:48:38 by rokupin           #+#    #+#             */
-/*   Updated: 2020/01/22 12:11:39 by rokupin          ###   ########.fr       */
+/*   Created: 2020/02/08 17:10:11 by rokupin           #+#    #+#             */
+/*   Updated: 2021/08/02 08:40:12 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strcat(char *src, char *dst)
 {
+	char	*ret;
 	int		i;
 	int		j;
-	char	*ret;
 
 	if (!src)
 		return (dst);
@@ -37,4 +37,27 @@ char	*ft_strcat(char *src, char *dst)
 	free(src);
 	free(dst);
 	return (ret);
+}
+
+char	*ft_strndup(char *s1, int len)
+{
+	char	*dup;
+	int		l;
+
+	l = 0;
+	while (s1[l])
+		l++;
+	if (l > len)
+		l = len;
+	dup = malloc(sizeof(char) * (l + 1));
+	if (!dup)
+		return (NULL);
+	dup[l] = '\0';
+	l--;
+	while (l >= 0)
+	{
+		dup[l] = s1[l];
+		l--;
+	}
+	return (dup);
 }

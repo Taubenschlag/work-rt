@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 01:42:02 by rokupin           #+#    #+#             */
-/*   Updated: 2019/12/23 01:42:09 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 00:55:25 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	t_list *head;
+	t_list	*head;
 
 	if (new)
 	{

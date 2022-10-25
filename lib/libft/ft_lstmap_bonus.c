@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 01:43:47 by rokupin           #+#    #+#             */
-/*   Updated: 2019/12/23 01:43:49 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 00:57:49 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *ptr;
-	t_list *new_ptr;
-	t_list *new;
+	t_list	*ptr;
+	t_list	*new_ptr;
+	t_list	*new;
 
-	new = NULL;
-	if (lst && f && del && (new = ft_lstnew(f(lst->content))))
+	new = ft_lstnew(f(lst->content));
+	if (lst && f && del)
 	{
 		new_ptr = new;
 		ptr = lst->next;

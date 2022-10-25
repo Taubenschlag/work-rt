@@ -6,14 +6,14 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 15:35:27 by rokupin           #+#    #+#             */
-/*   Updated: 2020/01/22 12:03:01 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/11/09 00:56:11 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-int		get_long_range(unsigned long long n)
+int	get_long_range(unsigned long long n)
 {
 	int	range;
 
@@ -31,7 +31,10 @@ char	*fill(unsigned long long val, int neg, int range)
 	char	*ret;
 	int		mod;
 
-	mod = !neg ? 1 : 2;
+	if (!neg)
+		mod = 1;
+	else
+		mod = 2;
 	ret = malloc(sizeof(char) * (range + mod));
 	ret[range + --mod] = '\0';
 	range--;
@@ -75,9 +78,19 @@ char	*ft_dtoa(double d, int prec)
 	unsigned long long	i_part;
 	double				f_part;
 
-	negative = (d < 0) ? 1 : 0;
-	i_part = (unsigned long long)((negative) ? d * -1 : d);
-	f_part = ((negative) ? d * -1 : d) - i_part;
+	negative = 0;
+	if (d < 0)
+		negative = 1;
+	if (!negative)
+	{
+		i_part = (unsigned long long)d;
+		f_part = d - i_part;
+	}
+	if (negative)
+	{		
+		i_part = (unsigned long long)(d * -1);
+		f_part = (d * -1) - i_part;
+	}
 	i_p = fill(i_part, negative, get_long_range(i_part));
 	return (ft_strcat(pr_fl_tostring(f_part, prec), i_p));
 }

@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 09:21:22 by rokupin           #+#    #+#             */
-/*   Updated: 2019/10/09 12:00:57 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/11/05 23:01:41 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned char *ptr;
+	int	*ptr;
 
 	ptr = b;
 	while (len > 0)

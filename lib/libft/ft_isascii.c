@@ -6,11 +6,11 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:05:06 by rokupin           #+#    #+#             */
-/*   Updated: 2019/10/11 18:47:07 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 00:51:45 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isascii(int c)
+int	ft_isascii(int c)
 {
 	if (c >= 0 && c <= 127)
 		return (1);

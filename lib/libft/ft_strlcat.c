@@ -6,13 +6,13 @@
 /*   By: coop <coop@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:03:22 by rokupin           #+#    #+#             */
-/*   Updated: 2019/12/21 12:29:24 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 01:06:38 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_strnlen(char *str, int len)
+static size_t	f_strnlen(char *str, int len)
 {
 	int	i;
 
@@ -23,7 +23,7 @@ static size_t	ft_strnlen(char *str, int len)
 	return ((size_t)i);
 }
 
-size_t			ft_strlcat(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	j;
@@ -34,7 +34,7 @@ size_t			ft_strlcat(char *dst, const char *src, size_t dstsize)
 	srcln = ft_strlen(src);
 	if (dstsize < 1)
 		return (srcln);
-	dstln = ft_strnlen(dst, dstsize);
+	dstln = f_strnlen(dst, dstsize);
 	i = dstln;
 	while (dstsize && src[j] && i < dstsize - 1)
 		dst[i++] = src[j++];

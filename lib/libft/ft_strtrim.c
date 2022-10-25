@@ -6,14 +6,14 @@
 /*   By: coop <coop@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:01:40 by rokupin           #+#    #+#             */
-/*   Updated: 2019/10/27 10:55:39 by coop             ###   ########.fr       */
+/*   Updated: 2021/08/02 01:08:13 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int		present(char c, const char *set)
+static int	present(char c, const char *set)
 {
 	while (*set && *set != c)
 		set++;
@@ -22,7 +22,7 @@ static int		present(char c, const char *set)
 	return (0);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	const char		*s2;
 	char			*ret;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rokupin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 14:39:45 by rokupin           #+#    #+#             */
-/*   Updated: 2019/12/22 14:01:33 by rokupin          ###   ########.fr       */
+/*   Created: 2021/11/08 10:24:17 by rokupin           #+#    #+#             */
+/*   Updated: 2021/11/09 04:58:10 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 # define LIBFT_H
 # include <stddef.h>
 
-/*
-** math
-*/
-char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
 /*
 ** memo
 */
@@ -29,68 +25,75 @@ void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			*ft_calloc(size_t count, size_t size);
 void			ft_bzero(void *s, size_t n);
-void			ft_swap(char *a, char *b);
+/*
+** Algo
+*/
+void			ft_sort(int *arr, int len);
 /*
 ** String
 */
-char		    **ft_whitespaces(char const *s);
 size_t			ft_strlen(const char *s);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
-char			*ft_strcat(char *src, char *dst);
+char			*ft_strcat(char *s1, char *s2);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strnstr(
 					const char *haystack, const char *needle, size_t len);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-int				ft_strequals(char *s1, char *s2);
-char			*ft_strndup(char *s, int len);
 int				ft_atoi(const char *str);
 double			ft_atod(char *str);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
-int				ft_isdigit_non_zero(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
 char			*ft_strdup(const char *s1);
+int				ft_strequals(char *s1, char *s2);
+char			*ft_strndup(char *s1, int len);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
-char			*ft_itoa(long long n);
-char			*ft_dtoa(double d, int prec);
+char			*ft_itoa(int n);
 char			*ft_strmapi(char *s, char (*f)(unsigned int, char));
-int				get_range(long n, int negative);
-char			*dec_to_any(long dec, char *base, int base_val);
+char			**ft_whitespaces(char const *s);
+
 /*
-** FD output
+** io
 */
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
+int				get_next_line(int fd, char **line);
+char			*dec_to_any(long dec, char *base, int base_val);
+char			*ft_dtoa(double d, int prec);
+int				get_range(long n, int negative);
+char			*ft_convert_base(
+					char *nbr, char *base_from, char *base_to, int nbr_i);
+void			ft_swap(char *a, char *b);
 /*
 ** list
 */
-typedef struct	s_list
+typedef struct s_list
 {
 	struct s_list	*next;
 	void			*content;
-}				t_list;
+}		t_list;
 
 t_list			*ft_lstnew(void *content);
-void			ft_lstadd_front(t_list **alst, t_list *neww);
-void			ft_lstadd_back(t_list **alst, t_list *neww);
+void			ft_lstadd_front(t_list **alst, t_list *new_l);
+void			ft_lstadd_back(t_list **alst, t_list *new_l);
 t_list			*ft_lstlast(t_list *lst);
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 int				ft_lstsize(t_list *lst);
 void			ft_lstdelone(t_list *lst, void (*del)(void*));
 void			ft_lstclear(
-						t_list **lst, void (*del)(void*));
+					t_list **lst, void (*del)(void*));
 t_list			*ft_lstmap(
-						t_list *lst, void *(*f)(void *), void (*del)(void *));
+					t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif

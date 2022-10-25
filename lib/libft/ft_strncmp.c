@@ -6,14 +6,14 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 13:47:45 by rokupin           #+#    #+#             */
-/*   Updated: 2019/10/16 10:43:37 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 01:07:31 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strncmp(char *s1, char *s2, unsigned int n)
+int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	unsigned char c1;
-	unsigned char c2;
+	unsigned char	c1;
+	unsigned char	c2;
 
 	while (n > 0)
 	{

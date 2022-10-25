@@ -6,7 +6,7 @@
 /*   By: coop <coop@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 09:41:57 by rokupin           #+#    #+#             */
-/*   Updated: 2019/12/21 12:45:32 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 01:05:05 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static char	*allocate(char *s, char c)
 	chars = 0;
 	while (s[chars] && s[chars] != c)
 		chars++;
-	if (!(word = malloc(sizeof(char) * (chars + 1))))
+	word = malloc(sizeof(char) * (chars + 1));
+	if (!word)
 		return (NULL);
 	word[chars--] = '\0';
 	while (chars >= 0)
@@ -60,7 +61,8 @@ static char	**split(char const *s, char c)
 	st = (char *)s;
 	i = 0;
 	wc = wcount(st, c);
-	if ((table = malloc(sizeof(char *) * (wc + 1))))
+	table = malloc(sizeof(char *) * (wc + 1));
+	if (table)
 	{
 		while (*st && i < wc)
 		{
@@ -78,7 +80,7 @@ static char	**split(char const *s, char c)
 	return (table);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	if (s)
 		return (split(s, c));

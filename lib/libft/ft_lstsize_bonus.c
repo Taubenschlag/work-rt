@@ -6,22 +6,24 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 01:44:15 by rokupin           #+#    #+#             */
-/*   Updated: 2019/12/23 01:44:20 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 01:01:35 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	if (lst)
+	{
 		while (lst)
 		{
 			size++;
 			lst = lst->next;
 		}
+	}
 	return (size);
 }

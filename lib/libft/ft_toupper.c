@@ -6,11 +6,11 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:06:07 by rokupin           #+#    #+#             */
-/*   Updated: 2019/10/11 19:05:17 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 01:09:03 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
 		return (c - ('a' - 'A'));

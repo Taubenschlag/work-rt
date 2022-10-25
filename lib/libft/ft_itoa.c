@@ -3,25 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: coop <coop@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 14:15:06 by rokupin           #+#    #+#             */
-/*   Updated: 2020/01/22 12:04:44 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/11/09 00:56:36 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_itoa(long long n)
+int	get_range(long n, int negative)
 {
-	long	fix;
+	int		range;
+
+	range = 1 + negative;
+	while (n >= 10)
+	{
+		n /= 10;
+		range++;
+	}
+	return (range);
+}
+
+static char	*itoa(int n)
+{
+	int		fix;
 	int		negative;
 	int		range;
 	char	*a;
 
-	negative = (n < 0) ? 1 : 0;
-	n = (negative) ? n * -1 : n;
+	negative = 0;
+	if (n < 0)
+		negative = 1;
+	if (negative)
+		n *= -1;
 	fix = n;
 	range = get_range(n, negative);
 	a = malloc(sizeof(char) * (range + 1));
@@ -37,4 +53,11 @@ char	*ft_itoa(long long n)
 		range--;
 	}
 	return (a);
+}
+
+char	*ft_itoa(int n)
+{
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	return (itoa(n));
 }

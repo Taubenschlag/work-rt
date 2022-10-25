@@ -6,11 +6,11 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:02:59 by rokupin           #+#    #+#             */
-/*   Updated: 2019/10/11 18:48:03 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/08/02 00:51:26 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalpha(int c)
+int	ft_isalpha(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);

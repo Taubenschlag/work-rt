@@ -6,15 +6,15 @@
 /*   By: rokupin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 11:34:51 by rokupin           #+#    #+#             */
-/*   Updated: 2019/06/25 13:07:02 by rokupin          ###   ########.fr       */
+/*   Updated: 2021/11/08 10:42:25 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int		get_length(long dec, int base_val)
+int	get_length(long dec, int base_val)
 {
-	int l;
+	int	l;
 
 	l = 1;
 	if (dec < 0)
@@ -49,10 +49,12 @@ char	*dec_to_any(long dec, char *base, int base_val)
 	if (dec == 0)
 		converted[0] = base[0];
 	else
+	{
 		while (length > i)
 		{
 			converted[--length] = base[dec % base_val];
 			dec /= base_val;
 		}
+	}
 	return (converted);
 }

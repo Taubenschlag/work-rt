@@ -6,7 +6,7 @@
 /*   By: coop <coop@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 11:55:12 by rokupin           #+#    #+#             */
-/*   Updated: 2019/10/26 16:54:36 by coop             ###   ########.fr       */
+/*   Updated: 2021/08/02 00:48:58 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char *ptr;
+	unsigned char	*ptr;
 
 	if (n > 0)
 	{
