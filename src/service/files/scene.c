@@ -104,7 +104,6 @@ void	save_scene(t_scene *s)
 		fd = open(filename, O_CREAT | O_WRONLY, 0);
 		free(filename);
 		render(s->cameras[cam_count], &w, &c);
-
 		fill_bmp(init_bmp(s->resolution_y, s->resolution_x, fd), &c);
 		close(fd);
 		canvas_free(&c);
