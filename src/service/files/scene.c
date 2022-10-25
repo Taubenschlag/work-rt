@@ -58,10 +58,13 @@ int	parse_scene(int fd, int *counters, t_scene *s)
 				success = 0;
 		cnt = -1;
 		while (success && ++cnt < count_shapes(counters))
-			if (!get_next_line(fd, &line) || !handle_shape(line, s))
+			if (!get_next_line(fd, &line) ||
+			!handle_shape(line, s))
 				success = 0;
 	}
 	free(counters);
+	success = !(get_next_line(fd, &line));
+	free(line);
 	close(fd);
 	return (success);
 }

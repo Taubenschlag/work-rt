@@ -36,9 +36,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <mlx.h>
+# include <unistd.h>
 
 # include "../lib/libft/libft.h"
-# include "../lib/gnl/get_next_line.h"
 
 # include "../src/entities/tuple/tuple.h"
 # include "../src/entities/matrix/matrix.h"
