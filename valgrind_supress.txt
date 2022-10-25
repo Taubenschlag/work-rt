@@ -1,7 +1,7 @@
 {
    ignore_libxcb_alloc
    Memcheck:Leak
-   fun:*alloc
+   fun:*
    obj:/usr/lib/libxcb.so.1.1.0
 }
 
@@ -19,7 +19,7 @@
 {
    ignore_libx_alloc
    Memcheck:Leak
-   fun:*alloc
+   fun:*
    obj:/usr/lib/libXext.so.6.4.0
 }
 
@@ -37,7 +37,7 @@
 {
    ignore_libx11_alloc
    Memcheck:Leak
-   fun:*alloc
+   fun:*
    obj:/usr/lib/libX11.so.6.4.0
 }
 
@@ -51,4 +51,23 @@
    ignore_libx11_invalid_free
    Memcheck:Free
    obj:/usr/lib/libX11.so.6.4.0
+}
+
+{
+   ignore_libx11_alloc
+   Memcheck:Leak
+   fun:*
+   obj:/usr/lib/libc.so.6
+}
+
+{
+   ignore_libx11_condition_jumps
+   Memcheck:Cond
+   obj:/usr/lib/libc.so.6
+}
+
+{
+   ignore_libx11_invalid_free
+   Memcheck:Free
+   obj:/usr/lib/libc.so.6
 }

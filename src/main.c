@@ -35,6 +35,5 @@ int	main(int ac, char **av)
 		save_scene(&s);
 	else
 		display_scene(&s);
-	free_scene(&s);
 	return (0);
 }

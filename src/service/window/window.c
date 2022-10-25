@@ -86,26 +86,26 @@ void	display_scene(t_scene *s)
 	t_mlx_wrap	*data;
 	t_canvas	c;
 	t_world		w;
-	int			cam_count;
+	int			cam;
 
-	cam_count = 0;
+	cam = 0;
 	w.shape_counter = s->shape_counter;
 	init_world(&w, s->shapes, s->lights, s->light_counter);
 	data = init_mlx_wrapper(s);
-	while (++cam_count <= s->camera_counter)
+	while (++cam <= s->camera_counter)
 	{
-		world_set_ambience(&w, s->cameras[cam_count - 1]->from, s->ambi_color);
-		argb_render(s->cameras[cam_count - 1], &w, &c);
-		free(s->cameras[cam_count - 1]->name);
-		data->imgs[cam_count] = mlx_new_image(
+		world_set_ambience(&w, s->cameras[cam - 1]->from, s->ambi_color);
+		argb_render(s->cameras[cam - 1], &w, &c);
+		free(s->cameras[cam - 1]->name);
+		data->imgs[cam] = mlx_new_image(
 				data->mlx, s->resolution_x, s->resolution_y);
-		data->addr[cam_count] = mlx_get_data_addr(
-				data->imgs[cam_count], &(data->bits_per_pixel),
-				&(data->line_length), &(data->endian));
-		fill_image(&c, data, cam_count);
+		data->addr[cam] = mlx_get_data_addr(data->imgs[cam],
+				&(data->bits_per_pixel), &(data->line_length), &(data->endian));
+		fill_image(&c, data, cam);
 		canvas_free(&c);
 	}
 	if (w.ambienace)
 		light_free(w.ambienace);
+	free_scene(s);
 	loop_gui(data);
 }
