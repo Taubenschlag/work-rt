@@ -29,13 +29,16 @@ void	check_sphere(int **counters_ptr, int *is_correct, char **str)
 		i++;
 	if (i != 4)
 		*is_correct = FALSE;
-	s1 = ft_atod(str[2]);
-	if (!is_tuple(str[1], FALSE)
-		|| !is_tuple(str[3], TRUE)
-		|| s1 <= 0.0)
-		*is_correct = FALSE;
 	else
-		counters[SPH]++;
+	{
+		s1 = ft_atod(str[2]);
+		if (!is_tuple(str[1], FALSE)
+			|| !is_tuple(str[3], TRUE)
+			|| s1 <= 0.0)
+			*is_correct = FALSE;
+		else
+			counters[SPH]++;
+	}
 }
 
 /*
@@ -54,12 +57,15 @@ void	check_plane(int **counters_ptr, int *is_correct, char **str)
 		i++;
 	if (i != 4)
 		*is_correct = FALSE;
-	if (!is_tuple(str[1], FALSE)
-		|| !is_tuple(str[2], FALSE)
-		|| !is_tuple(str[3], TRUE))
-		*is_correct = FALSE;
 	else
-		counters[PLA]++;
+	{
+		if (!is_tuple(str[1], FALSE)
+			|| !is_tuple(str[2], FALSE)
+			|| !is_tuple(str[3], TRUE))
+			*is_correct = FALSE;
+		else
+			counters[PLA]++;
+	}
 }
 
 /*
@@ -80,16 +86,19 @@ void	check_square_cube(int **counters_ptr, int *is_correct, char **str)
 		i++;
 	if (i != 5)
 		*is_correct = FALSE;
-	s1 = ft_atod(str[3]);
-	if (!is_tuple(str[1], FALSE)
-		|| !is_tuple(str[2], FALSE)
-		|| !is_tuple(str[4], TRUE)
-		|| s1 <= 0.0)
-		*is_correct = FALSE;
-	else if (ft_strequals(str[0], "sq"))
-		counters[SQU]++;
 	else
-		counters[CUB]++;
+	{
+		s1 = ft_atod(str[3]);
+		if (!is_tuple(str[1], FALSE)
+			|| !is_tuple(str[2], FALSE)
+			|| !is_tuple(str[4], TRUE)
+			|| s1 <= 0.0)
+			*is_correct = FALSE;
+		else if (ft_strequals(str[0], "sq"))
+			counters[SQU]++;
+		else
+			counters[CUB]++;
+	}
 }
 
 /*
@@ -109,13 +118,16 @@ void	check_triangle(int **counters_ptr, int *is_correct, char **str)
 		i++;
 	if (i != 5)
 		*is_correct = FALSE;
-	if (!is_tuple(str[1], FALSE)
-		|| !is_tuple(str[2], FALSE)
-		|| !is_tuple(str[3], FALSE)
-		|| !is_tuple(str[4], TRUE))
-		*is_correct = FALSE;
 	else
-		counters[TRI]++;
+	{
+		if (!is_tuple(str[1], FALSE)
+			|| !is_tuple(str[2], FALSE)
+			|| !is_tuple(str[3], FALSE)
+			|| !is_tuple(str[4], TRUE))
+			*is_correct = FALSE;
+		else
+			counters[TRI]++;
+	}
 }
 
 /*
@@ -138,16 +150,18 @@ void	check_cone_cylinder(int **counters_ptr, int *is_correct, char **str)
 		i++;
 	if (i != 6)
 		*is_correct = FALSE;
-	s1 = ft_atod(str[3]);
-	s2 = ft_atod(str[4]);
-	if (!is_tuple(str[1], FALSE)
-		|| !is_tuple(str[2], FALSE)
-		|| !is_tuple(str[5], TRUE)
-		|| s1 <= 0.0
-		|| s2 <= 0.0)
-		*is_correct = FALSE;
-	else if (ft_strequals(str[0], "co"))
-		counters[CON]++;
 	else
-		counters[CYL]++;
+	{
+		s1 = ft_atod(str[3]);
+		s2 = ft_atod(str[4]);
+		if (!is_tuple(str[1], FALSE)
+			|| !is_tuple(str[2], FALSE)
+			|| !is_tuple(str[5], TRUE)
+			|| s1 <= 0.0 || s2 <= 0.0)
+			*is_correct = FALSE;
+		else if (ft_strequals(str[0], "co"))
+			counters[CON]++;
+		else
+			counters[CYL]++;
+	}
 }

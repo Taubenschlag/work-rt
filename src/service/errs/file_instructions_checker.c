@@ -29,12 +29,15 @@ void	check_resolution(int **counters_ptr, int *is_correct, char **str)
 		i++;
 	if (i != 3)
 		*is_correct = FALSE;
-	s1 = ft_atoi(str[1]);
-	s2 = ft_atoi(str[2]);
-	if (s1 > 0 && s2 > 0)
-		counters[RES]++;
 	else
-		*is_correct = FALSE;
+	{
+		s1 = ft_atoi(str[1]);
+		s2 = ft_atoi(str[2]);
+		if (s1 > 0 && s2 > 0)
+			counters[RES]++;
+		else
+			*is_correct = FALSE;
+	}
 }
 
 /*
@@ -53,11 +56,14 @@ void	check_ambiance(int **counters_ptr, int *is_correct, char **str)
 		i++;
 	if (i != 3)
 		*is_correct = FALSE;
-	s1 = ft_atod(str[1]);
-	if (s1 > 0 && is_tuple(str[2], TRUE))
-		counters[AMB]++;
 	else
-		*is_correct = FALSE;
+	{
+		s1 = ft_atod(str[1]);
+		if (s1 > 0 && is_tuple(str[2], TRUE))
+			counters[AMB]++;
+		else
+			*is_correct = FALSE;
+	}
 }
 
 /*
@@ -78,14 +84,17 @@ void	check_cameras(int **counters_ptr, int *is_correct, char **str)
 		i++;
 	if (i != 5)
 		*is_correct = FALSE;
-	s1 = ft_atod(str[4]);
-	if (!is_tuple(str[1], FALSE)
-		|| !is_tuple(str[2], FALSE)
-		|| !is_tuple(str[3], FALSE)
-		|| s1 <= 0.0)
-		*is_correct = FALSE;
 	else
-		counters[CAM]++;
+	{
+		s1 = ft_atod(str[4]);
+		if (!is_tuple(str[1], FALSE)
+			|| !is_tuple(str[2], FALSE)
+			|| !is_tuple(str[3], FALSE)
+			|| s1 <= 0.0)
+			*is_correct = FALSE;
+		else
+			counters[CAM]++;
+	}
 }
 
 /*
@@ -105,11 +114,14 @@ void	check_lights(int **counters_ptr, int *is_correct, char **str)
 		i++;
 	if (i != 4)
 		*is_correct = FALSE;
-	s1 = ft_atod(str[2]);
-	if (!is_tuple(str[1], FALSE)
-		|| !is_tuple(str[3], TRUE)
-		|| s1 <= 0.0)
-		*is_correct = FALSE;
 	else
-		counters[LHT]++;
+	{
+		s1 = ft_atod(str[2]);
+		if (!is_tuple(str[1], FALSE)
+			|| !is_tuple(str[3], TRUE)
+			|| s1 <= 0.0)
+			*is_correct = FALSE;
+		else
+			counters[LHT]++;
+	}
 }
