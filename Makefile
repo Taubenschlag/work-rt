@@ -11,72 +11,66 @@ ODIR = tmp
 
 LIBFT = lib/libft/libft.a
 
-GNL = lib/gnl/gnl.a
-
 LIBX = mlx_linux/libmlx.a
 
 SRC = \
-entities/intersection/intersection_4.c \
-entities/intersection/intersection_1.c \
-entities/intersection/intersection_2a.c \
-entities/intersection/intersection_3.c \
-entities/intersection/intersection_2.c \
-entities/intersection/intersection.c \
-entities/intersection/world.c \
-entities/tuple/tuple_basic.c \
-entities/tuple/tuple_advanced_3.c \
-entities/tuple/tuple_advanced_1.c \
-entities/tuple/tuple_advanced_2.c \
-entities/ray/ray.c \
+main.c \
+general_utils.c \
 \
-entities/matrix/matrix_advanced_1.c \
-\
-entities/matrix/matrix_advanced_2.c \
-entities/matrix/matrix_transformations.c \
-entities/matrix/matrix_basic.c \
-entities/matrix/matrix_advanced_3.c \
-\
-\
-entities/shapes/cone/cone.c \
-entities/shapes/square/square.c \
-\
-\
-entities/shapes/sphere/sphere.c \
-entities/shapes/cylinder/cylinder.c \
-\
-\
-entities/shapes/cube/cube.c \
-\
-entities/shapes/plane/plane.c \
-entities/shapes/shape.c \
-\
-entities/shapes/triangle/triangle.c \
-entities/color/colors_get.c \
-\
-entities/color/colors_set.c \
-entities/camera/camera.c \
-\
-\
-entities/material/material.c \
-entities/material/material_1.c \
-\
-entities/light/light.c \
 entities/bmp/bmp.c \
 \
-main.c \
-service/files/scene_handlers_2.c \
-service/files/scene_handlers_1.c \
+entities/camera/camera.c \
 \
-service/files/scene.c \
-service/files/scene_handlers.c \
-service/window/mlx_handlers.c \
-service/window/window.c \
+entities/color/colors_get.c \
+entities/color/colors_set.c \
 \
+entities/intersection/intersection_1.c \
+entities/intersection/intersection_2a.c \
+entities/intersection/intersection_2.c \
+entities/intersection/intersection_3.c \
+entities/intersection/intersection_4.c \
+entities/intersection/intersection.c \
+entities/intersection/world.c \
+\
+entities/light/light.c \
+\
+entities/material/material_1.c \
+entities/material/material.c \
+\
+entities/matrix/matrix_advanced_1.c \
+entities/matrix/matrix_advanced_2.c \
+entities/matrix/matrix_advanced_3.c \
+entities/matrix/matrix_basic.c \
+entities/matrix/matrix_transformations.c \
+\
+entities/ray/ray.c \
+\
+entities/shapes/cone/cone.c \
+entities/shapes/cube/cube.c \
+entities/shapes/cylinder/cylinder.c \
+entities/shapes/plane/plane.c \
+entities/shapes/shape.c \
+entities/shapes/sphere/sphere.c \
+entities/shapes/square/square.c \
+entities/shapes/triangle/triangle.c \
+\
+entities/tuple/tuple_advanced_1.c \
+entities/tuple/tuple_advanced_2.c \
+entities/tuple/tuple_advanced_3.c \
+entities/tuple/tuple_basic.c \
 \
 service/errs/file_instructions_checker.c \
-service/errs/input_exceptions.c \
 service/errs/file_shape_description_checker.c \
-general_utils.c
+service/errs/input_exceptions.c \
+\
+service/files/scene_1.c \
+service/files/scene.c \
+service/files/scene_handlers_1.c \
+service/files/scene_handlers_2.c \
+service/files/scene_handlers.c \
+\
+service/window/mlx_handlers.c \
+service/window/window.c
 
 OBS = $(addprefix $(ODIR)/,${SRC:.c=.o})
 
@@ -88,20 +82,17 @@ FLAGS = -Wall -Wextra -Werror
 
 all: ${NAME}
 
-$(SAN): pre-build get-gnl get-libft #get-libx
-	${CC} ${FLAGS} -O1 -g -fsanitize=address -o ${SAN} ${SRCS} ${GNL} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
+$(SAN): pre-build get-libft #get-libx
+	${CC} ${FLAGS} -O1 -g -fsanitize=address -o ${SAN} ${SRCS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
 
-$(DEBUG): pre-build get-gnl get-libft #get-libx
-	${CC} ${FLAGS} -ggdb3  -o ${DEBUG} ${SRCS} ${GNL} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
+$(DEBUG): pre-build get-libft #get-libx
+	${CC} ${FLAGS} -ggdb3  -o ${DEBUG} ${SRCS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
 
-$(NAME): pre-build get-gnl get-libft  ${OBS}
-	${CC} ${FLAGS} -o ${NAME} ${OBS} ${GNL} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
+$(NAME): pre-build get-libft  ${OBS}
+	${CC} ${FLAGS} -o ${NAME} ${OBS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
 
 ${ODIR}/%.o: ${SDIR}/%.c
 	${CC} ${FLAGS} -I/usr/include -Imlx_linux -O3 -c $< -o $@
-
-get-gnl:
-	make -C lib/gnl all clean
 
 get-libft:
 	make -C lib/libft all clean
@@ -133,7 +124,6 @@ pre-build:
 clean:
 	rm -rf ${ODIR}
 	make -C lib/libft fclean
-	make -C lib/gnl fclean
 # 	rm -rf ${LIBX} 
 
 fclean: clean

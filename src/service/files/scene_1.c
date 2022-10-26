@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/26 00:41:26 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/10/26 21:39:36 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int	count_shapes(int *counters)
 {
 	return (counters[SPH]
-			+ counters[PLA]
-			+ counters[SQU]
-			+ counters[CUB]
-			+ counters[TRI]
-			+ counters[CYL]
-			+ counters[CON]);
+		+ counters[PLA]
+		+ counters[SQU]
+		+ counters[CUB]
+		+ counters[TRI]
+		+ counters[CYL]
+		+ counters[CON]);
 }
 
 void	init_scene(int *counters, t_scene *scene)
@@ -37,7 +37,7 @@ void	init_scene(int *counters, t_scene *scene)
 			sizeof(t_shape *) * count_shapes(counters));
 }
 
-void scene_parser_postprocess(int fd, int *counters, int *success, char **line)
+void	scene_postparser(int fd, int *counters, int *success, char **line)
 {
 	free(counters);
 	if (*success)
@@ -48,13 +48,14 @@ void scene_parser_postprocess(int fd, int *counters, int *success, char **line)
 
 int	parse_scene(int fd, int *counters, t_scene *s)
 {
-	char *line;
-	int cnt;
-	int success;
+	char	*line;
+	int		cnt;
+	int		success;
 
 	success = 0;
 	if (get_next_line(fd, &line) && handle_r(line, s)
-		&& get_next_line(fd, &line) && handle_a(line, s)) {
+		&& get_next_line(fd, &line) && handle_a(line, s))
+	{
 		success = 1;
 		cnt = -1;
 		while (success && ++cnt < counters[CAM])
@@ -69,6 +70,6 @@ int	parse_scene(int fd, int *counters, t_scene *s)
 			if (!get_next_line(fd, &line) || !handle_shape(line, s))
 				success = 0;
 	}
-	scene_parser_postprocess(fd, counters, &success, &line);
+	scene_postparser(fd, counters, &success, &line);
 	return (success);
 }
