@@ -59,6 +59,7 @@ entities/tuple/tuple_advanced_2.c \
 entities/tuple/tuple_advanced_3.c \
 entities/tuple/tuple_basic.c \
 \
+service/errs/file_check_handler.c \
 service/errs/file_instructions_checker.c \
 service/errs/file_shape_description_checker.c \
 service/errs/input_exceptions.c \
