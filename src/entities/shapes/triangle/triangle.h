@@ -37,4 +37,4 @@ t_triangle	*triangle_coordinates(t_tuple *a, t_tuple *b, t_tuple *c);
 t_tuple		*triangle_normale_at(t_triangle *t);
 void		free_triangle(t_triangle *t);
 
-#endif //RT_CHALLENGE_TRIANGLE_H
+#endif

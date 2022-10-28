@@ -24,4 +24,4 @@ t_sphere	*nsphere_nsphere(t_tuple *centre);
 t_sphere	*nsphere_unit(t_tuple *centre);
 void		nsphere_free(t_sphere *s);
 
-#endif //RT_CHALLENGE_SPHERE_H
+#endif

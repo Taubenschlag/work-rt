@@ -31,7 +31,6 @@ t_tuple	*tuple_point(double x, double y, double z);
 t_tuple	*tuple_color(double r, double g, double b);
 
 void	tuple_free(t_tuple *tuple);
-int		cheaty_free(t_tuple *tuple);
 
 int		tuple_is_vector(t_tuple *tuple);
 

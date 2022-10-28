@@ -52,31 +52,6 @@ t_matrix	*matrix_identity(int range)
 	return (m);
 }
 
-int	matrix_equals(t_matrix *m1, t_matrix *m2)
-{
-	int	i;
-	int	j;
-
-	if (m1->w == m2->w && m1->h == m2->h)
-	{
-		i = 0;
-		while (i < m1->h)
-		{
-			j = 0;
-			while (j < m1->w)
-			{
-				if (fabs(m1->matrix[i][j] - m2->matrix[i][j]) > DOUBLE_PREC)
-					return (0);
-				j++;
-			}
-			i++;
-		}
-	}
-	else
-		return (0);
-	return (1);
-}
-
 void	matrix_free(t_matrix *m)
 {
 	int	i;

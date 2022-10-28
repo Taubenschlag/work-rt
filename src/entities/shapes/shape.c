@@ -42,7 +42,6 @@ t_tuple	*world_normal_apply(t_shape *s, t_tuple *loc_pnt, t_tuple *loc_normal)
 	return (wrld_normal);
 }
 
-//todo mem
 t_tuple	*shape_normal_at(t_shape *s, t_tuple *p)
 {
 	t_tuple	*loc_pnt;

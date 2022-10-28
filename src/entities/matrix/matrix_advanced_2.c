@@ -55,7 +55,6 @@ t_matrix	*matrix_invert(t_matrix *m)
 	return (inverted);
 }
 
-// TODO probably creates burrr
 t_tuple	*tuple_apply_trans_matrix(t_matrix *trans_matrix, t_tuple *tup)
 {
 	t_matrix	*source_tuple_converted;

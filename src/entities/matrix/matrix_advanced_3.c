@@ -51,7 +51,6 @@ t_matrix	*rotate_align(t_tuple *v1, t_tuple *v2)
 	return (res);
 }
 
-//todo assert 3x3
 double	matrix_minor(t_matrix *m, int from, int to)
 {
 	t_matrix	*sub;

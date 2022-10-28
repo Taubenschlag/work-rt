@@ -38,4 +38,4 @@ t_tuple		*cylinder_normale_at(t_tuple *t, t_cylinder *c);
 int			check_cap(t_ray *r, double t);
 void		cylinder_free(t_cylinder *c);
 
-#endif //RT_CHALLENGE_CYLINDER_H
+#endif

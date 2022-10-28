@@ -23,7 +23,7 @@ typedef struct shape
 }	t_shape;
 
 t_shape	*make_shape(char type, void *shape_itself);
-void	*set_transform(t_shape *sh, t_matrix *trans);//todo deprecated
+void	*set_transform(t_shape *sh, t_matrix *trans);
 t_tuple	*shape_normal_at(t_shape *sh, t_tuple *p);
 void	free_shape(t_shape *s);
 

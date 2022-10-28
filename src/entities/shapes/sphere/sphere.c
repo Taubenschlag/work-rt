@@ -12,7 +12,6 @@
 
 #include "../../../../heads_global/minirt.h"
 
-//todo mem
 t_tuple	*nsphere_normal_at(t_tuple *p, t_matrix *m)
 {
 	t_tuple	*obj_normal;

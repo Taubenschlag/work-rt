@@ -37,7 +37,6 @@ t_lightning_pack	*make_l_p(t_light *l, t_computations *c)
 	return (pack);
 }
 
-//todo shallow leak ?
 void	cleanup_light_pack(t_lightning_pack *l)
 {
 	free(l->posit);

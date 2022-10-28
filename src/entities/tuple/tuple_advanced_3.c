@@ -12,12 +12,6 @@
 
 #include "../../../heads_global/minirt.h"
 
-int	cheaty_free(t_tuple *tuple)
-{
-	free(tuple);
-	return (1);
-}
-
 t_tuple	*tuple_multiply(t_tuple *t1, t_tuple *t2)
 {
 	t_tuple	*t;

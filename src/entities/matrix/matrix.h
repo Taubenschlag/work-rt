@@ -24,7 +24,6 @@ typedef struct matrix
 t_matrix	*matrix_matrix(int h, int w);
 t_matrix	*matrix_identity(int range);
 t_matrix	*tuple_to_matrix(t_tuple *t);
-int			matrix_equals(t_matrix *m1, t_matrix *m2);
 void		matrix_free(t_matrix *m);
 t_matrix	*matrix_copy(t_matrix *m);
 

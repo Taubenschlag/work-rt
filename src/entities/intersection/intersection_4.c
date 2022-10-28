@@ -39,7 +39,6 @@ void	triangle_actual_strike(t_triangle *tr, t_ray *ray)
 		free(tr->or_crs);
 }
 
-//? TODO more than 25
 t_intersection_list	*intersection_ray_triangle(t_shape *s, t_ray *ray)
 {
 	t_triangle			*tr;

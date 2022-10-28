@@ -30,7 +30,6 @@ unsigned char	get_blue(unsigned int rgb)
 	return ((unsigned char)(rgb >> 24));
 }
 
-//todo color limitations
 unsigned int	tuple_to_rgb(t_tuple *rgb_tuple)
 {
 	unsigned int	r;

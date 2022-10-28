@@ -30,4 +30,4 @@ t_square	*square(void);
 t_tuple		*square_normale_at(void);
 void		free_square(t_square *t);
 
-#endif //RT_CHALLENGE_SQUARE_H
+#endif

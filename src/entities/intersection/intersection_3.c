@@ -73,7 +73,6 @@ t_intersection_list	*intersection_ray_nsphere(t_shape *s, t_ray *ray)
 	return (ret);
 }
 
-// todo ternary
 void	axis(double orig, double direct, double *min, double *max)
 {
 	double	t_min_temp;

@@ -27,4 +27,4 @@ t_cube	*cube_cube(void);
 void	cube_free(t_cube *c);
 t_tuple	*cube_normal_at(t_tuple *p);
 
-#endif //RT_CHALLENGE_CUBE_H
+#endif

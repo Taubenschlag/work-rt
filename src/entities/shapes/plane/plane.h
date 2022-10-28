@@ -22,4 +22,4 @@ t_plane	*plane_plane(void);
 t_tuple	*plane_normal_at(void);
 void	plane_free(t_plane *pl);
 
-#endif //RT_CHALLENGE_PLANE_H
+#endif

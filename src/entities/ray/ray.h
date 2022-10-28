@@ -25,4 +25,4 @@ t_tuple	*ray_position(t_ray *ray, double t);
 t_ray	*ray_transform(t_ray *ray, t_matrix *m);
 void	ray_free(t_ray *p_ray);
 
-#endif //RT_CHALLENGE_RAY_H
+#endif

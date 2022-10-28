@@ -26,4 +26,4 @@ void		canvas_free(t_canvas *c);
 int			init_bmp(int h, int w, int fd);
 void		fill_bmp(int fd, t_canvas *c);
 
-#endif //RT_CHALLENGE_BMP_H
+#endif
