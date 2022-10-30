@@ -12,7 +12,7 @@ It can show images using 42's GUI lib _minilibx_, or save pictures to `.bmp` fil
 ## How to use
 **miniRT** creates images for each camera entry in the `.rt` file.
 The program opens a minilibx GUI window with rendered scenes by default, you can navigate using arrows and quit with `Esc`.
-#####`--save`
+####`--save`
 Instead of opening GUI - it saves rendered scenes to image files, from `0.bmp` to `n` - number of cameras in `.rt` file.
 To open the file it is required to set the correct permissions (`chmod`).
 
