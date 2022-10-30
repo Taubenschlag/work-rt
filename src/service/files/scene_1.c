@@ -45,7 +45,8 @@ void	scene_postparser(int fd, int *counters, int *success, char **line)
 	free(*line);
 	close(fd);
 }
-
+// TODO skips the last line
+// TODO random order of service instructions not supported
 int	parse_scene(int fd, int *counters, t_scene *s)
 {
 	char	*line;
