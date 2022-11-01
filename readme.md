@@ -50,14 +50,14 @@ Objects, that you'll actually see on the picture. All of them are optional, and 
 `pl` `coordinates orientation color`<br>
 `pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225`<br>
 ***X,Y,Z coordinates*** - is a _point tuple_<br>
-***X,Y,Z orientation vector*** - is a _vector tuple_ in range [-1,1]<br>
+***X,Y,Z orientation vector*** - 3d normalized orientation vector. In range [-1,1] for each x,y,z axis <br>
 ***R,G,B color*** - is a _colour tuple_
 
 #### Square
 `sq`  `coordinates orientation size color`<br>
 `sq  4,0,1       1,0,0       1           255,255,255`<br>
 ***X,Y,Z coordinates*** - is a _point tuple_<br>
-***X,Y,Z orientation vector*** - is a _vector tuple_ in range [-1,1]<br>
+***X,Y,Z orientation vector*** - 3d normalized orientation vector. In range [-1,1] for each x,y,z axis <br>
 ***size*** - _double_ side length <br>
 ***R,G,B color*** - is a _colour tuple_
 
@@ -70,33 +70,50 @@ Objects, that you'll actually see on the picture. All of them are optional, and 
 ***R,G,B color*** - is a _colour tuple_
 
 #### Sphere
-`sp`  `center radius color`<br>
+`sp`  `center diameter color`<br>
 `sp  -1,0,-1                 2           255,255,255`<br>
 ***center*** - is a _point tuple_<br>
-***radius*** -_double_  <br>
+***diameter*** - _double_  <br>
 ***R,G,B color*** - is a _colour tuple_
 
 #### Cube
+`cu`  `center orientation side color`<br>
+`cu`  `2,0,2 1,1,0 2 25.5,255,255`<br>
+***center*** - is a _point tuple_<br>
+***X,Y,Z orientation vector*** - 3d normalized orientation vector. In range [-1,1] for each x,y,z axis <br>
+***size*** - _double_ side length <br>
+***R,G,B color*** - is a _colour tuple_
 
 #### Cone
+`co` `coordinates orientation diameter height color`<br>
+`co  -2,1,2      0,1,0       2       2   255,255,255`<br>
+***X,Y,Z coordinates*** - is a _point tuple_<br>
+***X,Y,Z orientation vector*** - 3d normalized orientation vector. In range [-1,1] for each x,y,z axis <br>
+***diameter*** - _double_  <br>
+***height*** - _double_  <br>
+***R,G,B color*** - is a _colour tuple_
 
 #### Cylinder
+`cy` `coordinates orientation diameter height color`<br>
+`cy  -2,1,2      0,1,0       2       2   255,255,255`<br>
+***X,Y,Z coordinates*** - is a _point tuple_<br>
+***X,Y,Z orientation vector*** - 3d normalized orientation vector. In range [-1,1] for each x,y,z axis <br>
+***diameter*** - _double_  <br>
+***height*** - _double_  <br>
+***R,G,B color*** - is a _colour tuple_
 
 #### Tor
 *in progress..*
 
+## How it works
+The whole process can be broken down into those basic steps:
+1. Arguments check
+2. File check
+3. Scene parsing
+4. Creating the image canvas
+    - Creating a ray for each canvas pixel and look for the intersections with described objects.
+    - Creating rays from the intersection point to every light source
+    - Calculating the colour of each canvas pixel
+5. Converting canvas to `.bmp` or `Ximage`
 
-
-
-
-
-
-
-
-
-
-
-
-
-As far as RT is mini - usage of multithreading or GPU computations restricted by the subject.
- 
+That's it!

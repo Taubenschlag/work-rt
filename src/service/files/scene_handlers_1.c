@@ -6,13 +6,13 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/09/30 23:16:03 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/11/01 21:54:52 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-int	handle_square(char **values, t_scene *s)
+void	handle_square(char **values, t_scene *s)
 {
 	t_square	*sq;
 
@@ -37,10 +37,9 @@ int	handle_square(char **values, t_scene *s)
 	s->shape_counter++;
 	cleanup(values);
 	free(sq->center);
-	return (1);
 }
 
-int	handle_cylinder(char **values, t_scene *s)
+void	handle_cylinder(char **values, t_scene *s)
 {
 	t_cylinder	*c;
 
@@ -66,10 +65,9 @@ int	handle_cylinder(char **values, t_scene *s)
 	set_transform(s->shapes[s->shape_counter], c->trans);
 	s->shape_counter++;
 	cleanup(values);
-	return (1);
 }
 
-int	handle_triangle(char **values, t_scene *s)
+void	handle_triangle(char **values, t_scene *s)
 {
 	t_tuple	*a;
 	t_tuple	*b;
@@ -85,10 +83,9 @@ int	handle_triangle(char **values, t_scene *s)
 	s->shapes[s->shape_counter]->matrl = mat_with_col(color);
 	s->shape_counter++;
 	cleanup(values);
-	return (1);
 }
 
-int	handle_cone(char **values, t_scene *s)
+void	handle_cone(char **values, t_scene *s)
 {
 	t_cone		*c;
 
@@ -112,10 +109,9 @@ int	handle_cone(char **values, t_scene *s)
 	set_transform(s->shapes[s->shape_counter], c->trans);
 	s->shape_counter++;
 	cleanup(values);
-	return (1);
 }
 
-int	handle_cube(char **values, t_scene *s)
+void	handle_cube(char **values, t_scene *s)
 {
 	t_cube		*c;
 
@@ -141,5 +137,4 @@ int	handle_cube(char **values, t_scene *s)
 	free(c->center);
 	free(c->norm);
 	cleanup(values);
-	return (1);
 }

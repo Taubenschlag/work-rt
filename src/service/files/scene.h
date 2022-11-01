@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/23 18:18:50 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/11/01 18:50:11 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "../../../heads_global/minirt.h"
 # define COLOR_CF 0.003921569 //WHY?
+# define SHAPES 1
+# define ALL 2
 
 typedef struct scene
 {
@@ -33,20 +35,20 @@ typedef struct scene
 void		init_scene(int *counters, t_scene *scene);
 t_tuple		*get_tuple(char *value, char type);
 void		free_scene(t_scene *s);
-int			handle_r(char *line, t_scene *s);
-int			handle_a(char *line, t_scene *s);
-int			handle_c(char *line, t_scene *s, char *name);
-int			handle_l(char *line, t_scene *s);
-int			handle_shape(char *line, t_scene *s);
-int			handle_plane(char **values, t_scene *s);
-int			handle_sphere(char **values, t_scene *s);
-int			handle_square(char **values, t_scene *s);
-int			handle_cylinder(char **values, t_scene *s);
-int			handle_triangle(char **values, t_scene *s);
-int			handle_cone(char **values, t_scene *s);
-int			handle_cube(char **values, t_scene *s);
+void		handle_r(char **input, t_scene *s);
+void		handle_a(char **input, t_scene *s);
+void		handle_c(char **input, t_scene *s);
+void		handle_l(char **input, t_scene *s);
+void		handle_line(char **input, t_scene *s);
+void		handle_plane(char **values, t_scene *s);
+void		handle_sphere(char **values, t_scene *s);
+void		handle_square(char **values, t_scene *s);
+void		handle_cylinder(char **values, t_scene *s);
+void		handle_triangle(char **values, t_scene *s);
+void		handle_cone(char **values, t_scene *s);
+void		handle_cube(char **values, t_scene *s);
 void		save_scene(t_scene *s);
-int			parse_scene(int fd, int *counters, t_scene *s);
+void		parse_scene(int fd, int *counters, t_scene *s);
 void		cleanup(char **values);
 
 #endif

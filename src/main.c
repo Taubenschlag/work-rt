@@ -23,14 +23,12 @@ int	main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	counters = check_file(av[ac - 1]);
 	if (!counters)
-		exit(EXIT_FAILURE);
-	init_scene(counters, &s);
-	if (!parse_scene(fd, counters, &s))
 	{
-		free_scene(&s);
-		perror("invalid file");
+		perror("invalid file\n");
 		exit(EXIT_FAILURE);
 	}
+	init_scene(counters, &s);
+	parse_scene(fd, counters, &s);
 	if (ac == 3)
 		save_scene(&s);
 	else

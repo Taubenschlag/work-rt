@@ -13,6 +13,7 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 # define DOUBLE_PREC 0.0001
+# define INSTRUCTION_SET_SIZE 11
 # define RES 0
 # define AMB 1
 # define CAM 2

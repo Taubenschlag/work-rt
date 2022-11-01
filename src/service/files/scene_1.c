@@ -6,21 +6,34 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/26 21:39:36 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/11/01 18:49:37 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-int	count_shapes(int *counters)
+int	count_what(int *counters, int what)
 {
-	return (counters[SPH]
-		+ counters[PLA]
-		+ counters[SQU]
-		+ counters[CUB]
-		+ counters[TRI]
-		+ counters[CYL]
-		+ counters[CON]);
+	int	i;
+	int	res;
+
+	if (what == SHAPES)
+		return (counters[SPH]
+			+ counters[PLA]
+			+ counters[SQU]
+			+ counters[CUB]
+			+ counters[TRI]
+			+ counters[CYL]
+			+ counters[CON]);
+	else if (what == ALL)
+	{
+		i = -1;
+		res = 0;
+		while (++i < INSTRUCTION_SET_SIZE)
+			res += counters[i];
+		return (res);
+	}
+	return (-1);
 }
 
 void	init_scene(int *counters, t_scene *scene)
@@ -34,43 +47,22 @@ void	init_scene(int *counters, t_scene *scene)
 	scene->lights = (t_light **)malloc(sizeof(t_light *) * counters[LHT]);
 	scene->shape_counter = 0;
 	scene->shapes = (t_shape **)malloc(
-			sizeof(t_shape *) * count_shapes(counters));
+			sizeof(t_shape *) * count_what(counters, SHAPES));
 }
 
-void	scene_postparser(int fd, int *counters, int *success, char **line)
-{
-	free(counters);
-	if (*success)
-		*success = !(get_next_line(fd, line));
-	free(*line);
-	close(fd);
-}
-// TODO skips the last line
-// TODO random order of service instructions not supported
-int	parse_scene(int fd, int *counters, t_scene *s)
+void	parse_scene(int fd, int *counters, t_scene *s)
 {
 	char	*line;
-	int		cnt;
-	int		success;
 
-	success = 0;
-	if (get_next_line(fd, &line) && handle_r(line, s)
-		&& get_next_line(fd, &line) && handle_a(line, s))
+	while (get_next_line(fd, &line))
 	{
-		success = 1;
-		cnt = -1;
-		while (success && ++cnt < counters[CAM])
-			if (!get_next_line(fd, &line) || !handle_c(line, s, ft_itoa(cnt)))
-				success = 0;
-		cnt = -1;
-		while (success && ++cnt < counters[LHT])
-			if (!get_next_line(fd, &line) || !handle_l(line, s))
-				success = 0;
-		cnt = -1;
-		while (success && ++cnt < count_shapes(counters))
-			if (!get_next_line(fd, &line) || !handle_shape(line, s))
-				success = 0;
+		if (line && !ft_strequals(line, ""))
+			handle_line(ft_whitespaces(line), s);
+		free(line);
 	}
-	scene_postparser(fd, counters, &success, &line);
-	return (success);
+	if (line && !ft_strequals(line, ""))
+		handle_line(ft_whitespaces(line), s);
+	free(line);
+	free(counters);
+	close(fd);
 }

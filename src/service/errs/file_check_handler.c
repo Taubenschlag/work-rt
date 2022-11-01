@@ -42,8 +42,8 @@ int	*make_counters_array(void)
 	int	i;
 
 	i = -1;
-	counters = malloc(sizeof(int) * 11);
-	while (++i < 11)
+	counters = malloc(sizeof(int) * INSTRUCTION_SET_SIZE);
+	while (++i < INSTRUCTION_SET_SIZE)
 		counters[i] = 0;
 	return (counters);
 }
@@ -63,7 +63,8 @@ void	check_row(int *correct, char **line, char ***values, int *entry)
 	if (*correct)
 	{
 		*values = ft_whitespaces(*line);
-		instruction_switch(*values, &entry, correct);
+		if (*values && **values)
+			instruction_switch(*values, &entry, correct);
 		cleanup_arr(*values);
 	}
 	free(*line);
@@ -82,6 +83,7 @@ int	*check_file(char *filename)
 	correct = TRUE;
 	while (get_next_line(fd, &line))
 		check_row(&correct, &line, &values, entry);
+	check_row(&correct, &line, &values, entry);
 	close(fd);
 	if (!correct || entry[RES] != 1 || entry[AMB] > 1 || entry[CAM] < 1)
 	{
@@ -89,6 +91,5 @@ int	*check_file(char *filename)
 		perror("invalid file");
 		entry = NULL;
 	}
-	free(line);
 	return (entry);
 }

@@ -6,27 +6,24 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/14 22:01:32 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/11/01 18:48:59 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-int	handle_c(char *line, t_scene *s, char *name)
+void	handle_c(char **input, t_scene *s)
 {
-	char		**input;
 	t_tuple		*dir;
 	t_tuple		*up;
 	t_camera	*cam;
 
-	input = ft_whitespaces(line);
-	free(line);
 	if (input && ft_strequals(input[0], "c"))
 	{
 		cam = make_camera(
 				s->resolution_y,
 				s->resolution_x,
-				ft_atoi(input[4]) * (M_PI / 180), name);
+				ft_atoi(input[4]) * (M_PI / 180), ft_itoa(s->camera_counter));
 		cam->from = get_tuple(input[1], 'p');
 		dir = get_tuple(input[2], 'v');
 		up = get_tuple(input[3], 'v');
@@ -38,18 +35,14 @@ int	handle_c(char *line, t_scene *s, char *name)
 		s->camera_counter++;
 	}
 	cleanup(input);
-	return (1);
 }
 
-int	handle_l(char *line, t_scene *s)
+void	handle_l(char **input, t_scene *s)
 {
-	char	**input;
 	t_tuple	*from;
 	t_tuple	*color;
 	double	brightness;
 
-	input = ft_whitespaces(line);
-	free(line);
 	if (input && ft_strequals(input[0], "l"))
 	{
 		from = get_tuple(input[1], 'p');
@@ -60,10 +53,9 @@ int	handle_l(char *line, t_scene *s)
 		s->light_counter++;
 	}
 	cleanup(input);
-	return (1);
 }
 
-int	handle_sphere(char **values, t_scene *s)
+void	handle_sphere(char **values, t_scene *s)
 {
 	t_tuple	*centre;
 	t_tuple	*color;
@@ -83,10 +75,9 @@ int	handle_sphere(char **values, t_scene *s)
 	tuple_free(centre);
 	s->shape_counter++;
 	cleanup(values);
-	return (1);
 }
 
-int	handle_plane(char **values, t_scene *s)
+void	handle_plane(char **values, t_scene *s)
 {
 	t_tuple		*coordinate;
 	t_tuple		*norm;
@@ -112,5 +103,4 @@ int	handle_plane(char **values, t_scene *s)
 				coordinate->x, coordinate->y, coordinate->z), trans));
 	s->shape_counter++;
 	cleanup(values);
-	return (1);
 }

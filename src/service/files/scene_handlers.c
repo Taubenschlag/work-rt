@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/09/30 23:03:28 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/11/01 18:48:32 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_tuple	*get_tuple(char *value, char type)
 	return (ret);
 }
 
+// todo move
 void	cleanup(char **values)
 {
 	int	i;
@@ -49,72 +50,60 @@ void	cleanup(char **values)
 	free(values);
 }
 
-int	handle_r(char *line, t_scene *s)
+void	handle_r(char **input, t_scene *s)
 {
 	int		i;
-	char	**input;
 
-	input = ft_whitespaces(line);
-	free(line);
 	i = -1;
-	if (input && ft_strequals(input[0], "R"))
+	if (s->resolution_x < 0)
 	{
-		if (s->resolution_x < 0)
-		{
-			s->resolution_x = ft_atoi(input[1]);
-			s->resolution_y = ft_atoi(input[2]);
-		}
-		else
-		{
-			while (input[++i])
-				free(input[i]);
-			free(input);
-			return (0);
-		}
+		s->resolution_x = ft_atoi(input[1]);
+		s->resolution_y = ft_atoi(input[2]);
+	}
+	else
+	{
+		while (input[++i])
+			free(input[i]);
+		free(input);
 	}
 	cleanup(input);
-	return (s->resolution_x > 0 && s->resolution_y > 0);
 }
 
-int	handle_a(char *line, t_scene *s)
+void	handle_a(char **input, t_scene *s)
 {
-	char	**input;
 	t_tuple	*color;
 
-	input = ft_whitespaces(line);
-	free(line);
-	if (input && ft_strequals(input[0], "A"))
-	{
-		if (s->ambi_ratio < 0)
-			s->ambi_ratio = ft_atod(input[1]);
-		else
-			s->ambi_ratio = -1;
-		color = get_tuple(input[2], 'c');
-		s->ambi_color = tuple_scalar_multiply(color, s->ambi_ratio * COLOR_CF);
-	}
+	if (s->ambi_ratio < 0)
+		s->ambi_ratio = ft_atod(input[1]);
+	else
+		s->ambi_ratio = -1;
+	color = get_tuple(input[2], 'c');
+	s->ambi_color = tuple_scalar_multiply(color, s->ambi_ratio * COLOR_CF);
 	cleanup(input);
-	return (s->ambi_ratio >= 0 && s->ambi_ratio <= 1);
 }
 
-int	handle_shape(char *line, t_scene *s)
+void	handle_line(char **input, t_scene *s)
 {
-	char	**input;
-
-	input = ft_whitespaces(line);
-	free(line);
-	if (input && ft_strequals(input[0], "sp"))
-		return (handle_sphere(input, s));
-	if (input && ft_strequals(input[0], "pl"))
-		return (handle_plane(input, s));
-	if (input && ft_strequals(input[0], "sq"))
-		return (handle_square(input, s));
-	if (input && ft_strequals(input[0], "cy"))
-		return (handle_cylinder(input, s));
-	if (input && ft_strequals(input[0], "tr"))
-		return (handle_triangle(input, s));
-	if (input && ft_strequals(input[0], "co"))
-		return (handle_cone(input, s));
-	if (input && ft_strequals(input[0], "cu"))
-		return (handle_cube(input, s));
-	return (0);
+	if (ft_strequals(input[0], "R"))
+		handle_r(input, s);
+	else if (ft_strequals(input[0], "A"))
+		handle_a(input, s);
+	else if (ft_strequals(input[0], "c"))
+		handle_c(input, s);
+	else if (ft_strequals(input[0], "l"))
+		handle_l(input, s);
+	else if (ft_strequals(input[0], "sp"))
+		handle_sphere(input, s);
+	else if (ft_strequals(input[0], "pl"))
+		handle_plane(input, s);
+	else if (ft_strequals(input[0], "sq"))
+		handle_square(input, s);
+	else if (ft_strequals(input[0], "cy"))
+		handle_cylinder(input, s);
+	else if (ft_strequals(input[0], "tr"))
+		handle_triangle(input, s);
+	else if (ft_strequals(input[0], "co"))
+		handle_cone(input, s);
+	else if (ft_strequals(input[0], "cu"))
+		handle_cube(input, s);
 }
