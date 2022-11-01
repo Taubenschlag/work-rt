@@ -4,6 +4,8 @@ Raytracer, written in plain old C.<br>
 The program renders static images using naive ray tracing and the Phong model.
 It can show images using 42's GUI lib _minilibx_, or save pictures to `.bmp` files.
 
+![miniRT](https://raw.githubusercontent.com/Taubenschlag/work-rt/master/resources/everything/0.bmp?token=GHSAT0AAAAAABZDCWC2MCXFHDI7OLVR4I5SY3BR36Q)
+
 ## Try it!
 1. `git clone`
 2. `make`
@@ -115,5 +117,7 @@ The whole process can be broken down into those basic steps:
     - Creating rays from the intersection point to every light source
     - Calculating the colour of each canvas pixel
 5. Converting canvas to `.bmp` or `Ximage`
+
+![wolf](https://raw.githubusercontent.com/Taubenschlag/work-rt/master/resources/wolf/0.bmp?token=GHSAT0AAAAAABZDCWC3NLNTLIMHXWA2YDBWY3BR24A)
 
 That's it!
