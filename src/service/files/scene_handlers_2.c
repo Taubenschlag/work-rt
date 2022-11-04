@@ -23,7 +23,7 @@ void	handle_c(char **input, t_scene *s)
 		cam = make_camera(
 				s->resolution_y,
 				s->resolution_x,
-				ft_atoi(input[4]) * (M_PI / 180), ft_itoa(s->camera_counter));
+				ft_atoi(input[4]) * (M_PI / 180));
 		cam->from = get_tuple(input[1], 'p');
 		dir = get_tuple(input[2], 'v');
 		up = get_tuple(input[3], 'v');

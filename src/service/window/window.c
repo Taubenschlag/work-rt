@@ -96,7 +96,6 @@ void	display_scene(t_scene *s)
 	{
 		world_set_ambience(&w, s->cameras[cam - 1]->from, s->ambi_color);
 		argb_render(s->cameras[cam - 1], &w, &c);
-		free(s->cameras[cam - 1]->name);
 		data->imgs[cam] = mlx_new_image(
 				data->mlx, s->resolution_x, s->resolution_y);
 		data->addr[cam] = mlx_get_data_addr(data->imgs[cam],

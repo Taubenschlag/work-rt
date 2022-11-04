@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/01 18:49:37 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/11/04 22:56:41 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	init_scene(int *counters, t_scene *scene)
 	scene->resolution_x = -1;
 	scene->resolution_y = -1;
 	scene->ambi_ratio = -1;
+	scene->ambi_color = tuple_color(0, 0, 0);
 	scene->camera_counter = 0;
 	scene->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[CAM]);
 	scene->light_counter = 0;

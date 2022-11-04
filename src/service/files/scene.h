@@ -6,7 +6,7 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/01 18:50:11 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/11/04 22:55:23 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void		handle_cylinder(char **values, t_scene *s);
 void		handle_triangle(char **values, t_scene *s);
 void		handle_cone(char **values, t_scene *s);
 void		handle_cube(char **values, t_scene *s);
-void		save_scene(t_scene *s);
+void		save_scene(t_scene *s, int *fd_list);
 void		parse_scene(int fd, int *counters, t_scene *s);
 void		cleanup(char **values);
+int			*create_files(int *counters);
 
 #endif

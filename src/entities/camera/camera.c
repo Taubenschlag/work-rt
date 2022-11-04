@@ -6,18 +6,17 @@
 /*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/23 18:17:54 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/11/04 22:57:24 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-t_camera	*make_camera(int h_s, int v_s, double fov, char *name)
+t_camera	*make_camera(int h_s, int v_s, double fov)
 {
 	t_camera	*cam;
 
 	cam = (t_camera *)malloc(sizeof(t_camera));
-	cam->name = name;
 	cam->h_size = h_s;
 	cam->v_size = v_s;
 	cam->transform = NULL;

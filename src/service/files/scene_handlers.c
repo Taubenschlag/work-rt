@@ -73,11 +73,9 @@ void	handle_a(char **input, t_scene *s)
 {
 	t_tuple	*color;
 
-	if (s->ambi_ratio < 0)
-		s->ambi_ratio = ft_atod(input[1]);
-	else
-		s->ambi_ratio = -1;
+	s->ambi_ratio = ft_atod(input[1]);
 	color = get_tuple(input[2], 'c');
+	free(s->ambi_color);
 	s->ambi_color = tuple_scalar_multiply(color, s->ambi_ratio * COLOR_CF);
 	cleanup(input);
 }
