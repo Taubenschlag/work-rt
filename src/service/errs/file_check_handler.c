@@ -88,7 +88,6 @@ int	*check_file(char *filename)
 	if (!correct || entry[RES] != 1 || entry[AMB] > 1 || entry[CAM] < 1)
 	{
 		free(entry);
-		perror("invalid file");
 		entry = NULL;
 	}
 	return (entry);

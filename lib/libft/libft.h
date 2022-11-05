@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 10:24:17 by rokupin           #+#    #+#             */
-/*   Updated: 2021/11/09 04:58:10 by rokupin          ###   ########.fr       */
+/*   Updated: 2022/11/05 09:20:35 by rokupin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
+int				ft_isdouble(char *val);
+int				ft_isnumber(char *str);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
 char			*ft_strdup(const char *s1);

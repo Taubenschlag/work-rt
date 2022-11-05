@@ -6,7 +6,7 @@
 #    By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 17:35:27 by rokupin           #+#    #+#              #
-#    Updated: 2022/10/26 21:50:18 by rokupin          ###   ########.fr        #
+#    Updated: 2022/11/05 09:22:11 by rokupin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,21 +14,21 @@
 NAME = libft.a
 
 SRC = \
-ft_atod.c                 ft_putchar_fd.c \
-ft_atoi.c                ft_putendl_fd.c \
-ft_bzero.c               ft_putnbr_fd.c \
-ft_calloc.c              ft_putstr_fd.c \
-ft_convert_base2.c       ft_sort.c \
-ft_convert_base.c        ft_split.c \
-ft_dtoa.c                ft_strchr.c \
-ft_isalnum.c             ft_strcmp.c \
-ft_isalpha.c             ft_strdup.c \
-ft_isascii.c             ft_strequals.c \
-ft_isdigit.c             ft_strjoin.c \
-ft_isprint.c             ft_strlcat.c \
-ft_itoa.c                ft_strlcpy.c \
-ft_strlen.c \
-ft_strmapi.c \
+ft_atod.c			ft_putchar_fd.c \
+ft_atoi.c			ft_putendl_fd.c \
+ft_bzero.c			ft_putnbr_fd.c \
+ft_calloc.c			ft_putstr_fd.c \
+ft_convert_base2.c	ft_sort.c \
+ft_convert_base.c	ft_split.c \
+ft_dtoa.c			ft_strchr.c \
+ft_isalnum.c		ft_strcmp.c \
+ft_isalpha.c		ft_strdup.c \
+ft_isascii.c		ft_strequals.c \
+ft_isdigit.c		ft_strjoin.c \
+ft_isprint.c		ft_strlcat.c \
+ft_itoa.c			ft_strlcpy.c \
+ft_strlen.c			ft_isdouble.c \
+ft_strmapi.c 		ft_isnumber.c\
 ft_strncmp.c \
 ft_strnstr.c \
 ft_strrchr.c \

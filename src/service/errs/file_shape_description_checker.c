@@ -27,7 +27,7 @@ void	check_sphere(int **counters_ptr, int *is_correct, char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 4)
+	if (i != 4 || !ft_isdouble(str[2]))
 		*is_correct = FALSE;
 	else
 	{
@@ -84,7 +84,7 @@ void	check_square_cube(int **counters_ptr, int *is_correct, char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 5)
+	if (i != 5 || !ft_isdouble(str[3]))
 		*is_correct = FALSE;
 	else
 	{
@@ -148,7 +148,7 @@ void	check_cone_cylinder(int **counters_ptr, int *is_correct, char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 6)
+	if (i != 6 || !ft_isdouble(str[3]) || !ft_isdouble(str[4]))
 		*is_correct = FALSE;
 	else
 	{

@@ -27,7 +27,7 @@ void	check_resolution(int **counters_ptr, int *is_correct, char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 3)
+	if (i != 3 || !ft_isnumber(str[1]) || !ft_isnumber(str[2]))
 		*is_correct = FALSE;
 	else
 	{
@@ -54,12 +54,12 @@ void	check_ambiance(int **counters_ptr, int *is_correct, char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 3)
+	if (i != 3 || !ft_isdouble(str[1]))
 		*is_correct = FALSE;
 	else
 	{
 		s1 = ft_atod(str[1]);
-		if (s1 > 0 && is_tuple(str[2], TRUE))
+		if (s1 >= 0 && s1 <= 1 && is_tuple(str[2], TRUE))
 			counters[AMB]++;
 		else
 			*is_correct = FALSE;
@@ -82,7 +82,7 @@ void	check_cameras(int **counters_ptr, int *is_correct, char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 5)
+	if (i != 5 || !ft_isdouble(str[4]))
 		*is_correct = FALSE;
 	else
 	{
@@ -112,7 +112,7 @@ void	check_lights(int **counters_ptr, int *is_correct, char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 4)
+	if (i != 4 || !ft_isdouble(str[2]))
 		*is_correct = FALSE;
 	else
 	{
