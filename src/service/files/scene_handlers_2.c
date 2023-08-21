@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_handlers_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/01 18:48:59 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/08/21 15:50:45 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ void	handle_sphere(char **values, t_scene *s)
 	cleanup(values);
 }
 
+void	print_tup(t_tuple *tup)
+{
+	printf("\tx:[%.2f], y:[%.2f], z:[%.2f]\n", tup->x, tup->y, tup->z);
+}
+
 void	handle_plane(char **values, t_scene *s)
 {
 	t_tuple		*coordinate;
@@ -85,7 +90,13 @@ void	handle_plane(char **values, t_scene *s)
 	t_matrix	*trans;
 
 	coordinate = get_tuple(values[1], 'p');
-	norm = get_tuple(values[2], 'v');
+	/* DEBUG */
+	t_tuple		*tmp;
+	tmp = get_tuple(values[2], 'v');
+	print_tup(tmp);
+	norm = tuple_normalize(get_tuple(values[2], 'v'));
+	print_tup(norm);
+	/* ***** */
 	color = tuple_scalar_multiply(
 			get_tuple(values[3], 'c'), COLOR_CF);
 	s->shapes[s->shape_counter] = make_shape('p', plane_plane());

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_check_handler.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 00:51:23 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/29 00:51:39 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/08/21 16:16:26 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	*check_file(char *filename)
 	int		*entry;
 	int		correct;
 
+	/* this might be the second time to open file */
 	fd = open(filename, O_RDONLY);
 	entry = make_counters_array();
 	correct = TRUE;
