@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/08/21 15:50:45 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:11:05 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	handle_c(char **input, t_scene *s)
 	t_tuple		*up;
 	t_camera	*cam;
 
+	/* DEBUG */
+	printf("CAMERA\n");
+	/* ***** */
 	if (input && ft_strequals(input[0], "c"))
 	{
 		cam = make_camera(
@@ -61,6 +64,9 @@ void	handle_sphere(char **values, t_scene *s)
 	t_tuple	*color;
 	double	diameter;
 
+	/* DEBUG */
+	printf("SPHERE\n");
+	/* ***** */
 	centre = get_tuple(values[1], 'p');
 	diameter = ft_atod(values[2]);
 	color = tuple_scalar_multiply(
@@ -91,11 +97,11 @@ void	handle_plane(char **values, t_scene *s)
 
 	coordinate = get_tuple(values[1], 'p');
 	/* DEBUG */
-	t_tuple		*tmp;
-	tmp = get_tuple(values[2], 'v');
-	print_tup(tmp);
+	//t_tuple		*tmp;
+	//tmp = get_tuple(values[2], 'v');
+	//print_tup(tmp);
 	norm = tuple_normalize(get_tuple(values[2], 'v'));
-	print_tup(norm);
+	//print_tup(norm);
 	/* ***** */
 	color = tuple_scalar_multiply(
 			get_tuple(values[3], 'c'), COLOR_CF);
