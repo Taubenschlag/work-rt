@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/07 14:09:45 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:49:36 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,6 @@ t_matrix	*matrix_multiply(t_matrix *m1, t_matrix *m2)
 ** So, it takes around 18 seconds to render just one sphere and use 
 ** DEBUG printfs in the function bellow
 ** ..around 7 seconds to render same setting but without printf DEBUG statements
-**
-** call from handle_sphere() receive:	m1[4][4] and m2[4][1] so the result is res[4][1]
-** call from handle_plane() receive:	m1[4][4] and m2[4][1] so the result is res[4][1]
-** call from handle_square() receive:	m1[4][4] and m2[4][1] so the result is res[4][1]
-** call from handle_cylinder() receive:	m1[4][4] and m2[4][1] so the result is res[4][1]
-** call from handle_triangle() receive:	m1[4][4] and m2[4][1] so the result is res[4][1]
-** call from handle_cone() receive:		m1[4][4] and m2[4][1] so the result is res[4][1]
-** call from handle_cube() receive:		m1[4][4] and m2[4][1] so the result is res[4][1]
 **
 */
 t_matrix	*matrix_multiply(t_matrix *m1, t_matrix *m2)

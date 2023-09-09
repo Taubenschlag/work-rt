@@ -3,15 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_transformations.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 22:33:49 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/09 19:21:46 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
+void	matrix_translate(t_matrix *m, t_tuple *tpl)
+{
+	matrix_identity(m, M_MAX);
+	m->mtx[0][3] = tpl->x;
+	m->mtx[1][3] = tpl->y;
+	m->mtx[2][3] = tpl->z;
+}
+
+void	matrix_scale(t_matrix *m, t_tuple *tpl)
+{
+	matrix_identity(m, M_MAX);
+	m->mtx[0][0] = tpl->x;
+	m->mtx[1][1] = tpl->y;
+	m->mtx[2][2] = tpl->z;
+}
+
+/*
 t_matrix	*matrix_translate(double x, double y, double z)
 {
 	t_matrix	*trans;
@@ -78,3 +95,4 @@ t_matrix	*matrix_z_rotate(double r)
 	}
 	return (scl);
 }
+*/
