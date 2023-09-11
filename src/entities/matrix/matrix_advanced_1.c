@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/08 11:49:36 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:44:59 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_matrix(t_matrix *m)
 		w = 0;
 		while (w < m->w)
 		{
-			printf("%.1f ", m->matrix[h][w]);
+			printf("%.1f ", m->mtx[h][w]);
 			w++;
 		}
 		printf("\t]\n");
@@ -79,13 +79,14 @@ t_matrix	*matrix_multiply(t_matrix *m1, t_matrix *m2)
 ** ..around 7 seconds to render same setting but without printf DEBUG statements
 **
 */
-t_matrix	*matrix_multiply(t_matrix *m1, t_matrix *m2)
+//t_matrix	*matrix_multiply(t_matrix *res, t_matrix *m1, t_matrix *m2)
+void	matrix_multiply(t_matrix *res, t_matrix *m1, t_matrix *m2)
 {
-	t_matrix	*res;
+	//t_matrix	*res;
 	int			it[3];
 	double		tmp;
 
-	res = matrix_matrix(min(m1->h, m2->h), min(m1->w, m2->w));
+	matrix_matrix(res, min(m1->h, m2->h), min(m1->w, m2->w));
 
 	printf("mtx_multiply\n");
 	printf("\t m1->h:[%d],  m1->w:[%d]\n", m1->h, m1->w);
@@ -110,72 +111,78 @@ t_matrix	*matrix_multiply(t_matrix *m1, t_matrix *m2)
 			tmp = 0;
 			while (it[2] < m1->w && it[2] < m2->h)
 			{
-				tmp += m1->matrix[it[0]][it[2]] * m2->matrix[it[2]][it[1]];
+				tmp += m1->mtx[it[0]][it[2]] * m2->mtx[it[2]][it[1]];
 				/* DEBUG */
 				//printf("\ttmp:[%.1f]\tm1[%d][%d]: [%.1f]\tm2[%d][%d]: [%.1f]\n", tmp, it[0], it[2], m1->matrix[it[0]][it[1]], it[2], it[1], m1->matrix[it[2]][it[1]]);
 				/* ***** */
 				it[2]++;
 			}
-			res->matrix[it[0]][it[1]] = tmp;
+			res->mtx[it[0]][it[1]] = tmp;
 		}
 	}
 	/* DEBUG */
 	printf("mtx res:\n");
 	print_matrix(res);
 	/* ***** */
-	matrix_free(m1);
-	matrix_free(m2);
-	return (res);
+	//matrix_free(m1);
+	//matrix_free(m2);
+	//return (res);
 }
 
-t_matrix	*matrix_transpose(t_matrix *m)
+//t_matrix	*matrix_transpose(t_matrix *m)
+void	matrix_transpose(t_matrix *res, t_matrix *m)
 {
-	t_matrix	*res;
+	//t_matrix	*res;
 	int			i;
 	int			j;
 
-	res = matrix_matrix(m->h, m->w);
+	//res = matrix_matrix(m->h, m->w);
+	matrix_matrix(res, m->h, m->w);
 	i = 0;
 	while (i < res->h)
 	{
 		j = 0;
 		while (j < res->w)
 		{
-			res->matrix[i][j] = m->matrix[j][i];
+			res->mtx[i][j] = m->mtx[j][i];
 			j++;
 		}
 		i++;
 	}
-	matrix_free(m);
-	return (res);
+	//matrix_free(m);
+	//return (res);
 }
 
 double	matrix_determinant(t_matrix *m)
 {
 	int		column;
 	double	determinant;
+	/**/
+	t_matrix	sub;
 
 	determinant = 0;
 	column = -1;
 	if (m->h == 2 && m->w == 2)
-		determinant = m->matrix[0][0] * m->matrix[1][1]
-			- m->matrix[0][1] * m->matrix[1][0];
+		determinant = m->mtx[0][0] * m->mtx[1][1]
+			- m->mtx[0][1] * m->mtx[1][0];
 	else
 		while (++column < m->w)
-			determinant += m->matrix[0][column]
-				* matrix_cofactor(m, 0, column);
+			determinant += m->mtx[0][column]
+				* matrix_cofactor(&sub, m, 0, column);
 	return (determinant);
 }
 
-t_matrix	*matrix_sub(t_matrix *m, int column, int row)
+//t_matrix	*matrix_sub(t_matrix *m, int column, int row)
+void	matrix_sub(t_matrix *res, t_matrix *m, int column, int row)
 {
-	t_matrix	*res;
+	//t_matrix	*res;
 	int			i;
 	int			j;
 	int			i_skip;
 	int			j_skip;
 
-	res = matrix_matrix(m->h - 1, m->w - 1);
+	//res = matrix_matrix(m->h - 1, m->w - 1);
+	matrix_matrix(res, m->h - 1, m->w - 1);
 	i = 0;
 	i_skip = 0;
 	while (i < m->h && !(i == column && column == m->h - 1))
@@ -188,27 +195,29 @@ t_matrix	*matrix_sub(t_matrix *m, int column, int row)
 		{
 			if (j == row && ++j)
 				j_skip = 1;
-			res->matrix[i - i_skip][j - j_skip] = m->matrix[i][j];
+			res->mtx[i - i_skip][j - j_skip] = m->mtx[i][j];
 			j++;
 		}
 		i++;
 	}
-	return (res);
+	//return (res);
 }
 
-t_matrix	*matrix_copy(t_matrix *m)
+//t_matrix	*matrix_copy(t_matrix *m)
+void	matrix_copy(t_matrix *ret, t_matrix *m)
 {
-	t_matrix	*ret;
+	//t_matrix	*ret;
 	int			i;
 	int			j;
 
-	ret = matrix_matrix(m->h, m->w);
+	//ret = matrix_matrix(m->h, m->w);
+	matrix_matrix(ret, m->h, m->w);
 	i = -1;
 	while (++i < ret->h)
 	{
 		j = -1;
 		while (++j < ret->w)
-			ret->matrix[i][j] = m->matrix[i][j];
+			ret->mtx[i][j] = m->mtx[i][j];
 	}
-	return (ret);
+	//return (ret);
 }

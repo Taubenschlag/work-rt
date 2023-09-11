@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/18 00:13:14 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:45:34 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ typedef struct cylinder
 	t_tuple		*center;
 	t_tuple		*norm;
 	t_tuple		*color;
-	t_matrix	*trans;
+	//t_matrix	*trans;
+	t_matrix	trans;
 	double		d;
 
 	double		a;

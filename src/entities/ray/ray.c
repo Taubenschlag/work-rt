@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 22:28:44 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/11 13:12:12 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ void	ray_free(t_ray *ray)
 
 t_ray	*ray_transform(t_ray *ray, t_matrix *m)
 {
-	t_matrix	*m1;
+	//t_matrix	*m1;
 
-	m1 = matrix_copy(m);
+	//m1 = matrix_copy(m);
+	//		tuple_apply_trans_matrix(m1, tuple_copy(ray->origin)),
 	return (ray_ray(
-			tuple_apply_trans_matrix(m1, tuple_copy(ray->origin)),
+			tuple_apply_trans_matrix(m, tuple_copy(ray->origin)),
 			tuple_apply_trans_matrix(m, tuple_copy(ray->dir))));
 }
 

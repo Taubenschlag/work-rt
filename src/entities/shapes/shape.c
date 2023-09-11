@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 02:37:41 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/11 13:50:29by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,31 @@ t_shape	*make_shape(char type, void *shape_itself)
 	sh = (t_shape *)malloc(sizeof(t_shape));
 	sh->shape = shape_itself;
 	sh->type = type;
-	sh->trans = matrix_identity(4);
+	//sh->trans = matrix_identity(4);
+	matrix_identity(&sh->trans, 4);
 	sh->matrl = NULL;
 	return (sh);
 }
 
+/*
 void	*set_transform(t_shape *sh, t_matrix *trans)
 {
 	matrix_free(sh->trans);
 	sh->trans = trans;
 	return (sh);
 }
+*/
 
 t_tuple	*world_normal_apply(t_shape *s, t_tuple *loc_pnt, t_tuple *loc_normal)
 {
 	t_tuple	*wrld_normal;
+	/* */
+	t_matrix	tmp_m;	
 
-	wrld_normal = tuple_apply_trans_matrix(
-			matrix_transpose(matrix_copy(s->trans)), loc_normal);
+	//matrix_copy(tmp_m, s->trans);
+	matrix_transpose(&tmp_m, &s->trans);
+	wrld_normal = tuple_apply_trans_matrix(&tmp_m, loc_normal);
+	//wrld_normal = tuple_apply_trans_matrix(matrix_transpose(matrix_copy(s->trans)), loc_normal);
 	tuple_free(loc_pnt);
 	wrld_normal->type = 0;
 	return (wrld_normal);
@@ -46,10 +53,16 @@ t_tuple	*shape_normal_at(t_shape *s, t_tuple *p)
 {
 	t_tuple	*loc_pnt;
 	t_tuple	*loc_normal;
+	/**/
+	t_matrix inverted;
 
-	loc_pnt = tuple_apply_trans_matrix(matrix_invert(s->trans), tuple_copy(p));
+	matrix_invert(&inverted, &s->trans);
+	/**/
+	loc_pnt = tuple_apply_trans_matrix(&inverted, tuple_copy(p));
+	//loc_pnt = tuple_apply_trans_matrix(matrix_invert(s->trans), tuple_copy(p));
 	if (s->type == 's' )
-		return (nsphere_normal_at(loc_pnt, s->trans));
+		return (nsphere_normal_at(loc_pnt, &s->trans));
+		//return (nsphere_normal_at(loc_pnt, s->trans));
 	else if (s->type == 'p')
 		loc_normal = plane_normal_at();
 	else if (s->type == 'u')
@@ -84,6 +97,6 @@ void	free_shape(t_shape *s)
 	else if (s->type == 'q')
 		free_square((t_square *) s->shape);
 	material_free(s->matrl);
-	matrix_free(s->trans);
+	//matrix_free(s->trans);
 	free(s);
 }

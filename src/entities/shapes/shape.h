@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 02:34:23 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/11 13:15:59 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 # define SHAPE_H
 # include "../../../heads_global/minirt.h"
 
+/*
 typedef struct shape
 {
 	char		type;
 	t_matrl		*matrl;
 	t_matrix	*trans;
+	void		*shape;
+}	t_shape;
+*/
+typedef struct shape
+{
+	char		type;
+	t_matrl		*matrl;
+	t_matrix	trans;
 	void		*shape;
 }	t_shape;
 

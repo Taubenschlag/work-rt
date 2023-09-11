@@ -6,11 +6,31 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/09 19:15:46 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:19:16 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
+
+void	matrix_matrix(t_matrix *m, int h, int w)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	m->w = w;
+	m->h = h;
+	while (i < h)
+	{
+		j = 0;
+		while (j < w)
+		{
+			m->mtx[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
 
 /*
 t_matrix	*matrix_matrix(int h, int w)

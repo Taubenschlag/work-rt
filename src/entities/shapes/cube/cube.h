@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 21:47:43 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:26:31 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ typedef struct cube
 	double		side;
 	t_tuple		*color;
 	t_tuple		*norm;
-	t_matrix	*trans;
+	//t_matrix	*trans;
+	t_matrix	trans;
 }	t_cube;
 
 t_cube	*cube_cube(void);
