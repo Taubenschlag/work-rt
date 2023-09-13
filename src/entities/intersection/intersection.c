@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/19 23:49:30 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/13 17:01:52 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ t_intersection_list	*intersect_shape(t_shape *s, t_ray *r)
 	t_intersection_list	*list;
 
 	list = NULL;
-	ray = ray_transform(r, matrix_invert(s->trans));
+	/* DEBUG */
+	t_matrix	inverted;
+	matrix_invert(&inverted, &s->trans);
+	/* ***** */
+	ray = ray_transform(r, &inverted);
 	if (s->type == 's')
 		list = intersection_ray_nsphere(s, ray);
 	if (s->type == 'p')

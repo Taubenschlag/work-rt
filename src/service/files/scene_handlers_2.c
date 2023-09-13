@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/11 17:12:17 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:45:06 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	handle_c(char **input, t_scene *s)
 
 void	handle_l(char **input, t_scene *s)
 {
+	// DEBUG 
+	printf("LIGHT\n");
+	//
 	t_tuple	*from;
 	t_tuple	*color;
 	double	brightness;
@@ -107,6 +110,9 @@ void	print_tup(t_tuple *tup)
 
 void	handle_plane(char **values, t_scene *s)
 {
+	// DEBUG 
+	printf("PLANE\n");
+	//
 	t_tuple		*coordinate;
 	t_tuple		*norm;
 	t_tuple		*color;

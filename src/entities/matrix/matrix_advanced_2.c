@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/11 14:44:15 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:54:09 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,11 @@ void	view_transform(t_matrix *view_mtx, t_tuple *from, t_tuple *to, t_tuple *up)
 	vt_combine_matrix(&res, left, tuple_cross_product(left, forward), forward);
 	//view_matrix = matrix_multiply(res, matrix_translate(from->x, from->y, from->z));
 	matrix_translate(&tmp_m, from);
+
+	/* DEBUG 
+	local matrices are not initialized properly and it messes up with all the 
+	multipliation logic */
+
 	matrix_multiply(view_mtx, &res, &tmp_m);
 	tuple_free(from);
 	//return (view_matrix);

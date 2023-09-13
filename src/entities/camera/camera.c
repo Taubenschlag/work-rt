@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/11 09:40:47 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:58:30 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ t_camera	*make_camera(int h_s, int v_s, double fov)
 	cam = (t_camera *)malloc(sizeof(t_camera));
 	cam->h_size = h_s;
 	cam->v_size = v_s;
-	cam->transform = NULL;
+	/* DEBUG */
+	// need to initialize the instance of t_matrix
+	//cam->transform = NULL;
+	/* ***** */
 	cam->half = tan(fov / 2);
 	cam->aspect = (double)h_s / v_s;
 	if (cam->aspect >= 1)
@@ -50,13 +53,22 @@ t_ray	*ray_for_pix(t_camera *c, int y, int x)
 	t_tuple	*pixel;
 	t_tuple	*origin;
 	t_tuple	*direction;
+	/**/
+	t_matrix	inverted; // Initilizing first ??
 
+	/**/
 	xwrld = c->half_w - ((double)y + 0.5) * c->pix_size;
 	ywrld = c->half_h - ((double)x + 0.5) * c->pix_size;
+	matrix_invert(&inverted, &c->transform);
+	pixel = tuple_apply_trans_matrix(&inverted, tuple_point(ywrld, xwrld, -1));
+	origin = tuple_apply_trans_matrix(&inverted, tuple_point(0, 0, 0));
+	/* DEBUG 
 	pixel = tuple_apply_trans_matrix(
 			matrix_invert(c->transform), tuple_point(ywrld, xwrld, -1));
 	origin = tuple_apply_trans_matrix(
 			matrix_invert(c->transform), tuple_point(0, 0, 0));
+	*/
+	/* ***** */
 	direction = tuple_normalize(tuple_substract(pixel, tuple_copy(origin)));
 	return (ray_ray(origin, direction));
 }
