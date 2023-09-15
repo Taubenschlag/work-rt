@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/11 15:03:47 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:20:52 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ t_tuple	*nsphere_normal_at(t_tuple *p, t_matrix *m)
 	t_tuple	*obj_normal;
 	t_tuple	*world_normal;
 	/* DEBUG */
-	t_matrix	inverted;
-	t_matrix	transposed;
+	t_tmp_m	m_tmp;
+	//t_matrix	inverted;
+	//t_matrix	transposed;
 
-	matrix_invert(&inverted, m);
-	matrix_transpose(&transposed, &inverted);
+	matrix_invert(&m_tmp, m);
+	matrix_transpose(&m_tmp.transposed, &m_tmp.inv);
+	//matrix_transpose(&transposed, &inverted);
 	/* ***** */
 	obj_normal = tuple_substract(tuple_copy(p), tuple_point(0, 0, 0));
 	//world_normal = tuple_apply_trans_matrix(matrix_transpose(matrix_invert(m)), obj_normal);
-	world_normal = tuple_apply_trans_matrix(&transposed, obj_normal);
+	world_normal = tuple_apply_trans_matrix(&m_tmp.transposed, obj_normal);
 	world_normal->type = IS_VECTOR;
 	tuple_free(p);
 	return (tuple_normalize(world_normal));

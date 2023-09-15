@@ -6,62 +6,75 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/13 17:54:09 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:02:48 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
 //t_matrix	*invert(double determinant, t_matrix *m, t_matrix *inverted)
-void	invert(t_matrix *cofactors, double determinant, t_matrix *m, t_matrix *inverted)
+void	invert(t_tmp_m *m_tmp, t_matrix *m)
 {
 	int			i;
 	int			j;
 	//t_matrix	*cofactors;
 	double		diag;
-	t_matrix	sub;
+	//t_matrix	sub;
 
 	i = -1;
 	//cofactors = matrix_matrix(m->h, m->w);
-	matrix_matrix(cofactors, m->h, m->w);
+	matrix_matrix(&m_tmp->co_f, m->h, m->w);
 	while (++i < m->h)
 	{
 		j = -1;
 		while (++j < m->w)
-			cofactors->mtx[i][j] = matrix_cofactor(&sub, m, i, j);
+			m_tmp->co_f.mtx[i][j] = matrix_cofactor(&m_tmp->sub, m, i, j);
 			//cofactors->mtx[i][j] = matrix_cofactor(m, i, j);
 	}
 	//inverted = matrix_transpose(cofactors);
-	matrix_transpose(inverted, cofactors);
+	matrix_transpose(&m_tmp->inv, &m_tmp->co_f);
 	i = -1;
 	while (++i < m->h)
 	{
 		j = -1;
 		while (++j < m->w)
 		{
-			diag = inverted->mtx[i][j] / determinant;
-			inverted->mtx[i][j] = diag;
+			diag = m_tmp->inv.mtx[i][j] / m_tmp->determinant;
+			m_tmp->inv.mtx[i][j] = diag;
 		}
 	}
 	//return (inverted);
 }
 
 //t_matrix	*matrix_invert(t_matrix *m)
-void	matrix_invert(t_matrix *inverted, t_matrix *m)
+void	matrix_invert(t_tmp_m *m_tmp, t_matrix *m)
 {
-	double		determinant;
+	// DEBUG //
+	printf("\tmatrix_invert\n====================================\n");
+	printf("\ttrans matrix from t_camera:\n");
+	print_matrix(m);
+	///////////
+	//double		determinant;
 	//t_matrix	*inverted;
 
 	//inverted = NULL;
-	determinant = matrix_determinant(m);
-	if (determinant)
-		invert(inverted, determinant, m, inverted);
+	m_tmp->determinant = matrix_determinant(m);
+	///////////
+	printf("\tdeterminant: [%.2f]\n", m_tmp->determinant);
+	///////////
+	if (m_tmp->determinant)
+		invert(m_tmp, m);
 	/*
 		inverted = invert(determinant, m, inverted);
 	if (!inverted)
 		return (NULL);
 	return (inverted);
 	*/
+	///////////
+	printf("\tinverted matrix:\n");
+	print_matrix(&m_tmp->inv);
+	printf("====================================\n");
+	///////////
 }
 
 //void	tuple_apply_trans_matrix(t_tuple *res, t_matrix *trans_matrix, t_tuple *tup)

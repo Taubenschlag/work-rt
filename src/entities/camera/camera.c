@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/13 16:58:30 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:21:22 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,16 @@ t_ray	*ray_for_pix(t_camera *c, int y, int x)
 	t_tuple	*origin;
 	t_tuple	*direction;
 	/**/
-	t_matrix	inverted; // Initilizing first ??
+	t_tmp_m	m_tmp; // Initilizing first ??
+	//t_matrix	inverted; // Initilizing first ??
+	//t_matrix	cofactor; // Initilizing first ??
 
 	/**/
 	xwrld = c->half_w - ((double)y + 0.5) * c->pix_size;
 	ywrld = c->half_h - ((double)x + 0.5) * c->pix_size;
-	matrix_invert(&inverted, &c->transform);
-	pixel = tuple_apply_trans_matrix(&inverted, tuple_point(ywrld, xwrld, -1));
-	origin = tuple_apply_trans_matrix(&inverted, tuple_point(0, 0, 0));
+	matrix_invert(&m_tmp, &c->transform);
+	pixel = tuple_apply_trans_matrix(&m_tmp.inv, tuple_point(ywrld, xwrld, -1));
+	origin = tuple_apply_trans_matrix(&m_tmp.inv, tuple_point(0, 0, 0));
 	/* DEBUG 
 	pixel = tuple_apply_trans_matrix(
 			matrix_invert(c->transform), tuple_point(ywrld, xwrld, -1));
@@ -73,6 +75,33 @@ t_ray	*ray_for_pix(t_camera *c, int y, int x)
 	return (ray_ray(origin, direction));
 }
 
+void	render(t_camera *c, t_world *w, t_canvas *img)
+{
+	/* DEBUG */
+	// the following structure will contain the temp t_structs for computation
+	//t_tmp_m	m_tmp; // located in matrix.h
+	///////////
+	t_ray		*r;
+	t_tuple		*color;
+	int			y;
+	int			x;
+
+	init_canvas(c->v_size, c->h_size, img);
+	y = -1;
+	while (++y < c->h_size)
+	{
+		x = -1;
+		while (++x < c->v_size)
+		{
+			r = ray_for_pix(c, y, x);
+			color = color_at(w, r);
+			ray_free(r);
+			img->canvas[y][x] = tuple_to_rgb(color);
+		}
+	}
+}
+
+/*
 void	render(t_camera *c, t_world *w, t_canvas *img)
 {
 	t_ray		*r;
@@ -94,3 +123,4 @@ void	render(t_camera *c, t_world *w, t_canvas *img)
 		}
 	}
 }
+*/

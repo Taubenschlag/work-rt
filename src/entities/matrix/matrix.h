@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/11 17:16:55 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:20:29 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ typedef struct matrix
 	int		w;
 }	t_matrix;
 
+// DEBUG //
+typedef	struct
+{
+	t_matrix	inv;
+	t_matrix	co_f;
+	t_matrix	sub;
+	t_matrix	transposed;
+	double		determinant;
+}	t_tmp_m;
+////////////
+
 void	matrix_matrix(t_matrix *m, int h, int w);
 void	matrix_identity(t_matrix *m, int range);
 void	tuple_to_matrix(t_matrix *m, t_tuple *t);
@@ -42,7 +53,7 @@ void	matrix_sub(t_matrix *res, t_matrix *m, int column, int row);
 
 double	matrix_minor(t_matrix *sub, t_matrix *m, int from, int to);
 double	matrix_cofactor(t_matrix *sub, t_matrix *m, int from, int to);
-void	matrix_invert(t_matrix *inverted, t_matrix *m);
+void	matrix_invert(t_tmp_m *m_tmp, t_matrix *m);
 
 t_tuple		*tuple_apply_trans_matrix(t_matrix *trans_matrix, t_tuple *tup);
 /*
@@ -82,5 +93,9 @@ void	rotate_axis_angle(t_matrix *ret, t_tuple *u, double angle);
 void	rotate_align(t_matrix * res, t_tuple *v1, t_tuple *v2);
 
 void	view_transform(t_matrix *view_mtx, t_tuple *from, t_tuple *to, t_tuple *up);
+
+/* DEBUG */
+void	print_matrix(t_matrix *m);
+/* ***** */
 
 #endif //RT_CHALLENGE_MATRIX_H

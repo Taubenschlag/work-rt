@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/13 17:45:06 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:48:37 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	handle_c(char **input, t_scene *s)
 	t_tuple		*up;
 	t_camera	*cam;
 
-	// DEBUG 
+	// DEBUG //
 	printf("CAMERA\n");
-	//
+	///////////
 	if (input && ft_strequals(input[0], "c"))
 	{
 		cam = make_camera(
