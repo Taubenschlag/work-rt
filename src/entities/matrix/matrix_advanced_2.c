@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 16:02:48 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:53:44 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,16 @@ void	invert(t_tmp_m *m_tmp, t_matrix *m)
 {
 	int			i;
 	int			j;
-	//t_matrix	*cofactors;
 	double		diag;
-	//t_matrix	sub;
 
 	i = -1;
-	//cofactors = matrix_matrix(m->h, m->w);
 	matrix_matrix(&m_tmp->co_f, m->h, m->w);
 	while (++i < m->h)
 	{
 		j = -1;
 		while (++j < m->w)
 			m_tmp->co_f.mtx[i][j] = matrix_cofactor(&m_tmp->sub, m, i, j);
-			//cofactors->mtx[i][j] = matrix_cofactor(m, i, j);
 	}
-	//inverted = matrix_transpose(cofactors);
 	matrix_transpose(&m_tmp->inv, &m_tmp->co_f);
 	i = -1;
 	while (++i < m->h)
@@ -43,24 +38,23 @@ void	invert(t_tmp_m *m_tmp, t_matrix *m)
 			m_tmp->inv.mtx[i][j] = diag;
 		}
 	}
-	//return (inverted);
 }
 
 //t_matrix	*matrix_invert(t_matrix *m)
 void	matrix_invert(t_tmp_m *m_tmp, t_matrix *m)
 {
-	// DEBUG //
+	/* DEBUG //
 	printf("\tmatrix_invert\n====================================\n");
 	printf("\ttrans matrix from t_camera:\n");
 	print_matrix(m);
-	///////////
+	/////////*/
 	//double		determinant;
 	//t_matrix	*inverted;
 
 	//inverted = NULL;
 	m_tmp->determinant = matrix_determinant(m);
 	///////////
-	printf("\tdeterminant: [%.2f]\n", m_tmp->determinant);
+	//printf("\tdeterminant: [%.2f]\n", m_tmp->determinant);
 	///////////
 	if (m_tmp->determinant)
 		invert(m_tmp, m);
@@ -69,12 +63,12 @@ void	matrix_invert(t_tmp_m *m_tmp, t_matrix *m)
 	if (!inverted)
 		return (NULL);
 	return (inverted);
-	*/
 	///////////
 	printf("\tinverted matrix:\n");
 	print_matrix(&m_tmp->inv);
 	printf("====================================\n");
 	///////////
+	*/
 }
 
 //void	tuple_apply_trans_matrix(t_tuple *res, t_matrix *trans_matrix, t_tuple *tup)
@@ -86,7 +80,7 @@ t_tuple	*tuple_apply_trans_matrix(t_matrix *trans_matrix, t_tuple *tup)
 	//int			need_free;
 
 	/* DEBUG */
-	printf("tuple_apply_trans_matrix\n");
+	//printf("tuple_apply_trans_matrix\n");
 	/* ***** */
 	tuple_to_matrix(&source_tuple_converted, tup);
 	//source_tuple_converted = tuple_to_matrix(tup);

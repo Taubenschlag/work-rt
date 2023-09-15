@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/13 18:24:47 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:28:55 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,11 @@ t_matrix	*matrix_multiply(t_matrix *m1, t_matrix *m2)
 //t_matrix	*matrix_multiply(t_matrix *res, t_matrix *m1, t_matrix *m2)
 void	matrix_multiply(t_matrix *res, t_matrix *m1, t_matrix *m2)
 {
-	//t_matrix	*res;
 	int			it[3];
 	double		tmp;
 
 	matrix_matrix(res, min(m1->h, m2->h), min(m1->w, m2->w));
-
-	// DEBUG 
+	/* DEBUG 
 	printf("mtx_multiply\n");
 	printf("\t m1->h:[%d],  m1->w:[%d]\n", m1->h, m1->w);
 	printf("\t m2->h:[%d],  m2->w:[%d]\n", m2->h, m2->w);
@@ -99,7 +97,7 @@ void	matrix_multiply(t_matrix *res, t_matrix *m1, t_matrix *m2)
 	print_matrix(m1);
 	printf("mtx m2:\n");
 	print_matrix(m2);
-	//
+	*/
 	it[0] = -1;
 	while (++it[0] < res->h)
 	{
@@ -122,13 +120,10 @@ void	matrix_multiply(t_matrix *res, t_matrix *m1, t_matrix *m2)
 			res->mtx[it[0]][it[1]] = tmp;
 		}
 	}
-	// DEBUG
+	/* DEBUG
 	printf("mtx res:\n");
 	print_matrix(res);
-	//
-	//matrix_free(m1);
-	//matrix_free(m2);
-	//return (res);
+	*/
 }
 
 /*

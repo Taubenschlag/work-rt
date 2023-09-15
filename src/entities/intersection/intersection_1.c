@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/22 23:06:51 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/15 18:04:40 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	add_intersection(t_intersection *new_elem,
 	*list = nl;
 }
 
-t_intersection_list	*intersect_world(t_ray *r, t_world *w)
+t_intersection_list	*intersect_world(t_ray *r, t_world *w, t_tmp_m *m_tmp)
 {
 	int					i;
 	int					j;
@@ -40,7 +40,7 @@ t_intersection_list	*intersect_world(t_ray *r, t_world *w)
 	size = 0;
 	while (--i >= 0)
 	{
-		w->unsorted[i] = intersect_shape(w->shapes[i], r);
+		w->unsorted[i] = intersect_shape(w->shapes[i], r, m_tmp);
 		size += w->unsorted[i]->size;
 	}
 	w->merged = intersection_list_make(size);
@@ -58,7 +58,7 @@ t_intersection_list	*intersect_world(t_ray *r, t_world *w)
 	return (w->merged);
 }
 
-t_computations	*precomp(t_intersection *i, t_ray *r)
+t_computations	*precomp(t_intersection *i, t_ray *r, t_tmp_m *m_tmp)
 {
 	t_computations	*comps;
 	t_tuple			*tmp;
@@ -68,7 +68,7 @@ t_computations	*precomp(t_intersection *i, t_ray *r)
 	comps->shape = i->shape;
 	comps->point = ray_position(r, i->t);
 	comps->eyev = tuple_negate(tuple_copy(r->dir));
-	comps->normv = shape_normal_at(i->shape, comps->point);
+	comps->normv = shape_normal_at(i->shape, comps->point, m_tmp);
 	if (tuple_dot_product(comps->normv, comps->eyev) < 0)
 	{
 		comps->inside = 1;
@@ -83,14 +83,14 @@ t_computations	*precomp(t_intersection *i, t_ray *r)
 	return (comps);
 }
 
-t_tuple	*shade_hit(t_world *w, t_computations *cs, t_light *current)
+t_tuple	*shade_hit(t_world *w, t_computations *cs, t_light *current, t_tmp_m *m_tmp)
 {
 	return (lightning(
 			make_l_p(current, cs),
-			in_shadow(w, cs->overpoint, current)));
+			in_shadow(w, cs->overpoint, current, m_tmp)));
 }
 
-t_tuple	*color_at(t_world *w, t_ray *r)
+t_tuple	*color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 {
 	t_intersection_list	*l;
 	t_intersection		*i;
@@ -99,19 +99,19 @@ t_tuple	*color_at(t_world *w, t_ray *r)
 	int					j;
 
 	j = -1;
-	l = intersect_world(r, w);
+	l = intersect_world(r, w, m_tmp);
 	i = hit(l);
 	if (!i)
 		color = tuple_color(0, 0, 0);
 	else
 	{
-		c = precomp(i, r);
-		color = shade_hit(w, c, w->ambienace);
+		c = precomp(i, r, m_tmp);
+		color = shade_hit(w, c, w->ambienace, m_tmp);
 		free(c);
 		while (++j < w->lights_counter)
 		{
-			c = precomp(i, r);
-			color = tuple_add(color, shade_hit(w, c, w->lights[j]));
+			c = precomp(i, r, m_tmp);
+			color = tuple_add(color, shade_hit(w, c, w->lights[j], m_tmp));
 			free(c);
 		}
 	}

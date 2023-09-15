@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 16:02:12 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:27:49 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,14 @@ t_intersection_list	*intersection_list_make(int elem)
 	return (l);
 }
 
-t_intersection_list	*intersect_shape(t_shape *s, t_ray *r)
+t_intersection_list	*intersect_shape(t_shape *s, t_ray *r, t_tmp_m *m_tmp)
 {
 	t_ray				*ray;
 	t_intersection_list	*list;
 
 	list = NULL;
-	/* DEBUG */
-	//t_matrix	inverted;
-	t_tmp_m	m_tmp;
-	matrix_invert(&m_tmp, &s->trans);
-	/* ***** */
-	ray = ray_transform(r, &m_tmp.inv);
+	matrix_invert(m_tmp, &s->trans);
+	ray = ray_transform(r, &m_tmp->inv);
 	if (s->type == 's')
 		list = intersection_ray_nsphere(s, ray);
 	if (s->type == 'p')

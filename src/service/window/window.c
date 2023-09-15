@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/09 16:05:54 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:01:01 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 */
 void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 {
+	/* DEBUG */
+	// the following structure will contain the temp t_structs for computation
+	// also used in render() when saving the image in the file
+	t_tmp_m	m_tmp; // located in matrix.h
+	///////////
 	t_ray		*r;
 	t_tuple		*color;
 	int			y;
@@ -32,8 +37,8 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 		x = -1;
 		while (++x < c->v_size)
 		{
-			r = ray_for_pix(c, y, x);
-			color = color_at(w, r);
+			r = ray_for_pix(c, y, x, &m_tmp);
+			color = color_at(w, r, &m_tmp);
 			ray_free(r);
 			img->canvas[y][x] = tuple_to_argb(color);
 		}

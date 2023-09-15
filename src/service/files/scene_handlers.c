@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/13 17:36:06 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:34:46 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	cleanup(char **values)
 void	handle_r(char **input, t_scene *s)
 {
 	/* DEBUG */
-	printf("RESOLUTION\n");
+	//printf("RESOLUTION\n");
 	/* ***** */
 	int		i;
 
@@ -75,7 +75,7 @@ void	handle_r(char **input, t_scene *s)
 void	handle_a(char **input, t_scene *s)
 {
 	/* DEBUG */
-	printf("AMBIANCE\n");
+	//printf("AMBIANCE\n");
 	/* ***** */
 	t_tuple	*color;
 

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 12:48:37 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:34:24 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_c(char **input, t_scene *s)
 	t_camera	*cam;
 
 	// DEBUG //
-	printf("CAMERA\n");
+	//printf("CAMERA\n");
 	///////////
 	if (input && ft_strequals(input[0], "c"))
 	{
@@ -45,7 +45,7 @@ void	handle_c(char **input, t_scene *s)
 void	handle_l(char **input, t_scene *s)
 {
 	// DEBUG 
-	printf("LIGHT\n");
+	//printf("LIGHT\n");
 	//
 	t_tuple	*from;
 	t_tuple	*color;
@@ -74,7 +74,7 @@ void	handle_sphere(char **values, t_scene *s)
 	t_tuple		tmp_tuple;
 
 	// DEBUG
-	printf("SPHERE\n");
+	//printf("SPHERE\n");
 	//
 	centre = get_tuple(values[1], 'p');
 	diameter = ft_atod(values[2]);
@@ -103,15 +103,17 @@ void	handle_sphere(char **values, t_scene *s)
 	cleanup(values);
 }
 
+/* DEBUG */
 void	print_tup(t_tuple *tup)
 {
 	printf("\tx:[%.2f], y:[%.2f], z:[%.2f]\n", tup->x, tup->y, tup->z);
 }
+/* ***** */
 
 void	handle_plane(char **values, t_scene *s)
 {
 	// DEBUG 
-	printf("PLANE\n");
+	//printf("PLANE\n");
 	//
 	t_tuple		*coordinate;
 	t_tuple		*norm;

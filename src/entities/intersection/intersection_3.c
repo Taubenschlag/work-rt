@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 16:30:44 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/15 17:59:56 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-int	in_shadow(t_world *w, t_tuple *p, t_light *current_light)
+int	in_shadow(t_world *w, t_tuple *p, t_light *current_light, t_tmp_m *m_tmp)
 {
 	t_tuple			*v;
 	double			dist;
@@ -24,7 +24,7 @@ int	in_shadow(t_world *w, t_tuple *p, t_light *current_light)
 	dist = tuple_length(v);
 	direction = tuple_normalize(v);
 	ray = ray_ray(p, direction);
-	h = hit(intersect_world(ray, w));
+	h = hit(intersect_world(ray, w, m_tmp));
 	ray_free(ray);
 	if (h && (dist - h->t) > 0.00001)
 	{

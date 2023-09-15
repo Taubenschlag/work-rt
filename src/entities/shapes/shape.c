@@ -49,20 +49,20 @@ t_tuple	*world_normal_apply(t_shape *s, t_tuple *loc_pnt, t_tuple *loc_normal)
 	return (wrld_normal);
 }
 
-t_tuple	*shape_normal_at(t_shape *s, t_tuple *p)
+t_tuple	*shape_normal_at(t_shape *s, t_tuple *p, t_tmp_m *m_tmp)
 {
 	t_tuple	*loc_pnt;
 	t_tuple	*loc_normal;
 	/**/
 	//t_matrix inverted;
-	t_tmp_m	m_tmp;
+	//t_tmp_m	m_tmp;
 
-	matrix_invert(&m_tmp, &s->trans);
+	matrix_invert(m_tmp, &s->trans);
 	/**/
-	loc_pnt = tuple_apply_trans_matrix(&m_tmp.inv, tuple_copy(p));
+	loc_pnt = tuple_apply_trans_matrix(&m_tmp->inv, tuple_copy(p));
 	//loc_pnt = tuple_apply_trans_matrix(matrix_invert(s->trans), tuple_copy(p));
 	if (s->type == 's' )
-		return (nsphere_normal_at(loc_pnt, &s->trans));
+		return (nsphere_normal_at(loc_pnt, &s->trans, m_tmp));
 		//return (nsphere_normal_at(loc_pnt, s->trans));
 	else if (s->type == 'p')
 		loc_normal = plane_normal_at();
