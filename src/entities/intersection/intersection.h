@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 18:03:29 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/16 22:35:38 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef struct computations
 	double		t;
 	t_shape		*shape;
 	int			inside;
-	t_tuple		*point;
-	t_tuple		*eyev;
-	t_tuple		*normv;
-	t_tuple		*overpoint;
+	t_tuple		point;
+	t_tuple		eyev;
+	t_tuple		normv;
+	t_tuple		overpoint;
 }	t_computations;
 
 typedef struct world
@@ -48,9 +48,11 @@ typedef struct world
 	t_intersection_list	**unsorted;
 }	t_world;
 
-t_lightning_pack		*make_l_p(t_light *l, t_computations *c);
+//t_lightning_pack		*make_l_p(t_light *l, t_computations *c);
+void	make_l_p(t_lightning_pack *pack, t_light *l, t_computations *c);
 //t_computations			*precomp(t_intersection *i, t_ray *r);
-t_computations			*precomp(t_intersection *i, t_ray *r, t_tmp_m *m_tmp);
+//t_computations			*precomp(t_intersection *i, t_ray *r, t_tmp_m *m_tmp);
+void	precomp(t_computations	*comps, t_intersection *i, t_ray *r, t_tmp_m *m_tmp);
 //t_intersection_list		*intersect_shape(t_shape *s, t_ray *r);
 t_intersection_list		*intersect_shape(t_shape *s, t_ray *r, t_tmp_m *m_tmp);
 t_intersection			*intersect_make_shape(t_shape *s, double t);
@@ -67,13 +69,15 @@ t_intersection_list		*intersection_list_make(int elem);
 t_intersection			*hit(t_intersection_list *l);
 void					intersection_list_free(t_intersection_list **l);
 
-t_tuple	*shade_hit(t_world *w, t_computations *cs, t_light *current, t_tmp_m *m_tmp);
+//t_tuple	*shade_hit(t_world *w, t_computations *cs, t_light *current, t_tmp_m *m_tmp);
+void	shade_hit(t_world *w, t_computations *cs, t_light *current, t_tmp_m *m_tmp);
 //t_tuple					*shade_hit(t_world *w, t_computations *cs,
 //							t_light *current);
 t_intersection_list	*intersect_world(t_ray *r, t_world *w, t_tmp_m *m_tmp);
 //t_intersection_list		*intersect_world(t_ray *r, t_world *w);
 //t_tuple					*color_at(t_world *w, t_ray *r);
-t_tuple	*color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp);
+void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp);
+//t_tuple	*color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp);
 //int						in_shadow(t_world *w, t_tuple *p,
 //							t_light *current_light);
 int	in_shadow(t_world *w, t_tuple *p, t_light *current_light, t_tmp_m *m_tmp);

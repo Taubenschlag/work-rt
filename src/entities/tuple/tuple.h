@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuple.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/14 22:03:37 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/16 16:43:48 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,28 @@ typedef struct tuple
 
 int		is_tuple(char *value, int exclude_neg);
 
-t_tuple	*tuple_vector(double x, double y, double z);
-t_tuple	*tuple_point(double x, double y, double z);
-t_tuple	*tuple_color(double r, double g, double b);
+void	tuple_vector(t_tuple *t, double x, double y, double z);
+void	tuple_point(t_tuple *t, double x, double y, double z);
+void	tuple_color(t_tuple *res, double r, double g, double b);
 
-void	tuple_free(t_tuple *tuple);
-
+/* tuple_advanced_1.c */
 int		tuple_is_vector(t_tuple *tuple);
-
 int		tuple_equals(t_tuple *t1, t_tuple *t2);
-t_tuple	*tuple_add(t_tuple *t1, t_tuple *t2);
-t_tuple	*tuple_substract(t_tuple *t1, t_tuple *t2);
-t_tuple	*tuple_scalar_multiply(t_tuple *t, double scale);
-t_tuple	*tuple_negate(t_tuple *t);
+void	tuple_add(t_tuple *res, t_tuple *t1, t_tuple *t2);
+void	tuple_substract(t_tuple *res, t_tuple *t1, t_tuple *t2);
+void	tuple_scalar_multiply(t_tuple *res, t_tuple *t, double scale);
+
+/* tuple_advanced_2.c */
+void	tuple_negate(t_tuple *res, t_tuple *t);
 double	tuple_length(t_tuple *t);
-t_tuple	*tuple_normalize(t_tuple *t);
+void	tuple_normalize(t_tuple *res, t_tuple *t);
 double	tuple_dot_product(t_tuple *t1, t_tuple *t2);
-t_tuple	*tuple_cross_product(t_tuple *t1, t_tuple *t2);
-t_tuple	*tuple_multiply(t_tuple *t1, t_tuple *t2);
-t_tuple	*tuple_reflect(t_tuple *v_in, t_tuple *v_normal);
-t_tuple	*tuple_copy(t_tuple *t);
+void	tuple_cross_product(t_tuple *res, t_tuple *t1, t_tuple *t2);
+
+/* tuple_advanced_3.c */
+void	tuple_multiply(t_tuple *res, t_tuple *t1, t_tuple *t2);
+void	tuple_reflect(t_tuple *res, t_tuple *v_in, t_tuple *v_normal);
+void	tuple_color(t_tuple *res, double r, double g, double b);
+void	tuple_copy(t_tuple *res, t_tuple *t);
 
 #endif 

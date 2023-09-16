@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 03:12:54 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/16 21:51:10 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,25 @@ t_cylinder	*cylinder_params(double h)
 	return (c);
 }
 
+void	cylinder_normale_at(t_tuple *res, t_tuple *t, t_cylinder *c)
+{
+	double	dist;
+
+	dist = t->x * t->x + t->z * t->z;
+	if (dist < 1 && t->y >= (c->max - 0.00001))
+	{
+		tuple_vector(res, 0, 1, 0);
+		return ;
+	}
+	if (dist < 1 && t->y <= (c->min + 0.00001))
+	{
+		tuple_vector(res, 0, -1, 0);
+		return ;
+	}
+	tuple_vector(res, t->x, 0, t->z);
+}
+
+/*
 t_tuple	*cylinder_normale_at(t_tuple *t, t_cylinder *c)
 {
 	double	dist;
@@ -45,6 +64,7 @@ t_tuple	*cylinder_normale_at(t_tuple *t, t_cylinder *c)
 		return (tuple_vector(0, -1, 0));
 	return (tuple_vector(t->x, 0, t->z));
 }
+*/
 
 int	check_cap(t_ray *r, double t)
 {
@@ -52,8 +72,8 @@ int	check_cap(t_ray *r, double t)
 	double	z;
 	double	temp;
 
-	x = r->origin->x + t * r->dir->x;
-	z = r->origin->z + t * r->dir->z;
+	x = r->origin.x + t * r->dir.x;
+	z = r->origin.z + t * r->dir.z;
 	temp = fabs(x * x) + fabs(z * z);
 	return (temp <= 1);
 }

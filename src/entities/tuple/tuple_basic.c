@@ -3,15 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   tuple_basic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/14 23:41:45 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/16 10:22:29 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
+void	tuple_vector(t_tuple *t, double x, double y, double z)
+{
+	//t_tuple	*t;
+
+	//t = (t_tuple *)malloc(sizeof(t_tuple));
+	t->x = x;
+	t->y = y;
+	t->z = z;
+	t->type = IS_VECTOR;
+	//return (t);
+}
+
+void	tuple_point(t_tuple *t, double x, double y, double z)
+{
+	//t_tuple	*t;
+
+	//t = (t_tuple *)malloc(sizeof(t_tuple));
+	t->x = x;
+	t->y = y;
+	t->z = z;
+	t->type = IS_POINT;
+	//return (t);
+}
+
+/*
 t_tuple	*tuple_vector(double x, double y, double z)
 {
 	t_tuple	*t;
@@ -40,7 +65,7 @@ void	tuple_free(t_tuple *tuple)
 {
 	free(tuple);
 }
-
+*/
 int	check_parsed_tuple(char **val)
 {
 	int	i;

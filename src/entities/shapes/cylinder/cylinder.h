@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/11 15:45:34 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:51:00 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct cylinder
 
 t_cylinder	*cylinder_cylinder(void);
 t_cylinder	*cylinder_params(double h);
-t_tuple		*cylinder_normale_at(t_tuple *t, t_cylinder *c);
+void		cylinder_normale_at(t_tuple *res, t_tuple *t, t_cylinder *c);
 int			check_cap(t_ray *r, double t);
 void		cylinder_free(t_cylinder *c);
 

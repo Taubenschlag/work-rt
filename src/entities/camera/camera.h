@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 17:24:56 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/16 20:55:46 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 typedef struct camera
 {
-	t_tuple		*from;
+	//t_tuple		*from;
+	t_tuple		from;
 	char		*name;
 	int			h_size;
 	int			v_size;
@@ -32,11 +33,8 @@ typedef struct camera
 
 }	t_camera;
 
-/* DEBUG */
-t_ray	*ray_for_pix(t_camera *c, int y, int x, t_tmp_m *m_tmp);
-
+void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp);
 t_camera	*make_camera(int h_s, int v_s, double fov);
-//t_ray		*ray_for_pix(t_camera *c, int y, int x);
 void		render(t_camera *c, t_world *w, t_canvas *img);
 void		free_camera(t_camera *c);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 18:27:49 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/16 17:43:53 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,27 @@ t_intersection_list	*intersection_list_make(int elem)
 
 t_intersection_list	*intersect_shape(t_shape *s, t_ray *r, t_tmp_m *m_tmp)
 {
-	t_ray				*ray;
+	t_ray				ray;
 	t_intersection_list	*list;
 
 	list = NULL;
 	matrix_invert(m_tmp, &s->trans);
-	ray = ray_transform(r, &m_tmp->inv);
+	ray_transform(&ray, r, &m_tmp->inv);
 	if (s->type == 's')
-		list = intersection_ray_nsphere(s, ray);
+		list = intersection_ray_nsphere(s, &ray);
 	if (s->type == 'p')
-		list = intersection_ray_plane(s, ray);
+		list = intersection_ray_plane(s, &ray);
 	if (s->type == 'u')
-		list = intersection_ray_cube(s, ray);
+		list = intersection_ray_cube(s, &ray);
 	if (s->type == 'y')
-		list = intersection_ray_cylinder(s, ray);
+		list = intersection_ray_cylinder(s, &ray);
 	if (s->type == 'o')
-		list = intersection_ray_cone(s, ray);
+		list = intersection_ray_cone(s, &ray);
 	if (s->type == 'i')
-		list = intersection_ray_triangle(s, ray);
+		list = intersection_ray_triangle(s, &ray);
 	if (s->type == 'q')
-		list = intersection_ray_square(s, ray);
-	ray_free(ray);
+		list = intersection_ray_square(s, &ray);
+	//ray_free(ray);
 	return (list);
 }
 

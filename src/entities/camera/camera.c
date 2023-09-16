@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 18:25:34 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/16 20:51:00 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,33 @@ void	free_camera(t_camera *c)
 	free(c);
 }
 
-t_ray	*ray_for_pix(t_camera *c, int y, int x, t_tmp_m *m_tmp)
+void	tuple_set(t_tuple *t, double x, double y, double z)
+{
+	t->x = x;
+	t->y = y;
+	t->z = z;
+	t->type = IS_POINT;
+}
+
+//t_ray	*ray_for_pix(t_camera *c, int y, int x, t_tmp_m *m_tmp)
+void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp)
 {
 	double	xwrld;
 	double	ywrld;
-	t_tuple	*pixel;
-	t_tuple	*origin;
-	t_tuple	*direction;
+	t_tuple	pixel;
+	t_tuple	tmp;
+	t_tuple	tmp_p;
 
 	xwrld = c->half_w - ((double)y + 0.5) * c->pix_size;
 	ywrld = c->half_h - ((double)x + 0.5) * c->pix_size;
 	matrix_invert(m_tmp, &c->transform);
-	pixel = tuple_apply_trans_matrix(&m_tmp->inv, tuple_point(ywrld, xwrld, -1));
-	origin = tuple_apply_trans_matrix(&m_tmp->inv, tuple_point(0, 0, 0));
-	direction = tuple_normalize(tuple_substract(pixel, tuple_copy(origin)));
-	return (ray_ray(origin, direction));
+	tuple_set(&tmp_p, xwrld, ywrld, -1);
+	tuple_set(&tmp, 0, 0, 0);
+	tuple_apply_trans_matrix(&pixel, &m_tmp->inv, &tmp_p);
+	tuple_apply_trans_matrix(&r->origin, &m_tmp->inv, &tmp);
+	tuple_substract(&tmp_p, &pixel, &r->origin);
+	tuple_normalize(&r->dir, &tmp_p);
+	//return (ray_ray(origin, direction));
 }
 
 void	render(t_camera *c, t_world *w, t_canvas *img)
@@ -65,8 +77,8 @@ void	render(t_camera *c, t_world *w, t_canvas *img)
 	// also used in render() when saving the image in the file
 	t_tmp_m	m_tmp; // located in matrix.h
 	///////////
-	t_ray		*r;
-	t_tuple		*color;
+	t_ray		r;
+	//t_tuple		color;
 	int			y;
 	int			x;
 
@@ -77,10 +89,10 @@ void	render(t_camera *c, t_world *w, t_canvas *img)
 		x = -1;
 		while (++x < c->v_size)
 		{
-			r = ray_for_pix(c, y, x, &m_tmp);
-			color = color_at(w, r, &m_tmp);
-			ray_free(r);
-			img->canvas[y][x] = tuple_to_rgb(color);
+			ray_for_pix(&r, c, y, x, &m_tmp);
+			color_at(w, &r, &m_tmp);
+			//ray_free(r);
+			img->canvas[y][x] = tuple_to_rgb(&m_tmp.color);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/11 16:26:31 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:50:19 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct cube
 
 t_cube	*cube_cube(void);
 void	cube_free(t_cube *c);
-t_tuple	*cube_normal_at(t_tuple *p);
+//t_tuple	*cube_normal_at(t_tuple *p);
+
+void	cube_normal_at(t_tuple *res, t_tuple *p);
 
 #endif

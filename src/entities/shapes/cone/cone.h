@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/11 15:59:05 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/16 17:17:03 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct cone
 
 t_cone		*cone_cone(void);
 t_cone		*cone_param(double h);
-t_tuple		*cone_normale_at(t_tuple *t, t_cone *c);
+void		cone_normale_at(t_tuple *res, t_tuple *t, t_cone *c);
 int			check_cap_cone_max(t_ray *r, double t, double max);
 int			check_cap_cone_min(t_ray *r, double t, double min);
 

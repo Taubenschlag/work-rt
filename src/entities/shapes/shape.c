@@ -34,51 +34,60 @@ void	*set_transform(t_shape *sh, t_matrix *trans)
 }
 */
 
-t_tuple	*world_normal_apply(t_shape *s, t_tuple *loc_pnt, t_tuple *loc_normal)
+//t_tuple	*world_normal_apply(t_shape *s, t_tuple *loc_pnt, t_tuple *loc_normal)
+void	world_normal_apply(t_tuple *res, t_shape *s, t_tuple *loc_pnt, t_tuple *loc_normal)
 {
-	t_tuple	*wrld_normal;
+	//t_tuple	*wrld_normal;
 	/* */
 	t_matrix	tmp_m;	
 
 	//matrix_copy(tmp_m, s->trans);
 	matrix_transpose(&tmp_m, &s->trans);
-	wrld_normal = tuple_apply_trans_matrix(&tmp_m, loc_normal);
+	tuple_apply_trans_matrix(&res, &tmp_m, loc_normal);
+	res->type = 0;
 	//wrld_normal = tuple_apply_trans_matrix(matrix_transpose(matrix_copy(s->trans)), loc_normal);
-	tuple_free(loc_pnt);
-	wrld_normal->type = 0;
-	return (wrld_normal);
+	//tuple_free(loc_pnt);
+	//return (wrld_normal);
 }
 
-t_tuple	*shape_normal_at(t_shape *s, t_tuple *p, t_tmp_m *m_tmp)
+void	shape_normal_at(t_tuple *res, t_shape *s, t_tuple *p, t_tmp_m *m_tmp)
 {
-	t_tuple	*loc_pnt;
-	t_tuple	*loc_normal;
+	t_tuple	loc_pnt;
+	t_tuple	loc_normal;
+	t_tuple	tmp;
 	/**/
 	//t_matrix inverted;
 	//t_tmp_m	m_tmp;
 
 	matrix_invert(m_tmp, &s->trans);
 	/**/
-	loc_pnt = tuple_apply_trans_matrix(&m_tmp->inv, tuple_copy(p));
+	tuple_apply_trans_matrix(&loc_pnt, &m_tmp->inv, p);
+	//loc_pnt = tuple_apply_trans_matrix(&m_tmp->inv, tuple_copy(p));
 	//loc_pnt = tuple_apply_trans_matrix(matrix_invert(s->trans), tuple_copy(p));
 	if (s->type == 's' )
-		return (nsphere_normal_at(loc_pnt, &s->trans, m_tmp));
+	{
+		nsphere_normal_at(res, &loc_pnt, &s->trans, m_tmp);
+		return ;
+		//return (nsphere_normal_at(loc_pnt, &s->trans, m_tmp));
 		//return (nsphere_normal_at(loc_pnt, s->trans));
+	}
 	else if (s->type == 'p')
-		loc_normal = plane_normal_at();
+		plane_normal_at(&loc_normal);
 	else if (s->type == 'u')
-		loc_normal = cube_normal_at(loc_pnt);
+		cube_normal_at(&loc_normal, &loc_pnt);
 	else if (s->type == 'y')
-		loc_normal = cylinder_normale_at(loc_pnt, (t_cylinder *)s->shape);
+		cylinder_normale_at(&loc_normal, &loc_pnt, (t_cylinder *)s->shape);
 	else if (s->type == 'o')
-		loc_normal = cone_normale_at(loc_pnt, (t_cone *)s->shape);
+		cone_normale_at(&loc_normal, &loc_pnt, (t_cone *)s->shape);
 	else if (s->type == 'i')
-		loc_normal = triangle_normale_at((t_triangle *) s->shape);
+		triangle_normale_at(&loc_normal, (t_triangle *)s->shape);
 	else if (s->type == 'q')
-		loc_normal = square_normale_at();
+		square_normale_at(&loc_normal);
 	else
-		return (NULL);
-	return (tuple_normalize(world_normal_apply(s, loc_pnt, loc_normal)));
+		return ;
+	world_normal_apply(&tmp, s, &loc_pnt, &loc_normal);
+	tuple_normalize(res, &tmp);
+	//return (tuple_normalize(world_normal_apply(s, loc_pnt, loc_normal)));
 }
 
 void	free_shape(t_shape *s)

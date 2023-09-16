@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 16:20:29 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/16 23:34:44 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ typedef	struct
 	t_matrix	sub;
 	t_matrix	transposed;
 	double		determinant;
+	t_tuple		color; // this will hold the talculations from color_at()
+	struct lightning_pack pack;
+	//t_lightning_pack pack;
 }	t_tmp_m;
 ////////////
 
@@ -55,8 +58,9 @@ double	matrix_minor(t_matrix *sub, t_matrix *m, int from, int to);
 double	matrix_cofactor(t_matrix *sub, t_matrix *m, int from, int to);
 void	matrix_invert(t_tmp_m *m_tmp, t_matrix *m);
 
-t_tuple		*tuple_apply_trans_matrix(t_matrix *trans_matrix, t_tuple *tup);
+void	tuple_apply_trans_matrix(t_tuple *res, t_matrix *trans_matrix, t_tuple *tup);
 /*
+t_tuple		*tuple_apply_trans_matrix(t_matrix *trans_matrix, t_tuple *tup);
 t_matrix	*matrix_matrix(int h, int w);
 t_matrix	*matrix_identity(int range);
 t_matrix	*tuple_to_matrix(t_tuple *t);

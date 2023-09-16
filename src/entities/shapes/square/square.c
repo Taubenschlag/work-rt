@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   square.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 03:02:57 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/16 22:17:59 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../heads_global/minirt.h"
 
+/*
 t_square	*square(void)
 {
 	t_square	*ret;
@@ -38,4 +39,23 @@ void	free_square(t_square *t)
 	free_triangle(t->t1);
 	free_triangle(t->t2);
 	free(t);
+}
+*/
+void	square(t_square *res)
+{
+	t_tuple	t_a;
+	t_tuple	t_b;
+	t_tuple	t_c;
+
+	tuple_point(&t_a, -1, 1, 0);	
+	tuple_point(&t_b, -1, -1, 0);
+	tuple_point(&t_c, 1, 1, 0);
+	triangle_coordinates(&res->t1, &t_a, &t_b, &t_c); 
+	tuple_point(&t_a, 1, -1, 0);	
+	triangle_coordinates(&res->t2, &t_a, &t_c, &t_b); 
+}
+
+void	square_normale_at(t_tuple *res)
+{
+	tuple_vector(res, 0, 0, 1);
 }
