@@ -6,7 +6,7 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 17:17:03 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 16:30:28 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ typedef struct cone
 	double		max;
 	int			closed;
 
-	t_tuple		*center;
-	t_tuple		*norm;
-	t_tuple		*color;
-	//t_matrix	*trans;
+	t_tuple		center;
+	t_tuple		norm;
+	t_tuple		color;
 	t_matrix	trans;
 	double		d;
 

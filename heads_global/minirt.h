@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:11:07 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/23 18:11:27 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/17 14:05:08 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,17 @@
 
 # include "../lib/libft/libft.h"
 
+typedef struct lightning_pack t_lightning_pack;
+typedef	struct s_tmp t_tmp_m;
+typedef struct light t_light;
+typedef struct shape t_shape;
+
 # include "../src/entities/tuple/tuple.h"
+# include "../src/entities/material/material.h"
 # include "../src/entities/matrix/matrix.h"
 # include "../src/entities/ray/ray.h"
 # include "../src/entities/light/light.h"
 # include "../src/entities/color/colors.h"
-# include "../src/entities/material/material.h"
 # include "../src/entities/shapes/shape.h"
 # include "../src/entities/shapes/cone/cone.h"
 # include "../src/entities/shapes/cube/cube.h"

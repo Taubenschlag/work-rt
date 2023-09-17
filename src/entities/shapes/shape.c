@@ -12,6 +12,21 @@
 
 #include "../../../heads_global/minirt.h"
 
+/* DEBUG */
+void	print_shape(t_shape *sh)
+{
+	printf("\t\t======================\n");
+	printf("\t\ttype:[%c]\n", sh->type);
+	printf("\t\tmaterial:\n");
+	print_material(&sh->matrl);
+	printf("\t\ttrans:\n");
+	print_matrix(&sh->trans);
+	printf("\t\tshape @ [%p]\n", sh->shape);
+
+	printf("\t\t= = = = = = = = = = = = =\n");
+}
+/* ***** */
+
 t_shape	*make_shape(char type, void *shape_itself)
 {
 	t_shape	*sh;
@@ -19,35 +34,17 @@ t_shape	*make_shape(char type, void *shape_itself)
 	sh = (t_shape *)malloc(sizeof(t_shape));
 	sh->shape = shape_itself;
 	sh->type = type;
-	//sh->trans = matrix_identity(4);
 	matrix_identity(&sh->trans, 4);
-	sh->matrl = NULL;
 	return (sh);
 }
 
-/*
-void	*set_transform(t_shape *sh, t_matrix *trans)
+void	world_normal_apply(t_tuple *res, t_shape *s, t_tuple *loc_normal)
 {
-	matrix_free(sh->trans);
-	sh->trans = trans;
-	return (sh);
-}
-*/
-
-//t_tuple	*world_normal_apply(t_shape *s, t_tuple *loc_pnt, t_tuple *loc_normal)
-void	world_normal_apply(t_tuple *res, t_shape *s, t_tuple *loc_pnt, t_tuple *loc_normal)
-{
-	//t_tuple	*wrld_normal;
-	/* */
 	t_matrix	tmp_m;	
 
-	//matrix_copy(tmp_m, s->trans);
 	matrix_transpose(&tmp_m, &s->trans);
-	tuple_apply_trans_matrix(&res, &tmp_m, loc_normal);
+	tuple_apply_trans_matrix(res, &tmp_m, loc_normal);
 	res->type = 0;
-	//wrld_normal = tuple_apply_trans_matrix(matrix_transpose(matrix_copy(s->trans)), loc_normal);
-	//tuple_free(loc_pnt);
-	//return (wrld_normal);
 }
 
 void	shape_normal_at(t_tuple *res, t_shape *s, t_tuple *p, t_tmp_m *m_tmp)
@@ -55,21 +52,13 @@ void	shape_normal_at(t_tuple *res, t_shape *s, t_tuple *p, t_tmp_m *m_tmp)
 	t_tuple	loc_pnt;
 	t_tuple	loc_normal;
 	t_tuple	tmp;
-	/**/
-	//t_matrix inverted;
-	//t_tmp_m	m_tmp;
 
 	matrix_invert(m_tmp, &s->trans);
-	/**/
 	tuple_apply_trans_matrix(&loc_pnt, &m_tmp->inv, p);
-	//loc_pnt = tuple_apply_trans_matrix(&m_tmp->inv, tuple_copy(p));
-	//loc_pnt = tuple_apply_trans_matrix(matrix_invert(s->trans), tuple_copy(p));
 	if (s->type == 's' )
 	{
 		nsphere_normal_at(res, &loc_pnt, &s->trans, m_tmp);
 		return ;
-		//return (nsphere_normal_at(loc_pnt, &s->trans, m_tmp));
-		//return (nsphere_normal_at(loc_pnt, s->trans));
 	}
 	else if (s->type == 'p')
 		plane_normal_at(&loc_normal);
@@ -85,9 +74,8 @@ void	shape_normal_at(t_tuple *res, t_shape *s, t_tuple *p, t_tmp_m *m_tmp)
 		square_normale_at(&loc_normal);
 	else
 		return ;
-	world_normal_apply(&tmp, s, &loc_pnt, &loc_normal);
+	world_normal_apply(&tmp, s, &loc_normal);
 	tuple_normalize(res, &tmp);
-	//return (tuple_normalize(world_normal_apply(s, loc_pnt, loc_normal)));
 }
 
 void	free_shape(t_shape *s)
@@ -106,7 +94,5 @@ void	free_shape(t_shape *s)
 		free_triangle((t_triangle *) s->shape);
 	else if (s->type == 'q')
 		free_square((t_square *) s->shape);
-	material_free(s->matrl);
-	//matrix_free(s->trans);
 	free(s);
 }

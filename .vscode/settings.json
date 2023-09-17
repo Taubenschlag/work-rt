@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"*.c": "c",
-		"minirt.h": "c"
+		"minirt.h": "c",
+		"material.h": "c"
 	}
 }

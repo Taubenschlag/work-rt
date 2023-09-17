@@ -6,7 +6,7 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 21:51:34 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 19:52:21 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,6 @@ void	cone_normale_at(t_tuple *res, t_tuple *t, t_cone *c)
 		y = y * -1;
 	tuple_vector(res, t->x, y, t->z);
 }
-
-/*
-t_tuple	*cone_normale_at(t_tuple *t, t_cone *c)
-{
-	double	dist;
-	double	y;
-
-	dist = sqrt(t->x * t->x + t->z * t-> z);
-	if (dist <= fabs(c->max) && t->y >= (c->max - 0.00001))
-		return (tuple_vector(0, 1, 0));
-	if (dist <= fabs(c->min) && t->y <= (c->min + 0.00001))
-		return (tuple_vector(0, -1, 0));
-	y = sqrt(t->x * t->x + t->z * t-> z);
-	if (t-> y > 0)
-		y = y * -1;
-	return (tuple_vector(t->x, y, t->z));
-}
-*/
 
 int	check_cap_cone_max(t_ray *r, double t, double max)
 {

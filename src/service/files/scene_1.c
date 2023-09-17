@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 18:31:43 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/17 20:06:01 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_scene(int *counters, t_scene *scene)
 	scene->resolution_x = -1;
 	scene->resolution_y = -1;
 	scene->ambi_ratio = -1;
-	scene->ambi_color = tuple_color(0, 0, 0);
+	tuple_color(&scene->ambi_color, 0, 0, 0);
 	scene->camera_counter = 0;
 	scene->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[CAM]);
 	scene->light_counter = 0;
@@ -61,7 +61,7 @@ void	parse_scene(int fd, int *counters, t_scene *s)
 		if (line && !ft_strequals(line, ""))
 		{
 			/* DEBUG */
-			//printf("parce_scene, line:[%s]\n", line);
+			printf("parce_scene, line:[%s]\n", line);
 			/* ***** */
 			handle_line(ft_whitespaces(line), s);
 			/* DEBUG */
@@ -71,7 +71,7 @@ void	parse_scene(int fd, int *counters, t_scene *s)
 		free(line);
 	}
 	/* DEBUG */
-	//printf("\tlast line:[%s]\n", line);
+	printf("\tlast line:[%s]\n", line);
 	//exit(0);
 	/* ***** */
 	if (line && !ft_strequals(line, ""))

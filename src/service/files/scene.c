@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/04 22:56:17 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/17 18:17:56 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	free_scene(t_scene *s)
 	while (++i < s->light_counter)
 		light_free(s->lights[i]);
 	free(s->lights);
-	free(s->ambi_color);
 }
 
 void	emergency_close(int *fds, int failed)
@@ -78,15 +77,10 @@ void	save_scene(t_scene *s, int *fd_list)
 	init_world(&w, s->shapes, s->lights, s->light_counter);
 	while (++cam_count < s->camera_counter)
 	{
-		world_set_ambience(&w, s->cameras[cam_count]->from, s->ambi_color);
+		world_set_ambience(&w.ambienace, &s->cameras[cam_count]->from, &s->ambi_color);
 		render(s->cameras[cam_count], &w, &c);
 		fill_bmp(init_bmp(
 				s->resolution_y, s->resolution_x, fd_list[cam_count]), &c);
 		close(fd_list[cam_count]);
-		canvas_free(&c);
 	}
-	if (w.ambienace)
-		light_free(w.ambienace);
-	free_scene(s);
-	free(fd_list);
 }

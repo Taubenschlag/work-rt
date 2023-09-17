@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors_get.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 16:49:39 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/17 13:09:18 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ unsigned int	tuple_to_rgb(t_tuple *rgb_tuple)
 	r = (unsigned int)(rgb_tuple->x * 255);
 	g = (unsigned int)(rgb_tuple->y * 255);
 	b = (unsigned int)(rgb_tuple->z * 255);
-	tuple_free(rgb_tuple);
+	//tuple_free(rgb_tuple);
 	if (r > 255)
 		r = 255;
 	if (g > 255)
@@ -61,7 +61,7 @@ unsigned int	tuple_to_argb(t_tuple *rgb_tuple)
 	r = (unsigned int)(rgb_tuple->x * 127);
 	g = (unsigned int)(rgb_tuple->y * 127);
 	b = (unsigned int)(rgb_tuple->z * 127);
-	tuple_free(rgb_tuple);
+	//tuple_free(rgb_tuple);
 	if (r > 127)
 		r = 127;
 	if (g > 127)

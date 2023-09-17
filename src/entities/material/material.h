@@ -6,7 +6,7 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 22:52:50 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 22:15:13 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ typedef struct lightning_pack
 	double	light_dot_norm;
 }	t_lightning_pack;
 
-void	material_free(t_matrl *m);
 void	lightning(t_tuple *amb_color, t_lightning_pack *p, int in_shadow);
-//void	cleanup_light_pack(t_lightning_pack *l);
-t_matrl	*mat_with_col(t_tuple *color);
+void	mat_with_col(t_matrl *res, t_tuple *color);
 
-#endif //RT_CHALLENGE_MATERIAL_H
+/* DEBUG */
+void	print_material(t_matrl *m);
+/* ***** */
+
+#endif

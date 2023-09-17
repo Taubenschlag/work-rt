@@ -6,7 +6,7 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 21:51:10 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 19:53:38 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,6 @@ void	cylinder_normale_at(t_tuple *res, t_tuple *t, t_cylinder *c)
 	}
 	tuple_vector(res, t->x, 0, t->z);
 }
-
-/*
-t_tuple	*cylinder_normale_at(t_tuple *t, t_cylinder *c)
-{
-	double	dist;
-
-	dist = t->x * t->x + t->z * t->z;
-	if (dist < 1 && t->y >= (c->max - 0.00001))
-		return (tuple_vector(0, 1, 0));
-	if (dist < 1 && t->y <= (c->min + 0.00001))
-		return (tuple_vector(0, -1, 0));
-	return (tuple_vector(t->x, 0, t->z));
-}
-*/
 
 int	check_cap(t_ray *r, double t)
 {

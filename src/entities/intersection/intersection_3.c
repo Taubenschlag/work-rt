@@ -6,7 +6,7 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 18:03:08 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 19:36:27 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ int	in_shadow(t_world *w, t_tuple *p, t_light *current_light, t_tmp_m *m_tmp)
 	t_ray			ray;
 	t_intersection	*h;
 
-	tuple_substract(&v, current_light->position, p);
-	//v = tuple_substract(tuple_copy(current_light->position), tuple_copy(p));
+	tuple_substract(&v, &current_light->position, p);
 	dist = tuple_length(&v);
 	tuple_normalize(&direction, &v);
 	ray_ray(&ray, p, &direction);
 	h = hit(intersect_world(&ray, w, m_tmp));
-	//ray_free(ray);
 	if (h && (dist - h->t) > 0.00001)
 	{
 		free(h);
@@ -60,13 +58,10 @@ t_intersection_list	*intersection_ray_nsphere(t_shape *s, t_ray *ray)
 	double				dis;
 	t_intersection_list	*ret;
 
-	tuple_substract(&sphere_ray, &ray->origin, ((t_sphere*)s->shape)->centre);
-	//sphere_ray = tuple_substract(tuple_copy(ray->origin),
-	//		tuple_copy(((t_sphere*)s->shape)->centre));
+	tuple_substract(&sphere_ray, &ray->origin, &((t_sphere*)s->shape)->centre);
 	a = tuple_dot_product(&ray->dir, &ray->dir);
 	b = 2 * tuple_dot_product(&ray->dir, &sphere_ray);
 	dis = b * b - 4 * a * (tuple_dot_product(&sphere_ray, &sphere_ray) - 1);
-	//tuple_free(sphere_ray);
 	if (dis < 0)
 		return (intersection_list_make(0));
 	ret = intersection_list_make(2);

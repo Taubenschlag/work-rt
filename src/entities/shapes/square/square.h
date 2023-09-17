@@ -6,7 +6,7 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 22:18:18 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 19:55:54 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ typedef struct square
 	double		side;
 }	t_square;
 
-void	square_normale_at(t_tuple *res);
-void	square(t_square *res);
-
-//t_square	*square(void);
-//t_tuple		*square_normale_at(void);
-//void		free_square(t_square *t);
+void		square_normale_at(t_tuple *res);
+t_square	*square(void);
+void		free_square(t_square *t);
 
 #endif

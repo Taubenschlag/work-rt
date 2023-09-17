@@ -6,7 +6,7 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 23:03:38 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 22:21:35 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 	// also used in render() when saving the image in the file
 	t_tmp_m	m_tmp; // located in matrix.h
 	t_ray		r;
-	///////////
-	//t_ray		*r;
-	t_tuple		*color;
 	int			y;
 	int			x;
 
@@ -39,10 +36,8 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 		while (++x < c->v_size)
 		{
 			ray_for_pix(&r, c, y, x, &m_tmp);
-			//r = ray_for_pix(&r, c, y, x, &m_tmp);
 			color_at(w, &r, &m_tmp);
-			//ray_free(r);
-			img->canvas[y][x] = tuple_to_argb(color);
+			img->canvas[y][x] = tuple_to_argb(&m_tmp.color);
 		}
 	}
 }
@@ -101,13 +96,17 @@ void	display_scene(t_scene *s)
 	t_world		w;
 	int			cam;
 
+	/* DEBUG */
+	printf("DISPLAY SCENE\n");
+	print_scene(s);
+	/* ***** */
 	cam = 0;
 	w.shape_counter = s->shape_counter;
 	init_world(&w, s->shapes, s->lights, s->light_counter);
 	data = init_mlx_wrapper(s);
 	while (++cam <= s->camera_counter)
 	{
-		world_set_ambience(&w, s->cameras[cam - 1]->from, s->ambi_color);
+		world_set_ambience(&w.ambienace, &s->cameras[cam - 1]->from, &s->ambi_color);
 		argb_render(s->cameras[cam - 1], &w, &c);
 		data->imgs[cam] = mlx_new_image(
 				data->mlx, s->resolution_x, s->resolution_y);
@@ -116,8 +115,28 @@ void	display_scene(t_scene *s)
 		fill_image(&c, data, cam);
 		canvas_free(&c);
 	}
-	if (w.ambienace)
-		light_free(w.ambienace);
 	free_scene(s);
 	loop_gui(data);
+}
+
+void	print_scene(t_scene *s)
+{
+	printf("====================\n\tt_scene:\n");
+	printf("\tres x:[%d], y:[%d]\n", s->resolution_x, s->resolution_y);
+	printf("\tambi ratio:[%.2f]\n", s->ambi_ratio);
+	printf("\tambi_color:");
+	print_tuple(&s->ambi_color);
+	printf("\tcamera counter:[%d]\n", s->camera_counter);
+	for (int i = 0; i < s->camera_counter; i++) {
+		print_camera(s->cameras[i]);
+	}
+	printf("\tlight counter:[%d]\n", s->light_counter);
+	for (int i = 0; i < s->light_counter; i++) {
+		print_light(s->lights[i]);
+	}
+	printf("\tshape counter:[%d]\n", s->shape_counter);
+	for (int i = 0; i < s->shape_counter; i++) {
+		print_shape(s->shapes[i]);
+	}
+	printf("====================\n");
 }

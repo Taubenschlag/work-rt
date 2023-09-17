@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_basic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/13 17:58:38 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/17 21:45:09 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
+
+/* DEBUG */
+void	print_matrix(t_matrix *m)
+{
+	int	h = 0;
+	int	w = 0;
+
+	/* DEBUG */
+	printf("\tm->h: [%d], m->w: [%d]\n", m->h, m->w);
+	/* ***** */
+	while (h < m->h)
+	{
+		printf("\t[ ");
+		w = 0;
+		while (w < m->w)
+		{
+			printf("%.2f", m->mtx[h][w]);
+			if (m->w > 1)
+				printf("\t");
+			w++;
+		}
+		printf("\t]\n");
+		h++;
+	}
+	printf("\n");
+}
+/* ***** */
 
 void	matrix_matrix(t_matrix *m, int h, int w)
 {
@@ -55,94 +82,3 @@ void	tuple_to_matrix(t_matrix *m, t_tuple *t)
 	m->h = 4;
 	m->w = 1;
 }
-
-/*
-t_matrix	*matrix_matrix(int h, int w)
-{
-	t_matrix	*m;
-	int			i;
-	int			j;
-
-	i = 0;
-	m = (t_matrix *)malloc(sizeof(t_matrix));
-	m->w = w;
-	m->h = h;
-	m->matrix = (double **)malloc(sizeof(double *) * h);
-	while (i < h)
-	{
-		m->matrix[i] = (double *)malloc(sizeof(double) * w);
-		j = 0;
-		while (j < w)
-		{
-			m->matrix[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-	return (m);
-}
-
-t_matrix	*matrix_identity(int range)
-{
-	t_matrix	*m;
-	int			i;
-
-	i = 0;
-	m = matrix_matrix(range, range);
-	while (i < range)
-	{
-		m->matrix[i][i] = 1;
-		i++;
-	}
-	return (m);
-}
-
-void	matrix_free(t_matrix *m)
-{
-	int	i;
-
-	if (m)
-	{
-		i = 0;
-		while (i < m->h)
-		{
-			free((m->matrix)[i]);
-			i++;
-		}
-		free(m->matrix);
-		free(m);
-	}
-}
-
-t_matrix	*tuple_to_matrix(t_tuple *t)
-{
-	t_matrix	*m;
-
-	m = matrix_matrix(4, 1);
-	m->matrix[0][0] = t->x;
-	m->matrix[1][0] = t->y;
-	m->matrix[2][0] = t->z;
-	m->matrix[3][0] = (double)t->type;
-	return (m);
-}
-
-void	matrix_matrix(t_matrix *m, int h, int w)
-{
-	int			i;
-	int			j;
-
-	m->w = w;
-	m->h = h;
-	i = 0;
-	while (i < h)
-	{
-		j = 0;
-		while (j < w)
-		{
-			m->mtx[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-}
-*/

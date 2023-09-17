@@ -6,13 +6,12 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 23:30:41 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 19:44:09 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-//t_matrix	*invert(double determinant, t_matrix *m, t_matrix *inverted)
 void	invert(t_tmp_m *m_tmp, t_matrix *m)
 {
 	int			i;
@@ -40,58 +39,26 @@ void	invert(t_tmp_m *m_tmp, t_matrix *m)
 	}
 }
 
-//t_matrix	*matrix_invert(t_matrix *m)
 void	matrix_invert(t_tmp_m *m_tmp, t_matrix *m)
 {
-	/* DEBUG //
-	printf("\tmatrix_invert\n====================================\n");
-	printf("\ttrans matrix from t_camera:\n");
-	print_matrix(m);
-	/////////*/
-	//double		determinant;
-	//t_matrix	*inverted;
-
-	//inverted = NULL;
 	m_tmp->determinant = matrix_determinant(m);
-	///////////
-	//printf("\tdeterminant: [%.2f]\n", m_tmp->determinant);
-	///////////
 	if (m_tmp->determinant)
 		invert(m_tmp, m);
-	/*
-		inverted = invert(determinant, m, inverted);
-	if (!inverted)
-		return (NULL);
-	return (inverted);
-	///////////
-	printf("\tinverted matrix:\n");
-	print_matrix(&m_tmp->inv);
-	printf("====================================\n");
-	///////////
-	*/
 }
 
-//t_tuple	*tuple_apply_trans_matrix(t_tuple *res, t_matrix *trans_matrix, t_tuple *tup)
 void	tuple_apply_trans_matrix(t_tuple *res, t_matrix *trans_matrix, t_tuple *tup)
 {
 	t_matrix	source_tuple_converted;
 	t_matrix	product;
-	//t_tuple		*res;
-	//int			need_free;
 
 	/* DEBUG */
 	//printf("tuple_apply_trans_matrix\n");
 	/* ***** */
 	tuple_to_matrix(&source_tuple_converted, tup);
-	//source_tuple_converted = tuple_to_matrix(tup);
-	//need_free = 1;
 	if (trans_matrix)
 	{
 		matrix_multiply(&product, trans_matrix, &source_tuple_converted);
-		//product = matrix_multiply(trans_matrix, source_tuple_converted);
-		//need_free = 0;
-		tuple_point(res, product.mtx[0][0], 
-			product.mtx[1][0], product.mtx[2][0]);
+		tuple_point(res, product.mtx[0][0], product.mtx[1][0], product.mtx[2][0]);
 	}
 	else
 	{
@@ -102,21 +69,10 @@ void	tuple_apply_trans_matrix(t_tuple *res, t_matrix *trans_matrix, t_tuple *tup
 	}
 	if (tuple_is_vector(tup))
 		res->type = IS_VECTOR;
-	/*
-	if (need_free)
-		matrix_free(trans_matrix);
-	matrix_free(product);
-	free(tup);
-	return (res);
-	*/
 }
 
-//t_matrix	*vt_combine_matrix(t_tuple *left, t_tuple *true_up, t_tuple *forward)
 void	vt_combine_matrix(t_matrix *res, t_tuple *left, t_tuple *true_up, t_tuple *forward)
 {
-	//t_matrix	*res;
-
-	//res = matrix_identity(4);
 	matrix_identity(res, 4);
 	res->mtx[0][0] = left->x;
 	res->mtx[0][1] = left->y;
@@ -127,13 +83,8 @@ void	vt_combine_matrix(t_matrix *res, t_tuple *left, t_tuple *true_up, t_tuple *
 	res->mtx[2][0] = -1 * forward->x;
 	res->mtx[2][1] = -1 * forward->y;
 	res->mtx[2][2] = -1 * forward->z;
-	tuple_free(forward);
-	tuple_free(left);
-	tuple_free(true_up);
-	//return (res);
 }
 
-//t_matrix	*view_transform(t_tuple *from, t_tuple *to, t_tuple *up);
 void	view_transform(t_matrix *view_mtx, t_tuple *from, t_tuple *to, t_tuple *up)
 {
 	t_tuple		forward;
@@ -145,7 +96,7 @@ void	view_transform(t_matrix *view_mtx, t_tuple *from, t_tuple *to, t_tuple *up)
 
 	tuple_substract(&tmp, to, from);
 	tuple_normalize(&forward, &tmp);
-	tuple_normalize(&tmp, &up);
+	tuple_normalize(&tmp, up);
 	tuple_cross_product(&left, &forward, &tmp);
 	tuple_negate(&tmp, from);
 	tuple_cross_product(&cros, &left, &forward);
@@ -153,31 +104,3 @@ void	view_transform(t_matrix *view_mtx, t_tuple *from, t_tuple *to, t_tuple *up)
 	matrix_translate(&tmp_m, &tmp);
 	matrix_multiply(view_mtx, &res, &tmp_m);
 }
-
-/*
-//t_matrix	*view_transform(t_tuple *from, t_tuple *to, t_tuple *up);
-void	view_transform(t_matrix *view_mtx, t_tuple *from, t_tuple *to, t_tuple *up)
-{
-	t_tuple		*forward;
-	t_tuple		*left;
-	t_tuple		*tmp;
-	t_matrix	res;
-	t_matrix	tmp_m;
-	//t_matrix	*view_matrix;
-
-	tmp = tuple_substract(to, tuple_copy(from));
-	forward = tuple_normalize(tmp);
-	tmp = tuple_normalize(up);
-	left = tuple_cross_product(forward, tmp);
-	tuple_free(tmp);
-	from = tuple_negate(from);
-	//res = vt_combine_matrix(left, tuple_cross_product(left, forward), forward);
-	vt_combine_matrix(&res, left, tuple_cross_product(left, forward), forward);
-	//view_matrix = matrix_multiply(res, matrix_translate(from->x, from->y, from->z));
-	matrix_translate(&tmp_m, from);
-
-	matrix_multiply(view_mtx, &res, &tmp_m);
-	tuple_free(from);
-	//return (view_matrix);
-}
-*/

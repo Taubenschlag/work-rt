@@ -3,40 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   scene_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/15 18:34:46 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/17 21:26:22 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-t_tuple	*get_tuple(char *value, char type)
+void	set_tuple(t_tuple *tuple, char *value, char type)
 {
-	char	**next_part;
-	int		i;
-	t_tuple	*ret;
+	char	**input;
 
-	ret = NULL;
-	next_part = ft_split(value, ',');
+	input = ft_split(value, ',');
+	tuple->x = ft_atod(input[0]);
+	tuple->y = ft_atod(input[1]);
+	tuple->z = ft_atod(input[2]);
 	if (type == 'p')
-		ret = tuple_point(ft_atod(next_part[0]),
-				ft_atod(next_part[1]), ft_atod(next_part[2]));
-	else if (type == 'v')
-		ret = tuple_vector(ft_atod(next_part[0]),
-				ft_atod(next_part[1]), ft_atod(next_part[2]));
-	else if (type == 'c')
-		ret = tuple_color(ft_atod(next_part[0]),
-				ft_atod(next_part[1]), ft_atod(next_part[2]));
-	i = -1;
-	while (next_part[++i])
-		free(next_part[i]);
-	free(next_part);
-	return (ret);
+		tuple->type = IS_POINT;
+	if (type == 'v')
+		tuple->type = IS_VECTOR;
+	if (type == 'c')
+		tuple->type = 2;
 }
 
-// todo move
 void	cleanup(char **values)
 {
 	int	i;
@@ -77,12 +68,11 @@ void	handle_a(char **input, t_scene *s)
 	/* DEBUG */
 	//printf("AMBIANCE\n");
 	/* ***** */
-	t_tuple	*color;
+	t_tuple	color;
 
 	s->ambi_ratio = ft_atod(input[1]);
-	color = get_tuple(input[2], 'c');
-	free(s->ambi_color);
-	s->ambi_color = tuple_scalar_multiply(color, s->ambi_ratio * COLOR_CF);
+	set_tuple(&color, input[2], 'c');
+	tuple_scalar_multiply(&s->ambi_color, &color, s->ambi_ratio * COLOR_CF);
 	cleanup(input);
 }
 

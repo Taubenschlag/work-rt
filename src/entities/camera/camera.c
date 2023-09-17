@@ -6,11 +6,27 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 20:51:00 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 22:12:28 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
+
+/* DEBUG */
+void	print_camera(t_camera *cam)
+{
+	printf("\t\t=========================\n");
+	printf("\t\tCAMERA\n");
+	printf("\t\ttuple from:");
+	print_tuple(&cam->from);
+	printf("\t\tname:[%s]\n", cam->name);
+	printf("\t\tsize h:[%d], v:[%d], pix_size:[%.2f]\n", cam->h_size, cam->v_size, cam->pix_size);
+	printf("\t\ttransform:\n");
+	print_matrix(&cam->transform);
+	printf("\t\thalf:[%.2f], h_w:[%.2f], h_h:[%.2f], aspect:[%.2f]\n", cam->half, cam->half_w, cam->half_h, cam->aspect);
+	printf("\t\t= = = = = = = = = = = = =\n");
+}
+/* ***** */
 
 t_camera	*make_camera(int h_s, int v_s, double fov)
 {
@@ -35,21 +51,6 @@ t_camera	*make_camera(int h_s, int v_s, double fov)
 	return (cam);
 }
 
-void	free_camera(t_camera *c)
-{
-	tuple_free(c->from);
-	free(c);
-}
-
-void	tuple_set(t_tuple *t, double x, double y, double z)
-{
-	t->x = x;
-	t->y = y;
-	t->z = z;
-	t->type = IS_POINT;
-}
-
-//t_ray	*ray_for_pix(t_camera *c, int y, int x, t_tmp_m *m_tmp)
 void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp)
 {
 	double	xwrld;
@@ -67,7 +68,6 @@ void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp)
 	tuple_apply_trans_matrix(&r->origin, &m_tmp->inv, &tmp);
 	tuple_substract(&tmp_p, &pixel, &r->origin);
 	tuple_normalize(&r->dir, &tmp_p);
-	//return (ray_ray(origin, direction));
 }
 
 void	render(t_camera *c, t_world *w, t_canvas *img)
@@ -78,7 +78,6 @@ void	render(t_camera *c, t_world *w, t_canvas *img)
 	t_tmp_m	m_tmp; // located in matrix.h
 	///////////
 	t_ray		r;
-	//t_tuple		color;
 	int			y;
 	int			x;
 
@@ -91,32 +90,17 @@ void	render(t_camera *c, t_world *w, t_canvas *img)
 		{
 			ray_for_pix(&r, c, y, x, &m_tmp);
 			color_at(w, &r, &m_tmp);
-			//ray_free(r);
 			img->canvas[y][x] = tuple_to_rgb(&m_tmp.color);
 		}
 	}
 }
 
-/*
-void	render(t_camera *c, t_world *w, t_canvas *img)
+void		free_camera(t_camera *c)
 {
-	t_ray		*r;
-	t_tuple		*color;
-	int			y;
-	int			x;
-
-	init_canvas(c->v_size, c->h_size, img);
-	y = -1;
-	while (++y < c->h_size)
+	if (c)
 	{
-		x = -1;
-		while (++x < c->v_size)
-		{
-			r = ray_for_pix(c, y, x);
-			color = color_at(w, r);
-			ray_free(r);
-			img->canvas[y][x] = tuple_to_rgb(color);
-		}
+		if (c->name)
+			free(c->name);
+		free(c);
 	}
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 16:43:48 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 21:36:19 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct tuple
 
 int		is_tuple(char *value, int exclude_neg);
 
+void	tuple_set(t_tuple *t, double x, double y, double z);
 void	tuple_vector(t_tuple *t, double x, double y, double z);
 void	tuple_point(t_tuple *t, double x, double y, double z);
 void	tuple_color(t_tuple *res, double r, double g, double b);
@@ -49,5 +50,9 @@ void	tuple_multiply(t_tuple *res, t_tuple *t1, t_tuple *t2);
 void	tuple_reflect(t_tuple *res, t_tuple *v_in, t_tuple *v_normal);
 void	tuple_color(t_tuple *res, double r, double g, double b);
 void	tuple_copy(t_tuple *res, t_tuple *t);
+
+/* DEBUG */
+void	print_tuple(t_tuple *t);
+/* ***** */
 
 #endif 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_transformations.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/09 19:21:46 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/17 19:47:34 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,6 @@ void	matrix_scale(t_matrix *m, t_tuple *tpl)
 }
 
 /*
-t_matrix	*matrix_translate(double x, double y, double z)
-{
-	t_matrix	*trans;
-
-	trans = matrix_identity(4);
-	trans->matrix[0][3] = x;
-	trans->matrix[1][3] = y;
-	trans->matrix[2][3] = z;
-	return (trans);
-}
-
-t_matrix	*matrix_scale(double x, double y, double z)
-{
-	t_matrix	*scl;
-
-	scl = matrix_identity(4);
-	scl->matrix[0][0] = x;
-	scl->matrix[1][1] = y;
-	scl->matrix[2][2] = z;
-	return (scl);
-}
-
 t_matrix	*matrix_x_rotate(double r)
 {
 	t_matrix	*scl;

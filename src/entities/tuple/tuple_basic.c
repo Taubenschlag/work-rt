@@ -6,66 +6,43 @@
 /*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 10:22:29 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/17 21:35:59 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
+/* DEBUG */
+void	print_tuple(t_tuple *t)
+{
+	printf("\ttuple x:[%.2f], y:[%.2f], z:[%.2f], type:[%d]\n", t->x, t->y, t->z, t->type);
+}
+/* ***** */
+
+void	tuple_set(t_tuple *t, double x, double y, double z)
+{
+	t->x = x;
+	t->y = y;
+	t->z = z;
+	t->type = IS_POINT;
+}
+
 void	tuple_vector(t_tuple *t, double x, double y, double z)
 {
-	//t_tuple	*t;
-
-	//t = (t_tuple *)malloc(sizeof(t_tuple));
 	t->x = x;
 	t->y = y;
 	t->z = z;
 	t->type = IS_VECTOR;
-	//return (t);
 }
 
 void	tuple_point(t_tuple *t, double x, double y, double z)
 {
-	//t_tuple	*t;
-
-	//t = (t_tuple *)malloc(sizeof(t_tuple));
 	t->x = x;
 	t->y = y;
 	t->z = z;
 	t->type = IS_POINT;
-	//return (t);
 }
 
-/*
-t_tuple	*tuple_vector(double x, double y, double z)
-{
-	t_tuple	*t;
-
-	t = (t_tuple *)malloc(sizeof(t_tuple));
-	t->x = x;
-	t->y = y;
-	t->z = z;
-	t->type = IS_VECTOR;
-	return (t);
-}
-
-t_tuple	*tuple_point(double x, double y, double z)
-{
-	t_tuple	*t;
-
-	t = (t_tuple *)malloc(sizeof(t_tuple));
-	t->x = x;
-	t->y = y;
-	t->z = z;
-	t->type = IS_POINT;
-	return (t);
-}
-
-void	tuple_free(t_tuple *tuple)
-{
-	free(tuple);
-}
-*/
 int	check_parsed_tuple(char **val)
 {
 	int	i;
