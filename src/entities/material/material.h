@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   material.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 22:15:13 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/18 14:06:06 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,5 @@ typedef struct lightning_pack
 
 void	lightning(t_tuple *amb_color, t_lightning_pack *p, int in_shadow);
 void	mat_with_col(t_matrl *res, t_tuple *color);
-
-/* DEBUG */
-void	print_material(t_matrl *m);
-/* ***** */
 
 #endif

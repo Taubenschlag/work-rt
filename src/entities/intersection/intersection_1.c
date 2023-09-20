@@ -105,12 +105,14 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 		precomp(&c, i, r, m_tmp);
 		shade_hit(w, &c, &w->ambienace, m_tmp);
 		tuple_copy(&tmp_color1, &m_tmp->color);
+		//free(c.shape);
 		while (++j < w->lights_counter)
 		{
 			precomp(&c, i, r, m_tmp);
 			shade_hit(w, &c, w->lights[j], m_tmp);
 			tuple_copy(&tmp_color2, &m_tmp->color);
 			tuple_add(&m_tmp->color, &tmp_color1, &tmp_color2);
+			//free(c.shape);
 		}
 	}
 	free(i);

@@ -86,7 +86,10 @@ service/files/scene_handlers_2.c \
 service/files/scene_handlers.c \
 \
 service/window/mlx_handlers.c \
-service/window/window.c
+service/window/window.c \
+\
+debug.c 
+
 
 OBS = $(addprefix $(ODIR)/,${SRC:.c=.o})
 

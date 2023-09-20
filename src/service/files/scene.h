@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 20:21:51 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/18 14:03:46 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,5 @@ void	save_scene(t_scene *s, int *fd_list);
 void	parse_scene(int fd, int *counters, t_scene *s);
 void	cleanup(char **values);
 int		*create_files(int *counters);
-
-/* DEBUG */
-void	print_scene(t_scene *s);
-/* ***** */
 
 #endif

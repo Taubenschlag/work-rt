@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_basic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 21:45:09 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/18 14:09:38 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
-
-/* DEBUG */
-void	print_matrix(t_matrix *m)
-{
-	int	h = 0;
-	int	w = 0;
-
-	/* DEBUG */
-	printf("\tm->h: [%d], m->w: [%d]\n", m->h, m->w);
-	/* ***** */
-	while (h < m->h)
-	{
-		printf("\t[ ");
-		w = 0;
-		while (w < m->w)
-		{
-			printf("%.2f", m->mtx[h][w]);
-			if (m->w > 1)
-				printf("\t");
-			w++;
-		}
-		printf("\t]\n");
-		h++;
-	}
-	printf("\n");
-}
-/* ***** */
 
 void	matrix_matrix(t_matrix *m, int h, int w)
 {

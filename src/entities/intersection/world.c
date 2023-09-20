@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:38:46 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/18 18:30:43 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	init_world(t_world *w, t_shape **shapes, t_light **lights,
 	w->shapes = shapes;
 	w->lights = lights;
 	w->lights_counter = lights_counter;
+	/* DEBUG */
+	w->merged = NULL;
+	w->unsorted = NULL;
+	/* ***** */
 }
 
 void	world_set_ambience(t_light *w_amb, t_tuple *from, t_tuple *color)

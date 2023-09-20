@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 22:21:35 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/19 18:06:49 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 		{
 			ray_for_pix(&r, c, y, x, &m_tmp);
 			color_at(w, &r, &m_tmp);
+			/* DEBUG */
+			//print_ray(&r, y, x);
+			//printf("argb_rend: color: ");
+			//print_tuple(&m_tmp.color);
+			/* ***** */
 			img->canvas[y][x] = tuple_to_argb(&m_tmp.color);
 		}
 	}
@@ -98,7 +103,7 @@ void	display_scene(t_scene *s)
 
 	/* DEBUG */
 	printf("DISPLAY SCENE\n");
-	print_scene(s);
+	//print_scene(s);
 	/* ***** */
 	cam = 0;
 	w.shape_counter = s->shape_counter;
@@ -107,6 +112,9 @@ void	display_scene(t_scene *s)
 	while (++cam <= s->camera_counter)
 	{
 		world_set_ambience(&w.ambienace, &s->cameras[cam - 1]->from, &s->ambi_color);
+		/* DEBUG */
+		//print_world(&w);
+		/* ***** */
 		argb_render(s->cameras[cam - 1], &w, &c);
 		data->imgs[cam] = mlx_new_image(
 				data->mlx, s->resolution_x, s->resolution_y);
@@ -117,26 +125,4 @@ void	display_scene(t_scene *s)
 	}
 	free_scene(s);
 	loop_gui(data);
-}
-
-void	print_scene(t_scene *s)
-{
-	printf("====================\n\tt_scene:\n");
-	printf("\tres x:[%d], y:[%d]\n", s->resolution_x, s->resolution_y);
-	printf("\tambi ratio:[%.2f]\n", s->ambi_ratio);
-	printf("\tambi_color:");
-	print_tuple(&s->ambi_color);
-	printf("\tcamera counter:[%d]\n", s->camera_counter);
-	for (int i = 0; i < s->camera_counter; i++) {
-		print_camera(s->cameras[i]);
-	}
-	printf("\tlight counter:[%d]\n", s->light_counter);
-	for (int i = 0; i < s->light_counter; i++) {
-		print_light(s->lights[i]);
-	}
-	printf("\tshape counter:[%d]\n", s->shape_counter);
-	for (int i = 0; i < s->shape_counter; i++) {
-		print_shape(s->shapes[i]);
-	}
-	printf("====================\n");
 }

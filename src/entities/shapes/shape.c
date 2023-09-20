@@ -12,21 +12,6 @@
 
 #include "../../../heads_global/minirt.h"
 
-/* DEBUG */
-void	print_shape(t_shape *sh)
-{
-	printf("\t\t======================\n");
-	printf("\t\ttype:[%c]\n", sh->type);
-	printf("\t\tmaterial:\n");
-	print_material(&sh->matrl);
-	printf("\t\ttrans:\n");
-	print_matrix(&sh->trans);
-	printf("\t\tshape @ [%p]\n", sh->shape);
-
-	printf("\t\t= = = = = = = = = = = = =\n");
-}
-/* ***** */
-
 t_shape	*make_shape(char type, void *shape_itself)
 {
 	t_shape	*sh;

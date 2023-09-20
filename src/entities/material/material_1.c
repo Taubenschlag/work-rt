@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   material_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:39:54 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/20 09:49:39 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,24 @@
 
 void	make_l_p(t_lightning_pack *pack, t_light *l, t_computations *c)
 {
+	/* DEBUG */
+	//printf("\tmake_light_pack\n:");
+	//printf("col :");
+	//print_tuple(&l->color);
+	//printf("pos :");
+	//print_tuple(&l->position);
+	/* ***** */
 	t_tuple	tmp;
 
 	tuple_copy(&pack->eye_v, &c->eyev);
 	pack->l = l;
 	pack->m = &c->shape->matrl;
+	/* DEBUG */
+	printf("\npack :");
+	print_material(pack->m);
+	printf("comp :");
+	print_material(&c->shape->matrl);
+	/* ***** */
 	tuple_copy(&pack->norm_v, &c->normv);
 	tuple_copy(&pack->posit, &c->point);
 	tuple_multiply(&pack->ef_color, &c->shape->matrl.color, &l->color);
@@ -62,4 +75,5 @@ void	lightning(t_tuple *amb_color, t_lightning_pack *p, int in_shadow)
 		tuple_add(&tmp, amb_color, &p->diffuse);
 		tuple_add(amb_color, &tmp, &p->specular);
 	}
+	//free(p);
 }

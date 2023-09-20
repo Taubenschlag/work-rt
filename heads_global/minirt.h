@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:11:07 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 14:05:08 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/18 18:31:43 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,21 @@ double	dmin(double a, double b);
 double	mins(double *a, int length);
 double	maxs(double *a, int length);
 void	swap(double *x, double *y);
+
+/* DEBUG */
+// debug.c
+void	print_scene(t_scene *s);
+void	print_camera(t_camera *cam);
+void	print_light(t_light *l);
+void	print_shape(t_shape *sh);
+void	print_material(t_matrl *m);
+void	print_matrix(t_matrix *m);
+void	print_tuple(t_tuple *t);
+void	print_world(t_world *w);
+void	print_intersect_list(t_intersection_list *intersect);
+void	print_intersection(t_intersection *intersect, int i);
+void	print_computations(t_computations *comp);
+void	print_ray(t_ray *ray, int y, int x);
+/* ***** */
 
 #endif

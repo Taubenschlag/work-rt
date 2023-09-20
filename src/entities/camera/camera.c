@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 22:12:28 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/19 17:40:01 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
-
-/* DEBUG */
-void	print_camera(t_camera *cam)
-{
-	printf("\t\t=========================\n");
-	printf("\t\tCAMERA\n");
-	printf("\t\ttuple from:");
-	print_tuple(&cam->from);
-	printf("\t\tname:[%s]\n", cam->name);
-	printf("\t\tsize h:[%d], v:[%d], pix_size:[%.2f]\n", cam->h_size, cam->v_size, cam->pix_size);
-	printf("\t\ttransform:\n");
-	print_matrix(&cam->transform);
-	printf("\t\thalf:[%.2f], h_w:[%.2f], h_h:[%.2f], aspect:[%.2f]\n", cam->half, cam->half_w, cam->half_h, cam->aspect);
-	printf("\t\t= = = = = = = = = = = = =\n");
-}
-/* ***** */
 
 t_camera	*make_camera(int h_s, int v_s, double fov)
 {
@@ -61,13 +45,20 @@ void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp)
 
 	xwrld = c->half_w - ((double)y + 0.5) * c->pix_size;
 	ywrld = c->half_h - ((double)x + 0.5) * c->pix_size;
+	/* DEBUG */
+	//printf("\tRAY_FOR PIX\n");
+	/* ***** */
 	matrix_invert(m_tmp, &c->transform);
-	tuple_set(&tmp_p, xwrld, ywrld, -1);
-	tuple_set(&tmp, 0, 0, 0);
+	tuple_set(&tmp_p, ywrld, xwrld, -1);
+	tuple_set(&tmp, 0.0, 0.0, 0.0);
 	tuple_apply_trans_matrix(&pixel, &m_tmp->inv, &tmp_p);
 	tuple_apply_trans_matrix(&r->origin, &m_tmp->inv, &tmp);
 	tuple_substract(&tmp_p, &pixel, &r->origin);
 	tuple_normalize(&r->dir, &tmp_p);
+	/* DEBUG */
+	//printf("\tdirection:");
+	//print_tuple(&r->dir);
+	/**/
 }
 
 void	render(t_camera *c, t_world *w, t_canvas *img)

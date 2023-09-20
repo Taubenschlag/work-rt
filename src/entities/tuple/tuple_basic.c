@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tuple_basic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 21:35:59 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/18 14:11:07 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
-
-/* DEBUG */
-void	print_tuple(t_tuple *t)
-{
-	printf("\ttuple x:[%.2f], y:[%.2f], z:[%.2f], type:[%d]\n", t->x, t->y, t->z, t->type);
-}
-/* ***** */
 
 void	tuple_set(t_tuple *t, double x, double y, double z)
 {
