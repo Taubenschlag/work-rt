@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:36:27 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/20 17:26:40 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ int	in_shadow(t_world *w, t_tuple *p, t_light *current_light, t_tmp_m *m_tmp)
 	tuple_normalize(&direction, &v);
 	ray_ray(&ray, p, &direction);
 	h = hit(intersect_world(&ray, w, m_tmp));
+	/* DEBUG */
+	//printf("\n");
+	//printf("h @ [%p]\tdist:[%.2f] - h->t:[%.2f]\n", h, dist, h->t);
+	//print_tuple(&v);
+	//printf("ray:");
+	//print_ray(&ray, 0, 0);
+	/* ***** */
 	if (h && (dist - h->t) > 0.00001)
 	{
 		free(h);

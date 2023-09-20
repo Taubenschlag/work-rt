@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/19 18:06:49 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:45:51 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 			color_at(w, &r, &m_tmp);
 			/* DEBUG */
 			//print_ray(&r, y, x);
-			//printf("argb_rend: color: ");
+			//printf("\targb_rend: color: ");
 			//print_tuple(&m_tmp.color);
 			/* ***** */
 			img->canvas[y][x] = tuple_to_argb(&m_tmp.color);

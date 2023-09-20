@@ -82,7 +82,7 @@ void	precomp(t_computations	*comps, t_intersection *i, t_ray *r, t_tmp_m *m_tmp)
 void	shade_hit(t_world *w, t_computations *cs, t_light *current, t_tmp_m *m_tmp)
 {
 	make_l_p(&m_tmp->pack, current, cs);
-	lightning(&m_tmp->color, &m_tmp->pack,
+	lightning(&m_tmp->tmp_color, &m_tmp->pack,
 			in_shadow(w, &cs->overpoint, current, m_tmp));
 }
 
@@ -91,7 +91,7 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 	t_intersection_list	*l;
 	t_intersection		*i;
 	t_computations		c;
-	t_tuple				tmp_color1;
+	//t_tuple				tmp_color1;
 	t_tuple				tmp_color2;
 	int					j;
 
@@ -104,14 +104,28 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 	{
 		precomp(&c, i, r, m_tmp);
 		shade_hit(w, &c, &w->ambienace, m_tmp);
-		tuple_copy(&tmp_color1, &m_tmp->color);
+		tuple_copy(&tmp_color2, &m_tmp->tmp_color);
 		//free(c.shape);
+			/* DEBUG */
+			printf("\n");
+			printf("\t\tcolor :");
+			print_tuple(&m_tmp->tmp_color);
+			/* ***** */
+
 		while (++j < w->lights_counter)
 		{
 			precomp(&c, i, r, m_tmp);
+
 			shade_hit(w, &c, w->lights[j], m_tmp);
-			tuple_copy(&tmp_color2, &m_tmp->color);
-			tuple_add(&m_tmp->color, &tmp_color1, &tmp_color2);
+			//tuple_copy(&tmp_color2, &m_tmp->color);
+			tuple_add(&m_tmp->color, &m_tmp->tmp_color, &tmp_color2);
+
+			/* DEBUG */
+			//printf("\n");
+			//printf("\t\tcolor :");
+			//print_tuple(&m_tmp->color);
+			/* ***** */
+
 			//free(c.shape);
 		}
 	}
