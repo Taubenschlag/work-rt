@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/20 18:45:51 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:31:58 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 ** In this f() t_ray is created and used to project it through the objects.
 ** t_tuple *color is used to retrieve the color of each pixel
 ** and convert it to RGB before saving it on the canvas.
-**
+** 
+** the t_tmp_m structure located in matrix.h
+** contain the temp t_structs for intermediat computation
+** also used in render() when saving the image in the file
 */
 void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 {
-	/* DEBUG */
-	// the following structure will contain the temp t_structs for computation
-	// also used in render() when saving the image in the file
-	t_tmp_m	m_tmp; // located in matrix.h
+	t_tmp_m	m_tmp;
 	t_ray		r;
 	int			y;
 	int			x;
@@ -37,11 +37,6 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 		{
 			ray_for_pix(&r, c, y, x, &m_tmp);
 			color_at(w, &r, &m_tmp);
-			/* DEBUG */
-			//print_ray(&r, y, x);
-			//printf("\targb_rend: color: ");
-			//print_tuple(&m_tmp.color);
-			/* ***** */
 			img->canvas[y][x] = tuple_to_argb(&m_tmp.color);
 		}
 	}
@@ -101,10 +96,6 @@ void	display_scene(t_scene *s)
 	t_world		w;
 	int			cam;
 
-	/* DEBUG */
-	printf("DISPLAY SCENE\n");
-	//print_scene(s);
-	/* ***** */
 	cam = 0;
 	w.shape_counter = s->shape_counter;
 	init_world(&w, s->shapes, s->lights, s->light_counter);
@@ -112,9 +103,6 @@ void	display_scene(t_scene *s)
 	while (++cam <= s->camera_counter)
 	{
 		world_set_ambience(&w.ambienace, &s->cameras[cam - 1]->from, &s->ambi_color);
-		/* DEBUG */
-		//print_world(&w);
-		/* ***** */
 		argb_render(s->cameras[cam - 1], &w, &c);
 		data->imgs[cam] = mlx_new_image(
 				data->mlx, s->resolution_x, s->resolution_y);

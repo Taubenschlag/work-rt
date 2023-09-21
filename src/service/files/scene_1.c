@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 20:06:01 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 18:33:07 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,12 @@ void	parse_scene(int fd, int *counters, t_scene *s)
 
 	while (get_next_line(fd, &line))
 	{
-		//if (++i < 3 && line && !ft_strequals(line, ""))
 		if (line && !ft_strequals(line, ""))
 		{
-			/* DEBUG */
-			printf("parce_scene, line:[%s]\n", line);
-			/* ***** */
 			handle_line(ft_whitespaces(line), s);
-			/* DEBUG */
-			//printf("parce_scene, line:[%s]\nexit\n", line);
-			/* ***** */
 		}
 		free(line);
 	}
-	/* DEBUG */
-	printf("\tlast line:[%s]\n", line);
-	//exit(0);
-	/* ***** */
 	if (line && !ft_strequals(line, ""))
 		handle_line(ft_whitespaces(line), s);
 	free(line);

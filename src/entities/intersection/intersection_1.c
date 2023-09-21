@@ -34,14 +34,14 @@ t_intersection_list	*intersect_world(t_ray *r, t_world *w, t_tmp_m *m_tmp)
 	int					i;
 	int					j;
 	int					size;
+	t_intersection_list	*unsorted[w->shape_counter];
 
-	w->unsorted = malloc(sizeof(t_intersection_list *) * w->shape_counter);
 	i = w->shape_counter;
 	size = 0;
 	while (--i >= 0)
 	{
-		w->unsorted[i] = intersect_shape(w->shapes[i], r, m_tmp);
-		size += w->unsorted[i]->size;
+		unsorted[i] = intersect_shape(w->shapes[i], r, m_tmp);
+		size += unsorted[i]->size;
 	}
 	w->merged = intersection_list_make(size);
 	size = -1;
@@ -49,12 +49,11 @@ t_intersection_list	*intersect_world(t_ray *r, t_world *w, t_tmp_m *m_tmp)
 	while (++i < w->shape_counter)
 	{
 		j = -1;
-		while (++j < w->unsorted[i]->size)
-			w->merged->list[++size] = w->unsorted[i]->list[j];
-		free(w->unsorted[i]->list);
-		free(w->unsorted[i]);
+		while (++j < unsorted[i]->size)
+			w->merged->list[++size] = unsorted[i]->list[j];
+		free(unsorted[i]->list);
+		free(unsorted[i]);
 	}
-	free(w->unsorted);
 	return (w->merged);
 }
 
@@ -82,7 +81,7 @@ void	precomp(t_computations	*comps, t_intersection *i, t_ray *r, t_tmp_m *m_tmp)
 void	shade_hit(t_world *w, t_computations *cs, t_light *current, t_tmp_m *m_tmp)
 {
 	make_l_p(&m_tmp->pack, current, cs);
-	lightning(&m_tmp->tmp_color, &m_tmp->pack,
+	lightning(&m_tmp->color, &m_tmp->pack,
 			in_shadow(w, &cs->overpoint, current, m_tmp));
 }
 
@@ -91,8 +90,6 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 	t_intersection_list	*l;
 	t_intersection		*i;
 	t_computations		c;
-	//t_tuple				tmp_color1;
-	t_tuple				tmp_color2;
 	int					j;
 
 	j = -1;
@@ -104,30 +101,48 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 	{
 		precomp(&c, i, r, m_tmp);
 		shade_hit(w, &c, &w->ambienace, m_tmp);
-		tuple_copy(&tmp_color2, &m_tmp->tmp_color);
 		//free(c.shape);
-			/* DEBUG */
-			printf("\n");
-			printf("\t\tcolor :");
-			print_tuple(&m_tmp->tmp_color);
-			/* ***** */
-
 		while (++j < w->lights_counter)
 		{
 			precomp(&c, i, r, m_tmp);
 
+			tuple_copy(&m_tmp->tmp_clr_1, &m_tmp->color);
 			shade_hit(w, &c, w->lights[j], m_tmp);
-			//tuple_copy(&tmp_color2, &m_tmp->color);
-			tuple_add(&m_tmp->color, &m_tmp->tmp_color, &tmp_color2);
-
-			/* DEBUG */
-			//printf("\n");
-			//printf("\t\tcolor :");
-			//print_tuple(&m_tmp->color);
-			/* ***** */
-
+			tuple_copy(&m_tmp->tmp_clr_2, &m_tmp->color);
+			tuple_add(&m_tmp->color, &m_tmp->tmp_clr_1, &m_tmp->tmp_clr_2);
 			//free(c.shape);
 		}
 	}
 	free(i);
 }
+
+/*
+t_intersection_list	*intersect_world(t_ray *r, t_world *w, t_tmp_m *m_tmp)
+{
+	int					i;
+	int					j;
+	int					size;
+
+	w->unsorted = malloc(sizeof(t_intersection_list *) * w->shape_counter);
+	i = w->shape_counter;
+	size = 0;
+	while (--i >= 0)
+	{
+		w->unsorted[i] = intersect_shape(w->shapes[i], r, m_tmp);
+		size += w->unsorted[i]->size;
+	}
+	w->merged = intersection_list_make(size);
+	size = -1;
+	i = -1;
+	while (++i < w->shape_counter)
+	{
+		j = -1;
+		while (++j < w->unsorted[i]->size)
+			w->merged->list[++size] = w->unsorted[i]->list[j];
+		free(w->unsorted[i]->list);
+		free(w->unsorted[i]);
+	}
+	free(w->unsorted);
+	return (w->merged);
+}
+*/

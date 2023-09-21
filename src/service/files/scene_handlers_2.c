@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_handlers_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 21:26:43 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 18:41:02 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ void	handle_c(char **input, t_scene *s)
 	t_tuple		tmp;
 	t_camera	*cam;
 
-	// DEBUG //
-	//printf("CAMERA\n");
-	///////////
 	if (input && ft_strequals(input[0], "c"))
 	{
 		cam = make_camera(
@@ -41,9 +38,6 @@ void	handle_c(char **input, t_scene *s)
 
 void	handle_l(char **input, t_scene *s)
 {
-	// DEBUG 
-	//printf("LIGHT\n");
-	//
 	t_light	*lt;
 	t_tuple	from;
 	t_tuple	color;
@@ -78,9 +72,6 @@ void	handle_sphere(char **values, t_scene *s)
 	t_matrix	tmp_m_scale;
 	t_tuple		tmp_tuple;
 
-	// DEBUG
-	//printf("SPHERE\n");
-	//
 	set_tuple(&centre, values[1], 'p');
 	diameter = ft_atod(values[2]);
 	set_tuple(&tmp_tuple, values[3], 'c');
@@ -88,7 +79,6 @@ void	handle_sphere(char **values, t_scene *s)
 	tuple_point(&tmp_tuple, 0, 0, 0);
 	s->shapes[s->shape_counter] = make_shape('s', nsphere_unit(&tmp_tuple));
 	mat_with_col(&s->shapes[s->shape_counter]->matrl, &color); 
-
 	matrix_translate(&tmp_m, &centre);
 	tuple_point(&tmp_tuple, diameter / 2, diameter / 2, diameter / 2);
 	matrix_scale(&tmp_m_scale, &tmp_tuple);
@@ -99,9 +89,6 @@ void	handle_sphere(char **values, t_scene *s)
 
 void	handle_plane(char **values, t_scene *s)
 {
-	// DEBUG 
-	//printf("PLANE\n");
-	//
 	t_tuple		coordinate;
 	t_tuple		norm;
 	t_tuple		color;

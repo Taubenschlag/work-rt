@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 17:43:53 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 18:32:22 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_intersection_list	*intersect_shape(t_shape *s, t_ray *r, t_tmp_m *m_tmp)
 		list = intersection_ray_triangle(s, &ray);
 	if (s->type == 'q')
 		list = intersection_ray_square(s, &ray);
-	//ray_free(ray);
 	return (list);
 }
 

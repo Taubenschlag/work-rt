@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/19 17:07:32 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:50:24 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@ void	tuple_apply_trans_matrix(t_tuple *res, t_matrix *trans_matrix, t_tuple *tup
 	t_matrix	source_tuple_converted;
 	t_matrix	product;
 
-	/* DEBUG 
-	printf("tuple_apply_trans_matrix\n");
-	print_matrix(trans_matrix);
-	printf("tup:\t");
-	print_tuple(tup);
-*/
-	/* ***** */
 	tuple_to_matrix(&source_tuple_converted, tup);
 	if (trans_matrix)
 	{

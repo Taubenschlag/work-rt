@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_handlers_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 21:27:10 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 18:50:46 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	handle_square(char **values, t_scene *s)
 {
-	// DEBUG
-	//printf("SQUARE\n");
-	//
 	t_square	*sq;
 	t_matrix	tmp_m_trans;
 	t_matrix	tmp_m;
@@ -54,9 +51,6 @@ void	handle_square(char **values, t_scene *s)
 
 void	handle_cylinder(char **values, t_scene *s)
 {
-	// DEBUG
-	//printf("CYLINDER\n");
-	//
 	t_cylinder	*c;
 	t_matrix	tmp_translate;
 	t_matrix	tmp_m;
@@ -97,9 +91,6 @@ void	handle_cylinder(char **values, t_scene *s)
 
 void	handle_triangle(char **values, t_scene *s)
 {
-	// DEBUG
-	//printf("TRIANGLE\n");
-	//
 	t_triangle	*tr;
 	t_tuple	a;
 	t_tuple	b;
@@ -126,9 +117,6 @@ void	handle_triangle(char **values, t_scene *s)
 
 void	handle_cone(char **values, t_scene *s)
 {
-	// DEBUG
-	//printf("CONE\n");
-	//
 	t_cone		*c;
 	t_matrix	tmp_m_trans;
 	t_matrix	tmp_m;
@@ -167,9 +155,6 @@ void	handle_cone(char **values, t_scene *s)
 
 void	handle_cube(char **values, t_scene *s)
 {
-	// DEBUG
-	//printf("CUBE\n");
-	//
 	t_cube		*c;
 	t_matrix	tmp_m_trans;
 	t_matrix	tmp_m;

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:11:07 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/18 18:31:43 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:51:22 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ double	maxs(double *a, int length);
 void	swap(double *x, double *y);
 
 /* DEBUG */
-// debug.c
 void	print_scene(t_scene *s);
 void	print_camera(t_camera *cam);
 void	print_light(t_light *l);

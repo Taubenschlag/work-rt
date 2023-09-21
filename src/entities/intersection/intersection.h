@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:37:46 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 12:22:13 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct world
 	t_light				**lights;
 	t_light				ambienace;
 	t_intersection_list	*merged;
-	t_intersection_list	**unsorted;
+	//t_intersection_list	**unsorted;
 }	t_world;
 
 void	make_l_p(t_lightning_pack *pack, t_light *l, t_computations *c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 18:15:51 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 18:28:26 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	co_intrs_cap(t_shape *s, t_ray *r, t_intersection_list **ret)
 			ret);
 }
 
+/* PAGE 189 TRTC */
 void	cone_discriminant(t_cone *co, t_ray *ray)
 {
 	co->a = ray->dir.x * ray->dir.x
@@ -81,7 +82,7 @@ t_intersection_list	*intersection_ray_cone(t_shape *s, t_ray *ray)
 		if (fabs(co->b) > 0.0000001)
 			add_intersection(
 				intersect_make_shape(
-					s, -1 * co->c / (2 * co->b)),
+					s, -1 * co->c / 2 * co->b),
 				&ret);
 		co_intrs_cap(s, ray, &ret);
 		return (ret);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 13:20:50 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 13:33:36 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_intersection_list	*intersection_ray_square(t_shape *s, t_ray *ray)
 	tr = make_shape('i', (t_triangle *)&q->t2);
 	ret = intersection_ray_triangle(tr, ray);
 	//matrix_free(tr->trans);
-	//free(tr);
+	free(tr);
 	if (ret->size == 1)
 	{
 		ret->list[0]->shape = s;
@@ -93,7 +93,7 @@ t_intersection_list	*intersection_ray_square(t_shape *s, t_ray *ray)
 	tr = make_shape('i', (t_triangle *)&q->t1);
 	temp = intersection_ray_triangle(tr, ray);
 	//matrix_free(tr->trans);
-	//free(tr);
+	free(tr);
 	if (temp->size == 1)
 		temp->list[0]->shape = s;
 	return (temp);

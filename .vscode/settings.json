@@ -3,6 +3,8 @@
 		"*.c": "c",
 		"minirt.h": "c",
 		"material.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"limits": "c",
+		"*.tcc": "c"
 	}
 }

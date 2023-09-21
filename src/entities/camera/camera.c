@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/19 17:40:01 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:40:32 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_camera	*make_camera(int h_s, int v_s, double fov)
 	t_camera	*cam;
 
 	cam = (t_camera *)malloc(sizeof(t_camera));
+	cam->name = NULL;
 	cam->h_size = h_s;
 	cam->v_size = v_s;
 	cam->half = tan(fov / 2);
@@ -45,9 +46,6 @@ void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp)
 
 	xwrld = c->half_w - ((double)y + 0.5) * c->pix_size;
 	ywrld = c->half_h - ((double)x + 0.5) * c->pix_size;
-	/* DEBUG */
-	//printf("\tRAY_FOR PIX\n");
-	/* ***** */
 	matrix_invert(m_tmp, &c->transform);
 	tuple_set(&tmp_p, ywrld, xwrld, -1);
 	tuple_set(&tmp, 0.0, 0.0, 0.0);
@@ -55,19 +53,16 @@ void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp)
 	tuple_apply_trans_matrix(&r->origin, &m_tmp->inv, &tmp);
 	tuple_substract(&tmp_p, &pixel, &r->origin);
 	tuple_normalize(&r->dir, &tmp_p);
-	/* DEBUG */
-	//printf("\tdirection:");
-	//print_tuple(&r->dir);
-	/**/
 }
 
+/*
+** The t_tmp_m structure will contain the temp t_structs for computation
+** also used in render() when saving the image in the file
+** it is declared in matrix.h
+*/
 void	render(t_camera *c, t_world *w, t_canvas *img)
 {
-	/* DEBUG */
-	// the following structure will contain the temp t_structs for computation
-	// also used in render() when saving the image in the file
-	t_tmp_m	m_tmp; // located in matrix.h
-	///////////
+	t_tmp_m	m_tmp;
 	t_ray		r;
 	int			y;
 	int			x;

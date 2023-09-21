@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/20 19:07:24 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:39:56 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ typedef	struct s_tmp
 	t_matrix	sub;
 	t_matrix	transposed;
 	double		determinant;
+	/* folowing 3 tuples are used in color_at() */
 	t_tuple		color; // this will hold the calculations from color_at()
-	t_tuple		tmp_color;
+	t_tuple		tmp_clr_1;
+	t_tuple		tmp_clr_2;
 	t_lightning_pack pack;
 }	t_tmp_m;
 

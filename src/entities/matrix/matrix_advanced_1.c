@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_advanced_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 21:46:20 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 18:50:13 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,16 @@
 ** c	0,5,-8		0,0,1		0,1,0		70
 ** l	-10,10,-10	0.8			255,255,255	
 ** sp	0,5,0		5.0			225,25,25*
-**
-** So, it takes around 18 seconds to render just one sphere and use 
-** DEBUG printfs in the function bellow
-** ..around 7 seconds to render same setting but without printf DEBUG statements
 */
-//t_matrix	*matrix_multiply(t_matrix *res, t_matrix *m1, t_matrix *m2)
 void	matrix_multiply(t_matrix *res, t_matrix *m1, t_matrix *m2)
 {
 	int			it[3];
 	double		tmp;
 
 	matrix_matrix(res, min(m1->h, m2->h), min(m1->w, m2->w));
-	/* DEBUG 
-	printf("mtx_multiply\n");
-	printf("\t m1->h:[%d],  m1->w:[%d]\n", m1->h, m1->w);
-	printf("\t m2->h:[%d],  m2->w:[%d]\n", m2->h, m2->w);
-	printf("\tres->h:[%d], res->w:[%d]\n", res->h, res->w);
-	//exit(0);
-	printf("mtx m1:\n");
-	print_matrix(m1);
-	printf("mtx m2:\n");
-	print_matrix(m2);
-	*/
 	it[0] = -1;
 	while (++it[0] < res->h)
 	{
-		// DEBUG 
-		//printf(" [");
-		//
 		it[1] = -1;
 		while (++it[1] < res->w)
 		{
@@ -56,18 +37,11 @@ void	matrix_multiply(t_matrix *res, t_matrix *m1, t_matrix *m2)
 			while (it[2] < m1->w && it[2] < m2->h)
 			{
 				tmp += m1->mtx[it[0]][it[2]] * m2->mtx[it[2]][it[1]];
-				// DEBUG 
-				//printf("\ttmp:[%.1f]\tm1[%d][%d]: [%.1f]\tm2[%d][%d]: [%.1f]\n", tmp, it[0], it[2], m1->matrix[it[0]][it[1]], it[2], it[1], m1->matrix[it[2]][it[1]]);
-				//
 				it[2]++;
 			}
 			res->mtx[it[0]][it[1]] = tmp;
 		}
 	}
-	/* DEBUG
-	printf("mtx res:\n");
-	print_matrix(res);
-	*/
 }
 
 void	matrix_transpose(t_matrix *res, t_matrix *m)

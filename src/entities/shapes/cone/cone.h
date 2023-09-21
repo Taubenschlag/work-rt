@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 16:30:28 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 18:26:41 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,4 @@ void		cone_normale_at(t_tuple *res, t_tuple *t, t_cone *c);
 int			check_cap_cone_max(t_ray *r, double t, double max);
 int			check_cap_cone_min(t_ray *r, double t, double min);
 
-#endif //RT_CHALLENGE_CONE_H
+#endif

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/13 18:02:15 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:38:26 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,5 @@ int	main(int ac, char **av)
 		save_scene(&s, fd_list);
 	else
 		display_scene(&s);
-	/* DEBUG */
-	printf("MAIN\nexit\n");
-	exit(0);
-	/* ***** */
 	return (0);
 }

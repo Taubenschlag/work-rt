@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 21:26:22 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/21 18:51:05 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	set_tuple(t_tuple *tuple, char *value, char type)
 		tuple->type = IS_VECTOR;
 	if (type == 'c')
 		tuple->type = 2;
+	cleanup(input);
 }
 
 void	cleanup(char **values)
@@ -43,9 +44,6 @@ void	cleanup(char **values)
 
 void	handle_r(char **input, t_scene *s)
 {
-	/* DEBUG */
-	//printf("RESOLUTION\n");
-	/* ***** */
 	int		i;
 
 	i = -1;
@@ -65,9 +63,6 @@ void	handle_r(char **input, t_scene *s)
 
 void	handle_a(char **input, t_scene *s)
 {
-	/* DEBUG */
-	//printf("AMBIANCE\n");
-	/* ***** */
 	t_tuple	color;
 
 	s->ambi_ratio = ft_atod(input[1]);
@@ -78,9 +73,6 @@ void	handle_a(char **input, t_scene *s)
 
 void	handle_line(char **input, t_scene *s)
 {
-	/*
-	printf("hanle_line\texit\n");
-	*/
 	if (ft_strequals(input[0], "R"))
 		handle_r(input, s);
 	else if (ft_strequals(input[0], "A"))
