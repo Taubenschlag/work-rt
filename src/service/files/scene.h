@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 14:00:38 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:44:13 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ typedef struct scene
 	int			resolution_y;
 	double		ambi_ratio;
 	t_tuple		ambi_color;
-	int			camera_counter;
+	int			camera_count;
 	t_camera	**cameras;
-	int			light_counter;
+	int			light_count;
 	t_light		**lights;
-	int			shape_counter;
+	int			shape_count;
 	t_shape		**shapes;
 }	t_scene;
 
@@ -38,17 +38,17 @@ void	free_scene(t_scene *s);
 void	handle_r(char **input, t_scene *s);
 void	handle_a(char **input, t_scene *s);
 void	handle_c(char **input, t_scene *s);
-void	handle_l(char **input, t_scene *s);
-void	handle_line(char **input, t_scene *s);
+bool	handle_l(char **input, t_scene *s);
+bool	handle_line(char **input, t_scene *s);
 void	handle_plane(char **values, t_scene *s);
 void	handle_sphere(char **values, t_scene *s);
-void	handle_square(char **values, t_scene *s);
+bool	handle_square(char **values, t_scene *s);
 void	handle_cylinder(char **values, t_scene *s);
 void	handle_triangle(char **values, t_scene *s);
 void	handle_cone(char **values, t_scene *s);
 void	handle_cube(char **values, t_scene *s);
 void	save_scene(t_scene *s, int *fd_list);
-void	parse_scene(int fd, int *counters, t_scene *s);
+bool	parse_scene(int fd, t_scene *s);
 void	cleanup(char **values);
 int		*create_files(int *counters);
 

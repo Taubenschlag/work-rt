@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:33:07 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:47:30 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,56 @@ void	init_scene(int *counters, t_scene *scene)
 	scene->resolution_y = -1;
 	scene->ambi_ratio = -1;
 	tuple_color(&scene->ambi_color, 0, 0, 0);
-	scene->camera_counter = 0;
+	scene->camera_count = 0;
 	scene->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[CAM]);
-	scene->light_counter = 0;
+	scene->light_count = 0;
 	scene->lights = (t_light **)malloc(sizeof(t_light *) * counters[LHT]);
-	scene->shape_counter = 0;
+	scene->shape_count = 0;
 	scene->shapes = (t_shape **)malloc(
 			sizeof(t_shape *) * count_what(counters, SHAPES));
 }
 
-void	parse_scene(int fd, int *counters, t_scene *s)
+bool	parse_scene(int fd, t_scene *s)
 {
-	char	*line;
+	char	line[GNL_BUF_SIZE];
+	char	*l;
+	char	**split;
 
-	while (get_next_line(fd, &line))
+	l = get_next_line(fd, line);
+	while (l != NULL)
 	{
-		if (line && !ft_strequals(line, ""))
+		if (l && !ft_strequals(line, ""))
+		{
+			split = ft_whitespaces(line);
+			if (!handle_line(split, s))
+			{
+				cleanup(split);
+				return (false);
+			}
+			cleanup(split);
+		}
+		l = get_next_line(fd, line);
+	}
+	close(fd);
+	return (true);
+}
+
+/*
+void	parse_scene(int fd, t_scene *s)
+{
+	char	line[GNL_BUF_SIZE];
+	char	*l;
+	char	**split;
+
+	l = get_next_line(fd, line);
+	while (l != NULL)
+	{
+		if (l && !ft_strequals(line, ""))
 		{
 			handle_line(ft_whitespaces(line), s);
 		}
-		free(line);
+		l = get_next_line(fd, line);
 	}
-	if (line && !ft_strequals(line, ""))
-		handle_line(ft_whitespaces(line), s);
-	free(line);
-	free(counters);
 	close(fd);
 }
+*/

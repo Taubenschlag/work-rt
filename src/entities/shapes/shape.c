@@ -17,6 +17,8 @@ t_shape	*make_shape(char type, void *shape_itself)
 	t_shape	*sh;
 
 	sh = (t_shape *)malloc(sizeof(t_shape));
+	if (sh == NULL)
+		return (NULL);
 	sh->shape = shape_itself;
 	sh->type = type;
 	matrix_identity(&sh->trans, 4);

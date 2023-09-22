@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 11:29:04 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/05 11:29:16 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/05 17:46:03 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isnumber(char *str)
 {

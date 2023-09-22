@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 00:51:23 by rokupin           #+#    #+#             */
-/*   Updated: 2023/08/21 16:16:26 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/22 10:44:36 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,15 @@ void	instruction_switch(char **str, int **counters_ptr, int *correct)
 		*correct = 0;
 }
 
-int	*make_counters_array(void)
+void	init_counters_array(int *counters)
 {
-	int	*counters;
 	int	i;
 
-	i = -1;
-	counters = malloc(sizeof(int) * INSTRUCTION_SET_SIZE);
-	while (++i < INSTRUCTION_SET_SIZE)
-		counters[i] = 0;
-	return (counters);
+	i = 0;
+	while (i < INSTRUCTION_SET_SIZE)
+	{
+		counters[i++] = 0;
+	}
 }
 
 void	cleanup_arr(char **values)
@@ -58,38 +57,36 @@ void	cleanup_arr(char **values)
 	free(values);
 }
 
-void	check_row(int *correct, char **line, char ***values, int *entry)
+void	check_row(int *correct, char *line, char ***values, int *entry)
 {
 	if (*correct)
 	{
-		*values = ft_whitespaces(*line);
+		*values = ft_whitespaces(line);
 		if (*values && **values)
 			instruction_switch(*values, &entry, correct);
 		cleanup_arr(*values);
 	}
-	free(*line);
 }
 
-int	*check_file(char *filename)
+bool	check_file(char *filename, int *count)
 {
 	int		fd;
-	char	*line;
+	char	line[GNL_BUF_SIZE];
 	char	**values;
-	int		*entry;
 	int		correct;
 
+	values = NULL;
+	correct = TRUE;
 	/* this might be the second time to open file */
 	fd = open(filename, O_RDONLY);
-	entry = make_counters_array();
-	correct = TRUE;
-	while (get_next_line(fd, &line))
-		check_row(&correct, &line, &values, entry);
-	check_row(&correct, &line, &values, entry);
+	init_counters_array(count);
+	while (get_next_line(fd, line))
+		check_row(&correct, line, &values, count);
+	check_row(&correct, line, &values, count);
 	close(fd);
-	if (!correct || entry[RES] != 1 || entry[AMB] > 1 || entry[CAM] < 1)
+	if (!correct || count[RES] != 1 || count[AMB] > 1 || count[CAM] < 1)
 	{
-		free(entry);
-		entry = NULL;
+		return (false);
 	}
-	return (entry);
+	return (correct);
 }

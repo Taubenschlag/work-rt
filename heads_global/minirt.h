@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:11:07 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:51:22 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/22 10:40:57 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 # include "../lib/libft/libft.h"
 

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:31:58 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:04:14 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 */
 void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 {
-	t_tmp_m	m_tmp;
+	t_tmp_m		m_tmp;
 	t_ray		r;
 	int			y;
 	int			x;
@@ -102,7 +102,8 @@ void	display_scene(t_scene *s)
 	data = init_mlx_wrapper(s);
 	while (++cam <= s->camera_counter)
 	{
-		world_set_ambience(&w.ambienace, &s->cameras[cam - 1]->from, &s->ambi_color);
+		world_set_ambience(&w.ambienace, \
+					&s->cameras[cam - 1]->from, &s->ambi_color);
 		argb_render(s->cameras[cam - 1], &w, &c);
 		data->imgs[cam] = mlx_new_image(
 				data->mlx, s->resolution_x, s->resolution_y);

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:51:05 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:49:54 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,17 @@ void	cleanup(char **values)
 
 void	handle_r(char **input, t_scene *s)
 {
+	/*
 	int		i;
 
 	i = -1;
+	*/
 	if (s->resolution_x < 0)
 	{
 		s->resolution_x = ft_atoi(input[1]);
 		s->resolution_y = ft_atoi(input[2]);
 	}
+	/*
 	else
 	{
 		while (input[++i])
@@ -59,6 +62,7 @@ void	handle_r(char **input, t_scene *s)
 		free(input);
 	}
 	cleanup(input);
+	*/
 }
 
 void	handle_a(char **input, t_scene *s)
@@ -71,6 +75,32 @@ void	handle_a(char **input, t_scene *s)
 	cleanup(input);
 }
 
+bool	handle_line(char **input, t_scene *s)
+{
+	if (ft_strequals(input[0], "R"))
+		handle_r(input, s);
+	else if (ft_strequals(input[0], "A"))
+		handle_a(input, s);
+	else if (ft_strequals(input[0], "c"))
+		handle_c(input, s);
+	else if (ft_strequals(input[0], "l"))
+		return (handle_l(input, s));
+	else if (ft_strequals(input[0], "sp"))
+		handle_sphere(input, s);
+	else if (ft_strequals(input[0], "pl"))
+		handle_plane(input, s);
+	else if (ft_strequals(input[0], "sq"))
+		return (handle_square(input, s));
+	else if (ft_strequals(input[0], "cy"))
+		handle_cylinder(input, s);
+	else if (ft_strequals(input[0], "tr"))
+		handle_triangle(input, s);
+	else if (ft_strequals(input[0], "co"))
+		handle_cone(input, s);
+	else if (ft_strequals(input[0], "cu"))
+		handle_cube(input, s);
+}
+/*
 void	handle_line(char **input, t_scene *s)
 {
 	if (ft_strequals(input[0], "R"))
@@ -96,3 +126,4 @@ void	handle_line(char **input, t_scene *s)
 	else if (ft_strequals(input[0], "cu"))
 		handle_cube(input, s);
 }
+*/

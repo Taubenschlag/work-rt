@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/20 15:04:34 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/22 10:47:53 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,4 @@ void	lightning(t_tuple *amb_color, t_lightning_pack *p, int in_shadow)
 		tuple_add(&tmp, amb_color, &p->diffuse);
 		tuple_add(amb_color, &tmp, &p->specular);
 	}
-	//free(p);
 }

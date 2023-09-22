@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_whitespaces.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 23:16:10 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/26 00:29:05 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/05 18:11:49 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@ static char	**split(char const *s, char *set)
 	return (table);
 }
 
+/* 
+** Here we receive a string which is the line from the input file
+** which does not contain a \n (new line char in the end of it)
+*/
 char	**ft_whitespaces(char const *s)
 {
 	if (s)

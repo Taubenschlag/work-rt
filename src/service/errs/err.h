@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/08/21 16:16:28 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/22 10:41:59 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "../../../heads_global/minirt.h"
 
 int		check_arguments(int ac, char **av);
-int		*check_file(char *filename);
+bool	check_file(char *filename, int *count);
 void	check_resolution(int **counters_ptr, int *is_correct, char **str);
 void	check_ambiance(int **counters_ptr, int *is_correct, char **str);
 void	check_cameras(int **counters_ptr, int *is_correct, char **str);

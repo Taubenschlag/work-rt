@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:38:26 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:49:10 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int	main(int ac, char **av)
 	int		fd;
 	int		*fd_list;
 	t_scene	s;
-	int		*counters;
+	int		counters[INSTRUCTION_SET_SIZE];
 
 	fd = check_arguments(ac, av);
 	fd_list = NULL;
 	check_fd_argnum(fd, ac);
-	counters = check_file(av[ac - 1]);
+	check_file(av[ac - 1], counters);
 	check_counters(counters);
 	if (ac == 3)
 	{
@@ -54,10 +54,39 @@ int	main(int ac, char **av)
 		check_file_creation(fd_list);
 	}
 	init_scene(counters, &s);
-	parse_scene(fd, counters, &s);
+	if (!parse_scene(fd, &s))
+		return (1);	
 	if (ac == 3)
 		save_scene(&s, fd_list);
 	else
 		display_scene(&s);
 	return (0);
 }
+
+/*
+int	main(int ac, char **av)
+{
+	int		fd;
+	int		*fd_list;
+	t_scene	s;
+	int		counters[INSTRUCTION_SET_SIZE];
+
+	fd = check_arguments(ac, av);
+	fd_list = NULL;
+	check_fd_argnum(fd, ac);
+	check_file(av[ac - 1], counters);
+	check_counters(counters);
+	if (ac == 3)
+	{
+		fd_list = create_files(counters);
+		check_file_creation(fd_list);
+	}
+	init_scene(counters, &s);
+	parse_scene(fd, &s);
+	if (ac == 3)
+		save_scene(&s, fd_list);
+	else
+		display_scene(&s);
+	return (0);
+}
+*/
