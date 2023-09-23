@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:40:32 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:45:32 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_camera	*make_camera(int h_s, int v_s, double fov)
 	t_camera	*cam;
 
 	cam = (t_camera *)malloc(sizeof(t_camera));
+	// malloc protection
 	cam->name = NULL;
 	cam->h_size = h_s;
 	cam->v_size = v_s;
@@ -78,15 +79,5 @@ void	render(t_camera *c, t_world *w, t_canvas *img)
 			color_at(w, &r, &m_tmp);
 			img->canvas[y][x] = tuple_to_rgb(&m_tmp.color);
 		}
-	}
-}
-
-void		free_camera(t_camera *c)
-{
-	if (c)
-	{
-		if (c->name)
-			free(c->name);
-		free(c);
 	}
 }

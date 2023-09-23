@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:27:49 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:09:43 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_cone	*cone_cone(void)
 	t_cone	*cone;
 
 	cone = (t_cone *)malloc(sizeof(t_cone));
+	// malloc protection
 	cone->closed = 0;
 	cone->min = INFINITY * -1;
 	cone->max = INFINITY;

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/22 11:04:14 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:12:38 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,16 @@ t_mlx_wrap	*init_mlx_wrapper(t_scene *s)
 	t_mlx_wrap	*data;
 
 	data = malloc(sizeof(t_mlx_wrap));
+	// malloc protection
 	data->mlx = mlx_init();
-	data->imgs = malloc(sizeof(void *) * (s->camera_counter + 2));
-	data->addr = malloc(sizeof(char *) * (s->camera_counter + 2));
-	data->imgs[s->camera_counter + 1] = NULL;
+	data->imgs = malloc(sizeof(void *) * (s->camera_count + 2));
+	data->addr = malloc(sizeof(char *) * (s->camera_count + 2));
+	// malloc protection
+	data->imgs[s->camera_count + 1] = NULL;
 	data->imgs[0] = NULL;
-	data->win = mlx_new_window(
-			data->mlx, s->resolution_x, s->resolution_y, "miniRT");
-	data->img_counter = s->camera_counter;
+	data->win = mlx_new_window(data->mlx, s->resolution_x, s->resolution_y, "miniRT");
+	// mlx malloc protection
+	data->img_counter = s->camera_count;
 	return (data);
 }
 
@@ -97,21 +99,22 @@ void	display_scene(t_scene *s)
 	int			cam;
 
 	cam = 0;
-	w.shape_counter = s->shape_counter;
-	init_world(&w, s->shapes, s->lights, s->light_counter);
+	w.shape_counter = s->shape_count;
+	init_world(&w, s->shapes, s->lights, s->light_count);
 	data = init_mlx_wrapper(s);
-	while (++cam <= s->camera_counter)
+	while (++cam <= s->camera_count)
 	{
-		world_set_ambience(&w.ambienace, \
-					&s->cameras[cam - 1]->from, &s->ambi_color);
+		world_set_ambience(&w.amb, &s->cameras[cam - 1]->from, &s->ambi_color);
 		argb_render(s->cameras[cam - 1], &w, &c);
 		data->imgs[cam] = mlx_new_image(
 				data->mlx, s->resolution_x, s->resolution_y);
+		// mlx malloc protection
 		data->addr[cam] = mlx_get_data_addr(data->imgs[cam],
 				&(data->bits_per_pixel), &(data->line_length), &(data->endian));
+		// mlx malloc protection
 		fill_image(&c, data, cam);
 		canvas_free(&c);
 	}
-	free_scene(s);
+	//free_scene(s);
 	loop_gui(data);
 }

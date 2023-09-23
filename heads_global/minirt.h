@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:11:07 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/22 10:40:57 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:59:50 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct shape t_shape;
 # include "../src/service/files/scene.h"
 # include "../src/service/window/window.h"
 # include "../src/service/errs/err.h"
+# include "../src/service/free/free.h"
 
 int		min(int a, int b);
 int		max(int a, int b);

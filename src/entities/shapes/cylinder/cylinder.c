@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:50:40 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:09:50 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_cylinder	*cylinder_cylinder(void)
 	t_cylinder	*c;
 
 	c = (t_cylinder *)malloc(sizeof(t_cylinder));
+	// malloc protection
 	c->closed = 0;
 	c->min = INFINITY * -1;
 	c->max = INFINITY * 1;

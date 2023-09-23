@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 12:48:25 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:08:51 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ t_intersection_list	*intersection_ray_cube(t_shape *s, t_ray *ray)
 
 	mints = (double *)malloc(sizeof(double) * 3);
 	maxts = (double *)malloc(sizeof(double) * 3);
+	// malloc protection
 	axis(ray->origin.x, ray->dir.x, &(mints[0]), &(maxts[0]));
 	axis(ray->origin.y, ray->dir.y, &(mints[1]), &(maxts[1]));
 	axis(ray->origin.z, ray->dir.z, &(mints[2]), &(maxts[2]));

@@ -100,7 +100,7 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 	else
 	{
 		precomp(&c, i, r, m_tmp);
-		shade_hit(w, &c, &w->ambienace, m_tmp);
+		shade_hit(w, &c, &w->amb, m_tmp);
 		//free(c.shape);
 		while (++j < w->lights_counter)
 		{
@@ -115,34 +115,3 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 	}
 	free(i);
 }
-
-/*
-t_intersection_list	*intersect_world(t_ray *r, t_world *w, t_tmp_m *m_tmp)
-{
-	int					i;
-	int					j;
-	int					size;
-
-	w->unsorted = malloc(sizeof(t_intersection_list *) * w->shape_counter);
-	i = w->shape_counter;
-	size = 0;
-	while (--i >= 0)
-	{
-		w->unsorted[i] = intersect_shape(w->shapes[i], r, m_tmp);
-		size += w->unsorted[i]->size;
-	}
-	w->merged = intersection_list_make(size);
-	size = -1;
-	i = -1;
-	while (++i < w->shape_counter)
-	{
-		j = -1;
-		while (++j < w->unsorted[i]->size)
-			w->merged->list[++size] = w->unsorted[i]->list[j];
-		free(w->unsorted[i]->list);
-		free(w->unsorted[i]);
-	}
-	free(w->unsorted);
-	return (w->merged);
-}
-*/

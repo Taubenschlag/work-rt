@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/18 14:04:22 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:32:11 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ typedef struct tuple
 	int		type;
 }	t_tuple;
 
-int		is_tuple(char *value, int exclude_neg);
-
 void	tuple_set(t_tuple *t, double x, double y, double z);
 void	tuple_vector(t_tuple *t, double x, double y, double z);
 void	tuple_point(t_tuple *t, double x, double y, double z);
 void	tuple_color(t_tuple *res, double r, double g, double b);
+int		is_tuple(char *value, int exclude_neg);
 
 /* tuple_advanced_1.c */
 int		tuple_is_vector(t_tuple *tuple);
@@ -50,5 +49,6 @@ void	tuple_multiply(t_tuple *res, t_tuple *t1, t_tuple *t2);
 void	tuple_reflect(t_tuple *res, t_tuple *v_in, t_tuple *v_normal);
 void	tuple_color(t_tuple *res, double r, double g, double b);
 void	tuple_copy(t_tuple *res, t_tuple *t);
+void	set_tuple(t_tuple *tuple, char *value, char type);
 
 #endif 

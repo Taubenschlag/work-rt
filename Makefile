@@ -74,19 +74,21 @@ entities/tuple/tuple_advanced_2.c \
 entities/tuple/tuple_advanced_3.c \
 entities/tuple/tuple_basic.c \
 \
-service/errs/file_check_handler.c \
 service/errs/file_instructions_checker.c \
 service/errs/file_shape_description_checker.c \
-service/errs/input_exceptions.c \
+service/errs/valid_input.c \
 \
 service/files/scene_1.c \
 service/files/scene.c \
+service/files/scene_handlers.c \
 service/files/scene_handlers_1.c \
 service/files/scene_handlers_2.c \
-service/files/scene_handlers.c \
+service/files/scene_handlers_3.c \
 \
 service/window/mlx_handlers.c \
 service/window/window.c \
+\
+service/free/free.c \
 \
 debug.c 
 
@@ -123,6 +125,7 @@ get-libft:
 # 	./mlx_linux/configure
 
 pre-build:
+	mkdir -p ${ODIR}/service/free
 	mkdir -p ${ODIR}/service/errs
 	mkdir -p ${ODIR}/service/files
 	mkdir -p ${ODIR}/service/window

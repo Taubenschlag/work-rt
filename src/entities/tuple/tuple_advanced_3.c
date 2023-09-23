@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuple_advanced_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:59:50 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/23 14:29:11 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,21 @@ void	tuple_copy(t_tuple *res, t_tuple *t)
 {
 	tuple_point(res, t->x, t->y, t->z);
 	res->type = t->type;
+}
+
+void	set_tuple(t_tuple *tuple, char *value, char type)
+{
+	char	**input;
+
+	input = ft_split(value, ',');
+	tuple->x = ft_atod(input[0]);
+	tuple->y = ft_atod(input[1]);
+	tuple->z = ft_atod(input[2]);
+	if (type == 'p')
+		tuple->type = IS_POINT;
+	if (type == 'v')
+		tuple->type = IS_VECTOR;
+	if (type == 'c')
+		tuple->type = 2;
+	cleanup(input);
 }

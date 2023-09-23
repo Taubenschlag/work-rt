@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/22 13:47:30 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:08:34by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,50 @@ int	count_what(int *counters, int what)
 	return (-1);
 }
 
-void	init_scene(int *counters, t_scene *scene)
+static void	init_scene_helper(t_scene *scene)
 {
 	scene->resolution_x = -1;
 	scene->resolution_y = -1;
 	scene->ambi_ratio = -1;
 	tuple_color(&scene->ambi_color, 0, 0, 0);
 	scene->camera_count = 0;
-	scene->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[CAM]);
 	scene->light_count = 0;
-	scene->lights = (t_light **)malloc(sizeof(t_light *) * counters[LHT]);
 	scene->shape_count = 0;
-	scene->shapes = (t_shape **)malloc(
-			sizeof(t_shape *) * count_what(counters, SHAPES));
+	scene->fd_list = NULL;
 }
 
-bool	parse_scene(int fd, t_scene *s)
+bool	init_scene(t_scene *s)
+{
+	init_scene_helper(s);
+	s->cameras = (t_camera **)malloc(sizeof(t_camera *) * s->counters[CAM]);
+	if (s->cameras == NULL)
+	{
+		printf("Error: malloc fail for **cameras in 'init_scene()'\n");
+		return (false);
+	}
+	s->lights = (t_light **)malloc(sizeof(t_light *) * s->counters[LHT]);
+	if (s->lights == NULL)
+	{
+		printf("Error: malloc fail for **lights in 'init_scene()'\n");
+		return (false);
+	}
+	s->shapes = (t_shape **)malloc(
+			sizeof(t_shape *) * count_what(s->counters, SHAPES));
+	if (s->shapes == NULL)
+	{
+		printf("Error: malloc fail for **shapes in 'init_scene()'\n");
+		return (false);
+	}
+	return (true);
+}
+
+bool	parse_scene(t_scene *s)
 {
 	char	line[GNL_BUF_SIZE];
 	char	*l;
 	char	**split;
 
-	l = get_next_line(fd, line);
+	l = get_next_line(s->fd_infile, line);
 	while (l != NULL)
 	{
 		if (l && !ft_strequals(line, ""))
@@ -70,28 +92,8 @@ bool	parse_scene(int fd, t_scene *s)
 			}
 			cleanup(split);
 		}
-		l = get_next_line(fd, line);
+		l = get_next_line(s->fd_infile, line);
 	}
-	close(fd);
+	close(s->fd_infile);
 	return (true);
 }
-
-/*
-void	parse_scene(int fd, t_scene *s)
-{
-	char	line[GNL_BUF_SIZE];
-	char	*l;
-	char	**split;
-
-	l = get_next_line(fd, line);
-	while (l != NULL)
-	{
-		if (l && !ft_strequals(line, ""))
-		{
-			handle_line(ft_whitespaces(line), s);
-		}
-		l = get_next_line(fd, line);
-	}
-	close(fd);
-}
-*/

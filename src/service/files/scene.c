@@ -6,80 +6,56 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/22 10:51:52 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:18:39by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-void	free_scene(t_scene *s)
+bool	create_files(t_scene *s)
 {
-	int	i;
-
-	i = -1;
-	while (++i < s->camera_counter)
-		free_camera(s->cameras[i]);
-	free(s->cameras);
-	i = -1;
-	while (++i < s->shape_counter)
-		free_shape(s->shapes[i]);
-	free(s->shapes);
-	i = -1;
-	while (++i < s->light_counter)
-		light_free(s->lights[i]);
-	free(s->lights);
-}
-
-void	emergency_close(int *fds, int failed)
-{
-	failed--;
-	while (failed >= 0)
-	{
-		close(fds[failed]);
-		failed--;
-	}
-	free(fds);
-}
-
-int	*create_files(int *counters)
-{
-	int		*fd_list;
 	char	*filename;
 	int		i;
 
-	i = 0;
-	fd_list = malloc(sizeof(int) * counters[CAM]);
-	while (i < counters[CAM])
+	s->fd_list = malloc(sizeof(int) * s->counters[CAM]);
+	if (s->fd_list == NULL)
 	{
-		filename = ft_strcat(
-				ft_strdup(".bmp"), ft_itoa(i));
-		fd_list[i] = open(filename, O_CREAT | O_WRONLY, 0);
-		free(filename);
-		if (fd_list[i] < 0)
-		{
-			emergency_close(fd_list, i);
-			return (NULL);
-		}
-		i++;
+		printf("Error: malloc fail for *fd_list in 'init_scene()'\n");
+		return (false);
 	}
-	return (fd_list);
+	i = -1;
+	while (++i < s->counters[CAM])
+	{
+		filename = ft_strcat(ft_strdup(".bmp"), ft_itoa(i));
+		s->fd_list[i] = open(filename, O_CREAT | O_WRONLY, 0);
+		if (s->fd_list[i] < 0)
+		{
+
+			printf("Error: unable to create output file '%s'\n", filename);
+			emergency_close(s->fd_list, i);
+			free(filename);
+			return (false);
+		}
+		free(filename);
+	}
+	return (true);
 }
 
 void	save_scene(t_scene *s, int *fd_list)
 {
 	t_canvas	c;
 	t_world		w;
-	int			cam_count;
+	int			cam;
 
-	cam_count = -1;
-	w.shape_counter = s->shape_counter;
-	init_world(&w, s->shapes, s->lights, s->light_counter);
-	while (++cam_count < s->camera_counter)
+	w.shape_counter = s->shape_count;
+	init_world(&w, s->shapes, s->lights, s->light_count);
+	cam = -1;
+	while (++cam < s->camera_count)
 	{
-		world_set_ambience(&w.ambienace, &s->cameras[cam_count]->from, &s->ambi_color);
-		render(s->cameras[cam_count], &w, &c);
-		fill_bmp(init_bmp(
-				s->resolution_y, s->resolution_x, fd_list[cam_count]), &c);
-		close(fd_list[cam_count]);
+		world_set_ambience(&w.amb, &s->cameras[cam]->from, &s->ambi_color);
+		render(s->cameras[cam], &w, &c);
+		fill_bmp(init_bmp(s->resolution_y, s->resolution_x, fd_list[cam]), &c);
+		close(fd_list[cam]);
 	}
+	canvas_free(&c);
 }

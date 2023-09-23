@@ -21,16 +21,16 @@ void	print_scene(t_scene *s)
 	printf("\tambi ratio:[%.2f]\n", s->ambi_ratio);
 	printf("\tambi_color:");
 	print_tuple(&s->ambi_color);
-	printf("\tcamera counter:[%d]\n", s->camera_counter);
-	for (int i = 0; i < s->camera_counter; i++) {
+	printf("\tcamera counter:[%d]\n", s->camera_count);
+	for (int i = 0; i < s->camera_count; i++) {
 		print_camera(s->cameras[i]);
 	}
-	printf("\tlight counter:[%d]\n", s->light_counter);
-	for (int i = 0; i < s->light_counter; i++) {
+	printf("\tlight counter:[%d]\n", s->light_count);
+	for (int i = 0; i < s->light_count; i++) {
 		print_light(s->lights[i]);
 	}
-	printf("\tshape counter:[%d]\n", s->shape_counter);
-	for (int i = 0; i < s->shape_counter; i++) {
+	printf("\tshape counter:[%d]\n", s->shape_count);
+	for (int i = 0; i < s->shape_count; i++) {
 		print_shape(s->shapes[i]);
 	}
 	printf("====================\n");
@@ -126,7 +126,7 @@ void	print_world(t_world *w)
 		print_light(w->lights[i]);
 	}
 	printf("\t\tambi:");
-	print_light(&w->ambienace);
+	print_light(&w->amb);
 	/*
 	printf("intersection MERGED:\n");
 	print_intersect_list(w->merged);

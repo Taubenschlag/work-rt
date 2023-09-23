@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:32:22 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:09:19 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_intersection	*intersect_make_shape(t_shape *s, double t)
 	t_intersection	*i;
 
 	i = (t_intersection *)malloc(sizeof(t_intersection));
+	// malloc protection
 	i->shape = s;
 	i->t = t;
 	return (i);
@@ -29,9 +30,11 @@ t_intersection_list	*intersection_list_make(int elem)
 
 	i = -1;
 	l = (t_intersection_list *)malloc(sizeof(t_intersection_list));
+	// malloc protection
 	l->list = NULL;
 	if (elem > 0)
 		l->list = (t_intersection **)malloc(sizeof(t_intersection *) * elem);
+	// malloc protection
 	while (++i < elem)
 		l->list[i] = NULL;
 	l->size = elem;

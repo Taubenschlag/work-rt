@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:54:32 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/23 19:09:59 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_sphere	*nsphere_nsphere(t_tuple *centre)
 	t_sphere	*nsphere;
 
 	nsphere = (t_sphere *)malloc(sizeof(t_sphere));
+	// malloc protection
 	tuple_copy(&nsphere->centre, centre);
 	return (nsphere);
 }

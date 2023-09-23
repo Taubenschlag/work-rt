@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/22 10:41:59 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:36:42 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define ERR_H
 # include "../../../heads_global/minirt.h"
 
-int		check_arguments(int ac, char **av);
-bool	check_file(char *filename, int *count);
+bool	check_arguments(t_scene *s, int ac, char **av);
 void	check_resolution(int **counters_ptr, int *is_correct, char **str);
 void	check_ambiance(int **counters_ptr, int *is_correct, char **str);
 void	check_cameras(int **counters_ptr, int *is_correct, char **str);
