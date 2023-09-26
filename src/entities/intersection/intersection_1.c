@@ -20,40 +20,45 @@ void	add_intersection(t_intersection *new_elem,
 
 	i = -1;
 	nl = intersection_list_make((*list)->size + 1);
-	while (++i < (*list)->size)
-		nl->list[i] = (*list)->list[i];
-	nl->list[i] = new_elem;
+	if (nl != NULL)
+	{
+		while (++i < (*list)->size)
+			nl->list[i] = (*list)->list[i];
+		nl->list[i] = new_elem;
+	}
 	if ((*list)->list)
 		free((*list)->list);
-	free(*list);
+	if (*list)
+		free(*list);
 	*list = nl;
 }
 
 t_intersection_list	*intersect_world(t_ray *r, t_world *w, t_tmp_m *m_tmp)
 {
-	int					i;
-	int					j;
-	int					size;
+	t_i_tmp	tmp;
 	t_intersection_list	*unsorted[w->shape_counter];
 
-	i = w->shape_counter;
-	size = 0;
-	while (--i >= 0)
+	tmp.i = w->shape_counter;
+	tmp.size = 0;
+	while (--tmp.i >= 0)
 	{
-		unsorted[i] = intersect_shape(w->shapes[i], r, m_tmp);
-		size += unsorted[i]->size;
+		unsorted[tmp.i] = intersect_shape(w->shapes[tmp.i], r, m_tmp);
+		if (unsorted[tmp.i] == NULL)
+			return (free_unsorted_list(w->shape_counter, unsorted), NULL);
+		tmp.size += unsorted[tmp.i]->size;
 	}
-	w->merged = intersection_list_make(size);
-	size = -1;
-	i = -1;
-	while (++i < w->shape_counter)
+	w->merged = intersection_list_make(tmp.size);
+	if (w->merged == NULL)
+		return (free_unsorted_list(w->shape_counter, unsorted), NULL);
+	tmp.size = -1;
+	tmp.i = -1;
+	while (++tmp.i < w->shape_counter)
 	{
-		j = -1;
-		while (++j < unsorted[i]->size)
-			w->merged->list[++size] = unsorted[i]->list[j];
-		free(unsorted[i]->list);
-		free(unsorted[i]);
+		tmp.j = -1;
+		while (++tmp.j < unsorted[tmp.i]->size)
+			w->merged->list[++tmp.size] = unsorted[tmp.i]->list[tmp.j];
 	}
+	free_unsorted_list(w->shape_counter, unsorted);
 	return (w->merged);
 }
 
@@ -85,6 +90,12 @@ void	shade_hit(t_world *w, t_computations *cs, t_light *current, t_tmp_m *m_tmp)
 			in_shadow(w, &cs->overpoint, current, m_tmp));
 }
 
+/*
+** This is where the beginning of intersections start to be calculated
+** t_intersection_list *l - holds temporary list of all intersections
+** t_intersection *i - is filtered list of valid intersections where the
+** shortest values for given intersections are stored
+*/
 void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 {
 	t_intersection_list	*l;
@@ -101,7 +112,6 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 	{
 		precomp(&c, i, r, m_tmp);
 		shade_hit(w, &c, &w->amb, m_tmp);
-		//free(c.shape);
 		while (++j < w->lights_counter)
 		{
 			precomp(&c, i, r, m_tmp);
@@ -110,7 +120,6 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 			shade_hit(w, &c, w->lights[j], m_tmp);
 			tuple_copy(&m_tmp->tmp_clr_2, &m_tmp->color);
 			tuple_add(&m_tmp->color, &m_tmp->tmp_clr_1, &m_tmp->tmp_clr_2);
-			//free(c.shape);
 		}
 	}
 	free(i);

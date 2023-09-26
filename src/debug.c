@@ -10,7 +10,7 @@ void	print_tuple(t_tuple *t);
 void	print_intersect_list(t_intersection_list *list);
 void	print_world(t_world *w);
 void	print_intersect_list(t_intersection_list *intersect);
-void	print_intersection(t_intersection *intersect, int i);
+void	print_intersection(t_intersection *intersect);
 void	print_computations(t_computations *comp);
 void	print_ray(t_ray *ray, int y, int x);
 
@@ -161,10 +161,17 @@ void	print_intersect_list(t_intersection_list *intersect)
 	}
 }
 
-void	print_intersection(t_intersection *intersect, int i)
+void	print_intersection(t_intersection *intersect)
 {
-	printf("\ti: [%d]\t", i);
-	printf("intersect @ [%p]\n", intersect);
+	if (intersect)
+	{
+		printf("\tshape[%c] ", intersect->shape->type);
+		printf("t[%.2f]\n", intersect->t);
+	}
+	else
+	{
+		printf("\tNO intersect");
+	}
 }
 
 void	print_computations(t_computations *comp)

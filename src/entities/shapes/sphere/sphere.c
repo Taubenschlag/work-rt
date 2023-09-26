@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 19:09:59 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:36:58 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_sphere	*nsphere_nsphere(t_tuple *centre)
 	t_sphere	*nsphere;
 
 	nsphere = (t_sphere *)malloc(sizeof(t_sphere));
-	// malloc protection
+	if (nsphere == NULL)
+		return (NULL);
 	tuple_copy(&nsphere->centre, centre);
 	return (nsphere);
 }

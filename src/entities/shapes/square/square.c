@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 19:10:07 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:37:38 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_square	*square(void)
 	t_square	*square;
 
 	square = (t_square *)malloc(sizeof(t_square));
-	// malloc protection
+	if (square == NULL)
+		return (NULL);
 	tuple_point(&square->t1.a, -1, 1, 0);	
 	tuple_point(&square->t1.b, -1, -1, 0);
 	tuple_point(&square->t1.c, 1, 1, 0);

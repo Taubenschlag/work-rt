@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:53:03 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/26 19:35:30 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ t_cube	*cube_cube(void)
 
 	c = (t_cube *)malloc(sizeof(t_cube));
 	if (c == NULL)
-	{
-		//malloc error handling
-	}
+		return (NULL);
 	return (c);
 }
 

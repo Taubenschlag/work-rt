@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:11:07 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 15:59:50 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:45:04 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	print_matrix(t_matrix *m);
 void	print_tuple(t_tuple *t);
 void	print_world(t_world *w);
 void	print_intersect_list(t_intersection_list *intersect);
-void	print_intersection(t_intersection *intersect, int i);
+void	print_intersection(t_intersection *intersect);
 void	print_computations(t_computations *comp);
 void	print_ray(t_ray *ray, int y, int x);
 /* ***** */

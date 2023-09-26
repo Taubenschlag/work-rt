@@ -6,12 +6,14 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 19:08:51 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:33:41 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
+/*
+*/
 int	in_shadow(t_world *w, t_tuple *p, t_light *current_light, t_tmp_m *m_tmp)
 {
 	t_tuple			v;
@@ -99,32 +101,24 @@ void	axis(double orig, double direct, double *min, double *max)
 		*min = t_max;
 }
 
+
 t_intersection_list	*intersection_ray_cube(t_shape *s, t_ray *ray)
 {
 	t_intersection_list	*ret;
-	double				*mints;
-	double				*maxts;
+	double				mints[3];
+	double				maxts[3];
 	double				min;
 	double				max;
 
-	mints = (double *)malloc(sizeof(double) * 3);
-	maxts = (double *)malloc(sizeof(double) * 3);
-	// malloc protection
 	axis(ray->origin.x, ray->dir.x, &(mints[0]), &(maxts[0]));
 	axis(ray->origin.y, ray->dir.y, &(mints[1]), &(maxts[1]));
 	axis(ray->origin.z, ray->dir.z, &(mints[2]), &(maxts[2]));
 	min = maxs(mints, 3);
 	max = mins(maxts, 3);
 	if (min > max)
-	{
-		free(mints);
-		free(maxts);
 		return (intersection_list_make(0));
-	}
 	ret = intersection_list_make(2);
 	ret->list[0] = intersect_make_shape(s, min);
 	ret->list[1] = intersect_make_shape(s, max);
-	free(mints);
-	free(maxts);
 	return (ret);
 }

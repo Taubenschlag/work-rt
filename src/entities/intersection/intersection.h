@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 15:07:24 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:22:21 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,18 @@ typedef struct world
 	t_intersection_list	*merged;
 }	t_world;
 
+typedef struct inter_tmp
+{
+	int					i;
+	int					j;
+	int					size;
+}	t_i_tmp;
+
 void	make_l_p(t_lightning_pack *pack, t_light *l, t_computations *c);
 void	precomp(t_computations	*comps, t_intersection *i, t_ray *r, t_tmp_m *m_tmp);
 t_intersection_list		*intersect_shape(t_shape *s, t_ray *r, t_tmp_m *m_tmp);
 t_intersection			*intersect_make_shape(t_shape *s, double t);
+//void			intersect_make_shape(t_intersection *ret, t_shape *s, double t);
 void					add_intersection(t_intersection *new_elem,
 							t_intersection_list **list);
 t_intersection_list		*intersection_ray_nsphere(t_shape *s, t_ray *ray);
@@ -62,6 +70,7 @@ t_intersection_list		*intersection_ray_triangle(t_shape *s, t_ray *ray);
 t_intersection_list		*intersection_ray_square(t_shape *s, t_ray *ray);
 t_intersection_list		*intersection_list_make(int elem);
 t_intersection			*hit(t_intersection_list *l);
+//void			hit(t_intersection *ret, t_intersection_list *l);
 void					intersection_list_free(t_intersection_list **l);
 
 t_intersection_list	*intersect_world(t_ray *r, t_world *w, t_tmp_m *m_tmp);

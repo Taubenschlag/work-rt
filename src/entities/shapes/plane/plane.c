@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:53:58 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/26 19:36:19 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ t_plane	*plane_plane(void)
 
 	new_plane = (t_plane *)malloc(sizeof(new_plane));
 	if (new_plane == NULL)
-	{
-		//malloc error handling
-	}
+		return (NULL);
 	return (new_plane);
 }
 
