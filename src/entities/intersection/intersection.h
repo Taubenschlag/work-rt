@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/26 19:22:21 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:41:09 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ typedef struct intersection_list
 	t_intersection	**list;
 }	t_intersection_list;
 
+/* 
+** The uv tuple holdds u and v values range from 0 to 1 
+** which correspond to the horizontal 
+** and vertical axes of the texture image.
+*/
 typedef struct computations
 {
 	double		t;
@@ -35,6 +40,7 @@ typedef struct computations
 	t_tuple		eyev;
 	t_tuple		normv;
 	t_tuple		overpoint;
+	t_tuple		uv;
 }	t_computations;
 
 typedef struct world

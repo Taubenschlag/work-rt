@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/26 19:33:41 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:36:23 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_intersection_list	*intersection_ray_plane(t_shape *s, t_ray *ray)
 	else
 	{
 		ret = intersection_list_make(1);
+		if (ret == NULL)
+			return (NULL);
 		ret->list[0] = intersect_make_shape(
 				s, (-1 * ray->origin.y) / ray->dir.y);
 		return (ret);
@@ -67,6 +69,8 @@ t_intersection_list	*intersection_ray_nsphere(t_shape *s, t_ray *ray)
 	if (dis < 0)
 		return (intersection_list_make(0));
 	ret = intersection_list_make(2);
+	if (ret == NULL)
+		return (NULL);
 	ret->list[0] = intersect_make_shape(s, (-1 * b - sqrt(dis)) / (2 * a));
 	ret->list[1] = intersect_make_shape(s, (-1 * b + sqrt(dis)) / (2 * a));
 	return (ret);
@@ -118,6 +122,8 @@ t_intersection_list	*intersection_ray_cube(t_shape *s, t_ray *ray)
 	if (min > max)
 		return (intersection_list_make(0));
 	ret = intersection_list_make(2);
+	if (ret == NULL)
+		return (NULL);
 	ret->list[0] = intersect_make_shape(s, min);
 	ret->list[1] = intersect_make_shape(s, max);
 	return (ret);

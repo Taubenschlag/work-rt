@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:11:07 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/26 15:45:04 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:02:51 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include <math.h>
 # include <pthread.h>
 # include <errno.h>
-# include <error.h>
+//# include <error.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_2a.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 22:56:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/16 18:06:37 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/27 09:49:19 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ t_intersection_list	*intersection_ray_cylinder(t_shape *s, t_ray *ray)
 
 	cy = (t_cylinder *)s->shape;
 	ret = intersection_list_make(0);
+	if (ret == NULL)
+		return (NULL);
 	cylinder_discriminant(cy, ray);
 	if (fabs(cy->a) < 0.000001)
 	{

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:28:26 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:50:07 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_intersection_list	*intersection_ray_cone(t_shape *s, t_ray *ray)
 	t_cone				*co;
 
 	ret = intersection_list_make(0);
+	if (ret == NULL)
+		return (NULL);
 	co = (t_cone *)s->shape;
 	cone_discriminant(co, ray);
 	if (fabs(co->a) < 0.000001)
