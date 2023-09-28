@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/27 16:41:09 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:00:59 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct intersection_list
 
 /* 
 ** The uv tuple holdds u and v values range from 0 to 1 
-** which correspond to the horizontal 
+** these are coordinatets which correspond to the horizontal 
 ** and vertical axes of the texture image.
 */
 typedef struct computations
@@ -40,7 +40,11 @@ typedef struct computations
 	t_tuple		eyev;
 	t_tuple		normv;
 	t_tuple		overpoint;
-	t_tuple		uv;
+	/* the following values are used to calc
+	** checkboard coords */
+	bool		is_odd;
+	t_tuple		odd_color;
+	t_tuple		even_color;
 }	t_computations;
 
 typedef struct world

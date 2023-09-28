@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/18 14:06:06 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:55:49 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef struct matrl
 {
+	int		pattern;
 	t_tuple	color;
 	double	diffuse;
 	double	ambient;
