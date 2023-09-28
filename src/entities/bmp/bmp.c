@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/02 17:00:46 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/23 19:33:24 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ void	vw(int fd, void *ptr, size_t len)
 	(void)silencer;
 }
 
+/* 
+** Initializes unsigned int **canvas of size resolution
+** taken from input file 'R' and fills it with 0.
+** to store rendered image pixel by pixel
+**
+** might use stack for default MAX **canvas size..
+*/
 void	init_canvas(unsigned int w, unsigned int h, t_canvas *c)
 {
 	unsigned int	i;
@@ -30,9 +37,11 @@ void	init_canvas(unsigned int w, unsigned int h, t_canvas *c)
 	c->h = h;
 	c->w = w;
 	c->canvas = (unsigned int **)malloc(sizeof(int *) * h);
+	// malloc protection
 	while (i < h)
 	{
 		(c->canvas)[i] = (unsigned int *)malloc(sizeof(int) * w);
+		// malloc protection
 		j = 0;
 		while (j < w)
 		{
@@ -41,19 +50,6 @@ void	init_canvas(unsigned int w, unsigned int h, t_canvas *c)
 		}
 		i++;
 	}
-}
-
-void	canvas_free(t_canvas *c)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (i < c->h)
-	{
-		free(c->canvas[i]);
-		i++;
-	}
-	free(c->canvas);
 }
 
 int	init_bmp(int h, int w, int fd)

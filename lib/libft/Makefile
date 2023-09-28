@@ -3,80 +3,60 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+         #
+#    By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 17:35:27 by rokupin           #+#    #+#              #
-#    Updated: 2022/11/05 09:22:11 by rokupin          ###   ########.fr        #
+#    Updated: 2023/09/22 09:27:26 by sbocanci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = libft.a
 
 SRC = \
-ft_atod.c			ft_putchar_fd.c \
-ft_atoi.c			ft_putendl_fd.c \
-ft_bzero.c			ft_putnbr_fd.c \
-ft_calloc.c			ft_putstr_fd.c \
-ft_convert_base2.c	ft_sort.c \
-ft_convert_base.c	ft_split.c \
-ft_dtoa.c			ft_strchr.c \
-ft_isalnum.c		ft_strcmp.c \
-ft_isalpha.c		ft_strdup.c \
-ft_isascii.c		ft_strequals.c \
-ft_isdigit.c		ft_strjoin.c \
-ft_isprint.c		ft_strlcat.c \
-ft_itoa.c			ft_strlcpy.c \
-ft_strlen.c			ft_isdouble.c \
-ft_strmapi.c 		ft_isnumber.c\
-ft_strncmp.c \
-ft_strnstr.c \
-ft_strrchr.c \
-ft_strtrim.c \
-ft_substr.c \
-ft_swap.c \
-ft_tolower.c \
-ft_memccpy.c \
-ft_memchr.c \
-ft_memcmp.c \
-ft_memcpy.c \
-ft_memmove.c \
-ft_toupper.c \
-ft_whitespaces.c \
-get_next_line.c \
-get_next_line_utils.c \
-ft_memset.c
-
-BNS = ft_lstnew_bonus.c ft_lstdelone_bonus.c ft_lstadd_front_bonus.c ft_lstadd_back_bonus.c ft_lstsize_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c ft_lstlast_bonus.c  ft_lstclear_bonus.c
+	ft_atod.c \
+	ft_atoi.c \
+	ft_isdouble.c \
+	ft_isnumber.c\
+	ft_itoa.c \
+	ft_split.c \
+	ft_strcat.c \
+	ft_strdup.c \
+	ft_strequals.c \
+	ft_strlen.c \
+	ft_whitespaces.c \
+	get_next_line.c
 
 HEAD = libft.h
 
 OBS = ${SRC:.c=.o}
 
-BBS = ${BNS:.c=.o}
-
-CC = gcc
+CC = cc
 
 FLAGS = -Wall -Wextra -Werror -g
 
 all: ${NAME}
-	ranlib ${NAME}
+	@ranlib ${NAME}
+	@printf "\e[0;36m>>> ${NAME} ready\n\e[0m"
 
-$(NAME): ${BBS} ${OBS}
-	ar -rcs libft.a ${BBS} ${OBS}
-
-bonus: ${BBS} ${OBS}
-	ar -rcs libft.a ${BBS} ${OBS}
+$(NAME): ${OBS}
+	ar -rcs ${NAME} ${OBS} 
+	@printf "\e[0;36mGenerated libft objects \n\e[0m" $@
 
 ${OBS}: ${SRC}
 	${CC} -g -c -I ${FLAGS} ${SRC} ${BNS}
+	@printf "\e[0;36mCompiled libft\n\e[0m" $@
 
 clean:
 	rm -f ${OBS}
-	rm -f ${BBS}
 	rm -f libft.h.gch
+	@printf "\e[0;31mlibft objects removed\n\e[0m" $@
 
 fclean: clean
 	rm -f ${NAME}
+	@printf "\e[0;31m${NAME} removed\n\e[0m" $@
 	
 re: fclean all
+
+.PHONY: all clean fclean re
+
+.SILENT:

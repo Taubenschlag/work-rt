@@ -7,6 +7,15 @@
 
 NAME = miniRT
 
+_NC=`tput sgr0`
+_RED=\033[0;31m
+_GREEN=\033[0;32m
+_YELLOW=\033[0;33m
+_BLUE=\033[0;34m
+_PURPLE=\033[0;95m
+_CYAN=\033[0;36m
+_WHITE=\033[0;37m
+
 DEBUG = dbRT
 
 SAN = sanRT
@@ -65,29 +74,35 @@ entities/tuple/tuple_advanced_2.c \
 entities/tuple/tuple_advanced_3.c \
 entities/tuple/tuple_basic.c \
 \
-service/errs/file_check_handler.c \
 service/errs/file_instructions_checker.c \
 service/errs/file_shape_description_checker.c \
-service/errs/input_exceptions.c \
+service/errs/valid_input.c \
 \
 service/files/scene_1.c \
 service/files/scene.c \
+service/files/scene_handlers.c \
 service/files/scene_handlers_1.c \
 service/files/scene_handlers_2.c \
-service/files/scene_handlers.c \
+service/files/scene_handlers_3.c \
 \
 service/window/mlx_handlers.c \
-service/window/window.c
+service/window/window.c \
+\
+service/free/free.c \
+\
+debug.c 
+
 
 OBS = $(addprefix $(ODIR)/,${SRC:.c=.o})
 
 SRCS = $(addprefix $(SDIR)/,${SRC})
 
-CC = gcc
+CC = cc
 
 FLAGS = -Wall -Wextra -Werror
 
 all: ${NAME}
+	@printf "\e[92;5;118m\n>>> miniRT ready\n\e[0m"
 
 $(SAN): pre-build get-libft #get-libx
 	${CC} ${FLAGS} -O1 -g -fsanitize=address -o ${SAN} ${SRCS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
@@ -100,14 +115,17 @@ $(NAME): pre-build get-libft  ${OBS}
 
 ${ODIR}/%.o: ${SDIR}/%.c
 	${CC} ${FLAGS} -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	@printf "$(_CYAN)Generating miniRT objects in ...$(_BLUE)%-33.33s\r$(_NC)" $@
 
 get-libft:
 	make -C lib/libft all clean
+#	@printf "$(_CYAN)Generating $(LIBFT) Libft...$(_BLUE)%-33.33s\r$(_NC)" $@
 
 # get-libx:
 # 	./mlx_linux/configure
 
 pre-build:
+	mkdir -p ${ODIR}/service/free
 	mkdir -p ${ODIR}/service/errs
 	mkdir -p ${ODIR}/service/files
 	mkdir -p ${ODIR}/service/window
@@ -131,12 +149,14 @@ pre-build:
 clean:
 	rm -rf ${ODIR}
 	make -C lib/libft fclean
+	@printf "\033[00;31m>>> objects removed.\n\033[00m"
 # 	rm -rf ${LIBX} 
 
 fclean: clean
 	rm -rf ${NAME}
 	rm -rf ${DEBUG}
 	rm -rf ${SAN}
+	@printf "\033[00;31m>>> executable removed.\n\033[00m"
 
 bonus:
 	all
@@ -148,3 +168,5 @@ asan: ${SAN}
 re: fclean all
 
 .PHONY: ${NAME} $(DEBUG) ${SAN}
+
+.SILENT:

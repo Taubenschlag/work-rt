@@ -3,42 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   tuple_basic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/14 23:41:45 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/23 14:30:51y sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-t_tuple	*tuple_vector(double x, double y, double z)
+void	tuple_set(t_tuple *t, double x, double y, double z)
 {
-	t_tuple	*t;
-
-	t = (t_tuple *)malloc(sizeof(t_tuple));
-	t->x = x;
-	t->y = y;
-	t->z = z;
-	t->type = IS_VECTOR;
-	return (t);
-}
-
-t_tuple	*tuple_point(double x, double y, double z)
-{
-	t_tuple	*t;
-
-	t = (t_tuple *)malloc(sizeof(t_tuple));
 	t->x = x;
 	t->y = y;
 	t->z = z;
 	t->type = IS_POINT;
-	return (t);
 }
 
-void	tuple_free(t_tuple *tuple)
+void	tuple_vector(t_tuple *t, double x, double y, double z)
 {
-	free(tuple);
+	t->x = x;
+	t->y = y;
+	t->z = z;
+	t->type = IS_VECTOR;
+}
+
+void	tuple_point(t_tuple *t, double x, double y, double z)
+{
+	t->x = x;
+	t->y = y;
+	t->z = z;
+	t->type = IS_POINT;
 }
 
 int	check_parsed_tuple(char **val)
@@ -92,8 +87,11 @@ int	is_tuple(char *value, int exclude_neg)
 	next_part = ft_split(value, ',');
 	ret = check_parsed_tuple(next_part);
 	i = -1;
+	cleanup(next_part);
+	/*
 	while (next_part[++i])
 		free(next_part[i]);
 	free(next_part);
+	*/
 	return (ret);
 }

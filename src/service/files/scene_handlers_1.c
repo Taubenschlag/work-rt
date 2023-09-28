@@ -3,138 +3,119 @@
 /*                                                        :::      ::::::::   */
 /*   scene_handlers_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/01 21:54:52 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/23 14:44:54 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-void	handle_square(char **values, t_scene *s)
+static void	handle_square_helper(t_tmp *tmp, t_square *sq, t_scene *s)
 {
+	if (sq->norm.x == 0 && sq->norm.y == 0 && fabs(sq->norm.z) == 1)
+		matrix_identity(&sq->trans, 4);
+	else
+	{
+		tuple_vector(&tmp->tup, 0, 0, 1);
+		rotate_align(&sq->trans, &tmp->tup, &sq->norm);
+	}
+	matrix_translate(&tmp->m, &sq->center);
+	matrix_multiply(&tmp->trans, &tmp->m, &sq->trans);
+	tuple_point(&tmp->center, sq->side, sq->side, sq->side);
+	matrix_scale(&tmp->m, &tmp->center);
+	matrix_multiply(&s->shapes[s->shape_count]->trans, &tmp->m, &tmp->trans);
+	s->shape_count++;
+}
+
+bool	handle_square(char **values, t_scene *s)
+{
+	t_tmp		tmp;
 	t_square	*sq;
 
-	s->shapes[s->shape_counter] = make_shape('q', square());
-	sq = (t_square *)s->shapes[s->shape_counter]->shape;
-	sq->center = get_tuple(values[1], 'p');
-	sq->norm = tuple_normalize(get_tuple(values[2], 'v'));
+	s->shapes[s->shape_count] = make_shape('q', square());
+	if (s->shapes[s->shape_count] == NULL)
+	{
+		printf("Error: malloc fail in 'handle_square()'\n");
+		return (false);
+	}
+	sq = (t_square *)s->shapes[s->shape_count]->shape;
+	set_tuple(&sq->center, values[1], 'p');
+	set_tuple(&tmp.tup, values[2], 'v');
+	tuple_normalize(&sq->norm, &tmp.tup);
 	sq->side = ft_atod(values[3]);
-	sq->color = tuple_scalar_multiply(get_tuple(values[4], 'c'),
-			COLOR_CF);
-	s->shapes[s->shape_counter]->matrl = mat_with_col(sq->color);
-	if (sq->norm->x == 0 && sq->norm->y == 0 && fabs(sq->norm->z) == 1)
-		sq->trans = matrix_identity(4);
-	else
-		sq->trans = rotate_align(tuple_vector(0, 0, 1), sq->norm);
-	tuple_free(sq->norm);
-	sq->trans = matrix_multiply(matrix_translate(
-				sq->center->x, sq->center->y, sq->center->z), sq->trans);
-	sq->trans = matrix_multiply(matrix_scale(
-				sq->side, sq->side, sq->side), sq->trans);
-	set_transform(s->shapes[s->shape_counter], sq->trans);
-	s->shape_counter++;
-	cleanup(values);
-	free(sq->center);
+	set_tuple(&tmp.tup, values[4], 'c');
+	tuple_scalar_multiply(&sq->color, &tmp.tup, COLOR_CF);
+	mat_with_col(&s->shapes[s->shape_count]->matrl, &sq->color);
+	handle_square_helper(&tmp, sq, s);
+	return (true);
 }
 
-void	handle_cylinder(char **values, t_scene *s)
+static void	handle_cylinder_helper(t_tmp *tmp, t_cylinder *c)
 {
+	if (fabs(c->norm.x) < 0000.1 && fabs(c->norm.y - 1.0) < 0000.1
+		&& fabs(c->norm.z) < 0000.1)
+	{
+		matrix_identity(&c->trans, 4);
+	}
+	else
+	{
+		tuple_vector(&tmp->tup, 0, 1, 0);
+		rotate_align(&c->trans, &tmp->tup, &c->norm);
+	}
+	matrix_translate(&tmp->m, &c->center);
+	matrix_copy(&tmp->m_cpy, &c->trans);
+	matrix_multiply(&tmp->trans, &tmp->m, &tmp->m_cpy);
+	tuple_point(&tmp->tup, c->d / 2, 1, c->d / 2);
+	matrix_scale(&tmp->m, &tmp->tup);
+}
+
+bool	handle_cylinder(char **values, t_scene *s)
+{
+	t_tmp		tmp;
 	t_cylinder	*c;
 
-	s->shapes[s->shape_counter] = make_shape(
+	s->shapes[s->shape_count] = make_shape(
 			'y', cylinder_params(ft_atod(values[4])));
-	c = (t_cylinder *)s->shapes[s->shape_counter]->shape;
-	c->center = get_tuple(values[1], 'p');
-	c->norm = tuple_normalize(get_tuple(values[2], 'v'));
+	if (s->shapes[s->shape_count] == NULL)
+	{
+		printf("Error: malloc fail in 'handle_cylinder()'\n");
+		return (false);
+	}
+	c = (t_cylinder *)s->shapes[s->shape_count]->shape;
+	set_tuple(&c->center, values[1], 'p');
+	set_tuple(&tmp.tup, values[2], 'v');
+	tuple_normalize(&c->norm, &tmp.tup);
 	c->d = ft_atod(values[3]);
-	c->color = tuple_scalar_multiply(get_tuple(values[5], 'c'),
-			COLOR_CF);
-	s->shapes[s->shape_counter]->matrl = mat_with_col(c->color);
-	if (fabs(c->norm->x) < 0000.1
-		&& fabs(c->norm->y - 1.0) < 0000.1 && fabs(c->norm->z) < 0000.1)
-		c->trans = matrix_identity(4);
-	else
-		c->trans = rotate_align(tuple_vector(0, 1, 0), c->norm);
-	tuple_free(c->norm);
-	c->trans = matrix_multiply(matrix_translate(
-				c->center->x, c->center->y, c->center->z), c->trans);
-	tuple_free(c->center);
-	c->trans = matrix_multiply(c->trans, matrix_scale(c->d / 2, 1, c->d / 2));
-	set_transform(s->shapes[s->shape_counter], c->trans);
-	s->shape_counter++;
-	cleanup(values);
+	set_tuple(&tmp.tup, values[5], 'c');
+	tuple_scalar_multiply(&c->color, &tmp.tup, COLOR_CF);
+	mat_with_col(&s->shapes[s->shape_count]->matrl, &c->color);
+	handle_cylinder_helper(&tmp, c);
+	matrix_multiply(&s->shapes[s->shape_count]->trans, &tmp.trans, &tmp.m);
+	s->shape_count++;
+	return (true);
 }
 
-void	handle_triangle(char **values, t_scene *s)
+bool	handle_triangle(char **values, t_scene *s)
 {
-	t_tuple	*a;
-	t_tuple	*b;
-	t_tuple	*c;
-	t_tuple	*color;
+	t_tmp		tmp;
+	t_triangle	*tr;
 
-	a = get_tuple(values[1], 'p');
-	b = get_tuple(values[2], 'p');
-	c = get_tuple(values[3], 'p');
-	color = tuple_scalar_multiply(get_tuple(values[4], 'c'), COLOR_CF);
-	s->shapes[s->shape_counter] = make_shape(
-			'i', triangle_coordinates(a, b, c));
-	s->shapes[s->shape_counter]->matrl = mat_with_col(color);
-	s->shape_counter++;
-	cleanup(values);
-}
-
-void	handle_cone(char **values, t_scene *s)
-{
-	t_cone		*c;
-
-	s->shapes[s->shape_counter] = make_shape('o',
-			cone_param(ft_atod(values[4])));
-	c = (t_cone *)s->shapes[s->shape_counter]->shape;
-	c->center = get_tuple(values[1], 'p');
-	c->norm = tuple_normalize(get_tuple(values[2], 'v'));
-	c->d = ft_atod(values[3]);
-	c->color = tuple_scalar_multiply(get_tuple(values[5], 'c'), COLOR_CF);
-	s->shapes[s->shape_counter]->matrl = mat_with_col(c->color);
-	if (c->norm->x == 0 && fabs(c->norm->y) == 1 && c->norm->z == 0)
-		c->trans = matrix_identity(4);
-	else
-		c->trans = rotate_align(tuple_vector(0, 1, 0), c->norm);
-	tuple_free(c->norm);
-	c->trans = matrix_multiply(matrix_translate(
-				c->center->x, c->center->y, c->center->z), c->trans);
-	tuple_free(c->center);
-	c->trans = matrix_multiply(c->trans, matrix_scale(c->d / 2, 1, c->d / 2));
-	set_transform(s->shapes[s->shape_counter], c->trans);
-	s->shape_counter++;
-	cleanup(values);
-}
-
-void	handle_cube(char **values, t_scene *s)
-{
-	t_cube		*c;
-
-	s->shapes[s->shape_counter] = make_shape('u', cube_cube());
-	c = (t_cube *)s->shapes[s->shape_counter]->shape;
-	c->center = get_tuple(values[1], 'p');
-	c->norm = tuple_normalize(get_tuple(values[2], 'v'));
-	c->side = ft_atod(values[3]);
-	c->color = tuple_scalar_multiply(
-			get_tuple(values[4], 'c'), COLOR_CF);
-	s->shapes[s->shape_counter]->matrl = mat_with_col(c->color);
-	if (tuple_equals(tuple_copy(c->norm),
-			tuple_normalize(tuple_vector(1, 1, 0))))
-		c->trans = matrix_identity(4);
-	else
-		c->trans = rotate_align(tuple_vector(0, 1, 0), c->norm);
-	c->trans = matrix_multiply(matrix_translate(
-				c->center->x, c->center->y, c->center->z), c->trans);
-	c->trans = matrix_multiply(matrix_scale(
-				c->side / 2, c->side / 2, c->side / 2), c->trans);
-	set_transform(s->shapes[s->shape_counter], c->trans);
-	s->shape_counter++;
-	free(c->center);
-	free(c->norm);
-	cleanup(values);
+	tr = (t_triangle *)malloc(sizeof(t_triangle));
+	if (tr == NULL)
+	{
+		printf("Error: malloc fail in 'handle_triangle()'\n");
+		return (false);
+	}
+	set_tuple(&tr->a, values[1], 'p');
+	set_tuple(&tr->b, values[2], 'p');
+	set_tuple(&tr->c, values[3], 'p');
+	set_tuple(&tmp.tup, values[4], 'c');
+	tuple_scalar_multiply(&tmp.color, &tmp.tup, COLOR_CF);
+	triangle_coordinates(tr);
+	s->shapes[s->shape_count] = make_shape('i', tr);
+	mat_with_col(&s->shapes[s->shape_count]->matrl, &tmp.color);
+	s->shape_count++;
+	return (true);
 }

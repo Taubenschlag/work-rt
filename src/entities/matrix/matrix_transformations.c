@@ -3,37 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_transformations.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 22:33:49 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/17 19:47:34 by sv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-t_matrix	*matrix_translate(double x, double y, double z)
+void	matrix_translate(t_matrix *m, t_tuple *tpl)
 {
-	t_matrix	*trans;
-
-	trans = matrix_identity(4);
-	trans->matrix[0][3] = x;
-	trans->matrix[1][3] = y;
-	trans->matrix[2][3] = z;
-	return (trans);
+	matrix_identity(m, M_MAX);
+	m->mtx[0][3] = tpl->x;
+	m->mtx[1][3] = tpl->y;
+	m->mtx[2][3] = tpl->z;
 }
 
-t_matrix	*matrix_scale(double x, double y, double z)
+void	matrix_scale(t_matrix *m, t_tuple *tpl)
 {
-	t_matrix	*scl;
-
-	scl = matrix_identity(4);
-	scl->matrix[0][0] = x;
-	scl->matrix[1][1] = y;
-	scl->matrix[2][2] = z;
-	return (scl);
+	matrix_identity(m, M_MAX);
+	m->mtx[0][0] = tpl->x;
+	m->mtx[1][1] = tpl->y;
+	m->mtx[2][2] = tpl->z;
 }
 
+/*
 t_matrix	*matrix_x_rotate(double r)
 {
 	t_matrix	*scl;
@@ -78,3 +73,4 @@ t_matrix	*matrix_z_rotate(double r)
 	}
 	return (scl);
 }
+*/

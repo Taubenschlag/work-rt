@@ -3,19 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/23 18:19:19 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/26 19:41:27 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
+/*
+** In this f() t_ray is created and used to project it through the objects.
+** t_tuple *color is used to retrieve the color of each pixel
+** and convert it to RGB before saving it on the canvas.
+** 
+** the t_tmp_m structure located in matrix.h
+** contain the temp t_structs for intermediat computation
+** also used in render() when saving the image in the file
+*/
 void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 {
-	t_ray		*r;
-	t_tuple		*color;
+	t_tmp_m		m_tmp;
+	t_ray		r;
 	int			y;
 	int			x;
 
@@ -26,10 +35,15 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 		x = -1;
 		while (++x < c->v_size)
 		{
-			r = ray_for_pix(c, y, x);
-			color = color_at(w, r);
-			ray_free(r);
-			img->canvas[y][x] = tuple_to_argb(color);
+			/* DEBUG */
+			//printf("[%d][%d]\t", y, x);
+			/* ***** */
+			ray_for_pix(&r, c, y, x, &m_tmp);
+			color_at(w, &r, &m_tmp);
+			img->canvas[y][x] = tuple_to_argb(&m_tmp.color);
+			/* DEBUG */
+			//printf("\n");
+			/* ***** */
 		}
 	}
 }
@@ -70,14 +84,19 @@ t_mlx_wrap	*init_mlx_wrapper(t_scene *s)
 	t_mlx_wrap	*data;
 
 	data = malloc(sizeof(t_mlx_wrap));
+	if (data == NULL)
+		return (NULL);
 	data->mlx = mlx_init();
-	data->imgs = malloc(sizeof(void *) * (s->camera_counter + 2));
-	data->addr = malloc(sizeof(char *) * (s->camera_counter + 2));
-	data->imgs[s->camera_counter + 1] = NULL;
+	data->imgs = malloc(sizeof(void *) * (s->camera_count + 2));
+	data->addr = malloc(sizeof(char *) * (s->camera_count + 2));
+	if (!data->mlx || !data->imgs || !data->addr)
+		return (NULL);
+	data->imgs[s->camera_count + 1] = NULL;
 	data->imgs[0] = NULL;
-	data->win = mlx_new_window(
-			data->mlx, s->resolution_x, s->resolution_y, "miniRT");
-	data->img_counter = s->camera_counter;
+	data->win = mlx_new_window(data->mlx, s->resolution_x, s->resolution_y, "miniRT");
+	if (data->win == NULL)
+		return (NULL);
+	data->img_counter = s->camera_count;
 	return (data);
 }
 
@@ -89,12 +108,12 @@ void	display_scene(t_scene *s)
 	int			cam;
 
 	cam = 0;
-	w.shape_counter = s->shape_counter;
-	init_world(&w, s->shapes, s->lights, s->light_counter);
+	w.shape_counter = s->shape_count;
+	init_world(&w, s->shapes, s->lights, s->light_count);
 	data = init_mlx_wrapper(s);
-	while (++cam <= s->camera_counter)
+	while (++cam <= s->camera_count)
 	{
-		world_set_ambience(&w, s->cameras[cam - 1]->from, s->ambi_color);
+		world_set_ambience(&w.amb, &s->cameras[cam - 1]->from, &s->ambi_color);
 		argb_render(s->cameras[cam - 1], &w, &c);
 		data->imgs[cam] = mlx_new_image(
 				data->mlx, s->resolution_x, s->resolution_y);
@@ -103,8 +122,5 @@ void	display_scene(t_scene *s)
 		fill_image(&c, data, cam);
 		canvas_free(&c);
 	}
-	if (w.ambienace)
-		light_free(w.ambienace);
-	free_scene(s);
 	loop_gui(data);
 }

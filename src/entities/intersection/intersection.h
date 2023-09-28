@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/23 18:17:06 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/28 13:00:59 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,25 @@ typedef struct intersection_list
 	t_intersection	**list;
 }	t_intersection_list;
 
+/* 
+** The uv tuple holdds u and v values range from 0 to 1 
+** these are coordinatets which correspond to the horizontal 
+** and vertical axes of the texture image.
+*/
 typedef struct computations
 {
 	double		t;
 	t_shape		*shape;
 	int			inside;
-	t_tuple		*point;
-	t_tuple		*eyev;
-	t_tuple		*normv;
-	t_tuple		*overpoint;
+	t_tuple		point;
+	t_tuple		eyev;
+	t_tuple		normv;
+	t_tuple		overpoint;
+	/* the following values are used to calc
+	** checkboard coords */
+	bool		is_odd;
+	t_tuple		odd_color;
+	t_tuple		even_color;
 }	t_computations;
 
 typedef struct world
@@ -43,15 +53,22 @@ typedef struct world
 	int					lights_counter;
 	t_shape				**shapes;
 	t_light				**lights;
-	t_light				*ambienace;
+	t_light				amb;
 	t_intersection_list	*merged;
-	t_intersection_list	**unsorted;
 }	t_world;
 
-t_lightning_pack		*make_l_p(t_light *l, t_computations *c);
-t_computations			*precomp(t_intersection *i, t_ray *r);
-t_intersection_list		*intersect_shape(t_shape *s, t_ray *r);
+typedef struct inter_tmp
+{
+	int					i;
+	int					j;
+	int					size;
+}	t_i_tmp;
+
+void	make_l_p(t_lightning_pack *pack, t_light *l, t_computations *c);
+void	precomp(t_computations	*comps, t_intersection *i, t_ray *r, t_tmp_m *m_tmp);
+t_intersection_list		*intersect_shape(t_shape *s, t_ray *r, t_tmp_m *m_tmp);
 t_intersection			*intersect_make_shape(t_shape *s, double t);
+//void			intersect_make_shape(t_intersection *ret, t_shape *s, double t);
 void					add_intersection(t_intersection *new_elem,
 							t_intersection_list **list);
 t_intersection_list		*intersection_ray_nsphere(t_shape *s, t_ray *ray);
@@ -63,17 +80,15 @@ t_intersection_list		*intersection_ray_triangle(t_shape *s, t_ray *ray);
 t_intersection_list		*intersection_ray_square(t_shape *s, t_ray *ray);
 t_intersection_list		*intersection_list_make(int elem);
 t_intersection			*hit(t_intersection_list *l);
+//void			hit(t_intersection *ret, t_intersection_list *l);
 void					intersection_list_free(t_intersection_list **l);
 
-t_tuple					*shade_hit(t_world *w, t_computations *cs,
-							t_light *current);
-t_intersection_list		*intersect_world(t_ray *r, t_world *w);
-t_tuple					*color_at(t_world *w, t_ray *r);
-int						in_shadow(t_world *w, t_tuple *p,
-							t_light *current_light);
-void					init_world(t_world *w, t_shape **shapes,
-							t_light **lights, int lights_counter);
-void					world_set_ambience(t_world *w, t_tuple *from,
-							t_tuple *color);
+t_intersection_list	*intersect_world(t_ray *r, t_world *w, t_tmp_m *m_tmp);
+
+void	shade_hit(t_world *w, t_computations *cs, t_light *current, t_tmp_m *m_tmp);
+void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp);
+int		in_shadow(t_world *w, t_tuple *p, t_light *current_light, t_tmp_m *m_tmp);
+void	init_world(t_world *w, t_shape **shapes, t_light **lights, int lights_counter);
+void	world_set_ambience(t_light *w_amb, t_tuple *from, t_tuple *color);
 
 #endif

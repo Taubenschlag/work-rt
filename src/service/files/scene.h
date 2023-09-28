@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/04 22:55:23 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/23 17:50:08 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,51 @@
 
 typedef struct scene
 {
+	int			fd_infile;
+	char		*filename;
+	int			counters[INSTRUCTION_SET_SIZE];
 	int			resolution_x;
 	int			resolution_y;
 	double		ambi_ratio;
-	t_tuple		*ambi_color;
-	int			camera_counter;
+	t_tuple		ambi_color;
+	int			camera_count;
 	t_camera	**cameras;
-	int			light_counter;
+	int			light_count;
 	t_light		**lights;
-	int			shape_counter;
+	int			shape_count;
 	t_shape		**shapes;
+	int			*fd_list;
 }	t_scene;
 
-void		init_scene(int *counters, t_scene *scene);
-t_tuple		*get_tuple(char *value, char type);
-void		free_scene(t_scene *s);
-void		handle_r(char **input, t_scene *s);
-void		handle_a(char **input, t_scene *s);
-void		handle_c(char **input, t_scene *s);
-void		handle_l(char **input, t_scene *s);
-void		handle_line(char **input, t_scene *s);
-void		handle_plane(char **values, t_scene *s);
-void		handle_sphere(char **values, t_scene *s);
-void		handle_square(char **values, t_scene *s);
-void		handle_cylinder(char **values, t_scene *s);
-void		handle_triangle(char **values, t_scene *s);
-void		handle_cone(char **values, t_scene *s);
-void		handle_cube(char **values, t_scene *s);
-void		save_scene(t_scene *s, int *fd_list);
-void		parse_scene(int fd, int *counters, t_scene *s);
-void		cleanup(char **values);
-int			*create_files(int *counters);
+typedef struct s_tmp_pars
+{
+	double		doubl;
+	t_tuple		center;
+	t_tuple		direct;
+	t_tuple		color;
+	t_tuple		tup;
+	t_tuple		norm;
+	t_matrix	m;
+	t_matrix	m_cpy;
+	t_matrix	trans;
+}	t_tmp;
+
+bool	init_scene(t_scene *scene);
+void	set_tuple(t_tuple *tuple, char *value, char type);
+bool	handle_r(char **input, t_scene *s);
+bool	handle_a(char **input, t_scene *s);
+bool	handle_c(char **input, t_scene *s);
+bool	handle_l(char **input, t_scene *s);
+bool	handle_line(char **input, t_scene *s);
+bool	handle_plane(char **values, t_scene *s);
+bool	handle_sphere(char **values, t_scene *s);
+bool	handle_square(char **values, t_scene *s);
+bool	handle_cylinder(char **values, t_scene *s);
+bool	handle_triangle(char **values, t_scene *s);
+bool	handle_cone(char **values, t_scene *s);
+bool	handle_cube(char **values, t_scene *s);
+void	save_scene(t_scene *s, int *fd_list);
+bool	parse_scene(t_scene *s);
+bool	create_files(t_scene *s);
 
 #endif

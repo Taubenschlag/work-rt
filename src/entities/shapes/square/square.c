@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   square.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/01 03:02:57 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/26 19:37:38 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 t_square	*square(void)
 {
-	t_square	*ret;
+	t_square	*square;
 
-	ret = (t_square *)malloc(sizeof(t_square));
-	ret->t1 = triangle_coordinates(
-			tuple_point(-1, 1, 0),
-			tuple_point(-1, -1, 0),
-			tuple_point(1, 1, 0));
-	ret->t2 = triangle_coordinates(
-			tuple_point(1, -1, 0),
-			tuple_point(1, 1, 0),
-			tuple_point(-1, -1, 0));
-	return (ret);
+	square = (t_square *)malloc(sizeof(t_square));
+	if (square == NULL)
+		return (NULL);
+	tuple_point(&square->t1.a, -1, 1, 0);	
+	tuple_point(&square->t1.b, -1, -1, 0);
+	tuple_point(&square->t1.c, 1, 1, 0);
+	triangle_coordinates(&square->t1); 
+	tuple_point(&square->t2.a, 1, -1, 0);	
+	tuple_point(&square->t2.b, -1, -1, 0);
+	tuple_point(&square->t2.c, 1, 1, 0);
+	triangle_coordinates(&square->t2); 
+	return (square);
 }
 
-t_tuple	*square_normale_at(void)
+void	square_normale_at(t_tuple *res)
 {
-	return (tuple_vector(0, 0, 1));
+	tuple_vector(res, 0, 0, 1);
 }
 
 void	free_square(t_square *t)
 {
-	free_triangle(t->t1);
-	free_triangle(t->t2);
 	free(t);
 }

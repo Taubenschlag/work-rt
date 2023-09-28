@@ -1,0 +1,41 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                //"${workspaceFolder}/**",
+				"heads_global",
+				"lib/libft",
+				"mlx_linux",
+				"src/entities/bmp",
+				"src/entities/camera",
+				"src/entities/color",
+				"src/entities/intersection",
+				"src/entities/light",
+				"src/entities/light",
+				"src/entities/material",
+				"src/entities/matrix",
+				"src/entities/ray",
+				"src/entities/shapes",
+				"src/entities/shapes/cone",
+				"src/entities/shapes/cube",
+				"src/entities/shapes/cylinder",
+				"src/entities/shapes/plane",
+				"src/entities/shapes/sphere",
+				"src/entities/shapes/square",
+				"src/entities/shapes/triangle",
+				"src/entities/tuple",
+				"src/service/errs",
+				"src/service/files",
+				"src/service/free",
+				"src/service/window"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

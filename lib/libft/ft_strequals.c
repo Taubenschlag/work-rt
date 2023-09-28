@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strequals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 23:16:29 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/25 23:17:53 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/04 17:53:06 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_strequals(char *s1, char *s2)
 {

@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   scene_handlers_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/01 18:48:59 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/23 14:44:20 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../heads_global/minirt.h"
 
-void	handle_c(char **input, t_scene *s)
+bool	handle_c(char **input, t_scene *s)
 {
-	t_tuple		*dir;
-	t_tuple		*up;
+	t_tmp		tmp;
 	t_camera	*cam;
 
 	if (input && ft_strequals(input[0], "c"))
@@ -24,83 +23,84 @@ void	handle_c(char **input, t_scene *s)
 				s->resolution_y,
 				s->resolution_x,
 				ft_atoi(input[4]) * (M_PI / 180));
-		cam->from = get_tuple(input[1], 'p');
-		dir = get_tuple(input[2], 'v');
-		up = get_tuple(input[3], 'v');
-		cam->transform = view_transform(
-				tuple_copy(cam->from),
-				tuple_add(tuple_copy(cam->from), dir),
-				up);
-		s->cameras[s->camera_counter] = cam;
-		s->camera_counter++;
+		set_tuple(&cam->from, input[1], 'p');
+		set_tuple(&tmp.direct, input[2], 'v');
+		set_tuple(&tmp.center, input[3], 'v');
+		tuple_add(&tmp.tup, &cam->from, &tmp.direct);
+		view_transform(&cam->transform, &cam->from, &tmp.tup, &tmp.center);
+		s->cameras[s->camera_count] = cam;
+		s->camera_count++;
 	}
-	cleanup(input);
+	return (true);
 }
 
-void	handle_l(char **input, t_scene *s)
+bool	handle_l(char **input, t_scene *s)
 {
-	t_tuple	*from;
-	t_tuple	*color;
-	double	brightness;
+	t_tmp	tmp;
+	t_light	*lt;
 
 	if (input && ft_strequals(input[0], "l"))
 	{
-		from = get_tuple(input[1], 'p');
-		brightness = ft_atod(input[2]);
-		color = tuple_scalar_multiply(get_tuple(input[3], 'c'),
-				brightness * COLOR_CF);
-		s->lights[s->light_counter] = light_make(from, color);
-		s->light_counter++;
+		set_tuple(&tmp.center, input[1], 'p');
+		tmp.doubl = ft_atod(input[2]);
+		set_tuple(&tmp.tup, input[3], 'c');
+		tuple_scalar_multiply(&tmp.color, &tmp.tup, tmp.doubl * COLOR_CF);
+		lt = (t_light *)malloc(sizeof(t_light));
+		if (lt == NULL)
+		{
+			printf("Error: malloc fail in 'handle_l()'\n");
+			return (cleanup(input), false);
+		}
+		light_make(lt, &tmp.center, &tmp.color);
+		s->lights[s->light_count] = lt;
+		s->light_count++;
 	}
-	cleanup(input);
+	return (true);
 }
 
-void	handle_sphere(char **values, t_scene *s)
+bool	handle_sphere(char **values, t_scene *s)
 {
-	t_tuple	*centre;
-	t_tuple	*color;
-	double	diameter;
+	t_tmp	tmp;
 
-	centre = get_tuple(values[1], 'p');
-	diameter = ft_atod(values[2]);
-	color = tuple_scalar_multiply(
-			get_tuple(values[3], 'c'), COLOR_CF);
-	s->shapes[s->shape_counter] = make_shape('s',
-			nsphere_unit(tuple_point(0, 0, 0)));
-	s->shapes[s->shape_counter]->matrl = mat_with_col(color);
-	set_transform(s->shapes[s->shape_counter], matrix_multiply(
-			matrix_translate(centre->x, centre->y, centre->z),
-			matrix_scale(
-				diameter / 2, diameter / 2, diameter / 2)));
-	tuple_free(centre);
-	s->shape_counter++;
-	cleanup(values);
+	set_tuple(&tmp.center, values[1], 'p');
+	tmp.doubl = ft_atod(values[2]);
+	set_tuple(&tmp.tup, values[3], 'c');
+	tuple_scalar_multiply(&tmp.color, &tmp.tup, COLOR_CF);
+	tuple_point(&tmp.tup, 0, 0, 0);
+	s->shapes[s->shape_count] = make_shape('s', nsphere_unit(&tmp.tup));
+	mat_with_col(&s->shapes[s->shape_count]->matrl, &tmp.color);
+	matrix_translate(&tmp.m, &tmp.center);
+	tuple_point(&tmp.tup, tmp.doubl / 2, tmp.doubl / 2, tmp.doubl / 2);
+	matrix_scale(&tmp.m_cpy, &tmp.tup);
+	matrix_multiply(&s->shapes[s->shape_count]->trans, &tmp.m, &tmp.m_cpy);
+	s->shape_count++;
+	return (true);
 }
 
-void	handle_plane(char **values, t_scene *s)
+bool	handle_plane(char **values, t_scene *s)
 {
-	t_tuple		*coordinate;
-	t_tuple		*norm;
-	t_tuple		*color;
-	t_matrix	*trans;
+	t_tmp	tmp;
 
-	coordinate = get_tuple(values[1], 'p');
-	norm = get_tuple(values[2], 'v');
-	color = tuple_scalar_multiply(
-			get_tuple(values[3], 'c'), COLOR_CF);
-	s->shapes[s->shape_counter] = make_shape('p', plane_plane());
-	s->shapes[s->shape_counter]->matrl = mat_with_col(color);
-	s->shapes[s->shape_counter]->matrl->diffuse = 0.5;
-	s->shapes[s->shape_counter]->matrl->ambient = 0.1;
-	s->shapes[s->shape_counter]->matrl->specular = 0.1;
-	s->shapes[s->shape_counter]->matrl->shininess = 50;
-	if (norm->x == 0 && fabs(norm->y) == 1 && norm->z == 0)
-		trans = matrix_identity(4);
+	set_tuple(&tmp.center, values[1], 'p');
+	set_tuple(&tmp.tup, values[2], 'v');
+	tuple_normalize(&tmp.norm, &tmp.tup);
+	set_tuple(&tmp.tup, values[3], 'c');
+	tuple_scalar_multiply(&tmp.color, &tmp.tup, COLOR_CF);
+	s->shapes[s->shape_count] = make_shape('p', plane_plane());
+	mat_with_col(&s->shapes[s->shape_count]->matrl, &tmp.color);
+	s->shapes[s->shape_count]->matrl.diffuse = 0.5;
+	s->shapes[s->shape_count]->matrl.ambient = 0.1;
+	s->shapes[s->shape_count]->matrl.specular = 0.1;
+	s->shapes[s->shape_count]->matrl.shininess = 50;
+	if (tmp.norm.x == 0 && fabs(tmp.norm.y) == 1 && tmp.norm.z == 0)
+		matrix_identity(&tmp.trans, 4);
 	else
-		trans = rotate_align(tuple_vector(0, 1, 0), norm);
-	set_transform(s->shapes[s->shape_counter],
-		matrix_multiply(matrix_translate(
-				coordinate->x, coordinate->y, coordinate->z), trans));
-	s->shape_counter++;
-	cleanup(values);
+	{
+		tuple_vector(&tmp.tup, 0, 1, 0);
+		rotate_align(&tmp.trans, &tmp.tup, &tmp.norm);
+	}
+	matrix_translate(&tmp.m, &tmp.center);
+	matrix_multiply(&s->shapes[s->shape_count]->trans, &tmp.m, &tmp.trans);
+	s->shape_count++;
+	return (true);
 }

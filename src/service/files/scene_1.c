@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/04 22:56:41 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/23 14:08:34by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,64 @@ int	count_what(int *counters, int what)
 	return (-1);
 }
 
-void	init_scene(int *counters, t_scene *scene)
+static void	init_scene_helper(t_scene *scene)
 {
 	scene->resolution_x = -1;
 	scene->resolution_y = -1;
 	scene->ambi_ratio = -1;
-	scene->ambi_color = tuple_color(0, 0, 0);
-	scene->camera_counter = 0;
-	scene->cameras = (t_camera **)malloc(sizeof(t_camera *) * counters[CAM]);
-	scene->light_counter = 0;
-	scene->lights = (t_light **)malloc(sizeof(t_light *) * counters[LHT]);
-	scene->shape_counter = 0;
-	scene->shapes = (t_shape **)malloc(
-			sizeof(t_shape *) * count_what(counters, SHAPES));
+	tuple_color(&scene->ambi_color, 0, 0, 0);
+	scene->camera_count = 0;
+	scene->light_count = 0;
+	scene->shape_count = 0;
+	scene->fd_list = NULL;
 }
 
-void	parse_scene(int fd, int *counters, t_scene *s)
+bool	init_scene(t_scene *s)
 {
-	char	*line;
-
-	while (get_next_line(fd, &line))
+	init_scene_helper(s);
+	s->cameras = (t_camera **)malloc(sizeof(t_camera *) * s->counters[CAM]);
+	if (s->cameras == NULL)
 	{
-		if (line && !ft_strequals(line, ""))
-			handle_line(ft_whitespaces(line), s);
-		free(line);
+		printf("Error: malloc fail for **cameras in 'init_scene()'\n");
+		return (false);
 	}
-	if (line && !ft_strequals(line, ""))
-		handle_line(ft_whitespaces(line), s);
-	free(line);
-	free(counters);
-	close(fd);
+	s->lights = (t_light **)malloc(sizeof(t_light *) * s->counters[LHT]);
+	if (s->lights == NULL)
+	{
+		printf("Error: malloc fail for **lights in 'init_scene()'\n");
+		return (false);
+	}
+	s->shapes = (t_shape **)malloc(
+			sizeof(t_shape *) * count_what(s->counters, SHAPES));
+	if (s->shapes == NULL)
+	{
+		printf("Error: malloc fail for **shapes in 'init_scene()'\n");
+		return (false);
+	}
+	return (true);
+}
+
+bool	parse_scene(t_scene *s)
+{
+	char	line[GNL_BUF_SIZE];
+	char	*l;
+	char	**split;
+
+	l = get_next_line(s->fd_infile, line);
+	while (l != NULL)
+	{
+		if (l && !ft_strequals(line, ""))
+		{
+			split = ft_whitespaces(line);
+			if (!handle_line(split, s))
+			{
+				cleanup(split);
+				return (false);
+			}
+			cleanup(split);
+		}
+		l = get_next_line(s->fd_infile, line);
+	}
+	close(s->fd_infile);
+	return (true);
 }

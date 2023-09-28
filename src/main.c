@@ -3,50 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2022/11/04 22:55:03 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/09/23 18:17:17 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../heads_global/minirt.h"
 
-void	check_fd_argnum(int fd, int ac)
+int	main(int ac, char **av)
 {
-	if (fd < 1 || ac < 2 || ac > 3)
-		exit(EXIT_FAILURE);
-}
+	t_scene	s;
 
-void	check_counters(int *counters)
-{
-	if (!counters)
+	if (check_arguments(&s, ac, av) == false)
 	{
-		perror("invalid file\n");
-		exit(EXIT_FAILURE);
+		return (1);	
 	}
-}
-
-void	check_file_creation(int *fd_list)
-{
-	if (!fd_list)
+	if (!init_scene(&s) || !parse_scene(&s))
 	{
-		perror("unable to create output files\n");
-		exit(EXIT_FAILURE);
+		close(s.fd_infile);
+		free_scene(&s);
+		return (1);	
 	}
+	if (ac == 3)
+	{
+		if (!create_files(&s))
+		{
+			free_scene(&s);
+			return (1);	
+		}
+		save_scene(&s, s.fd_list);
+	}
+	else
+		display_scene(&s);
+	free_scene(&s);
+	return (0);
 }
 
+/*
 int	main(int ac, char **av)
 {
 	int		fd;
 	int		*fd_list;
 	t_scene	s;
-	int		*counters;
+	int		counters[INSTRUCTION_SET_SIZE];
 
 	fd = check_arguments(ac, av);
 	fd_list = NULL;
 	check_fd_argnum(fd, ac);
-	counters = check_file(av[ac - 1]);
+	check_file(av[ac - 1], counters);
 	check_counters(counters);
 	if (ac == 3)
 	{
@@ -54,10 +60,11 @@ int	main(int ac, char **av)
 		check_file_creation(fd_list);
 	}
 	init_scene(counters, &s);
-	parse_scene(fd, counters, &s);
+	parse_scene(fd, &s);
 	if (ac == 3)
 		save_scene(&s, fd_list);
 	else
 		display_scene(&s);
 	return (0);
 }
+*/
