@@ -82,8 +82,11 @@ bool	parse_scene(t_scene *s)
 	l = get_next_line(s->fd_infile, line);
 	while (l != NULL)
 	{
-		if (l && !ft_strequals(line, ""))
+		if (l && !ft_strequals(line, "") && find_first('#', line) != 0)
 		{
+            //todo no need to free() if whitespaces weren't used?
+            if (find_first('#', line) > 0)
+                line[find_first('#', line)] = '\0';
 			split = ft_whitespaces(line);
 			if (!handle_line(split, s))
 			{

@@ -39,7 +39,11 @@ static void	instruction_switch(char **str, int **counters_ptr, int *correct)
 static void	check_row(int *correct, char *line, char ***values, int *entry)
 {
 	if (*correct)
-	{
+	{   //todo no need to free() line if whitespaces weren't used?
+        if (find_first('#', line) == 0)
+            return;
+        else if (find_first('#', line) > 0)
+            line[find_first('#', line)] = '\0';
 		*values = ft_whitespaces(line);
 		if (*values && **values)
 			instruction_switch(*values, &entry, correct);
