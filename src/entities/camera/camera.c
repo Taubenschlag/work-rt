@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/26 19:30:54 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:44:41 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_camera	*make_camera(int h_s, int v_s, double fov)
 	return (cam);
 }
 
-void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp)
+void	ray_for_pix(t_camera *c, t_ray *ray, t_tmp_m *m_tmp)
 {
 	double	xwrld;
 	double	ywrld;
@@ -46,15 +46,15 @@ void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp)
 	t_tuple	tmp;
 	t_tuple	tmp_p;
 
-	xwrld = c->half_w - ((double)y + 0.5) * c->pix_size;
-	ywrld = c->half_h - ((double)x + 0.5) * c->pix_size;
+	xwrld = c->half_w - ((double)m_tmp->y + 0.5) * c->pix_size;
+	ywrld = c->half_h - ((double)m_tmp->x + 0.5) * c->pix_size;
 	matrix_invert(m_tmp, &c->transform);
 	tuple_set(&tmp_p, ywrld, xwrld, -1);
 	tuple_set(&tmp, 0.0, 0.0, 0.0);
 	tuple_apply_trans_matrix(&pixel, &m_tmp->inv, &tmp_p);
-	tuple_apply_trans_matrix(&r->origin, &m_tmp->inv, &tmp);
-	tuple_substract(&tmp_p, &pixel, &r->origin);
-	tuple_normalize(&r->dir, &tmp_p);
+	tuple_apply_trans_matrix(&ray->origin, &m_tmp->inv, &tmp);
+	tuple_substract(&tmp_p, &pixel, &ray->origin);
+	tuple_normalize(&ray->dir, &tmp_p);
 }
 
 /*
@@ -62,29 +62,27 @@ void	ray_for_pix(t_ray *r, t_camera *c, int y, int x, t_tmp_m *m_tmp)
 ** also used in render() when saving the image in the file
 ** it is declared in matrix.h
 */
-void	render(t_camera *c, t_world *w, t_canvas *img)
+bool	render(t_camera *c, t_world *w, t_canvas *img)
 {
-	t_tmp_m	m_tmp;
-	t_ray		r;
-	int			y;
-	int			x;
+	t_tmp_m	tmp;
+	t_ray	ray;
 
 	init_canvas(c->v_size, c->h_size, img);
-	y = -1;
-	while (++y < c->h_size)
+	if (img->canvas == NULL)
 	{
-		x = -1;
-		while (++x < c->v_size)
+		printf("Error allocating memory for canvas\n");
+		return (false);
+	}
+	tmp.y = -1;
+	while (++tmp.y < c->h_size)
+	{
+		tmp.x = -1;
+		while (++tmp.x < c->v_size)
 		{
-			/* DEBUG */
-			//printf("[%d][%d]\t", y, x);
-			/* ***** */
-			ray_for_pix(&r, c, y, x, &m_tmp);
-			color_at(w, &r, &m_tmp);
-			img->canvas[y][x] = tuple_to_rgb(&m_tmp.color);
-			/* DEBUG */
-			//printf("\n");
-			/* ***** */
+			ray_for_pix(c, &ray, &tmp);
+			color_at(w, &ray, &tmp);
+			img->canvas[tmp.y][tmp.x] = tuple_to_rgb(&tmp.color);
 		}
 	}
+	return (true);
 }

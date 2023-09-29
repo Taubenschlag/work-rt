@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/26 19:41:27 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:18:46 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,19 @@
 */
 void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 {
-	t_tmp_m		m_tmp;
-	t_ray		r;
-	int			y;
-	int			x;
+	t_tmp_m		tmp;
+	t_ray		ray;
 
 	init_canvas(c->v_size, c->h_size, img);
-	y = -1;
-	while (++y < c->h_size)
+	tmp.y = -1;
+	while (++tmp.y < c->h_size)
 	{
-		x = -1;
-		while (++x < c->v_size)
+		tmp.x = -1;
+		while (++tmp.x < c->v_size)
 		{
-			/* DEBUG */
-			//printf("[%d][%d]\t", y, x);
-			/* ***** */
-			ray_for_pix(&r, c, y, x, &m_tmp);
-			color_at(w, &r, &m_tmp);
-			img->canvas[y][x] = tuple_to_argb(&m_tmp.color);
-			/* DEBUG */
-			//printf("\n");
-			/* ***** */
+			ray_for_pix(c, &ray, &tmp);
+			color_at(w, &ray, &tmp);
+			img->canvas[tmp.y][tmp.x] = tuple_to_argb(&tmp.color);
 		}
 	}
 }
@@ -93,7 +85,8 @@ t_mlx_wrap	*init_mlx_wrapper(t_scene *s)
 		return (NULL);
 	data->imgs[s->camera_count + 1] = NULL;
 	data->imgs[0] = NULL;
-	data->win = mlx_new_window(data->mlx, s->resolution_x, s->resolution_y, "miniRT");
+	data->win = mlx_new_window(data->mlx, s->resolution_x, \
+								s->resolution_y, "miniRT");
 	if (data->win == NULL)
 		return (NULL);
 	data->img_counter = s->camera_count;

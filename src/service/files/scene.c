@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 14:18:39by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:41:51 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ bool	create_files(t_scene *s)
 		s->fd_list[i] = open(filename, O_CREAT | O_WRONLY, 0);
 		if (s->fd_list[i] < 0)
 		{
-
 			printf("Error: unable to create output file '%s'\n", filename);
 			emergency_close(s->fd_list, i);
 			free(filename);
@@ -41,7 +40,7 @@ bool	create_files(t_scene *s)
 	return (true);
 }
 
-void	save_scene(t_scene *s, int *fd_list)
+bool	save_scene(t_scene *s, int *fd_list)
 {
 	t_canvas	c;
 	t_world		w;
@@ -53,9 +52,11 @@ void	save_scene(t_scene *s, int *fd_list)
 	while (++cam < s->camera_count)
 	{
 		world_set_ambience(&w.amb, &s->cameras[cam]->from, &s->ambi_color);
-		render(s->cameras[cam], &w, &c);
+		if (render(s->cameras[cam], &w, &c) == false)
+			return (false);
 		fill_bmp(init_bmp(s->resolution_y, s->resolution_x, fd_list[cam]), &c);
 		close(fd_list[cam]);
 	}
 	canvas_free(&c);
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 14:30:51y sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:13:14 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,5 @@ int	is_tuple(char *value, int exclude_neg)
 	ret = check_parsed_tuple(next_part);
 	i = -1;
 	cleanup(next_part);
-	/*
-	while (next_part[++i])
-		free(next_part[i]);
-	free(next_part);
-	*/
 	return (ret);
 }

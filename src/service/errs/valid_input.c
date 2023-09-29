@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 18:35:26 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:56:18 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static bool	check_file(t_scene *s)
 		check_row(&correct, line, &values, s->counters);
 	check_row(&correct, line, &values, s->counters);
 	close(fd);
-	if (!correct || s->counters[RES] != 1 || s->counters[AMB] > 1 
+	if (!correct || s->counters[RES] != 1 || s->counters[AMB] > 1
 		|| s->counters[CAM] < 1)
 	{
 		printf("Error: incorrect input data in '%s'\n", s->filename);

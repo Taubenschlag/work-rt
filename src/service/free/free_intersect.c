@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.h                                           :+:      :+:    :+:   */
+/*   free_intersect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/29 20:10:43 by sbocanci         ###   ########.fr       */
+/*   Created: 2023/09/23 14:33:58 by sbocanci          #+#    #+#             */
+/*   Updated: 2023/09/29 18:57:51 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPHERE_H
-# define SPHERE_H
-# include "../../../../heads_global/minirt.h"
+#include "../../../heads_global/minirt.h"
 
-typedef struct sphere
+void	intersection_list_free(t_intersection_list **l)
 {
-	t_tuple	centre;
-}	t_sphere;
+	int	i;
 
-void		nsphere_normal_at(t_tuple *res, t_tuple *p, \
-								t_matrix *m, t_tmp_m *m_tmp);
-t_sphere	*nsphere_nsphere(t_tuple *centre);
-t_sphere	*nsphere_unit(t_tuple *centre);
-void		nsphere_free(t_sphere *s);
+	i = -1;
+	while (++i < (*l)->size)
+		free((*l)->list[i]);
+	free((*l)->list);
+	free(*l);
+}
 
-#endif
+void	free_unsorted_list(int size, t_intersection_list *unsorted[size])
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (unsorted[i])
+		{
+			free(unsorted[i]->list);
+			free(unsorted[i]);
+		}
+		i++;
+	}
+}

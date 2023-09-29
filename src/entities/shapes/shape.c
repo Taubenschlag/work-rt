@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/11 13:50:29by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:05:05 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ void	shape_normal_at(t_tuple *res, t_shape *s, t_tuple *p, t_tmp_m *m_tmp)
 	matrix_invert(m_tmp, &s->trans);
 	tuple_apply_trans_matrix(&loc_pnt, &m_tmp->inv, p);
 	if (s->type == 's' )
-	{
-		nsphere_normal_at(res, &loc_pnt, &s->trans, m_tmp);
-		return ;
-	}
+		return (nsphere_normal_at(res, &loc_pnt, &s->trans, m_tmp));
 	else if (s->type == 'p')
 		plane_normal_at(&loc_normal);
 	else if (s->type == 'u')

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/26 19:35:30 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:10:10 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	cube_free(t_cube *c)
 {
 	free(c);
 }
-
 
 void	cube_normal_at(t_tuple *res, t_tuple *p)
 {

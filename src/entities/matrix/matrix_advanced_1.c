@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/21 18:50:13 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:51:35 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	matrix_transpose(t_matrix *res, t_matrix *m)
 
 double	matrix_determinant(t_matrix *m)
 {
-	int		column;
-	double	determinant;
+	int			column;
+	double		determinant;
 	t_matrix	sub;
 
 	determinant = 0;
