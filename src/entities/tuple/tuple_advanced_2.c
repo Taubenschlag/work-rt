@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuple_advanced_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:59:01 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/29 20:12:31 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ double	tuple_dot_product(t_tuple *t1, t_tuple *t2)
 
 void	tuple_cross_product(t_tuple *res, t_tuple *t1, t_tuple *t2)
 {
-	tuple_vector(res, t1->y * t2->z - t1->z * t2->y,
-		t1->z * t2->x - t1->x * t2->z,
-		t1->x * t2->y - t1->y * t2->x
-	);
+	tuple_vector(res, t1->y * t2->z - t1->z * t2->y, \
+					t1->z * t2->x - t1->x * t2->z, \
+					t1->x * t2->y - t1->y * t2->x);
 }

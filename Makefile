@@ -45,6 +45,7 @@ entities/intersection/intersection_2.c \
 entities/intersection/intersection_3.c \
 entities/intersection/intersection_4.c \
 entities/intersection/intersection.c \
+entities/intersection/pattern.c \
 entities/intersection/world.c \
 \
 entities/light/light.c \
@@ -89,8 +90,7 @@ service/window/mlx_handlers.c \
 service/window/window.c \
 \
 service/free/free.c \
-\
-debug.c 
+service/free/free_intersect.c
 
 
 OBS = $(addprefix $(ODIR)/,${SRC:.c=.o})

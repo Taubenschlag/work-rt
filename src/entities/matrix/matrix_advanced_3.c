@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_advanced_3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sv <sv@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/17 19:46:30 by sv               ###   ########.fr       */
+/*   Updated: 2023/09/29 19:59:40 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	rotate_axis_angle(t_matrix *ret, t_tuple *u, double angle)
 	ret->mtx[2][2] = (u->z * u->z * one_min_cos_a) + cos_a;
 }
 
-void	rotate_align(t_matrix * res, t_tuple *v1, t_tuple *v2)
+void	rotate_align(t_matrix *res, t_tuple *v1, t_tuple *v2)
 {
 	t_tuple		axis;
 	t_tuple		tmp;

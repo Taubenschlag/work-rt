@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/27 09:36:23 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:37:06 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_intersection_list	*intersection_ray_nsphere(t_shape *s, t_ray *ray)
 	double				dis;
 	t_intersection_list	*ret;
 
-	tuple_substract(&sphere_ray, &ray->origin, &((t_sphere*)s->shape)->centre);
+	tuple_substract(&sphere_ray, &ray->origin, &((t_sphere *)s->shape)->centre);
 	a = tuple_dot_product(&ray->dir, &ray->dir);
 	b = 2 * tuple_dot_product(&ray->dir, &sphere_ray);
 	dis = b * b - 4 * a * (tuple_dot_product(&sphere_ray, &sphere_ray) - 1);
@@ -104,7 +104,6 @@ void	axis(double orig, double direct, double *min, double *max)
 	else
 		*min = t_max;
 }
-
 
 t_intersection_list	*intersection_ray_cube(t_shape *s, t_ray *ray)
 {

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:33:58 by sbocanci          #+#    #+#             */
-/*   Updated: 2023/09/26 18:56:14 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:58:00 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	emergency_close(int *fds, int failed)
 		close(fds[failed]);
 		failed--;
 	}
-	//free(fds);
 }
 
 void	canvas_free(t_canvas *c)
@@ -70,39 +69,12 @@ void	canvas_free(t_canvas *c)
 	free(c->canvas);
 }
 
-void		free_camera(t_camera *c)
+void	free_camera(t_camera *c)
 {
 	if (c)
 	{
 		if (c->name)
 			free(c->name);
 		free(c);
-	}
-}
-
-void	intersection_list_free(t_intersection_list **l)
-{
-	int	i;
-
-	i = -1;
-	while (++i < (*l)->size)
-		free((*l)->list[i]);
-	free((*l)->list);
-	free(*l);
-}
-
-void	free_unsorted_list(int size, t_intersection_list *unsorted[size])
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (unsorted[i])
-		{
-			free(unsorted[i]->list);
-			free(unsorted[i]);
-		}
-		i++;
 	}
 }

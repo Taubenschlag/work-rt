@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 19:33:24 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:31:26 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,27 @@ void	init_canvas(unsigned int w, unsigned int h, t_canvas *c)
 	unsigned int	i;
 	unsigned int	j;
 
-	i = 0;
+	i = -1;
 	c->h = h;
 	c->w = w;
 	c->canvas = (unsigned int **)malloc(sizeof(int *) * h);
-	// malloc protection
-	while (i < h)
+	if (c->canvas == NULL)
+		return ;
+	while (++i < h)
 	{
 		(c->canvas)[i] = (unsigned int *)malloc(sizeof(int) * w);
-		// malloc protection
+		if ((c->canvas)[i] == NULL)
+		{
+			canvas_free(c);
+			c->canvas = NULL;
+			return ;
+		}
 		j = 0;
 		while (j < w)
 		{
 			(c->canvas)[i][j] = 0;
 			j++;
 		}
-		i++;
 	}
 }
 

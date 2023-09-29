@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 17:50:08 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:42:26 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	handle_cylinder(char **values, t_scene *s);
 bool	handle_triangle(char **values, t_scene *s);
 bool	handle_cone(char **values, t_scene *s);
 bool	handle_cube(char **values, t_scene *s);
-void	save_scene(t_scene *s, int *fd_list);
+bool	save_scene(t_scene *s, int *fd_list);
 bool	parse_scene(t_scene *s);
 bool	create_files(t_scene *s);
 
