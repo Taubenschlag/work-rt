@@ -13,7 +13,7 @@
 #include "libft.h"
 
 /* 
-** Short version of GNL whish does not use malloc
+** Short version of GNL which does not use malloc
 **
 ** It also does not save \n character in the end of the line
 ** this helps in proper parsing logic

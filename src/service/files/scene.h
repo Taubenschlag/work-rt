@@ -14,7 +14,7 @@
 # define SCENE_H
 
 # include "../../../heads_global/minirt.h"
-# define COLOR_CF 0.003921569 //WHY?
+# define COLOR_CF 0.003921569 // TODO WHY?
 # define SHAPES 1
 # define ALL 2
 
@@ -38,11 +38,11 @@ typedef struct scene
 
 typedef struct s_tmp_pars
 {
-	double		doubl;
+	double		doubl; // todo what?
 	t_tuple		center;
 	t_tuple		direct;
 	t_tuple		color;
-	t_tuple		tup;
+	t_tuple		tup; // todo what?
 	t_tuple		norm;
 	t_matrix	m;
 	t_matrix	m_cpy;

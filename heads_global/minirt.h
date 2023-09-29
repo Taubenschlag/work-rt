@@ -42,6 +42,7 @@
 
 # include "../lib/libft/libft.h"
 
+// TODO Why?
 typedef struct lightning_pack t_lightning_pack;
 typedef	struct s_tmp t_tmp_m;
 typedef struct light t_light;

@@ -34,6 +34,7 @@ int		ft_strequals(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 char	**ft_whitespaces(char const *s);
 int		get_range(long n, int negative);
+int		find_first(char c, char const *s);
 
 char	*get_next_line(int fd, char *line);
 
