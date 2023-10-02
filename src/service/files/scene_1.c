@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 13:21:10 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:07:09 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ bool	parse_scene(t_scene *s)
 	{
 		if (l && !ft_strequals(line, "") && find_first('#', line) != 0)
 		{
-            if (find_first('#', line) > 0)
-                line[find_first('#', line)] = '\0';
+			if (find_first('#', line) > 0)
+				line[find_first('#', line)] = '\0';
 			split = ft_whitespaces(line);
 			if (!handle_line(split, s))
 			{

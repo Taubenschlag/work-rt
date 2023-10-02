@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 14:49:03 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:05:10 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 {
 	t_tmp_m		tmp;
 	t_ray		ray;
+	double		progress;
 
 	init_canvas(c->v_size, c->h_size, img);
 	tmp.y = -1;
@@ -36,6 +37,9 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 			ray_for_pix(c, &ray, &tmp);
 			color_at(w, &ray, &tmp);
 			img->canvas[tmp.y][tmp.x] = tuple_to_argb(&tmp.color);
+			progress = ((tmp.y * c->v_size) + tmp.x) \
+						/ (double)(c->h_size * c->v_size);
+			display_progress(progress);
 		}
 	}
 }

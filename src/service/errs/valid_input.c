@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 12:43:40 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:08:16 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	check_row(int *correct, char *line, char ***values, int *entry)
 	if (*correct)
 	{
 		if (find_first('#', line) == 0)
-            return;
-        else if (find_first('#', line) > 0)
-            line[find_first('#', line)] = '\0';
+			return ;
+		else if (find_first('#', line) > 0)
+			line[find_first('#', line)] = '\0';
 		*values = ft_whitespaces(line);
 		if (*values && **values)
 			instruction_switch(*values, &entry, correct);
