@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 14:44:20 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:51:36 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ bool	handle_l(char **input, t_scene *s)
 	if (input && ft_strequals(input[0], "l"))
 	{
 		set_tuple(&tmp.center, input[1], 'p');
-		tmp.doubl = ft_atod(input[2]);
+		tmp.light_br = ft_atod(input[2]);
 		set_tuple(&tmp.tup, input[3], 'c');
-		tuple_scalar_multiply(&tmp.color, &tmp.tup, tmp.doubl * COLOR_CF);
+		tuple_scalar_multiply(&tmp.color, &tmp.tup, tmp.light_br * COLOR_CF);
 		lt = (t_light *)malloc(sizeof(t_light));
 		if (lt == NULL)
 		{
@@ -63,14 +63,14 @@ bool	handle_sphere(char **values, t_scene *s)
 	t_tmp	tmp;
 
 	set_tuple(&tmp.center, values[1], 'p');
-	tmp.doubl = ft_atod(values[2]);
+	tmp.sph_d = ft_atod(values[2]);
 	set_tuple(&tmp.tup, values[3], 'c');
 	tuple_scalar_multiply(&tmp.color, &tmp.tup, COLOR_CF);
 	tuple_point(&tmp.tup, 0, 0, 0);
 	s->shapes[s->shape_count] = make_shape('s', nsphere_unit(&tmp.tup));
 	mat_with_col(&s->shapes[s->shape_count]->matrl, &tmp.color);
 	matrix_translate(&tmp.m, &tmp.center);
-	tuple_point(&tmp.tup, tmp.doubl / 2, tmp.doubl / 2, tmp.doubl / 2);
+	tuple_point(&tmp.tup, tmp.sph_d / 2, tmp.sph_d / 2, tmp.sph_d / 2);
 	matrix_scale(&tmp.m_cpy, &tmp.tup);
 	matrix_multiply(&s->shapes[s->shape_count]->trans, &tmp.m, &tmp.m_cpy);
 	s->shape_count++;

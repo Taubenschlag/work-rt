@@ -110,7 +110,7 @@ $(SAN): pre-build get-libft #get-libx
 $(DEBUG): pre-build get-libft #get-libx
 	${CC} ${FLAGS} -ggdb3  -o ${DEBUG} ${SRCS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
 
-$(NAME): pre-build get-libft  ${OBS}
+$(NAME): pre-build get-libft get-libx ${OBS}
 	${CC} ${FLAGS} -o ${NAME} ${OBS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
 
 ${ODIR}/%.o: ${SDIR}/%.c
@@ -121,8 +121,8 @@ get-libft:
 	make -C lib/libft all clean
 #	@printf "$(_CYAN)Generating $(LIBFT) Libft...$(_BLUE)%-33.33s\r$(_NC)" $@
 
-# get-libx:
-# 	./mlx_linux/configure
+get-libx:
+	make -C mlx_linux
 
 pre-build:
 	mkdir -p ${ODIR}/service/free
@@ -149,6 +149,7 @@ pre-build:
 clean:
 	rm -rf ${ODIR}
 	make -C lib/libft fclean
+	make -C mlx_linux clean
 	#printf "\033[00;31m>>> objects removed.\n\033[00m"
 # 	rm -rf ${LIBX} 
 
