@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/29 18:56:18 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:43:40 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	instruction_switch(char **str, int **counters_ptr, int *correct)
 static void	check_row(int *correct, char *line, char ***values, int *entry)
 {
 	if (*correct)
-	{   //todo no need to free() line if whitespaces weren't used?
-        if (find_first('#', line) == 0)
+	{
+		if (find_first('#', line) == 0)
             return;
         else if (find_first('#', line) > 0)
             line[find_first('#', line)] = '\0';

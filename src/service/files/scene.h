@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/29 20:42:26 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:50:57 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ typedef struct scene
 
 typedef struct s_tmp_pars
 {
-	double		doubl; // todo what?
+	double		light_br; // todo what?
+	double		sph_d; // todo what?
 	t_tuple		center;
 	t_tuple		direct;
 	t_tuple		color;
