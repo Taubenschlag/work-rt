@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/29 19:18:46 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:49:03 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_mlx_wrap	*init_mlx_wrapper(t_scene *s)
 	return (data);
 }
 
-void	display_scene(t_scene *s)
+bool	display_scene(t_scene *s)
 {
 	t_mlx_wrap	*data;
 	t_canvas	c;
@@ -104,6 +104,8 @@ void	display_scene(t_scene *s)
 	w.shape_counter = s->shape_count;
 	init_world(&w, s->shapes, s->lights, s->light_count);
 	data = init_mlx_wrapper(s);
+	if (data == NULL)
+		return (printf("Error initializing MLX\n"), false);
 	while (++cam <= s->camera_count)
 	{
 		world_set_ambience(&w.amb, &s->cameras[cam - 1]->from, &s->ambi_color);
@@ -116,4 +118,5 @@ void	display_scene(t_scene *s)
 		canvas_free(&c);
 	}
 	loop_gui(data);
+	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 13:42:50 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:10:42 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	stripe_at_pattern(t_computations *comps)
 
 /*
 ** This puts a checkboard pattern on the plane object
+** The size of the pattern can be set in .rt configuratino file
 */
 void	checkboard_pattern_plane(t_computations *comps)
 {

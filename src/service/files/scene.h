@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 12:50:57 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:32:28 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 # define SCENE_H
 
 # include "../../../heads_global/minirt.h"
-# define COLOR_CF 0.003921569 // TODO WHY?
+
 # define SHAPES 1
 # define ALL 2
+# define COLOR_CF 0.003921569
+/* COLOR_CF: Color correction factor. Converting from [0-255] to [0-1] range */
 
+/*
+** This structure holds all necessary parametrs to render a scene
+*/
 typedef struct scene
 {
 	int			fd_infile;
@@ -36,14 +41,20 @@ typedef struct scene
 	int			*fd_list;
 }	t_scene;
 
+/*
+** The following structure holds temporary parameters
+** usaed during scene parsing and object creation
+** as intermediate value holders
+** Maynly used in functions from scene_handlers_123.c 
+*/
 typedef struct s_tmp_pars
 {
-	double		light_br; // todo what?
-	double		sph_d; // todo what?
+	double		light_br;
+	double		sph_d;
 	t_tuple		center;
 	t_tuple		direct;
 	t_tuple		color;
-	t_tuple		tup; // todo what?
+	t_tuple		tup;
 	t_tuple		norm;
 	t_matrix	m;
 	t_matrix	m_cpy;

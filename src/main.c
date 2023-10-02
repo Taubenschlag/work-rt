@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/29 20:44:17 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:44:17by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 	}
 	if (ac == 3)
 	{
-		if (!create_files(&s) && !save_scene(&s, s.fd_list))
+		if (!create_files(&s) || !save_scene(&s, s.fd_list))
 		{
 			free_scene(&s);
 			return (1);

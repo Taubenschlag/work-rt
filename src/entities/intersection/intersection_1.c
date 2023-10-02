@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 13:42:18 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:16:56 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 	l = intersect_world(r, w, m_tmp);
 	i = hit(l);
 	if (!i)
-		tuple_color(&m_tmp->color, 0, 0, 0);
+		tuple_color(&m_tmp->color, 1.0, 1.0, 1.0);
 	else
 	{
 		precomp(&c, i, r, m_tmp);
