@@ -7,15 +7,6 @@
 
 NAME = miniRT
 
-#_NC=`tput sgr0`
-#_RED=\033[0;31m
-#_GREEN=\033[0;32m
-#_YELLOW=\033[0;33m
-#_BLUE=\033[0;34m
-#_PURPLE=\033[0;95m
-#_CYAN=\033[0;36m
-#_WHITE=\033[0;37m
-
 DEBUG = dbRT
 
 SAN = sanRT

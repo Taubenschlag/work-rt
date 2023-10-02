@@ -14,7 +14,7 @@
 # define SCENE_H
 
 # include "../../../heads_global/minirt.h"
-# define COLOR_CF 0.003921569 // TODO WHY?
+# define COLOR_CF 0.003921569
 # define SHAPES 1
 # define ALL 2
 
