@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/29 20:44:41 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:04:31 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ bool	render(t_camera *c, t_world *w, t_canvas *img)
 {
 	t_tmp_m	tmp;
 	t_ray	ray;
+	double	progress;
 
 	init_canvas(c->v_size, c->h_size, img);
 	if (img->canvas == NULL)
@@ -82,7 +83,32 @@ bool	render(t_camera *c, t_world *w, t_canvas *img)
 			ray_for_pix(c, &ray, &tmp);
 			color_at(w, &ray, &tmp);
 			img->canvas[tmp.y][tmp.x] = tuple_to_rgb(&tmp.color);
+			progress = ((tmp.y * c->v_size) + tmp.x) \
+							/ ((double)c->h_size * c->v_size);
+			display_progress(progress);
 		}
 	}
 	return (true);
+}
+
+void	display_progress(double progress)
+{
+	int	bar;
+	int	width;
+	int	i;
+
+	bar = 50;
+	width = bar * progress;
+	printf("RENDERING SCENE: [");
+	i = 0;
+	while (i < bar)
+	{
+		if (i <= width)
+			printf("+");
+		else
+			printf(" ");
+		i++;
+	}
+	printf("] %.f%%\r", progress * 100);
+	fflush(stdout);
 }

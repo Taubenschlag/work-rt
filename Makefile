@@ -93,7 +93,6 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 all: ${NAME}
-	#printf "\e[92;5;118m\n>>> miniRT ready\n\e[0m"
 
 $(SAN): pre-build get-libft #get-libx
 	${CC} ${FLAGS} -O1 -g -fsanitize=address -o ${SAN} ${SRCS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
@@ -106,11 +105,9 @@ $(NAME): pre-build get-libft get-libx ${OBS}
 
 ${ODIR}/%.o: ${SDIR}/%.c
 	${CC} ${FLAGS} -I/usr/include -Imlx_linux -O3 -c $< -o $@
-	#printf "$(_CYAN)Generating miniRT objects in ...$(_BLUE)%-33.33s\r$(_NC)" $@
 
 get-libft:
 	make -C lib/libft all clean
-#	@printf "$(_CYAN)Generating $(LIBFT) Libft...$(_BLUE)%-33.33s\r$(_NC)" $@
 
 get-libx:
 	make -C mlx_linux
@@ -141,14 +138,11 @@ clean:
 	rm -rf ${ODIR}
 	make -C lib/libft fclean
 	make -C mlx_linux clean
-	#printf "\033[00;31m>>> objects removed.\n\033[00m"
-# 	rm -rf ${LIBX} 
 
 fclean: clean
 	rm -rf ${NAME}
 	rm -rf ${DEBUG}
 	rm -rf ${SAN}
-	#printf "\033[00;31m>>> executable removed.\n\033[00m"
 
 bonus:
 	all
@@ -160,5 +154,3 @@ asan: ${SAN}
 re: fclean all
 
 .PHONY: ${NAME} $(DEBUG) ${SAN}
-
-#.SILENT:
