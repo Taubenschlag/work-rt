@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 12:51:36 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:41:41 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ bool	handle_sphere(char **values, t_scene *s)
 
 	set_tuple(&tmp.center, values[1], 'p');
 	tmp.sph_d = ft_atod(values[2]);
-	set_tuple(&tmp.tup, values[3], 'c');
+	set_tuple(&tmp.tup, values[4], 'c');
 	tuple_scalar_multiply(&tmp.color, &tmp.tup, COLOR_CF);
 	tuple_point(&tmp.tup, 0, 0, 0);
 	s->shapes[s->shape_count] = make_shape('s', nsphere_unit(&tmp.tup));
 	mat_with_col(&s->shapes[s->shape_count]->matrl, &tmp.color);
+	s->shapes[s->shape_count]->matrl.pattern = ft_atoi(values[3]);
 	matrix_translate(&tmp.m, &tmp.center);
 	tuple_point(&tmp.tup, tmp.sph_d / 2, tmp.sph_d / 2, tmp.sph_d / 2);
 	matrix_scale(&tmp.m_cpy, &tmp.tup);
@@ -84,10 +85,11 @@ bool	handle_plane(char **values, t_scene *s)
 	set_tuple(&tmp.center, values[1], 'p');
 	set_tuple(&tmp.tup, values[2], 'v');
 	tuple_normalize(&tmp.norm, &tmp.tup);
-	set_tuple(&tmp.tup, values[3], 'c');
+	set_tuple(&tmp.tup, values[4], 'c');
 	tuple_scalar_multiply(&tmp.color, &tmp.tup, COLOR_CF);
 	s->shapes[s->shape_count] = make_shape('p', plane_plane());
 	mat_with_col(&s->shapes[s->shape_count]->matrl, &tmp.color);
+	s->shapes[s->shape_count]->matrl.pattern = ft_atoi(values[3]);
 	s->shapes[s->shape_count]->matrl.diffuse = 0.5;
 	s->shapes[s->shape_count]->matrl.ambient = 0.1;
 	s->shapes[s->shape_count]->matrl.specular = 0.1;

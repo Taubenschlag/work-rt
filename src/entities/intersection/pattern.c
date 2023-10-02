@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/29 19:48:37 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:42:50 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	set_checkboard_pattern_colors(t_computations *comps)
 ** through their full 0-1 range as the point varies over the entire
 ** sphere surface.
 */
-void	sphere_checkboard_parity(t_computations *comps)
+void	sphere_pattern(t_computations *comps)
 {
 	double	tmp;
 	double	u;
@@ -119,8 +119,8 @@ void	checkboard_pattern_plane(t_computations *comps)
 
 	x = comps->point.x;
 	z = comps->point.z;
-	x_block = (int)floor(x / SPACE);
-	z_block = (int)floor(z / SPACE);
+	x_block = (int)floor(x / comps->shape->matrl.pattern);
+	z_block = (int)floor(z / comps->shape->matrl.pattern);
 	is_odd = (x_block % 2 + z_block) % 2;
 	if (is_odd)
 	{

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/29 19:44:10 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:29:39 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define INTERSECTION_H
 # include "../../../heads_global/minirt.h"
 
-# define SPACE	20
+// # define SPACE	20
 
 typedef struct intersection
 {
@@ -102,7 +102,7 @@ void					world_set_ambience(t_light *w_amb, t_tuple *from, \
 
 /* pattern.c */
 void					set_checkboard_pattern_colors(t_computations *comps);
-void					sphere_checkboard_parity(t_computations *comps);
+void					sphere_pattern(t_computations *comps);
 void					stripe_at_pattern(t_computations *comps);
 void					checkboard_pattern_plane(t_computations *comps);
 
