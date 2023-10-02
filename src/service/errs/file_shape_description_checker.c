@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_shape_description_checker.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokupin <rokupin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:27:33 by rokupin           #+#    #+#             */
-/*   Updated: 2022/10/13 21:32:14 by rokupin          ###   ########.fr       */
+/*   Updated: 2023/10/02 13:39:03 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,30 @@
 /*
  * 1 - centre
  * 2 - diameter
- * 3 - color
+ * 3 - ptrn
+ * 4 - color
  */
 void	check_sphere(int **counters_ptr, int *is_correct, char **str)
 {
 	int		*counters;
 	int		i;
 	double	s1;
+	int		s2;
 
 	counters = *counters_ptr;
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 4 || !ft_isdouble(str[2]))
+	if (i != 5 || !ft_isdouble(str[2]) || !ft_isdouble(str[3]))
 		*is_correct = FALSE;
 	else
 	{
 		s1 = ft_atod(str[2]);
+		s2 = ft_atoi(str[3]);
 		if (!is_tuple(str[1], FALSE)
-			|| !is_tuple(str[3], TRUE)
-			|| s1 <= 0.0)
+			|| !is_tuple(str[4], TRUE)
+			|| s1 <= 0.0
+			|| !(s2 == 0 || s2 == 1))
 			*is_correct = FALSE;
 		else
 			counters[SPH]++;
@@ -44,24 +48,28 @@ void	check_sphere(int **counters_ptr, int *is_correct, char **str)
 /*
  * 1 - point on a t_plane
  * 2 - normale
- * 3 - color
+ * 3 - pattern (size)
+ * 4 - color
  */
 void	check_plane(int **counters_ptr, int *is_correct, char **str)
 {
 	int		*counters;
 	int		i;
+	int		pattern;
 
 	counters = *counters_ptr;
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 4)
+	if (i != 5)
 		*is_correct = FALSE;
 	else
 	{
+		pattern = ft_atoi(str[3]);
 		if (!is_tuple(str[1], FALSE)
 			|| !is_tuple(str[2], FALSE)
-			|| !is_tuple(str[3], TRUE))
+			|| !is_tuple(str[4], TRUE)
+			|| pattern < 0)
 			*is_correct = FALSE;
 		else
 			counters[PLA]++;

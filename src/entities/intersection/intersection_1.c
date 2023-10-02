@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/29 19:36:23 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:42:18 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ void	precomp(t_computations	*comps, t_intersection *i, \
 void	shade_hit(t_world *w, t_computations *cs, \
 					t_light *current, t_tmp_m *m_tmp)
 {
-	if (cs->shape->type == 's')
-		sphere_checkboard_parity(cs);
-	else if (cs->shape->type == 'p')
+	if (cs->shape->type == 's' && cs->shape->matrl.pattern == 1)
+		sphere_pattern(cs);
+	else if (cs->shape->type == 'p' && cs->shape->matrl.pattern > 0)
 		checkboard_pattern_plane(cs);
 	make_l_p(&m_tmp->pack, current, cs);
 	lightning(&m_tmp->color, &m_tmp->pack, \
