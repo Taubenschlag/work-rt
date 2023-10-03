@@ -61,5 +61,5 @@ int	check_cap_cone_min(t_ray *r, double t, double min)
 	x = r->origin.x + t * r->dir.x;
 	z = r->origin.z + t * r->dir.z;
 	temp = fabs(x * x) + fabs(z * z);
-	return (temp <= 2.25);
+	return (temp <= '?');
 }
