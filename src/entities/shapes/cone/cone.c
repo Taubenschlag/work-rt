@@ -39,13 +39,8 @@ void	cone_normale_at(t_tuple *res, t_tuple *t, t_cone *c)
 	double	dist;
 	double	y;
 
-	dist = sqrt(t->x * t->x + t->z * t-> z);
-	if (dist <= c->max && t->y >= (c->max - 0.00001))
-	{
-		tuple_vector(res, 0, 1, 0);
-		return ;
-	}
-	if (dist <= fabs(c->min) && t->y <= (c->min + 0.00001))
+	dist = t->x * t->x + t->z * t-> z;
+	if (dist <= (fabs(c->min) * 2) && t->y <= (c->min + 0.00001))
 	{
 		tuple_vector(res, 0, -1, 0);
 		return ;
@@ -56,20 +51,9 @@ void	cone_normale_at(t_tuple *res, t_tuple *t, t_cone *c)
 	tuple_vector(res, t->x, y, t->z);
 }
 
-int	check_cap_cone_max(t_ray *r, double t, double max)
-{
-	double	x;
-	double	z;
-	double	temp;
-
-	x = r->origin.x + t * r->dir.x;
-	z = r->origin.z + t * r->dir.z;
-	temp = fabs(x * x) + fabs(z * z);
-	return (temp <= fabs(max));
-}
-
 int	check_cap_cone_min(t_ray *r, double t, double min)
 {
+    (void) min;
 	double	x;
 	double	z;
 	double	temp;
@@ -77,5 +61,5 @@ int	check_cap_cone_min(t_ray *r, double t, double min)
 	x = r->origin.x + t * r->dir.x;
 	z = r->origin.z + t * r->dir.z;
 	temp = fabs(x * x) + fabs(z * z);
-	return (temp <= fabs(min) * 2);
+	return (temp <= 2.25);
 }

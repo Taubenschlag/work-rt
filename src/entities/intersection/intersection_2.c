@@ -14,20 +14,15 @@
 
 void	co_intrs_cap(t_shape *s, t_ray *r, t_intersection_list **ret)
 {
-	double	t1;
-	double	t2;
+	double	t;
 	t_cone	*co;
 
 	co = (t_cone *)s->shape;
 	if (!(co->closed) || fabs(r->dir.y) < 0.0000001)
 		return ;
-	t1 = (co->min - r->origin.y) / r->dir.y;
-	if (check_cap_cone_min(r, t1, co->min))
-		add_intersection(intersect_make_shape(s, t1),
-			ret);
-	t2 = (co->max - r->origin.y) / r->dir.y;
-	if (check_cap_cone_max(r, t2, co->max))
-		add_intersection(intersect_make_shape(s, t2),
+    t = (co->min - r->origin.y) / r->dir.y;
+	if (check_cap_cone_min(r, t, co->min))
+		add_intersection(intersect_make_shape(s, t),
 			ret);
 }
 
@@ -67,25 +62,25 @@ void	 cone_discriminant(t_cone *co, t_ray *ray)
 
 void	cone_hit_truncate(t_shape *s, t_ray *ray, t_intersection_list **ret)
 {
-	t_cone	*co;
-	double	t1;
-	double	t2;
-	double	y1;
-	double	y2;
+	t_cone  *co;
+    double  t0;
+    double  t1;
+    double  y0;
+    double  y1;
 
 	co = (t_cone *)s->shape;
-	t1 = (-1 * co->b - sqrt(co->disc)) / (2 * co->a);
-	t2 = (-1 * co->b + sqrt(co->disc)) / (2 * co->a);
-	y1 = ray->origin.y + dmin(t1, t2) * ray->dir.y;
-	if ((co)->min < y1 && y1 < (co)->max)
-		add_intersection(
-			intersect_make_shape(s, dmin(t1, t2)),
-			ret);
-	y2 = ray->origin.y + dmax(t1, t2) * ray->dir.y;
-	if ((co)->min < y2 && y2 < (co)->max)
-		add_intersection(
-			intersect_make_shape(s, dmax(t1, t2)),
-			ret);
+    t0 = (-1 * co->b - sqrt(co->disc)) / (2 * co->a);
+    t1 = (-1 * co->b + sqrt(co->disc)) / (2 * co->a);
+    y0 = ray->origin.y + dmin(t0, t1) * ray->dir.y;
+    if ((co)->min < y0 && y0 < (co)->max)
+        add_intersection(
+                intersect_make_shape(s, dmin(t0, t1)),
+                ret);
+    y1 = ray->origin.y + dmax(t0, t1) * ray->dir.y;
+    if ((co)->min < y1 && y1 < (co)->max)
+        add_intersection(
+                intersect_make_shape(s, dmax(t0, t1)),
+                ret);
 }
 
 t_intersection_list	*intersection_ray_cone(t_shape *s, t_ray *ray)
@@ -98,19 +93,9 @@ t_intersection_list	*intersection_ray_cone(t_shape *s, t_ray *ray)
 	if (ret == NULL)
 		return (NULL);
 	cone_discriminant(co, ray);
-	if (fabs(co->a) < 0.000001)
-	{
-//		if (fabs(co->b) > 0.0000001)
-//			add_intersection(
-//				intersect_make_shape(
-//					s, -1 * co->c / 2 * co->b),
-//				&ret);
-		co_intrs_cap(s, ray, &ret);
-		return (ret);
-	}
-	if (co->disc < 0)
-		return (ret);
-	cone_hit_truncate(s, ray, &ret);
-	co_intrs_cap(s, ray, &ret);
-	return (ret);
+	if (fabs(co->a) < 0.0000001 || co->disc < 0)
+        return (ret);
+    cone_hit_truncate(s, ray, &ret);
+    co_intrs_cap(s, ray, &ret);
+    return (ret);
 }

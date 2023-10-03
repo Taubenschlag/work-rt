@@ -45,23 +45,23 @@ void	cylinder_discriminant(t_cylinder *cy, t_ray *ray)
 void	cylinder_hit_truncate(t_shape *s, t_ray *ray, t_intersection_list **ret)
 {
 	t_cylinder	*cy;
+	double		t0;
 	double		t1;
-	double		t2;
+	double		y0;
 	double		y1;
-	double		y2;
 
 	cy = (t_cylinder *)s->shape;
-	t1 = (-1 * cy->b - sqrt(cy->disc)) / (2 * cy->a);
-	t2 = (-1 * cy->b + sqrt(cy->disc)) / (2 * cy->a);
-	y1 = ray->origin.y + dmin(t1, t2) * ray->dir.y;
+    t0 = (-1 * cy->b - sqrt(cy->disc)) / (2 * cy->a);
+    t1 = (-1 * cy->b + sqrt(cy->disc)) / (2 * cy->a);
+    y0 = ray->origin.y + dmin(t0, t1) * ray->dir.y;
+	if ((cy)->min < y0 && y0 < (cy)->max)
+		add_intersection(
+			intersect_make_shape(s, dmin(t0, t1)),
+			ret);
+    y1 = ray->origin.y + dmax(t0, t1) * ray->dir.y;
 	if ((cy)->min < y1 && y1 < (cy)->max)
 		add_intersection(
-			intersect_make_shape(s, dmin(t1, t2)),
-			ret);
-	y2 = ray->origin.y + dmax(t1, t2) * ray->dir.y;
-	if ((cy)->min < y2 && y2 < (cy)->max)
-		add_intersection(
-			intersect_make_shape(s, dmax(t1, t2)),
+			intersect_make_shape(s, dmax(t0, t1)),
 			ret);
 }
 
@@ -75,8 +75,8 @@ t_intersection_list	*intersection_ray_cylinder(t_shape *s, t_ray *ray)
 	if (ret == NULL)
 		return (NULL);
 	cylinder_discriminant(cy, ray);
-	if (fabs(cy->a) < 0.000001)
-	{
+	if (fabs(cy->a) < 0.000001)//ray is parallel to y axis
+ 	{
 		cyl_int_cap(s, ray, &ret);
 		return (ret);
 	}
