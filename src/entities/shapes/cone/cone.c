@@ -19,7 +19,6 @@ t_cone	*cone_cone(void)
 	cone = (t_cone *)malloc(sizeof(t_cone));
 	if (cone == NULL)
 		return (NULL);
-	cone->closed = 0;
 	cone->min = INFINITY * -1;
 	cone->max = INFINITY;
 	return (cone);
@@ -32,7 +31,6 @@ t_cone	*cone_param(double h)
 	c = cone_cone();
 	c->min = h * -1;
 	c->max = 0;
-	c->closed = 1;
 	return (c);
 }
 

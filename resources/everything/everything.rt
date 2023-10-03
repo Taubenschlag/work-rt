@@ -11,12 +11,12 @@ l               0,8,0       0.6         0,255,0
 l               0,0,8       0.6         0,0,255
 # Sphere	center		diameter	paterrn	color
 sp			-1,0,-1     2           0		255,255,255
-sq          4,0,1       1,0,0       1           255,255,255
-cu          2,0,2       1,1,0       2           25.5,255,255
-cu          0,0,0       1,1,0       20          255,255,255
+sq          4,0,1       1,0,0       1       255,255,255
+cu          2,0,2       1,1,0       2       25.5,255,255
+cu          0,0,0       1,1,0       20      255,255,255
 # triangle: A           B           C           color
 tr          -1.5,0,4    0,1.5,4     1.5,0,4     255,255,255
 # cone:     coordinates orientation diameter    height      color
 co          -2,1,2      0,1,0       2           2           255,255,255
-# cylinder: coordinates orientation diameter    height      color
-cy          2,-2,0      0,1,0       2           4           255,255,255
+# cylinder: coordinates orientation diameter    is closed   height  color
+cy          2,-2,0      0,1,0       2           1           4       255,255,255

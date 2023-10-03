@@ -38,8 +38,7 @@ void	cylinder_discriminant(t_cylinder *cy, t_ray *ray)
 	cy->b = 2 * ray->dir.x * ray->origin.x
 		+ 2 * ray->dir.z * ray->origin.z;
 	cy->c = ray->origin.x * ray->origin.x
-		+ ray->origin.z * ray->origin.z
-		- 1;
+		+ ray->origin.z * ray->origin.z - 1;
 	cy->disc = cy->b * cy->b - 4 * cy->a * cy->c;
 }
 

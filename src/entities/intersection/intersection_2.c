@@ -32,7 +32,7 @@ void	co_intrs_cap(t_shape *s, t_ray *r, t_intersection_list **ret)
 }
 
 /* PAGE 189 TRTC */
-void	cone_discriminant(t_cone *co, t_ray *ray)
+void	 cone_discriminant(t_cone *co, t_ray *ray)
 {
 	co->a = ray->dir.x * ray->dir.x
 		- ray->dir.y * ray->dir.y
@@ -45,6 +45,25 @@ void	cone_discriminant(t_cone *co, t_ray *ray)
 		+ ray->origin.z * ray->origin.z;
 	co->disc = co->b * co->b - 4 * co->a * co->c;
 }
+
+//double  cone_get_rad_at_h(t_cone *co, double h_given) {
+//    return (co->d / 2) / ((co->max - co->min) / h_given);
+//}
+//
+//void	 cone_discriminant(t_cone *co, t_ray *ray)
+//{
+//    double dotDN = tuple_dot_product(&ray->dir, &co->norm);
+//    t_tuple ray_origin_to_the_cone_center;
+//    tuple_substract(&ray_origin_to_the_cone_center,&co->center,&ray->origin);
+//    double dotVN = tuple_dot_product(&ray->dir, &ray_origin_to_the_cone_center);
+//    double dotVV = tuple_dot_product(&ray_origin_to_the_cone_center, &ray_origin_to_the_cone_center);
+//    double hh = dotVN / (dotDN * tan(acos(dotDN)));
+//    co->a = dotDN * dotDN - (1 - cone_get_rad_at_h(co, hh) *
+//                                    cone_get_rad_at_h(co, hh)) * dotDN * dotDN;
+//	co->b = 2 * (dotDN * dotVN - dotVV * dotDN);
+//	co->c = dotVN * dotVN - dotVV * dotVV;
+//	co->disc = co->b * co->b - 4 * co->a * co->c;
+//}
 
 void	cone_hit_truncate(t_shape *s, t_ray *ray, t_intersection_list **ret)
 {
@@ -74,18 +93,18 @@ t_intersection_list	*intersection_ray_cone(t_shape *s, t_ray *ray)
 	t_intersection_list	*ret;
 	t_cone				*co;
 
+    co = (t_cone *)s->shape;
 	ret = intersection_list_make(0);
 	if (ret == NULL)
 		return (NULL);
-	co = (t_cone *)s->shape;
 	cone_discriminant(co, ray);
 	if (fabs(co->a) < 0.000001)
 	{
-		if (fabs(co->b) > 0.0000001)
-			add_intersection(
-				intersect_make_shape(
-					s, -1 * co->c / 2 * co->b),
-				&ret);
+//		if (fabs(co->b) > 0.0000001)
+//			add_intersection(
+//				intersect_make_shape(
+//					s, -1 * co->c / 2 * co->b),
+//				&ret);
 		co_intrs_cap(s, ray, &ret);
 		return (ret);
 	}

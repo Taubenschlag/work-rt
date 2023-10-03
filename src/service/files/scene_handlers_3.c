@@ -46,7 +46,8 @@ bool	handle_cone(char **values, t_scene *s)
 	set_tuple(&tmp.tup, values[2], 'v');
 	tuple_normalize(&c->norm, &tmp.tup);
 	c->d = ft_atod(values[3]);
-	set_tuple(&tmp.tup, values[5], 'c');
+	c->closed = ft_atoi(values[5]);
+	set_tuple(&tmp.tup, values[6], 'c');
 	tuple_scalar_multiply(&c->color, &tmp.tup, COLOR_CF);
 	mat_with_col(&s->shapes[s->shape_count]->matrl, &c->color);
 	handle_cone_helper(&tmp, c);

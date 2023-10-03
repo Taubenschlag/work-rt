@@ -141,9 +141,10 @@ void	check_triangle(int **counters_ptr, int *is_correct, char **str)
 /*
  * 1 - circle center
  * 2 - up vector
- * 3 - height
- * 4 - diameter
- * 5 - color
+ * 3 - diameter
+ * 4 - height
+ * 5 - is closed
+ * 6 - color
  */
 void	check_cone_cylinder(int **counters_ptr, int *is_correct, char **str)
 {
@@ -151,21 +152,24 @@ void	check_cone_cylinder(int **counters_ptr, int *is_correct, char **str)
 	int		i;
 	double	s1;
 	double	s2;
+	int     s3;
 
 	counters = *counters_ptr;
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 6 || !ft_isdouble(str[3]) || !ft_isdouble(str[4]))
+	if (i != 7 || !ft_isdouble(str[3]) || !ft_isdouble(str[4]) ||
+        !ft_isdouble(str[5]))
 		*is_correct = FALSE;
 	else
 	{
 		s1 = ft_atod(str[3]);
 		s2 = ft_atod(str[4]);
+		s3 = ft_atoi(str[5]);
 		if (!is_tuple(str[1], FALSE)
 			|| !is_tuple(str[2], FALSE)
-			|| !is_tuple(str[5], TRUE)
-			|| s1 <= 0.0 || s2 <= 0.0)
+			|| !is_tuple(str[6], TRUE)
+			|| s1 <= 0.0 || s2 <= 0.0 || !(s3 == 0 || s3 == 1))
 			*is_correct = FALSE;
 		else if (ft_strequals(str[0], "co"))
 			counters[CON]++;
