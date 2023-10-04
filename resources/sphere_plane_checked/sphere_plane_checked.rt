@@ -1,0 +1,13 @@
+# resolution:   high    width
+R               500     500
+# ambient light:    brightness  color
+A                   0.2         255,255,255
+# camera:   position        direction       up-vector   zoom
+c           100,100,100		-1,-1,-1        0,1,0		50
+# light source: position        brightness  color
+l               100,100,250     0.8         255,255,255
+l               -100,100,100    0.8			255,155,0
+# plane:	coordinates	orientation	paterrn	color
+pl          0,0,0		0,1,0		40		255,250,150
+# sphere:	center		diameter	paterrn	color
+sp			25,25,25	40.0		1		225,25,25

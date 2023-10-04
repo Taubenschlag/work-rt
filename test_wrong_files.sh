@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 for file in resources/disfunctional/*;
 do
   valgrind --leak-check=full \
