@@ -92,7 +92,7 @@ void	shade_hit(t_world *w, t_computations *cs, \
 					t_light *current, t_tmp_m *m_tmp)
 {
 	if (cs->shape->type == 's' && cs->shape->matrl.pattern == 1)
-		sphere_pattern(cs);
+		stripe_at_pattern(cs);
 	else if (cs->shape->type == 'p' && cs->shape->matrl.pattern > 0)
 		checkboard_pattern_plane(cs);
 	make_l_p(&m_tmp->pack, current, cs);

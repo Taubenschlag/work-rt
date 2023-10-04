@@ -1,9 +1,11 @@
 # resolution:   width    high
-R               700      400
+R               500      500
 # ambient light:    brightness  color
 A                   0.6         255,255,255
 # camera:   position    direction   up-vectror      zoom
 c           7,0,0       -1,0,0      0,1,0           80
+c           0,7,0       0,-1,0      1,0,1           80
+c           0,0,7       0,0,-1      0,1,0           80
 c           7,7,7       -1,-1,-1    0,1,0           60
 c           -7,-7,-7     1,1,1      0,1,0           60
 # light source: position    brightness  color

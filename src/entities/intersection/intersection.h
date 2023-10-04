@@ -102,7 +102,6 @@ void					world_set_ambience(t_light *w_amb, t_tuple *from, \
 
 /* pattern.c */
 void					set_checkboard_pattern_colors(t_computations *comps);
-void					sphere_pattern(t_computations *comps);
 void					stripe_at_pattern(t_computations *comps);
 void					checkboard_pattern_plane(t_computations *comps);
 

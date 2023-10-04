@@ -24,63 +24,6 @@ void	set_checkboard_pattern_colors(t_computations *comps)
 }
 
 /*
-** Function bellow performs calculations for mapping a sphere 
-** to a checkerboard pattern.
-** UV coordinates are used to map a 2D texture onto a 3D model. 
-** The u and v values range from 0 to 1 and correspond to the 
-** horizontal and vertical axes of the texture image.
-**
-** The u coordinate maps to the horizontal axis of the texture image.
-** u=0 is the left edge, u=1 is the right edge.
-** The v coordinate maps to the vertical axis. 
-** v=0 is the bottom edge, v=1 is the top edge.
-**
-** The u coordinate should be calculated as the 
-** azimuthal angle from -π to π. This can be done by taking the 
-** atan2 of the y and x coordinates.
-** The v coordinate should be the inclination angle from 0 to π. 
-** This can be calculated as acos(z / radius)
-**
-** To check if a square is odd or even, we take the fractional part 
-** of u and v by calling fmod. 
-** The fractions should be in the range [0,1]
-**
-** u_frac and v_frac values should vary as expected over the sphere
-** If both fracs are < 0.5, it's an even square. Otherwise it's odd.
-** (u and v calculations should map the full 0 to 2π and 0 to π range 
-** over the sphere surface.)
-** The goal is to have u and v (and their fractions) cycle 
-** through their full 0-1 range as the point varies over the entire
-** sphere surface.
-*/
-void	sphere_pattern(t_computations *comps)
-{
-	double	tmp;
-	double	u;
-	double	v;
-	double	u_frac;
-	double	v_frac;
-
-	u = atan2(comps->point.y, comps->point.x);
-	tmp = sqrt(comps->point.x * comps->point.x \
-				+ comps->point.y * comps->point.y);
-	v = atan2(comps->point.z, tmp);
-	u = u / (2 * M_PI);
-	v = v / M_PI;
-	u_frac = fmod(u, 1.0);
-	v_frac = fmod(v, 1.0);
-	tmp = fmod(u_frac + v_frac, 2.0);
-	if (tmp < 0.30)
-	{
-		tuple_copy(&comps->shape->matrl.color, &comps->yellow);
-	}
-	else
-	{
-		tuple_copy(&comps->shape->matrl.color, &comps->blue);
-	}
-}
-
-/*
 ** floor() returns the largest integer less than or equal to a given number
 ** eg: 
 ** floor(1.1) = 1, since 1 is the largest integer less than or equal to 1.1
