@@ -19,7 +19,6 @@ t_camera	*make_camera(int h_s, int v_s, double fov)
 	cam = (t_camera *)malloc(sizeof(t_camera));
 	if (cam == NULL)
 		return (NULL);
-	cam->name = NULL;
 	cam->h_size = h_s;
 	cam->v_size = v_s;
 	cam->half = tan(fov / 2);
@@ -62,7 +61,7 @@ void	ray_for_pix(t_camera *c, t_ray *ray, t_tmp_m *m_tmp)
 ** also used in render() when saving the image in the file
 ** it is declared in matrix.h
 */
-bool	render(t_camera *c, t_world *w, t_canvas *img)
+bool render(t_camera *c, t_world *w, t_canvas *img)
 {
 	t_tmp_m	tmp;
 	t_ray	ray;
@@ -85,13 +84,13 @@ bool	render(t_camera *c, t_world *w, t_canvas *img)
 			img->canvas[tmp.y][tmp.x] = tuple_to_rgb(&tmp.color);
 			progress = ((tmp.y * c->v_size) + tmp.x) \
 							/ ((double)c->h_size * c->v_size);
-			display_progress(progress);
+			display_progress(progress, c);
 		}
 	}
 	return (true);
 }
 
-void	display_progress(double progress)
+void display_progress(double progress, t_camera *cam)
 {
 	int	bar;
 	int	width;
@@ -99,7 +98,7 @@ void	display_progress(double progress)
 
 	bar = 50;
 	width = bar * progress;
-	printf("RENDERING SCENE: [");
+	printf("RENDERING SCENE: %d/%d [", cam->cam_count + 1, cam->cam_tot);
 	i = 0;
 	while (i < bar)
 	{

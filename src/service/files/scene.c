@@ -51,6 +51,8 @@ bool	save_scene(t_scene *s, int *fd_list)
 	cam = -1;
 	while (++cam < s->camera_count)
 	{
+		s->cameras[cam]->cam_count = cam;
+		s->cameras[cam]->cam_tot = s->camera_count;
 		world_set_ambience(&w.amb, &s->cameras[cam]->from, &s->ambi_color);
 		if (render(s->cameras[cam], &w, &c) == false)
 			return (false);

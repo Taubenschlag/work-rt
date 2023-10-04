@@ -73,8 +73,6 @@ void	free_camera(t_camera *c)
 {
 	if (c)
 	{
-		if (c->name)
-			free(c->name);
 		free(c);
 	}
 }

@@ -39,7 +39,7 @@ void	argb_render(t_camera *c, t_world *w, t_canvas *img)
 			img->canvas[tmp.y][tmp.x] = tuple_to_argb(&tmp.color);
 			progress = ((tmp.y * c->v_size) + tmp.x) \
 						/ (double)(c->h_size * c->v_size);
-			display_progress(progress);
+			display_progress(progress, c);
 		}
 	}
 }
@@ -112,6 +112,8 @@ bool	display_scene(t_scene *s)
 		return (printf("Error initializing MLX\n"), false);
 	while (++cam <= s->camera_count)
 	{
+		s->cameras[cam -1]->cam_count = cam - 1;
+		s->cameras[cam -1]->cam_tot = s->camera_count;
 		world_set_ambience(&w.amb, &s->cameras[cam - 1]->from, &s->ambi_color);
 		argb_render(s->cameras[cam - 1], &w, &c);
 		data->imgs[cam] = mlx_new_image(

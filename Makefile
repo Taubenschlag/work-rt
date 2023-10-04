@@ -97,9 +97,6 @@ all: ${NAME}
 $(SAN): pre-build get-libft #get-libx
 	${CC} ${FLAGS} -O1 -g -fsanitize=address -o ${SAN} ${SRCS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
 
-$(DEBUG): pre-build get-libft #get-libx
-	${CC} ${FLAGS} -ggdb3  -o ${DEBUG} ${SRCS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
-
 $(NAME): pre-build get-libft get-libx ${OBS}
 	${CC} ${FLAGS} -o ${NAME} ${OBS} ${LIBFT} ${LIBX} -Imlx_linux -lXext -lX11 -lm -lz
 

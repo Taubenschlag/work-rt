@@ -1,5 +1,5 @@
 # resolution:   high    width
-R               500     500
+R               1000     1000
 # ambient light:    brightness  color
 A                   0.2         255,255,255
 # camera:   position    direction   up-vector   zoom
@@ -15,7 +15,7 @@ cy	        -5,0,10		0,1,0       2.8	        10      1           140,140,140
 cy	        5,0,-2		0,1,0       2.8	        10      1           140,140,140
 cy	        5,0,10		0,1,0       2.8	        10      1           140,140,140
 # sphere:	center		diameter	pattern     color
-sp	        0,1,-1		1.2			0	        125,25,25
+sp	        0,1,-1		1.2			1	        125,25,25
 sp	        -5,0,10		4.2         0           140,140,140
 sp	        5,0,10		4.2         0           140,140,140
 sp	        -5,0,-2		4.2         0           140,140,140
