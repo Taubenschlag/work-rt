@@ -1,5 +1,5 @@
-# resolution:   high    width
-R               1000    1000
+# resolution:   width   high
+R               500    500
 # ambient light:    brightness  color
 A                   1.0         145,200,255
 # camera:   position    direction   up-vectror  zoom

@@ -119,5 +119,3 @@ The whole process can be broken down into those basic steps:
 5. Converting canvas to `.bmp` or `Ximage`
 
 ![wolf](https://raw.githubusercontent.com/Taubenschlag/work-rt/master/resources/wolf/0.bmp?token=GHSAT0AAAAAABZDCWC3NLNTLIMHXWA2YDBWY3BR24A)
-
-That's it!
