@@ -1,4 +1,4 @@
-# resolution:   width   high
+# resolution:   width    high
 R               500     500
 # ambient light:    brightness  color
 A                   0.2         255,255,255
