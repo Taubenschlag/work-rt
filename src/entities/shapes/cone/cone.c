@@ -53,13 +53,13 @@ void	cone_normale_at(t_tuple *res, t_tuple *t, t_cone *c)
 
 int	check_cap_cone_min(t_ray *r, double t, double min)
 {
-    (void) min;
 	double	x;
 	double	z;
 	double	temp;
 
 	x = r->origin.x + t * r->dir.x;
 	z = r->origin.z + t * r->dir.z;
+	min *= min;
 	temp = fabs(x * x) + fabs(z * z);
-	return (temp <= '?');
+	return (temp <= min);
 }
