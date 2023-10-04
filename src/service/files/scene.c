@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/04 14:09:55 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:55:06 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ bool	save_scene(t_scene *s, int *fd_list)
 
 	w.shape_counter = s->shape_count;
 	init_world(&w, s->shapes, s->lights, s->light_count);
+	init_canvas(s->cameras[0]->v_size, s->cameras[0]->h_size, &c);
 	cam = -1;
 	while (++cam < s->camera_count)
 	{
