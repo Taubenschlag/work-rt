@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/04 14:15:31 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:55:12 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ bool	render(t_camera *c, t_world *w, t_canvas *img)
 	t_ray	ray;
 	double	progress;
 
-	init_canvas(c->v_size, c->h_size, img);
 	if (img->canvas == NULL)
 	{
 		printf("Error allocating memory for canvas\n");
