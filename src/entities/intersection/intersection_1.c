@@ -137,7 +137,7 @@ void	color_at(t_world *w, t_ray *r, t_tmp_m *m_tmp)
 	l = intersect_world(r, w, m_tmp);
 	i = hit(l);
 	if (!i)
-		tuple_color(&m_tmp->color, 1.0, 1.0, 1.0);
+		tuple_color(&m_tmp->color, 0, 0, 0);
 	else
 	{
 		precomp(&c, i, r, m_tmp);
