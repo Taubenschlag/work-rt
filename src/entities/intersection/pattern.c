@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 15:10:42 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:42:31 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	stripe_at_pattern(t_computations *comps)
 	x = comps->point.x;
 	if ((int)(floor(x / cnst)) % 2 == 0)
 	{
-		tuple_copy(&comps->shape->matrl.color, &comps->white);
+		tuple_copy(&comps->shape->matrl.color, &comps->yellow);
 	}
 	else
 	{
-		tuple_copy(&comps->shape->matrl.color, &comps->black);
+		tuple_copy(&comps->shape->matrl.color, &comps->blue);
 	}
 }
 

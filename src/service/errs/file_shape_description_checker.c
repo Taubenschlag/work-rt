@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 21:27:33 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 13:39:03 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:34:13 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,26 +150,23 @@ void	check_cone_cylinder(int **counters_ptr, int *is_correct, char **str)
 {
 	int		*counters;
 	int		i;
-	double	s1;
-	double	s2;
-	int     s3;
+	double	s[2];
+	int		s3;
 
 	counters = *counters_ptr;
 	i = 0;
 	while (str[i])
 		i++;
-	if (i != 7 || !ft_isdouble(str[3]) || !ft_isdouble(str[4]) ||
-        !ft_isdouble(str[5]))
+	if (i != 7 || !ft_isdouble(str[3]) || !ft_isdouble(str[4]) \
+		|| !ft_isdouble(str[5]))
 		*is_correct = FALSE;
 	else
 	{
-		s1 = ft_atod(str[3]);
-		s2 = ft_atod(str[4]);
+		s[0] = ft_atod(str[3]);
+		s[1] = ft_atod(str[4]);
 		s3 = ft_atoi(str[5]);
-		if (!is_tuple(str[1], FALSE)
-			|| !is_tuple(str[2], FALSE)
-			|| !is_tuple(str[6], TRUE)
-			|| s1 <= 0.0 || s2 <= 0.0 || !(s3 == 0 || s3 == 1))
+		if (!is_tuple(str[1], 0) || !is_tuple(str[2], 0) || !is_tuple(str[6], 1)
+			|| s[0] <= 0.0 || s[1] <= 0.0 || !(s3 == 0 || s3 == 1))
 			*is_correct = FALSE;
 		else if (ft_strequals(str[0], "co"))
 			counters[CON]++;

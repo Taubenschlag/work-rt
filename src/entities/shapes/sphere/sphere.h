@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 13:22:38 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:11:09 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 typedef struct sphere
 {
 	t_tuple	centre;
+	double	diameter;
 }	t_sphere;
 
 void		nsphere_normal_at(t_tuple *res, t_tuple *p, \

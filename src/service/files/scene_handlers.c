@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 14:45:40 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:11:41 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 bool	handle_r(char **input, t_scene *s)
 {
-	if (s->resolution_x < 0)
+	if (s->res_x < 0)
 	{
-		s->resolution_x = ft_atoi(input[1]);
-		s->resolution_y = ft_atoi(input[2]);
+		s->res_x = ft_atoi(input[1]);
+		s->res_y = ft_atoi(input[2]);
 	}
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 13:29:39 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:21:51 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define INTERSECTION_H
 # include "../../../heads_global/minirt.h"
 
-// # define SPACE	20
+typedef struct lightning_pack	t_lightning_pack;
 
 typedef struct intersection
 {

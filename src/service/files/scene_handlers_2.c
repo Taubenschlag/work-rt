@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 13:41:41 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:12:05 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ bool	handle_c(char **input, t_scene *s)
 	if (input && ft_strequals(input[0], "c"))
 	{
 		cam = make_camera(
-				s->resolution_y,
-				s->resolution_x,
+				s->res_y,
+				s->res_x,
 				ft_atoi(input[4]) * (M_PI / 180));
 		set_tuple(&cam->from, input[1], 'p');
 		set_tuple(&tmp.direct, input[2], 'v');

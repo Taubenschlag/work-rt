@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 22:56:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/27 09:49:19 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:20:06 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void	cylinder_hit_truncate(t_shape *s, t_ray *ray, t_intersection_list **ret)
 	double		y1;
 
 	cy = (t_cylinder *)s->shape;
-    t0 = (-1 * cy->b - sqrt(cy->disc)) / (2 * cy->a);
-    t1 = (-1 * cy->b + sqrt(cy->disc)) / (2 * cy->a);
-    y0 = ray->origin.y + dmin(t0, t1) * ray->dir.y;
+	t0 = (-1 * cy->b - sqrt(cy->disc)) / (2 * cy->a);
+	t1 = (-1 * cy->b + sqrt(cy->disc)) / (2 * cy->a);
+	y0 = ray->origin.y + dmin(t0, t1) * ray->dir.y;
 	if ((cy)->min < y0 && y0 < (cy)->max)
 		add_intersection(
 			intersect_make_shape(s, dmin(t0, t1)),
 			ret);
-    y1 = ray->origin.y + dmax(t0, t1) * ray->dir.y;
+	y1 = ray->origin.y + dmax(t0, t1) * ray->dir.y;
 	if ((cy)->min < y1 && y1 < (cy)->max)
 		add_intersection(
 			intersect_make_shape(s, dmax(t0, t1)),
@@ -75,8 +75,8 @@ t_intersection_list	*intersection_ray_cylinder(t_shape *s, t_ray *ray)
 	if (ret == NULL)
 		return (NULL);
 	cylinder_discriminant(cy, ray);
-	if (fabs(cy->a) < 0.000001)//ray is parallel to y axis
- 	{
+	if (fabs(cy->a) < 0.000001)
+	{
 		cyl_int_cap(s, ray, &ret);
 		return (ret);
 	}

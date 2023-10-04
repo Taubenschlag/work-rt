@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:11:07 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 12:44:49 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:24:29 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # include <math.h>
 # include <pthread.h>
 # include <errno.h>
-//# include <error.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -41,11 +40,6 @@
 # include <stdbool.h>
 
 # include "../lib/libft/libft.h"
-
-typedef struct lightning_pack t_lightning_pack;
-typedef	struct s_tmp t_tmp_m;
-typedef struct light t_light;
-typedef struct shape t_shape;
 
 # include "../src/entities/tuple/tuple.h"
 # include "../src/entities/material/material.h"

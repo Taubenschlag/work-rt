@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 16:04:12 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:09:55 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	save_scene(t_scene *s, int *fd_list)
 		world_set_ambience(&w.amb, &s->cameras[cam]->from, &s->ambi_color);
 		if (render(s->cameras[cam], &w, &c) == false)
 			return (false);
-		fill_bmp(init_bmp(s->resolution_y, s->resolution_x, fd_list[cam]), &c);
+		fill_bmp(init_bmp(s->res_y, s->res_x, fd_list[cam]), &c);
 		close(fd_list[cam]);
 	}
 	canvas_free(&c);
