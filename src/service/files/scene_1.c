@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 00:41:24 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 18:07:09 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:10:54 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	count_what(int *counters, int what)
 
 static void	init_scene_helper(t_scene *scene)
 {
-	scene->resolution_x = -1;
-	scene->resolution_y = -1;
+	scene->res_x = -1;
+	scene->res_y = -1;
 	scene->ambi_ratio = -1;
 	tuple_color(&scene->ambi_color, 0, 0, 0);
 	scene->camera_count = 0;

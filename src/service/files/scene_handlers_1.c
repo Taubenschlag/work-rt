@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/09/23 14:44:54 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:20:49 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ bool	handle_cylinder(char **values, t_scene *s)
 	set_tuple(&tmp.tup, values[2], 'v');
 	tuple_normalize(&c->norm, &tmp.tup);
 	c->d = ft_atod(values[3]);
-    c->closed = ft_atoi(values[5]);
-    set_tuple(&tmp.tup, values[6], 'c');
+	c->closed = ft_atoi(values[5]);
+	set_tuple(&tmp.tup, values[6], 'c');
 	tuple_scalar_multiply(&c->color, &tmp.tup, COLOR_CF);
 	mat_with_col(&s->shapes[s->shape_count]->matrl, &c->color);
 	handle_cylinder_helper(&tmp, c);

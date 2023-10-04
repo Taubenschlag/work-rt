@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 18:04:31 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:15:31 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ray_for_pix(t_camera *c, t_ray *ray, t_tmp_m *m_tmp)
 ** also used in render() when saving the image in the file
 ** it is declared in matrix.h
 */
-bool render(t_camera *c, t_world *w, t_canvas *img)
+bool	render(t_camera *c, t_world *w, t_canvas *img)
 {
 	t_tmp_m	tmp;
 	t_ray	ray;
@@ -90,7 +90,7 @@ bool render(t_camera *c, t_world *w, t_canvas *img)
 	return (true);
 }
 
-void display_progress(double progress, t_camera *cam)
+void	display_progress(double progress, t_camera *cam)
 {
 	int	bar;
 	int	width;
@@ -108,6 +108,6 @@ void display_progress(double progress, t_camera *cam)
 			printf(" ");
 		i++;
 	}
-	printf("] %.f%%\r", progress * 100);
+	printf("] \r");
 	fflush(stdout);
 }

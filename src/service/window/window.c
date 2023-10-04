@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 18:05:10 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:08:46 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ t_mlx_wrap	*init_mlx_wrapper(t_scene *s)
 		return (NULL);
 	data->imgs[s->camera_count + 1] = NULL;
 	data->imgs[0] = NULL;
-	data->win = mlx_new_window(data->mlx, s->resolution_x, \
-								s->resolution_y, "miniRT");
+	data->win = mlx_new_window(data->mlx, s->res_x, s->res_y, "miniRT");
 	if (data->win == NULL)
 		return (NULL);
 	data->img_counter = s->camera_count;
@@ -116,8 +115,7 @@ bool	display_scene(t_scene *s)
 		s->cameras[cam -1]->cam_tot = s->camera_count;
 		world_set_ambience(&w.amb, &s->cameras[cam - 1]->from, &s->ambi_color);
 		argb_render(s->cameras[cam - 1], &w, &c);
-		data->imgs[cam] = mlx_new_image(
-				data->mlx, s->resolution_x, s->resolution_y);
+		data->imgs[cam] = mlx_new_image(data->mlx, s->res_x, s->res_y);
 		data->addr[cam] = mlx_get_data_addr(data->imgs[cam],
 				&(data->bits_per_pixel), &(data->line_length), &(data->endian));
 		fill_image(&c, data, cam);

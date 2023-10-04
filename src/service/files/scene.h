@@ -6,7 +6,7 @@
 /*   By: sbocanci <sbocanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:08:19 by rokupin           #+#    #+#             */
-/*   Updated: 2023/10/02 15:32:28 by sbocanci         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:08:27 by sbocanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct scene
 	int			fd_infile;
 	char		*filename;
 	int			counters[INSTRUCTION_SET_SIZE];
-	int			resolution_x;
-	int			resolution_y;
+	int			res_x;
+	int			res_y;
 	double		ambi_ratio;
 	t_tuple		ambi_color;
 	int			camera_count;
