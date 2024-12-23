@@ -4,7 +4,7 @@ Raytracer, written in plain old C.<br>
 The program renders static images using naive ray tracing and the Phong model.
 It can show images using 42's GUI lib _minilibx_, or save pictures to `.bmp` files.
 
-![miniRT](https://raw.githubusercontent.com/Taubenschlag/work-rt/master/resources/everything/0.bmp?token=GHSAT0AAAAAABZDCWC2MCXFHDI7OLVR4I5SY3BR36Q)
+![miniRT](https://raw.githubusercontent.com/r-kupin/42-miniRT/refs/heads/master/resources/everything/0.bmp)
 
 ## Try it!
 1. `git clone`
@@ -156,4 +156,4 @@ intersecting them with objects in the scene, and calculating lighting and shadin
    - Final Pixel Color:
        Assign the calculated color to the pixel on the image plane.
        
-![wolf](https://raw.githubusercontent.com/Taubenschlag/work-rt/master/resources/wolf/0.bmp?token=GHSAT0AAAAAABZDCWC3NLNTLIMHXWA2YDBWY3BR24A)
+![wolf](https://raw.githubusercontent.com/r-kupin/42-miniRT/refs/heads/master/resources/wolf/0.bmp)
