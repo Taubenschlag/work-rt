@@ -1,6 +1,5 @@
 # 42's miniRT project
 
-Raytracer, written in plain old C.<br>
 The program renders static images using naive ray tracing and the Phong model.
 It can show images using 42's GUI lib _minilibx_, or save pictures to `.bmp` files.
 
